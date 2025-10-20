@@ -1,14 +1,18 @@
 #ifndef WATERCOMMAND_H
 #define WATERCOMMAND_H
 
-class WaterCommand : PlantCommand {
+#include <string>
+#include "PlantCommand.h"
+#include "Plant.h"
+
+class WaterCommand : public PlantCommand {
 
 protected:
 	Plant* plant;
-	String type;
+	std::string type;
 
 public:
-	WaterCommand(String type, Plant* plant);
+	WaterCommand(const std::string& type, Plant* plant);
 };
 
 #endif

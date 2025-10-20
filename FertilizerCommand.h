@@ -1,14 +1,18 @@
 #ifndef FERTILIZERCOMMAND_H
 #define FERTILIZERCOMMAND_H
 
-class FertilizerCommand : PlantCommand {
+#include <string>
+#include "PlantCommand.h"
+#include "Plant.h"
+
+class FertilizerCommand : public PlantCommand {
 
 protected:
 	Plant* plant;
-	String type;
+	std::string type;
 
 public:
-	FertilizerCommand(String type, Plant* plant);
+	FertilizerCommand(const std::string& type, Plant* plant);
 };
 
 #endif

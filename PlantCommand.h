@@ -1,14 +1,18 @@
 #ifndef PLANTCOMMAND_H
 #define PLANTCOMMAND_H
 
-class PlantCommand : Command {
+#include <string>
+#include "Command.h"
+#include "Plant.h"
+
+class PlantCommand : public Command {
 
 protected:
 	Plant* plant;
-	String type;
+	std::string type;
 
 public:
-	PlantCommand(String type, Plant* plant);
+	PlantCommand(const std::string& type, Plant* plant);
 };
 
 #endif

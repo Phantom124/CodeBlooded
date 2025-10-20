@@ -1,17 +1,19 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <string>
+
 class Command {
 
 protected:
-	String type;
+	std::string type;
 
 public:
-	Command(String type);
+	Command(const std::string& type);
 
 	virtual void execute() = 0;
 
-	String getType();
+	std::string getType();
 };
 
 #endif

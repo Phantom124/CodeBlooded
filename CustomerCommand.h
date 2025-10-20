@@ -1,14 +1,18 @@
 #ifndef CUSTOMERCOMMAND_H
 #define CUSTOMERCOMMAND_H
 
-class CustomerCommand : Command {
+#include <string>
+#include "Command.h"
+#include "Customer.h"
+
+class CustomerCommand : public Command {
 
 protected:
-	String type;
+	std::string type;
 	Customer* customer;
 
 public:
-	CustomerCommand(String type, Customer* customer);
+	CustomerCommand(const std::string& type, Customer* customer);
 };
 
 #endif

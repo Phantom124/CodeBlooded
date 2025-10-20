@@ -1,14 +1,18 @@
 #ifndef DEADCOMMAND_H
 #define DEADCOMMAND_H
 
-class DeadCommand : PlantCommand {
+#include <string>
+#include "PlantCommand.h"
+#include "Plant.h"
+
+class DeadCommand : public PlantCommand {
 
 protected:
 	Plant* plant;
-	String type;
+	std::string type;
 
 public:
-	DeadCommand(String type, Plant* plant);
+	DeadCommand(const std::string& type, Plant* plant);
 };
 
 #endif
