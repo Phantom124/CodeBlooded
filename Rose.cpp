@@ -3,6 +3,7 @@
 Rose::Rose(){
     this->name = name;
     this->price = price;
+    
 
     this->state = state;
     this->waterLevel = waterLevel;
