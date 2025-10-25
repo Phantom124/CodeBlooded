@@ -4,21 +4,25 @@
 #include "Plant.h"
 #include "PlantComponent.h"
 #include "PriceStrategies.h"
+#include "PlantGroup.h"
 #include <string>
 
-class Order {
-	private:
-		PlantComponent* plants;
-		PriceStrategies* priceStrategy;
+class Order
+{
+private:
+	PlantGroup *plantGroup;
+	PriceStrategies *priceStrategy;
+	std::string receiptID;
 
-	public:
-		Order(PlantComponent* plants);
-		~Order();
-		double getPrice();
-		std::string getName();
-		void printOrder();
-		void addToOrder(Plant* plant);
-		void priceStrategy();
+public:
+	Order(PlantGroup *plantGroup);
+	~Order();
+	double getPrice();
+	std::string getName();
+	void printOrder();
+	void addToOrder(Plant *plant);
+	void priceStrategy();
+	std::string getReceiptID();
 };
 
 #endif

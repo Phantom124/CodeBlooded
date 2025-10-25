@@ -4,15 +4,15 @@
 #include "PlantDecorator.h"
 #include <string>
 
-class Ribbon : public PlantDecorator {
-
+class Ribbon : public PlantDecorator
+{
 
 public:
 	Ribbon();
-	~Ribbon();
-	double getPrice();
-	std::string getName();
-	void print();
+	~Ribbon() = default;
+	virtual double getPrice();
+	virtual std::string getName();
+	virtual void print();
 };
 
 #endif
