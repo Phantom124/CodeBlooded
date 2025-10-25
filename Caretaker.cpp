@@ -1,9 +1,5 @@
 #include "Caretaker.h"
 
-Caretaker::Caretaker() {
-    mementos = std::unordered_map<std::string, OrderMemento*>();
-}
-
 Caretaker::~Caretaker() {
     for (auto& pair : mementos) {
         delete pair.second;
@@ -34,7 +30,7 @@ void Caretaker::restoreOrder(Receipt& receipt, RealGreenHouseInventory& inventor
     OrderMemento* memento = getMemento(receipt.getReceiptID());
     if (!memento) return;
 
-    if (receipt.isValid) {
+    if (receipt.getIsValid()) {
         auto plants = memento->getPlants();
         inventory.restorePlants(plants);
     }

@@ -35,7 +35,11 @@ bool Receipt::validateReceipt() {
     auto now = date::current_time();
     auto diff = now - orderDate;
 
-    auto days = std::chrono::duration_cast<std::chrono::hours>(diff).count() / 24;
-    isValid = (days <= 7);
+    auto hours = std::chrono::duration_cast<std::chrono::hours>(diff).count();
+    isValid = (hours <= 168);
+    return isValid;
+}
+
+bool Receipt::getIsValid() const {
     return isValid;
 }

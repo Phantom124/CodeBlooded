@@ -12,7 +12,7 @@ class Caretaker{
         std::map<std::string, OrderMemento*> mementos;
 
     public:
-        Caretaker();
+        Caretaker() = default;
         ~Caretaker();
         void addMemento(std::string receiptID, const OrderMemento& memento);
         OrderMemento* getMemento(std::string receiptID) const;

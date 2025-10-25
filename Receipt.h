@@ -20,6 +20,7 @@ class Receipt {
         date::time getOrderDate() const;
         void printReceipt() const;
         bool validateReceipt();
+        bool getIsValid() const;
 };
 
 #endif
