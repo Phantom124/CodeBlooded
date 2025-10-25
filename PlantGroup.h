@@ -17,6 +17,7 @@ class PlantGroup : public PlantComponent {
 		double getPrice();
 		std::string getName();
 		void addPlantComponent(PlantComponent* plantComponent);
+		std::vector<PlantComponent*> getPlantComponents();
 };
 
 #endif

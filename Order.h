@@ -1,24 +1,30 @@
 #ifndef ORDER_H
 #define ORDER_H
 
-#include "Plant.h"
-#include "PlantComponent.h"
+#include "PlantGroup.h"
 #include "PriceStrategies.h"
+#include "OrderMemento.h"
+#include "Receipt.h"
 #include <string>
 
 class Order {
 	private:
-		PlantComponent* plants;
+		PlantGroup* plantGroup;
 		PriceStrategies* priceStrategy;
+		std::string receiptID;
 
 	public:
-		Order(PlantComponent* plants);
+		Order(PlantGroup* plantGroup);
 		~Order();
 		double getPrice();
 		std::string getName();
 		void printOrder();
 		void addToOrder(Plant* plant);
 		void priceStrategy();
+		OrderMemento* createMemento();
+		Receipt* generateReceipt();
+		std::string getReceiptID() const;
+		std::string generateInfo();
 };
 
 #endif
