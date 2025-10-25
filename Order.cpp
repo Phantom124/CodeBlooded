@@ -26,7 +26,7 @@ std::string Order::generateInfo(){
         auto p = plantGroup->plants[i];
         if (!p) continue;
         info += p->getName();
-        info += " : ";
+        info += " : R";
         info += std::to_string(p->getPrice());
         if (i + 1 < plantGroup->plants.size()) info += "\n";
     }
