@@ -13,6 +13,7 @@ protected:
 
 public:
 	WaterCommand(const std::string& type, Plant* plant);
+	virtual void execute();
 };
 
 #endif

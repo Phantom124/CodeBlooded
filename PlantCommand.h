@@ -13,6 +13,7 @@ protected:
 
 public:
 	PlantCommand(const std::string& type, Plant* plant);
+	virtual void execute() = 0;
 };
 
 #endif
