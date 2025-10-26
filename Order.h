@@ -21,7 +21,8 @@ public:
 	std::string getName();
 	void printOrder();
 	void addToOrder(Plant *plant);
-	void priceStrategy();
+	void setPriceStrategy(PriceStrategies *priceStrategy);
+	void applyPriceStrategy();
 	std::string getReceiptID();
 };
 

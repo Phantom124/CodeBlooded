@@ -17,6 +17,7 @@ public:
 	virtual ~PlantGroup();
 	virtual double getPrice();
 	virtual std::string getName();
+	std::vector<PlantComponent *> getPlants();
 	void addPlantComponent(PlantComponent *plantComponent);
 	void removePlantComponent(PlantComponent *plantComponent);
 };

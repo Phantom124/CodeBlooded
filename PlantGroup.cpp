@@ -40,6 +40,11 @@ std::string PlantGroup::getName()
     return plantGroup;
 }
 
+std::vector<PlantComponent *> PlantGroup::getPlants()
+{
+    return this->plants;
+}
+
 void PlantGroup::addPlantComponent(PlantComponent *plantComponent)
 {
     this->plants.push_back(plantComponent);
