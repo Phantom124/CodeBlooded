@@ -4,6 +4,8 @@
 #include "PlantSnapshot.h"
 #include "Plant.h"
 #include "StaffHandler.h"
+#include "Item.h"
+
 #include <string>
 #include <vector>
 #include <map>
@@ -18,8 +20,12 @@ class GreenHouseInventory {
 	public:
 		void notify(std::string msg, std::string handlerType);
 		void registerStaffhandler(StaffHandler* handler);
-		void addPlant(Plant* plant, StaffHandler* staff);
-		void removePlant(std::string plantType, StaffHandler* staff);
+
+		virtual void addPlant(Item item) = 0;
+		virtual void removePlant(std::string query) = 0;
+		virtual void showPlant(std::string query) = 0;
+    	virtual void showAllPlants() = 0;
+		
 		void requestPlant(std::string plantType, StaffHandler* staff);
 		void checkStockLevel();
 		Plant* getPlant(std::string plantType);

@@ -13,6 +13,7 @@ class Plant : public PlantComponent
 		int fertilizerLevel;
 		double waterRetention;
 		double fertilizerRetention;
+		std::string plantID;
 
 	public:
 		Plant();
