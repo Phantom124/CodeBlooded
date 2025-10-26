@@ -4,7 +4,11 @@
 #include "Command.h"
 
 class QueueIterator {
+	private:
+		StaffSystem* sys;
 	public:
+		QueueIterator(StaffSystem* sys);
+		// QueueIterator(const QueueIterator& it);
 		void emptyQueue();
 		Command* dequeue();
 		Command* front();

@@ -3,17 +3,22 @@
 
 #include <string>
 
+enum cmdType {
+    WATER,
+    FERTILIZER,
+    DEAD,
+	BUY_PLANT
+};
+
 class Command {
 
 protected:
-	std::string type;
+	cmdType type;
 
 public:
-	Command(const std::string& type);
-
+	Command(const cmdType type);
 	virtual void execute() = 0;
-
-	std::string getType();
+	cmdType getType();
 };
 
 #endif

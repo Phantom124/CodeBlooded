@@ -6,11 +6,8 @@
 
 class WaterHandler : public StaffHandler {
 	public:
-		void DeadHandler();
-		void setSuccessor(StaffHandler* successor);
+		WaterHandler(StaffSystem* sys);
 		void handleRequest(Command* command);
-		void receive(std::string msg);
-		void requestAction(std::string action);
-};
+	};
 
 #endif

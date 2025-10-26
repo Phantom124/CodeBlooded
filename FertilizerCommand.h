@@ -12,7 +12,7 @@ protected:
 	std::string type;
 
 public:
-	FertilizerCommand(const std::string& type, Plant* plant);
+	FertilizerCommand(const cmdType type, Plant* plant);
 	virtual void execute();
 };
 

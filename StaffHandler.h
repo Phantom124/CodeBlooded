@@ -11,14 +11,14 @@ class QueryBuilder;
 class QueryProduct;
 
 class StaffHandler {
-	private:
+	protected:
 		StaffHandler* successor;
 		StaffSystem* staffSys;
 		QueryBuilder* queryBuilder;
 
 	public:
 		StaffHandler(StaffSystem* sys);
-		virtual void handleRequest(Command* command) = 0;
+		virtual void handleRequest(Command* command);
 		void setSuccessor(StaffHandler* successor);
 		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
 		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);

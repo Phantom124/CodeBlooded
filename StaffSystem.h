@@ -11,6 +11,7 @@ class StaffSystem {
 	public:
 		StaffSystem();
 		QueueIterator createIterator();
+		friend class QueueIterator;
 };
 
 #endif

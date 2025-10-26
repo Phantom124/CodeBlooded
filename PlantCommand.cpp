@@ -1,5 +1,4 @@
 #include "PlantCommand.h"
 
-PlantCommand::PlantCommand(const std::string &type, Plant *plant)
+PlantCommand::PlantCommand(const cmdType type, Plant *plant)
     : Command(type), plant(plant){}
-

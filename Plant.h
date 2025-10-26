@@ -5,9 +5,12 @@
 #include "PlantGrowthState.h"
 #include <string>
 
+using namespace std;
+
 class Plant : public PlantComponent
 {
 	protected:
+		string id;
 		int careCount;
 		int waterLevel;
 		int fertilizerLevel;
@@ -23,7 +26,9 @@ class Plant : public PlantComponent
 		void add(Plant *extra);
 		void print();
 		double getPrice();
-		std::string getName();
+		string getName();
+		string getId();
+		string getMaturityState();
 };
 
 #endif

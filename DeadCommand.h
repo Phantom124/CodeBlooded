@@ -12,8 +12,9 @@ protected:
 	std::string type;
 
 public:
-	DeadCommand(const std::string& type, Plant* plant);
+	DeadCommand(const cmdType type, Plant* plant);
 	virtual void execute();
+	Plant* getPlant();	
 };
 
 #endif

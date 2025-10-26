@@ -1,6 +1,6 @@
 #include "DeadCommand.h"
 
-DeadCommand::DeadCommand(const std::string &type, Plant *plant)
+DeadCommand::DeadCommand(const cmdType type, Plant *plant)
     : PlantCommand(type, plant){}
 
 void DeadCommand::execute(){

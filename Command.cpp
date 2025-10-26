@@ -1,8 +1,8 @@
 #include "Command.h"
 
-Command::Command(const std::string &type): type(type){
+Command::Command(const cmdType type): type(type){
 }
 
-std::string Command::getType(){
+cmdType Command::getType(){
     return type;
 }

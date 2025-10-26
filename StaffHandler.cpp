@@ -4,20 +4,29 @@
 
 StaffHandler::StaffHandler(StaffSystem* sys){
     staffSys = sys;
-    successor = NULL;
-    queryBuilder = NULL;
+    successor = nullptr;
+    queryBuilder = nullptr;
+}
+
+void StaffHandler::handleRequest(Command *command){\
+    if (successor == false){
+        QueueIterator it = staffSys->createIterator();
+        it.enqueue(command);
+    } else {
+        successor->handleRequest(command);            
+    }
 }
 
 void StaffHandler::setSuccessor(StaffHandler *successor){
-    if (this->successor == NULL){
+    if (this->successor == nullptr){
         this->successor = successor;
     }
 }
 
 QueryProduct* StaffHandler::createDeleteQuery(string plantID, string plantType, string maturityState){
-    if (queryBuilder == NULL){
-        return NULL;
-        //Not sure whether I should return NULL here or if I should just create a QBuilder
+    if (queryBuilder == nullptr){
+        return nullptr;
+        //Not sure whether I should return nullptr here or if I should just create a QBuilder
     }
     
     // deleteBuilder->deleteQueryBuilder(plantID, plantType, maturityState);
@@ -26,7 +35,7 @@ QueryProduct* StaffHandler::createDeleteQuery(string plantID, string plantType, 
 
 void StaffHandler::setQueryBuilder(QueryBuilder *qb)
 {
-    if (queryBuilder == NULL){
+    if (queryBuilder == nullptr){
         queryBuilder = qb;
         return;
     }
