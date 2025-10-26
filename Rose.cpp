@@ -1,13 +1,13 @@
 #include "Rose.h"
+#include <string>
 
 Rose::Rose(){
-    this->name = name;
-    this->price = price;
-    
-
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+    this->name = "Rose";
+    this->price = 20;
+    this->waterRetention = 0.85;
+    this->lowWaterLevel = 30;
+    this->fertilizerRetention = 0.60;
+    this->lowFertilizerLevel = 70;
 }
 
 Rose::Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
@@ -24,6 +24,15 @@ Rose::~Rose(){
     this->state = nullptr;
 }
 
+double Rose::getPrice()
+{
+    return price;
+}
+
+std::string Rose::getName(){
+    return "Rose";
+}
+
 PlantGrowthState* Rose::getState(){
     return this->state;
 }
@@ -34,16 +43,4 @@ int Rose::getWaterLevel(){
 
 int Rose::getFertilizerLevel(){
     return this->fertilizerLevel;
-}
-
-PlantGrowthState* Rose::setState(PlantGrowthState* state){
-    this->state = state;
-}
-
-int Rose::setWaterLevel(int waterLevel){
-    this->waterLevel = waterLevel;
-}
-
-int Rose::setFertilizerLevel(int fertilizerLevel){
-    this->fertilizerLevel = fertilizerLevel;
 }

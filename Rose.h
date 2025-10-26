@@ -11,8 +11,7 @@ class Rose : public Plant {
 		double price;
 
 		PlantGrowthState* state;
-		int waterLevel;
-		int fertilizerLeve;
+
 
 	public:
 		Rose();
@@ -20,15 +19,12 @@ class Rose : public Plant {
 		~Rose();
 		double getPrice();
 		std::string getName();
-		void print();
-		void add(Plant* extra);
+		// void add(Plant* extra);
 
 		PlantGrowthState* getState();
 		int getWaterLevel();
 		int getFertilizerLevel();
-		PlantGrowthState* setState(PlantGrowthState* state);
-		int setWaterLevel(int waterLevel);
-		int setFertilizerLevel(int fertilizerLevel);
+
 };
 
 #endif

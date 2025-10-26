@@ -3,7 +3,10 @@
 
 class PlantGrowthState {
 	public:
-		PlantGrowthState handle(int careCount);
+		virtual PlantGrowthState* getNextState(int careCount) = 0;
+		virtual int effect() = 0;
+		virtual std::string getStateName() = 0;
+
 };
 
 #endif
