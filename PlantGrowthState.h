@@ -1,10 +1,11 @@
 #ifndef PLANTGROWTHSTATE_H
 #define PLANTGROWTHSTATE_H
 
+#include <string>
 class PlantGrowthState {
 	public:
 		virtual PlantGrowthState* getNextState(int careCount) = 0;
-		virtual int effect() = 0;
+		virtual double getPriceEffect() = 0;
 		virtual std::string getStateName() = 0;
 
 };

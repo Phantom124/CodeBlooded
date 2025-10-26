@@ -1,12 +1,12 @@
 #include "Sunflower.h"
 
 Sunflower::Sunflower(){
-    this->name = name;
-    this->price = price;
-
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+    this->name = "Sunflower";
+    this->price = 25;
+    this->waterRetention = 0.72;
+    this->lowWaterLevel = 55;
+    this->fertilizerRetention = 0.85;
+    this->lowFertilizerLevel = 20;
 }
 
 Sunflower::Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
@@ -15,13 +15,10 @@ Sunflower::Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLeve
     this->fertilizerLevel = fertilizerLevel;
 }
 
-Sunflower::~Sunflower()
-{
-    if (this->state != nullptr){
-        delete this->state;
+Sunflower::~Sunflower(){}
 
-    }
-    this->state = nullptr;
+std::string Sunflower::getName(){
+    return "Sunflower";
 }
 
 PlantGrowthState* Sunflower::getState(){
@@ -34,17 +31,4 @@ int Sunflower::getWaterLevel(){
 
 int Sunflower::getFertilizerLevel(){
     return this->fertilizerLevel;
-}
-
-PlantGrowthState* Sunflower::setState(PlantGrowthState* state){
-    this->state = state;
-
-}
-
-int Sunflower::setWaterLevel(int waterLevel){
-    this->waterLevel = waterLevel;
-}
-
-int Sunflower::setFertilizerLevel(int fertilizerLevel){
-    this->fertilizerLevel = fertilizerLevel;
 }

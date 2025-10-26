@@ -12,6 +12,8 @@
 #include "FertilizedState.h"
 #include "NonFertilizerState.h"
 
+#include "PlantGrowthState.h"
+
 #include <string>
 
 class Plant : public PlantComponent
@@ -34,7 +36,7 @@ class Plant : public PlantComponent
 		int plantId;                    // Instance ID for each plant
     	static int nextPlantId;         // Static variable to track next ID
 
-		//Maturity State go here
+		PlantGrowthState* growthState;
 		
 	public:
 		Plant();
@@ -46,7 +48,7 @@ class Plant : public PlantComponent
 		// void add(Plant *extra);//WHY IS THIS HERE???
 		void print();//Does this print plant name / plant info?
 		virtual std::string getName();
-		// double getPrice();
+		double getPrice();
 		// virtual std::string getName() = 0;
 	protected:
 		int getHealthEffects();

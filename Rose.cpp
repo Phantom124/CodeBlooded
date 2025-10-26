@@ -16,18 +16,9 @@ Rose::Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
     this->fertilizerLevel = fertilizerLevel;
 }
 
-Rose::~Rose(){
-    if (this->state != nullptr){
-        delete this->state;
+Rose::~Rose(){}
 
-    }
-    this->state = nullptr;
-}
 
-double Rose::getPrice()
-{
-    return price;
-}
 
 std::string Rose::getName(){
     return "Rose";

@@ -118,6 +118,9 @@ Plant::~Plant()
     if(this->fertilizerState != nullptr){
         delete this->fertilizerState;
     }
+    if(this->growthState != nullptr){
+        delete this->growthState;
+    }
 }
 
 void Plant::hoursHasPassed(){
@@ -181,4 +184,8 @@ std::string Plant::getName()
     ss << this->plantId;
     std::string strPlantId = ss.str();
     return "Plant" + strPlantId;
+}
+
+double Plant::getPrice(){
+    return this->price * this->growthState->getPriceEffect();//multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
 }

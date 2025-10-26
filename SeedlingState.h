@@ -2,10 +2,13 @@
 #define SEEDLINGSTATE_H
 
 #include "PlantGrowthState.h"
+#include <string>
 
 class SeedlingState : public PlantGrowthState {
 	public:
-		void handle();
+		PlantGrowthState* getNextState(int careCount);
+		double getPriceEffect();
+		std::string getStateName();
 };
 
 #endif
