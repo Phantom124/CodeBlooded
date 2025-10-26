@@ -51,8 +51,13 @@ class Plant : public PlantComponent
 		double getPrice();
 		// virtual std::string getName() = 0;
 	protected:
+		// int getCareCount();//Return care count
+		// int getCareCountEffect();//Return care count effect based on water and fertilizer states
+
+
 		int getHealthEffects();
 		void healthEffects();
+
 		void setWaterState(Water* waterState);
 		void setFertilizerState(Fertilizer* fertilizerState);
 		void checkWaterLevel(); // changes water state based on the current water level // Notify observers here when NotHydratedState is set

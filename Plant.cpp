@@ -31,12 +31,16 @@ int Plant::getHealthEffects(){
 }
 
 void Plant::healthEffects(){
-    //CHECK IF DEAD
+
+    if(this->health <= 0){//CHECK IF DEAD
+        return;
+    }
+    //Normal health effects
     this->health += getHealthEffects();
     if(this->health < 0 ){//DEAD
         this->health = 0;
         //TRANSITION TO DEAD STATE
-    }else if(this->health > 100){
+    }else if(this->health > 100){//MAX HEALTH
         this->health = 100;
     }
 }
@@ -83,6 +87,10 @@ void Plant::checkFertilizerLevel(){
 }
 
 void Plant::decreaseWaterLevel(){
+    if(health <= 0){//IF DEAD DO NOT DECREASE LEVELS
+        return;
+    }
+
     this->waterLevel = this->waterLevel - (10 * this->waterRetention);//Decrease water level based on retention
     if(this->waterLevel < 0){//Make sure it doesn't go below 0
         this->waterLevel = 0;
@@ -91,6 +99,9 @@ void Plant::decreaseWaterLevel(){
 }
 
 void Plant::decreaseFertilizerLevel(){
+    if(health <= 0){//IF DEAD DO NOT DECREASE LEVELS
+        return;
+    }
     this->fertilizerLevel = this->fertilizerLevel - (8 * this->fertilizerRetention);//Decrease fertilizer level based on retention
     if(this->fertilizerLevel < 0){//Make sure it doesn't go below 0
         this->fertilizerLevel = 0;

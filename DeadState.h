@@ -5,7 +5,7 @@
 
 class DeadState : public PlantGrowthState {
 	public:
-		PlantGrowthState* getNextState(int careCount);
+		PlantGrowthState* getNextState(int careCount, int health);
 		double getPriceEffect();
 		std::string getStateName();
 };
