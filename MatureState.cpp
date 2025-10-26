@@ -1,10 +1,6 @@
 #include "MatureState.h"
-#include "DeadState.h"
 
-PlantGrowthState *MatureState::getNextState(int careCount, int health) {
-    if(health <= 0){
-        return new DeadState();
-    }
+PlantGrowthState *MatureState::getNextState(int careCount) {
     return nullptr;
 }
 

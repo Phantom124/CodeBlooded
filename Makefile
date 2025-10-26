@@ -1,39 +1,48 @@
+# Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -g
-TARGET = plant_test
-OBJS = Plant.o FertilizedState.o NonFertilizerState.o HydratedState.o NotHydratedState.o Water.o Rose.o StateTesting.o
+CXXFLAGS = -Wall -std=c++11
 
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+# Target executable
+TARGET = plant_sim
 
-Plant.o: Plant.cpp Plant.h Water.h Fertilizer.h HydratedState.h NotHydratedState.h FertilizedState.h NonFertilizerState.h
-	$(CXX) $(CXXFLAGS) -c Plant.cpp
+# Source files
+SOURCES = StateTesting.cpp \
+          Plant.cpp \
+          Cactus.cpp \
+          Rose.cpp \
+          Sunflower.cpp \
+          SeedState.cpp \
+          GerminationState.cpp \
+          SaplingState.cpp \
+          MatureState.cpp \
+          DeadState.cpp \
+          HydratedState.cpp \
+          NotHydratedState.cpp \
+          FertilizedState.cpp \
+          NonFertilizerState.cpp \
+          Water.cpp
 
-FertilizedState.o: FertilizedState.cpp FertilizedState.h Fertilizer.h
-	$(CXX) $(CXXFLAGS) -c FertilizedState.cpp
+# Object files (replace .cpp with .o)
+OBJECTS = $(SOURCES:.cpp=.o)
 
-NonFertilizerState.o: NonFertilizerState.cpp NonFertilizerState.h Fertilizer.h
-	$(CXX) $(CXXFLAGS) -c NonFertilizerState.cpp
+# Default target
+all: $(TARGET)
 
-HydratedState.o: HydratedState.cpp HydratedState.h Water.h
-	$(CXX) $(CXXFLAGS) -c HydratedState.cpp
+# Link object files to create executable
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS)
 
-NotHydratedState.o: NotHydratedState.cpp NotHydratedState.h Water.h
-	$(CXX) $(CXXFLAGS) -c NotHydratedState.cpp
+# Compile source files to object files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-Water.o: Water.cpp Water.h
-	$(CXX) $(CXXFLAGS) -c Water.cpp
-
-Rose.o: Rose.cpp Rose.h Plant.h
-	$(CXX) $(CXXFLAGS) -c Rose.cpp
-
-StateTesting.o: StateTesting.cpp Plant.h Rose.h
-	$(CXX) $(CXXFLAGS) -c StateTesting.cpp
-
+# Run the program
 run: $(TARGET)
 	./$(TARGET)
 
+# Clean up build artifacts
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(OBJECTS) $(TARGET)
 
-.PHONY: run clean
+# Phony targets (not actual files)
+.PHONY: all run clean

@@ -51,12 +51,14 @@ class Plant : public PlantComponent
 		double getPrice();
 		// virtual std::string getName() = 0;
 	protected:
-		// int getCareCount();//Return care count
-		// int getCareCountEffect();//Return care count effect based on water and fertilizer states
+		int getCareCount();//Return care count
+		int getCareCountEffect();//Return care count effect based on water and fertilizer states
+		void increaseCareCount();//Increase care count by amount
+		void setGrowthState(PlantGrowthState* state);//Set growth state
 
 
 		int getHealthEffects();
-		void healthEffects();
+		void healthEffects();//Calculate new health // Can put plant in deadState
 
 		void setWaterState(Water* waterState);
 		void setFertilizerState(Fertilizer* fertilizerState);

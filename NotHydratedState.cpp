@@ -5,8 +5,8 @@ int NotHydratedState::effect(){
 }
 
 Water *NotHydratedState::getNextState(int currentLevel, int lowWaterLevel){
-    if(currentLevel < lowWaterLevel){
-        return new NotHydratedState();
+    if(currentLevel >= lowWaterLevel){
+        return new HydratedState();
     } else {
         return nullptr;
     }

@@ -6,7 +6,7 @@
 
 class GerminationState : public PlantGrowthState {
 	public:
-		PlantGrowthState* getNextState(int careCount, int health);
+		PlantGrowthState* getNextState(int careCount);
 		double getPriceEffect();
 		std::string getStateName();
 };

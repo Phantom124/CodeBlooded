@@ -1,6 +1,6 @@
 #include "DeadState.h"
 
-PlantGrowthState *DeadState::getNextState(int careCount, int health) {
+PlantGrowthState *DeadState::getNextState(int careCount) {
     return nullptr;
 }
 

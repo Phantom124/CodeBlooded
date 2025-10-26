@@ -5,8 +5,8 @@ int NonFertilizerState::effect(){
 }
 
 Fertilizer *NonFertilizerState::getNextState(int currentLevel, int lowFertilizerLevel){
-    if(currentLevel < lowFertilizerLevel){
-        return new NonFertilizerState();
+    if(currentLevel >= lowFertilizerLevel){
+        return new FertilizedState();
     } else {
         return nullptr;
     }

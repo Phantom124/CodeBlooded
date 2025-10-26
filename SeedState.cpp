@@ -1,10 +1,8 @@
 #include "SeedState.h"
 #include "GerminationState.h"
-#include "DeadState.h"
-PlantGrowthState *SeedState::getNextState(int careCount, int health) {
-    if(health <= 0){
-        return new DeadState();
-    }else if(careCount > 10){
+
+PlantGrowthState *SeedState::getNextState(int careCount) {
+    if(careCount > 10){
         return new GerminationState();
     }else{
         return nullptr;

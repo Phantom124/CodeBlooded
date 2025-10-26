@@ -3,11 +3,13 @@
 
 #include <string>
 class PlantGrowthState {
-	public:
-		virtual PlantGrowthState* getNextState(int careCount, int health) = 0;
-		virtual double getPriceEffect() = 0;
-		virtual std::string getStateName() = 0;
+    public:
+        // removed health parameter
+        virtual PlantGrowthState* getNextState(int careCount) = 0;
+        virtual double getPriceEffect() = 0;
+        virtual std::string getStateName() = 0;
 
 };
 
 #endif
+	
