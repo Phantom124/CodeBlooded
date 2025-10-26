@@ -1,5 +1,5 @@
-#ifndef REALGREENHOUSEINVENTORY_H
-#define REALGREENHOUSEINVENTORY_H
+#ifndef GREENHOUSEINVENTORY_H
+#define GREENHOUSEINVENTORY_H
 
 #include "PlantComponent.h"
 #include "Plant.h"
@@ -7,7 +7,7 @@
 #include <vector>
 #include <map>
 
-class RealGreenHouseInventory {
+class GreenHouseInventory {
 	private:
 		std::vector<Plant*> plants;
 		int totalPlants;

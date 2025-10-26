@@ -26,7 +26,7 @@ void Caretaker::removeMemento(std::string receiptID) {
     }
 }
 
-void Caretaker::restoreOrder(Receipt& receipt, RealGreenHouseInventory& inventory) {
+void Caretaker::restoreOrder(Receipt& receipt, GreenHouseInventory& inventory) {
     OrderMemento* memento = getMemento(receipt.getReceiptID());
     if (!memento) return;
 

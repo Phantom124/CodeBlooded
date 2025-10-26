@@ -17,7 +17,7 @@ class Caretaker{
         void addMemento(std::string receiptID, const OrderMemento& memento);
         OrderMemento* getMemento(std::string receiptID) const;
         void removeMemento(std::string receiptID);
-        void restoreOrder(Receipt& receipt, RealGreenHouseInventory& inventory);
+        void restoreOrder(Receipt& receipt, GreenHouseInventory& inventory);
 };
 
 #endif
