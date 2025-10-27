@@ -6,11 +6,11 @@ Caretaker::~Caretaker() {
     }
 }
 
-void Caretaker::addMemento(std::string receiptID, const OrderMemento& memento) {
+void Caretaker::addMemento(const std::string& receiptID, const OrderMemento& memento) {
     mementos[receiptID] = new OrderMemento(memento);
 }
 
-OrderMemento* Caretaker::getMemento(std::string receiptID) const {
+OrderMemento* Caretaker::getMemento(const std::string& receiptID) const {
     auto it = mementos.find(receiptID);
     if (it != mementos.end()) {
         return it->second;
@@ -18,7 +18,7 @@ OrderMemento* Caretaker::getMemento(std::string receiptID) const {
     return nullptr;
 }
 
-void Caretaker::removeMemento(std::string receiptID) {
+void Caretaker::removeMemento(const std::string& receiptID) {
     auto it = mementos.find(receiptID);
     if (it != mementos.end()) {
         delete it->second;
