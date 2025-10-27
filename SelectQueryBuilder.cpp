@@ -38,14 +38,17 @@ void SelectQueryBuilder::selectQueryBuilder(std::string plantID, std::string pla
     this->queryProduct->setQueryProduct(finalQuery);
 }
 
-std::string SelectQueryBuilder::addPlantID(){
-    return this->plantID;
+std::string SelectQueryBuilder::addPlantID(std::string plantID){
+    if (plantID.length() == 0) return "";
+    return plantID;
 }
 
-std::string SelectQueryBuilder::addPlantType(){
-    return this->plantType;
+std::string SelectQueryBuilder::addPlantType(std::string plantType){
+    if (plantType.length() == 0) return "";
+    return plantType;
 }
 
-std::string SelectQueryBuilder::addMaturityState(){
-    return this->maturityState;
+std::string SelectQueryBuilder::addMaturityState(std::string maturityState){
+    if (maturityState.length() == 0) return "";
+    return maturityState;
 }
