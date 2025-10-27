@@ -1,6 +1,6 @@
 #include "QueryProduct.h"
 
-QueryProduct::QueryProduct(GreenHouseInventory* inventory){
+QueryProduct::QueryProduct(ProxyGreenHouseInventory* inventory){
     this->inventory = inventory;
 }
 

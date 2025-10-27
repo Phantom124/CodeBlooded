@@ -8,12 +8,13 @@
 #include "PlantGrowthState.h"
 #include "Plant.h"
 #include "GreenHouseInventory.h"
+#include "ProxyGreenHouseInventory.h"
 
 class GreenHouseInventory;
 
 class QueryProduct{
     public:
-        QueryProduct(GreenHouseInventory* inventory);
+        QueryProduct(ProxyGreenHouseInventory* inventory);
         ~QueryProduct();
         void setQueryProduct(std::string query);
         std::string getQuery();
@@ -25,7 +26,7 @@ class QueryProduct{
 
     private:
         std::string query;
-        GreenHouseInventory* inventory;
+        ProxyGreenHouseInventory* inventory;
 
         // void inventorySelect(std::string query);
         // void inventoryInsert(std::string query);
