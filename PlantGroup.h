@@ -12,14 +12,15 @@ private:
 	std::string name;
 	std::vector<PlantComponent *> plants;
 
-public:
-	PlantGroup();
-	virtual ~PlantGroup();
-	virtual double getPrice();
-	virtual std::string getName();
-	std::vector<PlantComponent *> getPlants();
-	void addPlantComponent(PlantComponent *plantComponent);
-	void removePlantComponent(PlantComponent *plantComponent);
+	public:
+		PlantGroup();
+		virtual ~PlantGroup();
+	  virtual double getPrice();
+	  virtual std::string getName();
+    std::vector<PlantComponent *> getPlants();
+		void addPlantComponent(PlantComponent* plantComponent);
+		std::vector<PlantComponent*> getPlantComponents();
+    void removePlantComponent(PlantComponent *plantComponent);
 };
 
 #endif
