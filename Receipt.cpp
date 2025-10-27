@@ -1,7 +1,7 @@
 #include "Receipt.h"
 #include <iostream>
 
-Receipt::Receipt(std::string receiptID, double orderPrice, std::string info) 
+Receipt::Receipt(const std::string& receiptID, double orderPrice, const std::string& info) 
     : receiptID(receiptID), orderPrice(orderPrice), orderInfo(info), isValid(true) {
     orderDate = date::current_time();
 }
