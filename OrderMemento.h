@@ -15,7 +15,7 @@ class OrderMemento {
         std::string receiptID;
 
 	public:
-		OrderMemento(std::vector<PlantComponent*> plants, double price, std::string receiptID);
+		OrderMemento(const std::vector<PlantComponent*>& plants, double price, const std::string& receiptID);
 		std::vector<PlantComponent*> getPlants() const;
         double getOrderPrice() const;
         date::time getOrderDate() const;

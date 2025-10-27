@@ -17,7 +17,7 @@ class GreenHouseInventory {
 		void addPlant(Plant* plant);
 		void checkStockLevel();
 		std::vector<Plant*> getPlants();
-		void restorePlants(std::vector<PlantComponent*> plants);
+		void restorePlants(const std::vector<PlantComponent*>& plants);
 };
 
 #endif

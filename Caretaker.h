@@ -14,9 +14,9 @@ class Caretaker{
     public:
         Caretaker() = default;
         ~Caretaker();
-        void addMemento(std::string receiptID, const OrderMemento& memento);
-        OrderMemento* getMemento(std::string receiptID) const;
-        void removeMemento(std::string receiptID);
+        void addMemento(const std::string& receiptID, const OrderMemento& memento);
+        OrderMemento* getMemento(const std::string& receiptID) const;
+        void removeMemento(const std::string& receiptID);
         void restoreOrder(Receipt& receipt, GreenHouseInventory& inventory);
 };
 

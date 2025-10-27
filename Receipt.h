@@ -13,7 +13,7 @@ class Receipt {
         bool isValid;
 
     public:
-        Receipt(std::string receiptID, double orderPrice, std::string info);
+        Receipt(const std::string& receiptID, double orderPrice, const std::string& info);
         std::string getReceiptID() const;
         std::string getOrderInfo() const;
         double getOrderPrice() const;

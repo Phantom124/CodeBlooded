@@ -12,7 +12,7 @@ std::vector<Plant*> GreenHouseInventory::getPlants() {
     return plants;
 }
 
-void GreenHouseInventory::restorePlants(std::vector<PlantComponent*> plantComponents) {
+void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plantComponents) {
     for (auto& pc : plantComponents) {
         Plant* plant = dynamic_cast<Plant*>(pc);
         if (plant) {
