@@ -26,3 +26,21 @@ void DeleteQueryBuilder::deleteQueryBuilder(std::string plantID, std::string pla
 
     this->queryProduct->setQueryProduct(finalQuery);
 }
+
+std::string DeleteQueryBuilder::addPlantID(std::string plantID){
+    if (plantID.length() == 0) return "";
+    return plantID;
+
+}
+
+std::string DeleteQueryBuilder::addPlantType(std::string plantType){
+    if (plantType.length() == 0) return "";
+    return plantType;
+
+}
+
+std::string DeleteQueryBuilder::addMaturityState(std::string maturityState){
+    if (maturityState.length() == 0) return "";
+    return maturityState;
+    
+}
