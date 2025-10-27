@@ -5,13 +5,13 @@ CXX = g++
 CXXFLAGS = -Wall -g
 
 #Target executable
-TARGET = ./main
+TARGET = ./Builder_Proxy
 
 #For deleting the target
-TARGET_DEL = BuilderProxy.cpp
+TARGET_DEL = Builder_Proxy.cpp
 
 #Source files (all .cpp in workspace)
-SRCS = BuilderProxy.cpp QueryBuilder.cpp QueryProduct.cpp SelectQueryBuilder.cpp InsertQueryBuilder.cpp DeleteQueryBuilder.cpp StaffHandler.cpp Customer.cpp RealGreenHouseInventory.cpp Item.cpp
+SRCS = Builder_Proxy.cpp QueryBuilder.cpp QueryProduct.cpp SelectQueryBuilder.cpp InsertQueryBuilder.cpp DeleteQueryBuilder.cpp StaffHandler.cpp Customer.cpp RealGreenHouseInventory.cpp Item.cpp ProxyGreenHouseInventory.cpp
 
 #Object files
 OBJS = $(SRCS:.cpp=.o)

@@ -7,13 +7,13 @@
 
 #include "PlantGrowthState.h"
 #include "Plant.h"
-#include "RealGreenHouseInventory.h"
+#include "GreenHouseInventory.h"
 
-class RealGreenHouseInventory;
+class GreenHouseInventory;
 
 class QueryProduct{
     public:
-        QueryProduct(RealGreenHouseInventory* inventory);
+        QueryProduct(GreenHouseInventory* inventory);
         ~QueryProduct();
         void setQueryProduct(std::string query);
         std::string getQuery();
@@ -25,7 +25,7 @@ class QueryProduct{
 
     private:
         std::string query;
-        RealGreenHouseInventory* inventory;
+        GreenHouseInventory* inventory;
 
         // void inventorySelect(std::string query);
         // void inventoryInsert(std::string query);

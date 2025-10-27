@@ -3,9 +3,12 @@
 
 #include "StaffHandler.h"
 #include "StaffSystem.h"
-#include "QueryBuilder.h"
-#include "QueryProduct.h"
+// #include "QueryBuilder.h"
+// #include "QueryProduct.h"
 #include <string>
+
+class QueryBuilder;
+class QueryProduct;
 
 class StaffHandler {
 	private:

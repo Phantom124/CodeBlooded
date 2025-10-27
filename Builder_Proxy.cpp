@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cassert>
 
-
 #include "QueryProduct.h"
 #include "QueryBuilder.h"
 #include "SelectQueryBuilder.h"
@@ -12,6 +11,7 @@
 #include "Customer.h"
 #include "RealGreenHouseInventory.h"
 #include "Item.h"
+#include "ProxyGreenHouseInventory.h"
 
 void Builder();
 
@@ -163,10 +163,76 @@ void Builder() {
     DeleteQuery();
 }
 
+void Proxy(){
+    std::cout << "=== PROXY GREENHOUSE INVENTORY TEST ===\n";
+
+    // Arrange
+    ProxyGreenHouseInventory proxyInventory;
+    Customer customer;
+    StaffHandler staff;
+
+    // ----------------------------
+    // CUSTOMER SELECT (allowed)
+    // ----------------------------
+    {
+        QueryProduct query(&proxyInventory);
+        query.setQueryProduct("SELECT Rose FROM INVENTORY;");
+        std::cout << "\n[Customer SELECT Test]\n";
+        proxyInventory.handleControlRights(&customer, query);
+    }
+
+    // ----------------------------
+    // CUSTOMER INSERT (denied)
+    // ----------------------------
+    {
+        QueryProduct query(&proxyInventory);
+        query.setQueryProduct("INSERT INTO INVENTORY VALUES (4, Tulip, Mature);");
+        std::cout << "\n[Customer INSERT Test]\n";
+        proxyInventory.handleControlRights(&customer, query);
+    }
+
+    // ----------------------------
+    // STAFF INSERT (allowed)
+    // ----------------------------
+    {
+        QueryProduct query(&proxyInventory);
+        query.setQueryProduct("INSERT INTO INVENTORY VALUES (5, Daisy, Young);");
+        std::cout << "\n[Staff INSERT Test]\n";
+        proxyInventory.handleControlRights(&staff, query);
+    }
+
+    // ----------------------------
+    // STAFF DELETE (allowed)
+    // ----------------------------
+    {
+        QueryProduct query(&proxyInventory);
+        query.setQueryProduct("DELETE FROM INVENTORY WHERE PlantID = 1;");
+        std::cout << "\n[Staff DELETE Test]\n";
+        proxyInventory.handleControlRights(&staff, query);
+    }
+
+    // ----------------------------
+    // CUSTOMER DELETE (denied)
+    // ----------------------------
+    {
+        QueryProduct query(&proxyInventory);
+        query.setQueryProduct("DELETE FROM INVENTORY WHERE PlantID = 2;");
+        std::cout << "\n[Customer DELETE Test]\n";
+        proxyInventory.handleControlRights(&customer, query);
+    }
+
+    // ----------------------------
+    // Show all remaining plants
+    // ----------------------------
+    std::cout << "\n[Final Inventory]\n";
+    proxyInventory.showAllPlants();    
+}
+
 int main() {
     Builder();
     QueryProductTest();
     RealGreenhouseInventoryTest();
     TestInventory();
+    Proxy();
     return 0;
 }

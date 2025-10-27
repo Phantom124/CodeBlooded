@@ -17,6 +17,7 @@ class GreenHouseInventory {
 		int totalPlants;
 		std::map<std::string, int> plantCountByType;
 
+
 	public:
 		void notify(std::string msg, std::string handlerType);
 		void registerStaffhandler(StaffHandler* handler);
@@ -25,6 +26,8 @@ class GreenHouseInventory {
 		virtual void removePlant(std::string query) = 0;
 		virtual void showPlant(std::string query) = 0;
     	virtual void showAllPlants() = 0;
+        // virtual void handleControlRights(void* user, QueryProduct query) = 0;
+
 		
 		void requestPlant(std::string plantType, StaffHandler* staff);
 		void checkStockLevel();

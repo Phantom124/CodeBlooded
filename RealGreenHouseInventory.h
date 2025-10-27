@@ -12,12 +12,14 @@
 class RealGreenHouseInventory : public GreenHouseInventory{
     public:
         RealGreenHouseInventory();
-        ~RealGreenHouseInventory();
+        virtual ~RealGreenHouseInventory();
 
         void showPlant(std::string parameters);
         void showAllPlants();
         void addPlant(Item item);
         void removePlant(std::string parameters);
+        // void handleControlRights(void* user, QueryProduct query);
+
 
     private:
         std::vector<Item> plant;

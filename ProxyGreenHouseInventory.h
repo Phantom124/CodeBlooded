@@ -3,23 +3,31 @@
 
 #include "GreenHouseInventory.h"
 #include "RealGreenHouseInventory.h"
+#include "QueryProduct.h"
+#include "Customer.h"
+#include "StaffHandler.h"
 #include "Item.h"
 
 #include <string>
+// #include <typeinfo>
 
 class ProxyGreenHouseInventory : public GreenHouseInventory {
     public:
-        ProxyGreenHouseInventory(RealGreenHouseInventory* realInv, std::string type);
+        ProxyGreenHouseInventory();
         ~ProxyGreenHouseInventory();
         
         void showPlant(std::string parameters);
         void showAllPlants();
         void addPlant(Item item);
         void removePlant(std::string parameters);
+
+        void handleControlRights(void* user, QueryProduct query);
     
     private:
         RealGreenHouseInventory* realInventory;
-        std::string userType;
 };
 
 #endif
+
+//typeid to validate
+//void* => generic pointer, can point to any data type

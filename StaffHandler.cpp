@@ -1,4 +1,6 @@
 #include "StaffHandler.h"
+#include "QueryBuilder.h"
+#include "QueryProduct.h"
 
 StaffHandler::StaffHandler(){
     this->successor = nullptr;
@@ -6,8 +8,7 @@ StaffHandler::StaffHandler(){
     this->queryBuilder = nullptr;
 }
 
-QueryProduct StaffHandler::createSelectQuery(std::string plantID, std::string plantType, std::string maturityState)
-{
+QueryProduct StaffHandler::createSelectQuery(std::string plantID, std::string plantType, std::string maturityState){
     if (this->queryBuilder == nullptr) return QueryProduct(nullptr);
     this->queryBuilder->selectQueryBuilder(plantID, plantType, maturityState);
     return this->queryBuilder->getQueryProduct();
