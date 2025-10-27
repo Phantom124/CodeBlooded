@@ -22,13 +22,13 @@ std::string Order::generateInfo(){
 
     if (!plantGroup) return info;
 
-    for (size_t i = 0; i < plantGroup->plants.size(); ++i) {
-        auto p = plantGroup->plants[i];
+    for (size_t i = 0; i < plantGroup->getPlantComponents().size(); ++i) {
+        auto p = plantGroup->getPlantComponents()[i];
         if (!p) continue;
         info += p->getName();
         info += " : R";
         info += std::to_string(p->getPrice());
-        if (i + 1 < plantGroup->plants.size()) info += "\n";
+        if (i + 1 < plantGroup->getPlantComponents().size()) info += "\n";
     }
     return info;
 }
