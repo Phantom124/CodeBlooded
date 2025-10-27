@@ -1,6 +1,6 @@
 #include "OrderMemento.h"
 
-OrderMemento::OrderMemento(std::vector<PlantComponent*> plants, double price, std::string receiptID) 
+OrderMemento::OrderMemento(const std::vector<PlantComponent*>& plants, double price, const std::string& receiptID) 
     : plants(plants), orderPrice(price), receiptID(receiptID) {
     orderDate = date::current_time();
 }
