@@ -1,6 +1,6 @@
 #include "Order.h"
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup){
+Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup) {
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
 }
