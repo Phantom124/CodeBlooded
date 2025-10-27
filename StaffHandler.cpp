@@ -39,6 +39,10 @@ QueryProduct* StaffHandler::createDeleteQuery(string plantID, string plantType, 
     // queryBuilder->
 }
 
+void StaffHandler::resetBusy(){
+    isBusy = false;
+}
+
 void StaffHandler::setQueryBuilder(QueryBuilder *qb){
     if (queryBuilder == nullptr){
         queryBuilder = qb;

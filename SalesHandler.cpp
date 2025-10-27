@@ -10,8 +10,8 @@ void SalesHandler::handleRequest(Command *cmd, StaffSystem* staffSys){
     }
 
     if (cmd->getType() == GET_PLANT){
+        isBusy = false;
         cmd->execute();
-
         //TODO: check whether there was anything else?
     } else {
         StaffHandler::handleRequest(cmd, staffSys);

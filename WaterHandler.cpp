@@ -10,6 +10,7 @@ void WaterHandler::handleRequest(Command* command, StaffSystem* staffSys){
     }
     
     if (command->getType() == WATER){
+        isBusy = false;
         command->execute();
     } else {
         StaffHandler::handleRequest(command, staffSys);

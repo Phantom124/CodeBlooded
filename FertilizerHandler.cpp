@@ -10,6 +10,7 @@ void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
     }
 
     if (command->getType() == FERTILIZER){
+        isBusy = false;
         command->execute();
     } else {
         StaffHandler::handleRequest(command, staffSys);
