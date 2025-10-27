@@ -20,7 +20,8 @@ class Order {
 		std::string getName();
 		void printOrder();
 		void addToOrder(Plant* plant);
-		void priceStrategy();
+    void setPriceStrategy(PriceStrategies *priceStrategy);
+	  void applyPriceStrategy();
 		OrderMemento* createMemento();
 		Receipt* generateReceipt();
 		std::string getReceiptID() const;
