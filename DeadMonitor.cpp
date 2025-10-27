@@ -10,8 +10,10 @@ DeadMonitor::~DeadMonitor(){}
 void DeadMonitor::update(Plant *plant){
     if(plant != nullptr){//Passed in plant is valid
         if(plant->getHealth() == 0){
-            //Create Dead Command
-            //Send to chain of responsibility
+            // DeadCommand* command = new DeadCommand(plant);//MAKE DEAD COMMAND CORRECTLY
+            // if(staffSystem != nullptr){//SEND TO STAFF SYSTEM IF EXISTS
+            //     staffSystem->addCommand(command);
+            // }
             std::cout<< "Dead Monitor Recieved Update: Plant is dead.\n";
         }
     }

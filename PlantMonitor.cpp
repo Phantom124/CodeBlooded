@@ -2,17 +2,17 @@
 #include "Plant.h"
 
 PlantMonitor::PlantMonitor(){
-    chain = nullptr;
+    staffSystem = nullptr;
 }
 
 PlantMonitor::~PlantMonitor(){
-    chain = nullptr;
+    staffSystem = nullptr;
 }
 
-void PlantMonitor::setChain(StaffHandler *chain){
-    if(chain != nullptr){
-        this->chain = chain;
+void PlantMonitor::setChain(StaffSystem *staffSystem){
+    if(staffSystem != nullptr){
+        this->staffSystem = staffSystem;
     }else{
-        throw std::invalid_argument("Chain cannot be null");
+        throw std::invalid_argument("StaffSystem cannot be null");
     }
 }

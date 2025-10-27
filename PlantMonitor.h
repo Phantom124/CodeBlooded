@@ -3,20 +3,23 @@
 
 #include "StaffHandler.h"  // or forward declare if not needed
 #include <string>
+#include "StaffSystem.h"
+
 
 // Forward declaration
 class Plant;
 
+
 class PlantMonitor {
 protected:
-    StaffHandler* chain;
+    StaffSystem* staffSystem;
     std::string type;
 
 public:
     PlantMonitor();
     virtual ~PlantMonitor();
-    
-    void setChain(StaffHandler* chain);
+
+    void setChain(StaffSystem* staffSystem);
     virtual void update(Plant* plant) = 0;  // Pure virtual function
 };
 
