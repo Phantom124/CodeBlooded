@@ -3,9 +3,10 @@
 
 #include "PriceStrategies.h"
 
-class DiscountPrice : public PriceStrategies {
-	public:
-		void priceStrategy();
+class DiscountPrice : public PriceStrategies
+{
+public:
+	virtual double priceStrategy() { return 0.8; };
 };
 
 #endif

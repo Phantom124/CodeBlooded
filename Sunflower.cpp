@@ -1,50 +1,24 @@
 #include "Sunflower.h"
+#include <iostream>
+#include <string>
 
-Sunflower::Sunflower(){
-    this->name = name;
-    this->price = price;
-
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
-}
-
-Sunflower::Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
-}
-
-Sunflower::~Sunflower()
+Sunflower::Sunflower()
 {
-    if (this->state != nullptr){
-        delete this->state;
-
-    }
-    this->state = nullptr;
+    this->price = 55;
+    this->name = "Sunflower";
 }
 
-PlantGrowthState* Sunflower::getState(){
-    return this->state;
+double Sunflower::getPrice()
+{
+    return this->price;
 }
 
-int Sunflower::getWaterLevel(){
-    return this->waterLevel;
+std::string Sunflower::getName()
+{
+    return this->name;
 }
 
-int Sunflower::getFertilizerLevel(){
-    return this->fertilizerLevel;
-}
-
-PlantGrowthState* Sunflower::setState(PlantGrowthState* state){
-    this->state = state;
-
-}
-
-int Sunflower::setWaterLevel(int waterLevel){
-    this->waterLevel = waterLevel;
-}
-
-int Sunflower::setFertilizerLevel(int fertilizerLevel){
-    this->fertilizerLevel = fertilizerLevel;
+void Sunflower::print()
+{
+    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }
