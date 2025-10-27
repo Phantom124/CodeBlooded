@@ -1,11 +1,14 @@
 #ifndef FERTILIZER_H
 #define FERTILIZER_H
+#include <string> 
 
-#include "PlantGrowthState.h"
 
 class Fertilizer {
 	public:
-		PlantGrowthState handle(int careCount);
+		virtual ~Fertilizer() = default; 
+		virtual int effect() = 0;
+		virtual Fertilizer* getNextState(int currentLevel, int lowFertilizerLevel) = 0;
+		virtual std::string getStateName() = 0;
 };
 
 #endif

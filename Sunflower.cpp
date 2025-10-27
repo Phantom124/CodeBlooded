@@ -1,50 +1,22 @@
 #include "Sunflower.h"
 
-Sunflower::Sunflower(){
-    this->name = name;
-    this->price = price;
-
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+Sunflower::Sunflower():Plant(){
+    this->name = "Sunflower";
+    this->price = 25;
+    this->waterRetention = 0.72;
+    this->lowWaterLevel = 55;
+    this->fertilizerRetention = 0.85;
+    this->lowFertilizerLevel = 20;
 }
 
-Sunflower::Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
-}
+// Sunflower::Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
+//     this->state = state;
+//     this->waterLevel = waterLevel;
+//     this->fertilizerLevel = fertilizerLevel;
+// }
 
-Sunflower::~Sunflower()
-{
-    if (this->state != nullptr){
-        delete this->state;
+Sunflower::~Sunflower(){}
 
-    }
-    this->state = nullptr;
-}
-
-PlantGrowthState* Sunflower::getState(){
-    return this->state;
-}
-
-int Sunflower::getWaterLevel(){
-    return this->waterLevel;
-}
-
-int Sunflower::getFertilizerLevel(){
-    return this->fertilizerLevel;
-}
-
-PlantGrowthState* Sunflower::setState(PlantGrowthState* state){
-    this->state = state;
-
-}
-
-int Sunflower::setWaterLevel(int waterLevel){
-    this->waterLevel = waterLevel;
-}
-
-int Sunflower::setFertilizerLevel(int fertilizerLevel){
-    this->fertilizerLevel = fertilizerLevel;
+std::string Sunflower::getName(){
+    return "Sunflower";
 }
