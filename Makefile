@@ -48,5 +48,9 @@ run: $(TARGET)
 clean:
 	rm -f $(OBJECTS) $(TARGET)
 
+# Check for memory leaks (macOS only)
+checkleaks: $(TARGET)
+	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
+
 # Phony targets (not actual files)
-.PHONY: all run clean
+.PHONY: all run clean checkleaks
