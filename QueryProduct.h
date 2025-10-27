@@ -11,6 +11,7 @@
 #include "ProxyGreenHouseInventory.h"
 
 class GreenHouseInventory;
+class ProxyGreenHouseInventory;
 
 class QueryProduct{
     public:
