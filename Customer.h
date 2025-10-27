@@ -2,6 +2,7 @@
 #define CUSTOMER_H
 
 #include "QueryBuilder.h"
+#include "SelectQueryBuilder.h"
 
 class Customer {
     public:
