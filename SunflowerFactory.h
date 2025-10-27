@@ -7,15 +7,10 @@
 
 class SunflowerFactory : public PlantFactory {
 	public:
-		SunflowerFactory();
+		SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon);
 		~SunflowerFactory();
-		Plant* createSunflower();
-		Plant* createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
-
-	private:
-		PlantGrowthState* state;
-		int waterLevel;
-		int fertilizerLevel;
+		Plant* createPlant();
+		// Plant* createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 };
 
 #endif

@@ -20,7 +20,11 @@ SOURCES = StateTesting.cpp \
           NotHydratedState.cpp \
           FertilizedState.cpp \
           NonFertilizerState.cpp \
-          Water.cpp
+          Water.cpp \
+          PlantMonitor.cpp \
+          DeadMonitor.cpp \
+          FertilizerMonitor.cpp \
+          WaterMonitor.cpp
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)

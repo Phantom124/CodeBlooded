@@ -13,12 +13,18 @@
 #include "NonFertilizerState.h"
 
 #include "PlantGrowthState.h"
+#include "PlantMonitor.h"
 
 #include <string>
+
+class WaterMonitor;
+class FertilizerMonitor;
+class DeadMonitor;
 
 class Plant : public PlantComponent
 {
 	protected:
+		std::string name; //Child
 		double price; //Child
 		int careCount; //Plant
 		int health; //Plant
@@ -37,7 +43,12 @@ class Plant : public PlantComponent
     	static int nextPlantId;         // Static variable to track next ID
 
 		PlantGrowthState* growthState;
-		
+
+		//Monitoring
+		WaterMonitor* waterMonitor;
+		FertilizerMonitor* fertilizerMonitor;
+		DeadMonitor* deadMonitor;
+
 	public:
 		Plant();
 		virtual ~Plant();
@@ -45,11 +56,22 @@ class Plant : public PlantComponent
 		// Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);
 		void waterPlant();//Water plant to full and set state
 		void fertilizePlant();// Fertilize plant to full and set state
-		// void add(Plant *extra);//WHY IS THIS HERE???
 		void print();//Does this print plant name / plant info?
-		virtual std::string getName();
+
+		std::string getWaterStateName();
+		std::string getFertilizerStateName();
+		int getHealth();
+
+		void attachWaterMonitor(WaterMonitor* observer);
+		void attachFertilizerMonitor(FertilizerMonitor* observer);
+		void attachDeadMonitor(DeadMonitor* observer);
+
 		double getPrice();
-		// virtual std::string getName() = 0;
+		virtual std::string getName() = 0;
+		PlantGrowthState* getState();
+		int getWaterLevel();
+		int getFertilizerLevel();
+
 	protected:
 		int getCareCount();//Return care count
 		int getCareCountEffect();//Return care count effect based on water and fertilizer states

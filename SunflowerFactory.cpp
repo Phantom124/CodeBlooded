@@ -1,21 +1,14 @@
 #include "SunflowerFactory.h"
 #include "Sunflower.h"
 
-SunflowerFactory::SunflowerFactory(){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
-}
+SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon):PlantFactory(waterMon, fertMon, deadMon){}
 
-SunflowerFactory::~SunflowerFactory(){
-    delete this->state;
-    this->state = nullptr;
-}
+SunflowerFactory::~SunflowerFactory(){}
 
-Plant* SunflowerFactory::createSunflower(){
+Plant* SunflowerFactory::createPlant(){
     return new Sunflower();
 }
 
-Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    return new Sunflower(state, waterLevel, fertilizerLevel);
-}
+// Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
+//     return new Sunflower(state, waterLevel, fertilizerLevel);
+// }

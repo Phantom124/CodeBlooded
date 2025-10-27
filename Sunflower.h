@@ -5,21 +5,13 @@
 #include <string>
 
 class Sunflower : public Plant {
-	private:
-		std::string name;
-		double price;
-		PlantGrowthState* state;
-
-
 	public:
 		Sunflower();
-		Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
+		// Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 		~Sunflower();
 
 		std::string getName();
-		PlantGrowthState* getState();
-		int getWaterLevel();
-		int getFertilizerLevel();
+
 };
 
 #endif

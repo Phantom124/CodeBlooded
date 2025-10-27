@@ -1,6 +1,6 @@
 #include "Cactus.h"
 
-Cactus::Cactus(){
+Cactus::Cactus():Plant(){
     this->name = "Cactus";
     this->price = 15;
     this->waterRetention = 0.95;
@@ -9,22 +9,14 @@ Cactus::Cactus(){
     this->lowFertilizerLevel = 10;
 }
 
-Cactus::Cactus(PlantGrowthState *state, int waterLevel, int fertilizerLevel){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
-}
+// Cactus::Cactus(PlantGrowthState *state, int waterLevel, int fertilizerLevel){
+//     // this->state = state;
+//     // this->waterLevel = waterLevel;
+//     // this->fertilizerLevel = fertilizerLevel;
+// }
 
 Cactus::~Cactus(){}
 
 std::string Cactus::getName(){
     return this->name;
-}
-
-int Cactus::getWaterLevel(){
-    return this->waterLevel;
-}
-
-int Cactus::getFertilizerLevel(){
-    return this->fertilizerLevel;
 }

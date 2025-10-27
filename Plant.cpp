@@ -7,10 +7,14 @@
 #include "GerminationState.h"
 #include "SaplingState.h"
 #include "MatureState.h"
+#include "WaterMonitor.h"
+#include "FertilizerMonitor.h"
+#include "DeadMonitor.h"
 
 int Plant::nextPlantId = 1;
 
 Plant::Plant(){
+
     this->plantId = nextPlantId++;
     this->careCount = 0;
     this->health = 75; // Default health
@@ -75,6 +79,10 @@ void Plant::checkWaterLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setWaterState(nextState);
             if(nextState->getStateName() == "NotHydrated"){
+                if(waterMonitor != nullptr){
+                    waterMonitor->update(this);
+                }
+                
                 //NOTIFY OBSERVERS
             }
         }
@@ -89,6 +97,7 @@ void Plant::checkFertilizerLevel(){
             this->setFertilizerState(nextState);
             if(nextState->getStateName() == "NonFertilized"){
                 //NOTIFY OBSERVERS
+                fertilizerMonitor->update(this);
             }
         }
         // If nextState is nullptr, STAY in current state
@@ -216,20 +225,73 @@ void Plant::print() {
     std::cout << result << std::endl;
 }
 
+std::string Plant::getWaterStateName(){
+    if(this->waterState == nullptr){
+        return "No Water State";
+    }
+    return this->waterState->getStateName();
+}
 
-std::string Plant::getName()
-{
-    std::stringstream ss;
-    ss << this->plantId;
-    std::string strPlantId = ss.str();
-    return "Plant" + strPlantId;
+std::string Plant::getFertilizerStateName(){
+    if(this->fertilizerState == nullptr){
+        return "No Fertilizer State";
+    }
+    return this->fertilizerState->getStateName();
+}
+
+int Plant::getHealth(){
+    return this->health;
+}
+
+void Plant::attachWaterMonitor(WaterMonitor *observer){
+    if(observer != nullptr){
+        this->waterMonitor = observer;
+    }else{
+        throw std::invalid_argument("Observer cannot be null");
+    }
+
+}
+
+void Plant::attachFertilizerMonitor(FertilizerMonitor *observer){
+    if(observer != nullptr){
+        this->fertilizerMonitor = observer;
+    }else{
+        throw std::invalid_argument("Observer cannot be null");
+    }
+}
+
+void Plant::attachDeadMonitor(DeadMonitor *observer){
+    if(observer != nullptr){
+        this->deadMonitor = observer;
+    }else{
+        throw std::invalid_argument("Observer cannot be null");
+    }
+}
+
+std::string Plant::getName(){
+    return this->name;
+}
+
+PlantGrowthState *Plant::getState(){
+    return this->growthState;
+}
+
+int Plant::getWaterLevel(){
+    return this->waterLevel;
+}
+
+int Plant::getFertilizerLevel(){
+    return this->fertilizerLevel;
 }
 
 double Plant::getPrice(){
     return this->price * this->growthState->getPriceEffect();//multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
 }
 
-int Plant::getCareCount(){
+
+
+int Plant::getCareCount()
+{
     return this->careCount;
 }
 
