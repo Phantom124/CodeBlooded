@@ -1,12 +1,17 @@
 #include "FertilizerHandler.h"
 
-FertilizerHandler::FertilizerHandler(StaffSystem* sys)
-    : StaffHandler(sys){}
+FertilizerHandler::FertilizerHandler() {}
 
-void FertilizerHandler::handleRequest(Command *command){
+void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    if (command == nullptr){
+        throw "Command is nullptr.";
+    } else if (staffSys == nullptr){
+        throw "StaffSys is nullptr";
+    }
+
     if (command->getType() == FERTILIZER){
         command->execute();
     } else {
-        StaffHandler::handleRequest(command);
+        StaffHandler::handleRequest(command, staffSys);
     }
 }

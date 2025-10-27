@@ -1,14 +1,39 @@
 #include "QueueIterator.h"
 #include "StaffSystem.h"
+#include "StaffHandler.h"
 
 QueueIterator::QueueIterator(StaffSystem* sys){
     this->sys = sys;
 }
 
-void QueueIterator::emptyQueue(){
-    if(!this->sys) return;
+void QueueIterator::emptyQueue(StaffHandler* head){
+    if(!this->sys || !head) return;
+
     while(!this->sys->queue.empty()){
-        this->sys->queue.pop();
+        Command* cmd = this->sys->queue.front();
+        bool marked = cmd->getMarked();
+        if (!marked){
+            cmd->setMarked(true);
+            this->sys->queue.pop();
+            head->handleRequest(cmd, sys);
+        } else {
+            break;
+        }
+    }
+
+    bool marked = false;
+    while (true){
+
+        Command* cmd = this->sys->queue.front();
+        marked = cmd->getMarked();
+        if (marked){
+            cmd->setMarked(false);
+            this->sys->queue.pop();
+            this->sys->queue.push(cmd);
+        } else {
+            break;
+        }
+
     }
 }
 

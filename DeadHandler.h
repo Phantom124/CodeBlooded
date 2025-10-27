@@ -6,8 +6,8 @@
 
 class DeadHandler : public StaffHandler {
 	public:
-		DeadHandler(StaffSystem* sys);
-		void handleRequest(Command* command);
+		DeadHandler();
+		void handleRequest(Command* command, StaffSystem* staffSys);
 };
 
 #endif

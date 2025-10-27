@@ -7,18 +7,21 @@ enum cmdType {
     WATER,
     FERTILIZER,
     DEAD,
-	BUY_PLANT
+	GET_PLANT
 };
 
 class Command {
 
 protected:
 	cmdType type;
+	bool marked;
 
 public:
 	Command(const cmdType type);
 	virtual void execute() = 0;
 	cmdType getType();
+	bool getMarked();
+	void setMarked(bool newMarked);
 };
 
 #endif

@@ -6,8 +6,8 @@
 
 class FertilizerHandler : public StaffHandler {
 	public:
-		FertilizerHandler(StaffSystem* sys);
-		void handleRequest(Command* command);
+		FertilizerHandler();
+		void handleRequest(Command* command, StaffSystem* staffSys);
 };
 
 #endif

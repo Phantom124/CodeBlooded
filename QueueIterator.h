@@ -3,13 +3,16 @@
 
 #include "Command.h"
 
+class StaffSystem;
+class StaffHandler;
+
 class QueueIterator {
 	private:
 		StaffSystem* sys;
 	public:
 		QueueIterator(StaffSystem* sys);
 		// QueueIterator(const QueueIterator& it);
-		void emptyQueue();
+		void emptyQueue(StaffHandler* head);
 		Command* dequeue();
 		Command* front();
 		bool isEmpty();

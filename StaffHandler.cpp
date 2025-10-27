@@ -1,19 +1,25 @@
 #include "StaffHandler.h"
+#include "StaffSystem.h"
 // #include "QueryBuilder.h"
 // #include "DeleteQueryBuilder.h"
 
-StaffHandler::StaffHandler(StaffSystem* sys){
-    staffSys = sys;
+StaffHandler::StaffHandler(){
     successor = nullptr;
     queryBuilder = nullptr;
 }
 
-void StaffHandler::handleRequest(Command *command){\
+void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    if (command == nullptr){
+        throw "Command is nullptr.";
+    } else if (staffSys == nullptr){
+        throw "StaffSys is nullptr";
+    }
+    
     if (successor == false){
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
-        successor->handleRequest(command);            
+        successor->handleRequest(command, staffSys);            
     }
 }
 
@@ -33,8 +39,7 @@ QueryProduct* StaffHandler::createDeleteQuery(string plantID, string plantType, 
     // queryBuilder->
 }
 
-void StaffHandler::setQueryBuilder(QueryBuilder *qb)
-{
+void StaffHandler::setQueryBuilder(QueryBuilder *qb){
     if (queryBuilder == nullptr){
         queryBuilder = qb;
         return;
