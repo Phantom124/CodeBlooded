@@ -7,17 +7,17 @@ Rose::Rose()
     this->name = "Rose";
 }
 
-double Rose::getPrice()
+double Rose::getPrice()//Obed
 {
     return this->price;
 }
 
-std::string Rose::getName()
+std::string Rose::getName()//Obed
 {
     return this->name;
 }
 
-void Rose::print()
+void Rose::print()//Obed
 {
     std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }

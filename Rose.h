@@ -2,6 +2,7 @@
 #define ROSE_H
 
 #include "Plant.h"
+#include "PlantGrowthState.h"
 #include <string>
 
 class Rose : public Plant
