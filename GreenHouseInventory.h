@@ -1,7 +1,7 @@
 #ifndef GREENHOUSEINVENTORY_H
 #define GREENHOUSEINVENTORY_H
 
-#include "PlantSnapshot.h"
+#include "PlantComponent.h"
 #include "Plant.h"
 #include "StaffHandler.h"
 #include "Item.h"
@@ -13,7 +13,6 @@
 class GreenHouseInventory {
 	private:
 		std::vector<Plant*> plants;
-		std::vector<StaffHandler*> staffhandlers;
 		int totalPlants;
 		std::map<std::string, int> plantCountByType;
 
@@ -31,9 +30,8 @@ class GreenHouseInventory {
 		
 		void requestPlant(std::string plantType, StaffHandler* staff);
 		void checkStockLevel();
-		Plant* getPlant(std::string plantType);
-		PlantSnapshot* createSnapshot();
 		std::vector<Plant*> getPlants();
+		void restorePlants(const std::vector<PlantComponent*>& plants);
 };
 
 #endif

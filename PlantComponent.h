@@ -3,15 +3,16 @@
 
 #include <string>
 
-class PlantComponent {
-	private:
-		double price;
-		std::string name;
+class PlantComponent
+{
+private:
+	double price;
+	std::string name;
 
-	public:
-		double getPrice();
-		std::string getName();
-		void addPlantComponent(PlantComponent* plantComponent);
+public:
+	virtual double getPrice() = 0;
+	virtual std::string getName() = 0;
+	virtual void addPlantComponent(PlantComponent *plantComponent) = 0;
 };
 
 #endif

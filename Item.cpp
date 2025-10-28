@@ -8,7 +8,7 @@ Item::Item(std::string plantID, std::string plantType, std::string maturityState
 
 std::string Item::getPlantID(){
     return std::to_string(this->plantReference->getPlantId());
-}
+}    
 
 std::string Item::getPlantType(){
     return this->plantReference->getName();
