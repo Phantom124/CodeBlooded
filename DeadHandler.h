@@ -7,10 +7,7 @@
 class DeadHandler : public StaffHandler {
 	public:
 		DeadHandler();
-		void setSuccessor(StaffHandler* successor);
-		void handleRequest(Command* command);
-		void receive(std::string msg);
-		void requestAction(std::string action);
+		void handleRequest(Command* command, StaffSystem* staffSys);
 };
 
 #endif

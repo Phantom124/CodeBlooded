@@ -12,7 +12,8 @@ protected:
 	std::string type;
 
 public:
-	WaterCommand(const std::string& type, Plant* plant);
+	WaterCommand(Plant* plant);
+	virtual void execute();
 };
 
 #endif

@@ -5,12 +5,18 @@
 #include "Command.h"
 #include <queue>
 
+class StaffHandler;
+
 class StaffSystem {
 	private:
 		std::queue<Command*> queue;
+		StaffHandler* staffHandler;
 	public:
-		StaffSystem();
+		StaffSystem(StaffHandler* staff);
+		void setHandler(StaffHandler* staff);
+		void attemptCommand(Command* cmd);
 		QueueIterator createIterator();
+		friend class QueueIterator;
 };
 
 #endif

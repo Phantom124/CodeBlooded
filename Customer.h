@@ -2,6 +2,7 @@
 #define CUSTOMER_H
 
 class Customer {
+    
 };
 
 #endif

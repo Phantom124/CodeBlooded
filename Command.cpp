@@ -1,4 +1,17 @@
 #include "Command.h"
 
-Command::Command(const std::string &type) : type(type) {
+Command::Command(const cmdType type): type(type), marked(false){
+
+}
+
+cmdType Command::getType(){
+    return type;
+}
+
+bool Command::getMarked(){
+    return marked;
+}
+
+void Command::setMarked(bool newMarked){
+    marked = newMarked;
 }
