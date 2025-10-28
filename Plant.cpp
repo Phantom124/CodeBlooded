@@ -21,7 +21,7 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     this->plantId = nextPlantId++;
     this->waterLevel = 100;
     this->fertilizerLevel = 100;
-    
+
     this->waterState = new HydratedState();
     this->fertilizerState = new FertilizedState();
     this->growthState = new SeedState();
@@ -38,6 +38,9 @@ int Plant::getHealthEffects(){
         //can add extra abilities 
         //if +10 can increase to +15
         //if -10 can decrease to -12
+        if(totalEffect == 0){//If One state needs attention
+            totalEffect = -2;//Small decrease
+        }
     }
     return totalEffect;
     
@@ -53,6 +56,9 @@ void Plant::healthEffects(){
     if(this->health < 0 ){//DEAD
         this->health = 0;
         setGrowthState(new DeadState());//MAKE DEAD MAKE DEAD
+        if(deadMonitor != nullptr){
+            deadMonitor->update(this);
+        }
         //NOTIFY OBSERVERS
         //TRANSITION TO DEAD STATE
     }else if(this->health > 100){//MAX HEALTH
@@ -81,11 +87,11 @@ void Plant::checkWaterLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setWaterState(nextState);
             if(nextState->getStateName() == "NotHydrated"){
+
                 if(waterMonitor != nullptr){
-                    waterMonitor->update(this);
+                    waterMonitor->update(this);//NOTIFY Monitor
                 }
                 
-                //NOTIFY OBSERVERS
             }
         }
         // If nextState is nullptr, STAY in current state
@@ -98,8 +104,9 @@ void Plant::checkFertilizerLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setFertilizerState(nextState);
             if(nextState->getStateName() == "NonFertilized"){
+                std::cout << "Fertilizer level low, notifying monitor." << std::endl;
                 if (fertilizerMonitor != nullptr) {
-                    fertilizerMonitor->update(this);
+                    fertilizerMonitor->update(this);//NOTIFY Monitor
                 }
                 // else ignore or log warning
             }
@@ -176,6 +183,7 @@ void Plant::waterPlant(){
 }
 
 void Plant::fertilizePlant(){
+    std::cout << "Fertilizing Plant...\n";
     if(this->health <= 0){//IF DEAD DO NOT FERTILIZE
         this->fertilizerLevel = 0;
         checkFertilizerLevel();

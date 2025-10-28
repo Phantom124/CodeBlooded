@@ -503,9 +503,10 @@ int main() {
         FertilizerHandler* fertilizerHandler = new FertilizerHandler();
         DeadHandler* deadHandler = new DeadHandler();
 
-        StaffSystem* staffSystem = new StaffSystem(waterHandler);//staff system should be able to empty
+        StaffSystem* staffSystem = new StaffSystem();//staff system should be able to empty
         staffSystem->addHandler(fertilizerHandler);
         staffSystem->addHandler(deadHandler);
+        staffSystem->addHandler(waterHandler);
 
         waterMonitor->setStaffSystem(staffSystem);
         fertilizerMonitor->setStaffSystem(staffSystem);

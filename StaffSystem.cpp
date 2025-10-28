@@ -4,27 +4,27 @@
 #include <stdexcept>
 #include "PlantCommand.h"
 
-StaffSystem::StaffSystem(StaffHandler* staff){
-    staffHandler = staff;
+StaffSystem::StaffSystem(){
+    staffHandler = nullptr;
 }
 
-void StaffSystem::setHandler(StaffHandler *staff){
-    if (this->staffHandler != nullptr){
-        // delete this->staffHandler;
-        this->staffHandler = nullptr;
-    }
-    this->staffHandler = staff;
-}
+// void StaffSystem::setHandler(StaffHandler *staff){
+//     if (this->staffHandler != nullptr){
+//         delete this->staffHandler;
+//         this->staffHandler = nullptr;
+//     }
+//     this->staffHandler = staff;
+// }
 
 void StaffSystem::addHandler(StaffHandler *staff){
     if (staff == nullptr){
-        throw std::invalid_argument("StaffHandler is a nullptr.");
+        throw std::invalid_argument("Cannot add staff handler is a nullptr.");
     }
-    if (this->staffHandler == nullptr){
-        this->staffHandler = staff;
-    } 
-    StaffHandler* current = this->staffHandler;
-    staff->setSuccessor(current);
+    staff->setSuccessor(this->staffHandler);
+    this->staffHandler = staff;
+
+    // StaffHandler* current = this->staffHandler;
+    // staff->setSuccessor(current);
 
 }
 
@@ -45,8 +45,12 @@ void StaffSystem::attemptCommand(Command *cmd){
         std::cout << "DEBUG: StaffSystem received non-Plant command @" << cmd << std::endl;
     }
 
-    if (!staffHandler){
-        throw std::invalid_argument("staffHandler is nullptr.");
+    if (!staffHandler){//No staff handler, attempt to put in queue
+        // throw std::invalid_argument("staffHandler is nullptr.");
+        //PUT COMMAND IN QUEUE DIRECTLY
+        QueueIterator it = this->createIterator();
+        it.enqueue(cmd);
+        return;
     }
 
     this->staffHandler->handleRequest(cmd, this);

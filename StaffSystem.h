@@ -12,8 +12,8 @@ class StaffSystem {
 		std::queue<Command*> queue;
 		StaffHandler* staffHandler;
 	public:
-		StaffSystem(StaffHandler* staff);
-		void setHandler(StaffHandler* staff);
+		StaffSystem();
+		// void setHandler(StaffHandler* staff);
 		void addHandler(StaffHandler* staff);
 		void attemptCommand(Command* cmd);
 		QueueIterator createIterator();
