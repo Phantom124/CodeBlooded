@@ -9,7 +9,7 @@ PlantMonitor::~PlantMonitor(){
     staffSystem = nullptr;
 }
 
-void PlantMonitor::setChain(StaffSystem *staffSystem){
+void PlantMonitor::setStaffSystem(StaffSystem *staffSystem){
     if(staffSystem != nullptr){
         this->staffSystem = staffSystem;
     }else{

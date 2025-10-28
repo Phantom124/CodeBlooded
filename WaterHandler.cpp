@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-WaterHandler::WaterHandler(StaffSystem *sys) {}
+WaterHandler::WaterHandler() {}
 
 void WaterHandler::handleRequest(Command* command, StaffSystem* staffSys){
     if (command == nullptr){

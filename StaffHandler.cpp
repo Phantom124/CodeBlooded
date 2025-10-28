@@ -1,6 +1,6 @@
 #include "StaffHandler.h"
 #include "StaffSystem.h"
-
+#include <iostream>
 #include <stdexcept>
 
 StaffHandler::StaffHandler(){
@@ -15,7 +15,7 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
         throw std::invalid_argument("StaffSystem is a nullptr.");
     }
     
-    if (successor == false){
+    if (successor == nullptr){
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
@@ -27,9 +27,24 @@ void StaffHandler::setSuccessor(StaffHandler *successor){
     if (this->successor == nullptr){
         this->successor = successor;
     } else {
-        delete this->successor;
+        // delete this->successor;
         this->successor = successor;
     }
+}
+
+QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState){
+    std::cout<<"Creating Select Query"<<std::endl;
+    return nullptr;
+}
+
+QueryProduct *StaffHandler::createInsertQuery(string plantID, string plantType, string maturityState){
+    std::cout<<"Creating Insert Query"<<std::endl;
+    return nullptr;
+}
+
+QueryProduct *StaffHandler::createDeleteQuery(string plantID, string plantType, string maturityState){
+    std::cout<<"Creating Delete Query"<<std::endl;
+    return nullptr;
 }
 
 void StaffHandler::resetBusy()
@@ -46,6 +61,6 @@ void StaffHandler::setQueryBuilder(QueryBuilder *qb){
         return;
     }
 
-    delete queryBuilder;
-    queryBuilder = qb;
+    // delete queryBuilder;
+    // queryBuilder = qb;
 }

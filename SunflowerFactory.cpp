@@ -10,7 +10,11 @@ SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fe
 SunflowerFactory::~SunflowerFactory(){}
 
 Plant* SunflowerFactory::createPlant(){
-    return new Sunflower();
+    Sunflower* newSunflower = new Sunflower();
+    newSunflower->attachWaterMonitor(this->waterMonitor);
+    newSunflower->attachFertilizerMonitor(this->fertilizerMonitor);
+    newSunflower->attachDeadMonitor(this->deadMonitor);
+    return  newSunflower;
 }
 
 // Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){

@@ -24,7 +24,22 @@ SOURCES = StateTesting.cpp \
           PlantMonitor.cpp \
           DeadMonitor.cpp \
           FertilizerMonitor.cpp \
-          WaterMonitor.cpp
+          WaterMonitor.cpp \
+          Command.cpp \
+          PlantCommand.cpp \
+          DeadCommand.cpp \
+          WaterCommand.cpp \
+          FertilizerCommand.cpp \
+          StaffSystem.cpp \
+          StaffHandler.cpp \
+          WaterHandler.cpp \
+          FertilizerHandler.cpp \
+          DeadHandler.cpp \
+          QueueIterator.cpp \
+          PlantFactory.cpp \
+          RoseFactory.cpp \
+          CactusFactory.cpp \
+          SunflowerFactory.cpp
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -44,13 +59,13 @@ $(TARGET): $(OBJECTS)
 run: $(TARGET)
 	./$(TARGET)
 
+# Memory leak check (macOS)
+checkleaks: $(TARGET)
+	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
+
 # Clean up build artifacts
 clean:
 	rm -f $(OBJECTS) $(TARGET)
-
-# Check for memory leaks (macOS only)
-checkleaks: $(TARGET)
-	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
 
 # Phony targets (not actual files)
 .PHONY: all run clean checkleaks

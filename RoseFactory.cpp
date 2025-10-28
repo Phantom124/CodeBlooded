@@ -17,6 +17,7 @@ Plant* RoseFactory::createPlant(){
     newRose->attachWaterMonitor(this->waterMonitor);
     newRose->attachFertilizerMonitor(this->fertilizerMonitor);
     newRose->attachDeadMonitor(this->deadMonitor);
+    return newRose;
 
 }
 

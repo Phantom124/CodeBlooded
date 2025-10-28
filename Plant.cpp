@@ -131,8 +131,11 @@ void Plant::decreaseFertilizerLevel(){
 void Plant::internalsTimeElapse(){//ADD CARECOUNT LATER ON FOR GROWTH STATE
     //Growth state update would go here based on careCount
     //CHECK IF PLANT IS DEAD!!!
+    std::cout << "Effecting Plant Health...\n";
     healthEffects();//Calculate new health // Can put plant in deadState
+    std::cout<< "Increasing Care Count...\n";
     increaseCareCount();
+    std::cout << "Decreasing Water and Fertilizer Levels...\n";
     decreaseWaterLevel();//Decrease water level//
     decreaseFertilizerLevel();
 }
@@ -180,12 +183,16 @@ void Plant::fertilizePlant(){
 
 void Plant::print() {
     std::string result = "";
-
+    //UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS
     std::stringstream ss;
     ss << this->plantId;
     std::string strPlantId = ss.str();
 
+    cout << "Getting the name of the plant" << endl;
+
     result += this->getName();
+    cout << "Got the name of the plant" << endl;
+
     result += ": " + strPlantId;
 
     ss.str("");

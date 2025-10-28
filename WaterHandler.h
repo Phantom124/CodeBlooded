@@ -6,7 +6,7 @@
 
 class WaterHandler : public StaffHandler {
 	public:
-		WaterHandler(StaffSystem* sys);
+		WaterHandler();
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 	};
 

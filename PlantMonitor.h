@@ -19,7 +19,7 @@ public:
     PlantMonitor();
     virtual ~PlantMonitor();
 
-    void setChain(StaffSystem* staffSystem);
+    void setStaffSystem(StaffSystem* staffSystem);
     virtual void update(Plant* plant) = 0;  // Pure virtual function
 };
 

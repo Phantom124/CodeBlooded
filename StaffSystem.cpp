@@ -9,7 +9,7 @@ StaffSystem::StaffSystem(StaffHandler* staff){
 
 void StaffSystem::setHandler(StaffHandler *staff){
     if (this->staffHandler != nullptr){
-        delete this->staffHandler;
+        // delete this->staffHandler;
         this->staffHandler = nullptr;
     }
     this->staffHandler = staff;

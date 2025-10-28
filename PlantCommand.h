@@ -12,7 +12,7 @@ protected:
 	cmdType type;
 
 public:
-	PlantCommand(const cmdType type, Plant* plant);
+	PlantCommand(cmdType type, Plant* plant);
 	virtual void execute() = 0;
 };
 

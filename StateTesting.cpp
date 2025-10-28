@@ -14,6 +14,14 @@
 #include "DeadMonitor.h"
 #include "WaterMonitor.h"
 #include "FertilizerMonitor.h"
+#include "WaterHandler.h"
+#include "FertilizerHandler.h"
+#include "DeadHandler.h"
+#include "StaffSystem.h"
+#include "PlantFactory.h"
+#include "CactusFactory.h"
+#include "RoseFactory.h"
+#include "SunflowerFactory.h"
 #include <iostream>
 #include <iomanip>
 #include <cassert>
@@ -462,7 +470,7 @@ void testPlantProperties() {
               << std::setw(20) << "0.85"
               << std::setw(18) << "20" << "\n";
 }
-
+#include "RoseFactory.h"
 int main() {
     std::cout << "\n";
     std::cout << "╔════════════════════════════════════════════════════════════════════════════╗\n";
@@ -487,20 +495,38 @@ int main() {
         // std::cout << "\n";
 
 
-        // WaterMonitor* waterMonitor = new WaterMonitor();
-        // FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
-        // DeadMonitor* deadMonitor = new DeadMonitor();
-        // StaffSystem* staffSystem = new StaffSystem();//staff system should be able to empty
-        // waterMonitor->setStaffSystem(staffSystem);
-        // fertilizerMonitor->setStaffSystem(staffSystem);
-        // deadMonitor->setStaffSystem(staffSystem);
+        WaterMonitor* waterMonitor = new WaterMonitor();
+        FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
+        DeadMonitor* deadMonitor = new DeadMonitor();
 
-        Rose* rose = new Rose();
-        bool doIt = true;
+        WaterHandler* waterHandler = new WaterHandler();
+        FertilizerHandler* fertilizerHandler = new FertilizerHandler();
+        DeadHandler* deadHandler = new DeadHandler();
+
+        StaffSystem* staffSystem = new StaffSystem(waterHandler);//staff system should be able to empty
+        staffSystem->addHandler(fertilizerHandler);
+        staffSystem->addHandler(deadHandler);
+
+        waterMonitor->setStaffSystem(staffSystem);
+        fertilizerMonitor->setStaffSystem(staffSystem);
+        deadMonitor->setStaffSystem(staffSystem);
+
+        RoseFactory* roseFactory = new RoseFactory(waterMonitor, fertilizerMonitor, deadMonitor);
+        Plant* rosePlant = roseFactory->createPlant();
+
+        rosePlant->print();
+
+        bool doIt;
+        std::cin >> doIt;
         while(doIt){
+            std::cout << "Simulating growth for 1 hour...\n";
+            rosePlant->hoursHasPassed();
+            std::cout << "Current state of the plant:\n";
+            rosePlant->print();
             std::cin >> doIt;
-            rose->hoursHasPassed();
         }
+        delete rosePlant;
+        std::cout<< "\nDONE\n" ;
         return 0;
     } catch (const std::exception& e) {
         std::cerr << "\n\n❌ TEST FAILED WITH EXCEPTION: " << e.what() << "\n\n";
