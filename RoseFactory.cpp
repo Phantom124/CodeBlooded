@@ -1,10 +1,10 @@
 #include "RoseFactory.h"
 #include "Rose.h"
 
-RoseFactory::RoseFactory(){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;    
+RoseFactory::RoseFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon):PlantFactory(waterMon, fertMon, deadMon){
+    if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
+        throw std::invalid_argument("Monitors cannot be null");
+    }
 }
 
 RoseFactory::~RoseFactory(){
@@ -12,10 +12,14 @@ RoseFactory::~RoseFactory(){
     this->state = nullptr;
 }
 
-Plant* RoseFactory::createRose(){
-    return new Rose();
+Plant* RoseFactory::createPlant(){
+    Rose* newRose = new Rose();
+    newRose->attachWaterMonitor(this->waterMonitor);
+    newRose->attachFertilizerMonitor(this->fertilizerMonitor);
+    newRose->attachDeadMonitor(this->deadMonitor);
+
 }
 
-Plant* RoseFactory::createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    return new Rose(state, waterLevel, fertilizerLevel);
-}
+// Plant* RoseFactory::createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
+//     return new Rose(state, waterLevel, fertilizerLevel);
+// }

@@ -1,9 +1,10 @@
-#ifndef MATURESTATE_H
-#define MATURESTATE_H
+#ifndef SAPLINGSTATE_H
+#define SAPLINGSTATE_H
 
 #include "PlantGrowthState.h"
+#include <string>
 
-class MatureState : public PlantGrowthState {
+class SaplingState : public PlantGrowthState {
     public:
         PlantGrowthState* getNextState(int careCount);
         double getPriceEffect();
