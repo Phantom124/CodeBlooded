@@ -1,6 +1,7 @@
 #ifndef ITEM_H
 #define ITEM_H
 
+#include "Plant.h"
 #include <string>
 
 class Item{
@@ -17,6 +18,9 @@ class Item{
         std::string plantID;
         std::string plantType;
         std::string maturityState;
+
+        Plant* plantReference;
+
 };
 
 #endif
