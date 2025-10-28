@@ -48,11 +48,11 @@ QueryProduct *StaffHandler::createDeleteQuery(string plantID, string plantType, 
     return nullptr;
 }
 
-void StaffHandler::resetBusy()
+void StaffHandler::resetAvailable()
 {
-    isBusy = false;
+    isAvailable = true;
     if (successor != nullptr){
-        successor->resetBusy();
+        successor->resetAvailable();
     }
 }
 

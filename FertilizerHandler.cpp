@@ -11,8 +11,8 @@ void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
         throw std::invalid_argument("StaffSys is a nullptr.");
     }
 
-    if (command->getType() == FERTILIZER){
-        isBusy = false;
+    if (isAvailable == true && command->getType() == FERTILIZER){//First: Are you available //Second: Is this a fertilizer command
+        isAvailable = false;
         command->execute();
     } else {
         StaffHandler::handleRequest(command, staffSys);

@@ -12,8 +12,8 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
         throw std::invalid_argument("StaffSystem is a nullptr");
     }
 
-    if (command->getType() == DEAD){
-        isBusy = false;
+    if (isAvailable == true && command->getType() == DEAD){//First: Are you available //Second: Is this a dead command
+        isAvailable = false;
         //Remove the dead plant from the queue
         DeadCommand* deadCmd = dynamic_cast<DeadCommand*>(command);
         Plant* plant = deadCmd->getPlant();

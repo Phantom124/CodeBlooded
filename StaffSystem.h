@@ -14,6 +14,7 @@ class StaffSystem {
 	public:
 		StaffSystem();
 		// void setHandler(StaffHandler* staff);
+		void timeElapsed();
 		void addHandler(StaffHandler* staff);
 		void attemptCommand(Command* cmd);
 		QueueIterator createIterator();
