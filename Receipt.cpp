@@ -1,9 +1,11 @@
 #include "Receipt.h"
 #include <iostream>
+#include <iomanip>
+#include <ctime>
 
 Receipt::Receipt(const std::string& receiptID, double orderPrice, const std::string& info) 
     : receiptID(receiptID), orderPrice(orderPrice), orderInfo(info), isValid(true) {
-    orderDate = date::current_time();
+    orderDate = std::chrono::system_clock::now();
 }
 
 std::string Receipt::getReceiptID() const {
@@ -18,13 +20,16 @@ double Receipt::getOrderPrice() const {
     return orderPrice;
 }
 
-date::time Receipt::getOrderDate() const {
+std::chrono::system_clock::time_point Receipt::getOrderDate() const {
     return orderDate;
 }
 
 void Receipt::printReceipt() const {
     std::cout << "Receipt ID: " << receiptID << std::endl;
-    std::cout << "Order Date: " << date::format("%d/%m/%Y %H:%M:%S", orderDate) << std::endl;
+    
+    std::time_t time = std::chrono::system_clock::to_time_t(orderDate);
+    std::cout << "Order Date: " << std::put_time(std::localtime(&time), "%d/%m/%Y %H:%M:%S") << std::endl;
+    
     std::cout << "===========================" << std::endl;
     std::cout << "Order Info: " << orderInfo << std::endl;
     std::cout << "Total Price: R" << orderPrice << std::endl;
@@ -32,7 +37,7 @@ void Receipt::printReceipt() const {
 }
 
 bool Receipt::validateReceipt() {
-    auto now = date::current_time();
+    auto now = std::chrono::system_clock::now();
     auto diff = now - orderDate;
 
     auto hours = std::chrono::duration_cast<std::chrono::hours>(diff).count();

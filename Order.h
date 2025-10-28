@@ -5,6 +5,7 @@
 #include "PriceStrategies.h"
 #include "OrderMemento.h"
 #include "Receipt.h"
+#include "Plant.h"
 #include <string>
 
 class Order {
@@ -20,8 +21,8 @@ class Order {
 		std::string getName();
 		void printOrder();
 		void addToOrder(Plant* plant);
-    void setPriceStrategy(PriceStrategies *priceStrategy);
-	  void applyPriceStrategy();
+    	void setPriceStrategy(PriceStrategies *priceStrategy);
+	  	void applyPriceStrategy();
 		OrderMemento* createMemento();
 		Receipt* generateReceipt();
 		std::string getReceiptID() const;

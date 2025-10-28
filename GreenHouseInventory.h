@@ -2,6 +2,7 @@
 #define GREENHOUSEINVENTORY_H
 
 #include "PlantComponent.h"
+#include "PlantSnapshot.h"
 #include "Plant.h"
 #include <string>
 #include <vector>
@@ -17,7 +18,7 @@ class GreenHouseInventory {
 		void addPlant(Plant* plant);
 		void checkStockLevel();
 		std::vector<Plant*> getPlants();
-		void restorePlants(const std::vector<PlantComponent*>& plants);
+		void restorePlants(const std::vector<PlantSnapshot*>& snapshots);
 };
 
 #endif

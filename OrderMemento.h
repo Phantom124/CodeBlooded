@@ -3,23 +3,25 @@
 
 #include "Order.h"
 #include "PlantComponent.h"
-#include <date/time.h>
+#include "PlantSnapshot.h"
+#include <chrono>
 #include <string>
 #include <vector>
 
 class OrderMemento {
-	private:
-		std::vector<PlantComponent*> plants;
+    private:
+        std::vector<PlantSnapshot*> plantSnapshots;
         double orderPrice;
-        date::time orderDate;
+        std::chrono::system_clock::time_point orderDate;
         std::string receiptID;
 
-	public:
-		OrderMemento(const std::vector<PlantComponent*>& plants, double price, const std::string& receiptID);
-		std::vector<PlantComponent*> getPlants() const;
+    public:
+        OrderMemento(const std::vector<PlantComponent*>& plants, double price, const std::string& receiptID);
+        std::vector<PlantSnapshot*> getPlants() const;
         double getOrderPrice() const;
-        date::time getOrderDate() const;
+        std::chrono::system_clock::time_point getOrderDate() const;
         std::string getReceiptID() const;
+        std::vector<PlantSnapshot*> createSnapshots(const std::vector<PlantComponent*>& plants); 
 };
 
 #endif
