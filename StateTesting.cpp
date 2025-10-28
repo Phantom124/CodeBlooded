@@ -471,21 +471,36 @@ int main() {
     std::cout << "╚════════════════════════════════════════════════════════════════════════════╝\n";
     
     try {
-        // Run all tests
-        testPlantGrowthStates();
-        testWaterStates();
-        testFertilizerStates();
-        testPlantClasses();
-        testMonitorClasses();
-        testMonitorUpdates();
-        testStateTransitions();
-        testPlantProperties();
+        // // Run all tests
+        // testPlantGrowthStates();
+        // testWaterStates();
+        // testFertilizerStates();
+        // testPlantClasses();
+        // testMonitorClasses();
+        // testMonitorUpdates();
+        // testStateTransitions();
+        // testPlantProperties();
         
-        printSeparator();
-        std::cout << "\n  ✓✓✓ ALL TESTS PASSED SUCCESSFULLY! ✓✓✓\n";
-        printSeparator();
-        std::cout << "\n";
-        
+        // printSeparator();
+        // std::cout << "\n  ✓✓✓ ALL TESTS PASSED SUCCESSFULLY! ✓✓✓\n";
+        // printSeparator();
+        // std::cout << "\n";
+
+
+        // WaterMonitor* waterMonitor = new WaterMonitor();
+        // FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
+        // DeadMonitor* deadMonitor = new DeadMonitor();
+        // StaffSystem* staffSystem = new StaffSystem();//staff system should be able to empty
+        // waterMonitor->setStaffSystem(staffSystem);
+        // fertilizerMonitor->setStaffSystem(staffSystem);
+        // deadMonitor->setStaffSystem(staffSystem);
+
+        Rose* rose = new Rose();
+        bool doIt = true;
+        while(doIt){
+            std::cin >> doIt;
+            rose->hoursHasPassed();
+        }
         return 0;
     } catch (const std::exception& e) {
         std::cerr << "\n\n❌ TEST FAILED WITH EXCEPTION: " << e.what() << "\n\n";

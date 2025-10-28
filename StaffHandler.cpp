@@ -32,7 +32,8 @@ void StaffHandler::setSuccessor(StaffHandler *successor){
     }
 }
 
-void StaffHandler::resetBusy(){
+void StaffHandler::resetBusy()
+{
     isBusy = false;
     if (successor != nullptr){
         successor->resetBusy();

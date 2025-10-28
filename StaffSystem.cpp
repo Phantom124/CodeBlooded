@@ -15,6 +15,18 @@ void StaffSystem::setHandler(StaffHandler *staff){
     this->staffHandler = staff;
 }
 
+void StaffSystem::addHandler(StaffHandler *staff){
+    if (staff == nullptr){
+        throw std::invalid_argument("StaffHandler is a nullptr.");
+    }
+    if (this->staffHandler == nullptr){
+        this->staffHandler = staff;
+    } 
+    StaffHandler* current = this->staffHandler;
+    staff->setSuccessor(current);
+
+}
+
 QueueIterator StaffSystem::createIterator(){
     QueueIterator out(this);
     return out;
