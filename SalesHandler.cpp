@@ -1,12 +1,13 @@
 #include "SalesHandler.h"
+#include <stdexcept>
 
 SalesHandler::SalesHandler(){}
 
 void SalesHandler::handleRequest(Command *cmd, StaffSystem* staffSys){
     if (cmd == nullptr){
-        throw "Command is nullptr.";
+        throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
-        throw "StaffSys is nullptr";
+        throw std::invalid_argument("StaffSys is a nullptr.");
     }
 
     if (cmd->getType() == GET_PLANT){

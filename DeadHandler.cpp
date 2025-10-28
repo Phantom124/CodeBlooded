@@ -1,13 +1,15 @@
 #include "DeadHandler.h"
 #include "DeadCommand.h" 
 
+#include <stdexcept>
+
 DeadHandler::DeadHandler(){}
 
 void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){
-        throw "Command is nullptr.";
+        throw std::invalid_argument("Command is a nullptr");
     } else if (staffSys == nullptr){
-        throw "StaffSys is nullptr";
+        throw std::invalid_argument("StaffSystem is a nullptr");
     }
 
     if (command->getType() == DEAD){

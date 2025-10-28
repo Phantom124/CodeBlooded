@@ -12,7 +12,7 @@ protected:
 	std::string type;
 
 public:
-	WaterCommand(const cmdType type, Plant* plant);
+	WaterCommand(Plant* plant);
 	virtual void execute();
 };
 

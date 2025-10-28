@@ -1,7 +1,7 @@
 #include "StaffHandler.h"
 #include "StaffSystem.h"
-// #include "QueryBuilder.h"
-// #include "DeleteQueryBuilder.h"
+
+#include <stdexcept>
 
 StaffHandler::StaffHandler(){
     successor = nullptr;
@@ -10,9 +10,9 @@ StaffHandler::StaffHandler(){
 
 void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){
-        throw "Command is nullptr.";
+        throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
-        throw "StaffSys is nullptr";
+        throw std::invalid_argument("StaffSystem is a nullptr.");
     }
     
     if (successor == false){
@@ -26,21 +26,17 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
 void StaffHandler::setSuccessor(StaffHandler *successor){
     if (this->successor == nullptr){
         this->successor = successor;
+    } else {
+        delete this->successor;
+        this->successor = successor;
     }
-}
-
-QueryProduct* StaffHandler::createDeleteQuery(string plantID, string plantType, string maturityState){
-    if (queryBuilder == nullptr){
-        return nullptr;
-        //Not sure whether I should return nullptr here or if I should just create a QBuilder
-    }
-    
-    // deleteBuilder->deleteQueryBuilder(plantID, plantType, maturityState);
-    // queryBuilder->
 }
 
 void StaffHandler::resetBusy(){
     isBusy = false;
+    if (successor != nullptr){
+        successor->resetBusy();
+    }
 }
 
 void StaffHandler::setQueryBuilder(QueryBuilder *qb){

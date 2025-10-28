@@ -9,7 +9,7 @@ class GetPlantCommand : public CustomerCommand {
     Plant* plant;
 	std::string type;
 public:
-	GetPlantCommand(const cmdType type, Plant* plant, Customer* customer);
+	GetPlantCommand(Plant* plant, Customer* customer);
 	virtual void execute();
 };
 

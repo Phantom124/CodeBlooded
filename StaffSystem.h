@@ -13,6 +13,7 @@ class StaffSystem {
 		StaffHandler* staffHandler;
 	public:
 		StaffSystem(StaffHandler* staff);
+		void setHandler(StaffHandler* staff);
 		void attemptCommand(Command* cmd);
 		QueueIterator createIterator();
 		friend class QueueIterator;

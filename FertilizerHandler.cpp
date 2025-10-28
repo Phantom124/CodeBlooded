@@ -1,12 +1,14 @@
 #include "FertilizerHandler.h"
 
+#include <stdexcept>
+
 FertilizerHandler::FertilizerHandler() {}
 
 void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){
-        throw "Command is nullptr.";
+        throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
-        throw "StaffSys is nullptr";
+        throw std::invalid_argument("StaffSys is a nullptr.");
     }
 
     if (command->getType() == FERTILIZER){
