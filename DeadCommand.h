@@ -8,8 +8,8 @@
 class DeadCommand : public PlantCommand {
 
 protected:
-	Plant* plant;
-	std::string type;
+	// Plant* plant;
+	// std::string type;
 
 public:
 	DeadCommand(Plant* plant);

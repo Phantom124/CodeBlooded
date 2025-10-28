@@ -52,7 +52,9 @@ class Plant : public PlantComponent
 		friend class PlantSnapshot;
 
 	public:
-		Plant();
+		// Plant.h
+		Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel);
+
 		virtual ~Plant();
 		void hoursHasPassed();
 		// Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);

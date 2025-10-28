@@ -13,21 +13,23 @@
 
 int Plant::nextPlantId = 1;
 
-Plant::Plant(){
-
-    this->plantId = nextPlantId++;
+// Plant.cpp
+Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel): type(type), price(price),waterRetention(waterRetention),lowWaterLevel(lowWaterLevel),fertilizerRetention(fertilizerRetention),lowFertilizerLevel(lowFertilizerLevel){
+    // Initialize the rest too (health, states, etc.)
     this->careCount = 0;
-    this->health = 75; // Default health
-    
+    this->health = 100;
+    this->plantId = nextPlantId++;
     this->waterLevel = 100;
     this->fertilizerLevel = 100;
-
+    
     this->waterState = new HydratedState();
     this->fertilizerState = new FertilizedState();
     this->growthState = new SeedState();
+
     checkWaterLevel();
     checkFertilizerLevel();
 }
+
 
 int Plant::getHealthEffects(){
     int totalEffect = -1000;//will kill plant if not effected
@@ -96,8 +98,10 @@ void Plant::checkFertilizerLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setFertilizerState(nextState);
             if(nextState->getStateName() == "NonFertilized"){
-                //NOTIFY OBSERVERS
-                fertilizerMonitor->update(this);
+                if (fertilizerMonitor != nullptr) {
+                    fertilizerMonitor->update(this);
+                }
+                // else ignore or log warning
             }
         }
         // If nextState is nullptr, STAY in current state
