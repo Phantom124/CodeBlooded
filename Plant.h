@@ -24,7 +24,7 @@ class DeadMonitor;
 class Plant : public PlantComponent
 {
 	protected:
-		std::string name; //Child
+		std::string type; //Child
 		double price; //Child
 		int careCount; //Plant
 		int health; //Plant
@@ -48,6 +48,8 @@ class Plant : public PlantComponent
 		WaterMonitor* waterMonitor;
 		FertilizerMonitor* fertilizerMonitor;
 		DeadMonitor* deadMonitor;
+
+		friend class PlantSnapshot;
 
 	public:
 		Plant();
@@ -73,11 +75,13 @@ class Plant : public PlantComponent
 		int getFertilizerLevel();
 
 	protected:
+		//Only if at 100 health should the plant grow (careCount increase)
 		int getCareCount();//Return care count
 		int getCareCountEffect();//Return care count effect based on water and fertilizer states
 		void increaseCareCount();//Increase care count by amount
 		void setGrowthState(PlantGrowthState* state);//Set growth state
-
+		void checkGrowthLevel();//Check and update growth state based on care count
+	
 
 		int getHealthEffects();
 		void healthEffects();//Calculate new health // Can put plant in deadState
@@ -90,12 +94,8 @@ class Plant : public PlantComponent
 		void decreaseFertilizerLevel();
 		void internalsTimeElapse();// updates health, water level, and fertilizer level over time
 
-		//Growth functions go here
 		//Only if at 100 health should the plant grow (careCount increase)
 
-
-
-		//Add Observer here
 };
 
 #endif

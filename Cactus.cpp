@@ -1,7 +1,7 @@
 #include "Cactus.h"
 
 Cactus::Cactus():Plant(){
-    this->name = "Cactus";
+    this->type = "Cactus";
     this->price = 15;
     this->waterRetention = 0.95;
     this->lowWaterLevel = 15;
@@ -18,5 +18,5 @@ Cactus::Cactus():Plant(){
 Cactus::~Cactus(){}
 
 std::string Cactus::getName(){
-    return this->name;
+    return this->type;
 }

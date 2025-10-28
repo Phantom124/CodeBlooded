@@ -1,7 +1,7 @@
 #include "Sunflower.h"
 
 Sunflower::Sunflower():Plant(){
-    this->name = "Sunflower";
+    this->type = "Sunflower";
     this->price = 25;
     this->waterRetention = 0.72;
     this->lowWaterLevel = 55;

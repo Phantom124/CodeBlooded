@@ -2,7 +2,7 @@
 #include <string>
 
 Rose::Rose():Plant(){
-    this->name = "Rose";
+    this->type = "Rose";
     this->price = 20;
     this->waterRetention = 0.85;
     this->lowWaterLevel = 30;

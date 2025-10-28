@@ -269,7 +269,7 @@ void Plant::attachDeadMonitor(DeadMonitor *observer){
 }
 
 std::string Plant::getName(){
-    return this->name;
+    return this->type;
 }
 
 PlantGrowthState *Plant::getState(){
@@ -306,11 +306,12 @@ void Plant::increaseCareCount(){
         return;
     }
     this->careCount += getCareCountEffect();
-    PlantGrowthState* nextState = this->growthState->getNextState(this->careCount);
-        if(nextState != nullptr){
-            delete this->growthState;
-            this->growthState = nextState;
-        }
+    checkGrowthLevel();
+    // PlantGrowthState* nextState = this->growthState->getNextState(this->careCount);
+    // if(nextState != nullptr){
+    //     delete this->growthState;
+    //     this->growthState = nextState;
+    // }
 }
 
 void Plant::setGrowthState(PlantGrowthState *state){
@@ -318,4 +319,15 @@ void Plant::setGrowthState(PlantGrowthState *state){
         delete this->growthState;
     }
     this->growthState = state;
+}
+
+void Plant::checkGrowthLevel(){
+    if(growthState == nullptr){
+        return;
+    }
+    PlantGrowthState* nextState = this->growthState->getNextState(this->careCount);
+    if(nextState != nullptr){
+        delete this->growthState;
+        this->growthState = nextState;
+    }
 }
