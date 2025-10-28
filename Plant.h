@@ -15,16 +15,16 @@ class Plant : public PlantComponent
 		double fertilizerRetention;
 		std::string plantID;
 
-	public:
-		Plant();
-		void hoursHasPassed();
-		Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);
-		void waterPlant();
-		void fertilizePlant();
-		void add(Plant *extra);
-		void print();
-		double getPrice();
-		std::string getName();
+public:
+	Plant();
+	void hoursHasPassed();
+	Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);
+	void waterPlant();
+	void fertilizePlant();
+	virtual void add(Plant *extra) = 0;
+	virtual void print() = 0;
+	virtual double getPrice() = 0;
+	virtual std::string getName() = 0;
 };
 
 #endif

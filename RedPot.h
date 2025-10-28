@@ -4,15 +4,15 @@
 #include "PlantDecorator.h"
 #include <string>
 
-class RedPot : public PlantDecorator {
-
+class RedPot : public PlantDecorator
+{
 
 public:
 	RedPot();
-	~RedPot();
-	double getPrice();
-	std::string getName();
-	void print();
+	~RedPot() = default;
+	virtual double getPrice();
+	virtual std::string getName();
+	virtual void print();
 };
 
 #endif

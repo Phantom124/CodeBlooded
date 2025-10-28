@@ -1,49 +1,23 @@
 #include "Rose.h"
-
-Rose::Rose(){
-    this->name = name;
-    this->price = price;
-    
-
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+#include <iostream>
+#include <string>
+Rose::Rose()
+{
+    this->price = 80;
+    this->name = "Rose";
 }
 
-Rose::Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+double Rose::getPrice()//Obed
+{
+    return this->price;
 }
 
-Rose::~Rose(){
-    if (this->state != nullptr){
-        delete this->state;
-
-    }
-    this->state = nullptr;
+std::string Rose::getName()//Obed
+{
+    return this->name;
 }
 
-PlantGrowthState* Rose::getState(){
-    return this->state;
-}
-
-int Rose::getWaterLevel(){
-    return this->waterLevel;
-}
-
-int Rose::getFertilizerLevel(){
-    return this->fertilizerLevel;
-}
-
-PlantGrowthState* Rose::setState(PlantGrowthState* state){
-    this->state = state;
-}
-
-int Rose::setWaterLevel(int waterLevel){
-    this->waterLevel = waterLevel;
-}
-
-int Rose::setFertilizerLevel(int fertilizerLevel){
-    this->fertilizerLevel = fertilizerLevel;
+void Rose::print()//Obed
+{
+    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }

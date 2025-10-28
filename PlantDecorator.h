@@ -4,16 +4,18 @@
 #include "Plant.h"
 #include <string>
 
+class PlantDecorator : public Plant
+{
+public:
+	PlantDecorator();
+	~PlantDecorator();
+	void add(Plant *extra);
+	virtual void print();
+	virtual double getPrice();
+	virtual std::string getName();
 
-class PlantDecorator : public Plant {
-	public:
-		Plant* myPlant;
-		PlantDecorator(Plant* plant);
-		~PlantDecorator();
-		void add(Plant* extra);
-		void print();
-		double getPrice();
-		std::string getName();
+protected:
+	Plant *myPlant;
 };
 
 #endif
