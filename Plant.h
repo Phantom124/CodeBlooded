@@ -62,6 +62,7 @@ class Plant : public PlantComponent
 
 		std::string getWaterStateName();
 		std::string getFertilizerStateName();
+		std::string getMaturityStateName();
 		int getHealth();
 
 		void attachWaterMonitor(WaterMonitor* observer);
@@ -73,6 +74,7 @@ class Plant : public PlantComponent
 		PlantGrowthState* getState();
 		int getWaterLevel();
 		int getFertilizerLevel();
+		int getPlantId();
 
 	protected:
 		//Only if at 100 health should the plant grow (careCount increase)

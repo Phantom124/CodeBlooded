@@ -239,6 +239,10 @@ std::string Plant::getFertilizerStateName(){
     return this->fertilizerState->getStateName();
 }
 
+std::string Plant::getMaturityStateName(){
+    return this->growthState->getStateName();
+}
+
 int Plant::getHealth(){
     return this->health;
 }
@@ -282,6 +286,10 @@ int Plant::getWaterLevel(){
 
 int Plant::getFertilizerLevel(){
     return this->fertilizerLevel;
+}
+
+int Plant::getPlantId(){
+    return plantId;
 }
 
 double Plant::getPrice(){
