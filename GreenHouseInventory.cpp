@@ -1,9 +1,22 @@
 #include "GreenHouseInventory.h"
+#include "Item.h"
+#include "Plant.h"
+#include "PlantComponent.h"
+#include <vector>
+#include <string>
 
-void GreenHouseInventory::addPlant(Plant* plant) {
-    plants.push_back(plant);
-    totalPlants++;
-    plantCountByType[plant->getName()]++;
+GreenHouseInventory::~GreenHouseInventory(){
+    for (Plant* p: this->plants){
+        delete p;
+    }
+    this->plants.clear();
+}
+
+void GreenHouseInventory::addPlant(Plant *plant)
+{
+    // default behaviour: store the item in the inventory container if one exists.
+    // If derived classes maintain their own storage, they can override this.
+    if (plant != nullptr) this->plants.push_back(plant);
 }
 
 void GreenHouseInventory::checkStockLevel() {};

@@ -1,0 +1,56 @@
+#include "ProxyGreenHouseInventory.h"
+
+ProxyGreenHouseInventory::ProxyGreenHouseInventory(){
+    this->realInventory = new RealGreenHouseInventory();
+
+}
+
+ProxyGreenHouseInventory::~ProxyGreenHouseInventory(){
+    if (this->realInventory != nullptr){
+        delete this->realInventory;
+        this->realInventory = nullptr;
+    }
+
+}
+
+void ProxyGreenHouseInventory::showPlant(std::string parameters){
+    this->realInventory->showPlant(parameters);
+}
+
+void ProxyGreenHouseInventory::showAllPlants()
+{
+    this->realInventory->showAllPlants();
+}
+
+void ProxyGreenHouseInventory::addPlant(Plant* plant){
+    // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot INSERT.\n";
+    this->realInventory->addPlant(plant);
+}
+
+void ProxyGreenHouseInventory::removePlant(std::string parameters){
+    // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot DELETE.\n";
+    this->realInventory->removePlant(parameters);
+}
+
+void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct query){
+    //customers can only SELECT (showPlant, showAllPlants)
+
+    std::string queryText = query.getQuery(); //select, insert, delete
+    
+    if (dynamic_cast<Customer*>((Customer*)user)){
+        if (queryText.find("SELECT") != std::string::npos){
+            query.execute();
+            
+        }
+        else{
+            std::cout << "[CONTROL ACCESS] Customer cannot perform " << queryText << " operations.\n";
+        }
+    }
+    else if (dynamic_cast<StaffHandler*>((StaffHandler*)user)){
+        query.execute();
+        
+    }
+    else{
+        std::cout << "[CONTROL ACCESS] Unknown User Type\n";
+    }
+}

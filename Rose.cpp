@@ -1,23 +1,25 @@
 #include "Rose.h"
-#include <iostream>
 #include <string>
-Rose::Rose()
-{
-    this->price = 80;
-    this->name = "Rose";
+
+Rose::Rose():Plant(){
+    this->type = "Rose";
+    this->price = 20;
+    this->waterRetention = 0.85;
+    this->lowWaterLevel = 30;
+    this->fertilizerRetention = 0.60;
+    this->lowFertilizerLevel = 70;
 }
 
-double Rose::getPrice()//Obed
-{
-    return this->price;
-}
+// Rose::Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
+//     // this->state = state;
+//     // this->waterLevel = waterLevel;
+//     // this->fertilizerLevel = fertilizerLevel;
+// }
 
-std::string Rose::getName()//Obed
-{
-    return this->name;
-}
+Rose::~Rose(){}
 
-void Rose::print()//Obed
-{
-    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
+
+
+std::string Rose::getName(){
+    return "Rose";
 }

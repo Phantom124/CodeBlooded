@@ -1,7 +1,7 @@
 #include "Ribbon.h"
 #include <iostream>
 #include <string>
-Ribbon::Ribbon() : PlantDecorator() {}
+Ribbon::Ribbon() : PlantDecorator(nullptr) {}
 
 double Ribbon::getPrice()
 {

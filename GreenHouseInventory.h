@@ -3,22 +3,27 @@
 
 #include "PlantComponent.h"
 #include "PlantSnapshot.h"
+#include "Item.h"
 #include "Plant.h"
-#include <string>
 #include <vector>
-#include <map>
+#include <string>
 
 class GreenHouseInventory {
-	private:
-		std::vector<Plant*> plants;
-		int totalPlants;
-		std::map<std::string, int> plantCountByType;
+    public:
+        virtual ~GreenHouseInventory();
 
-	public:
-		void addPlant(Plant* plant);
-		void checkStockLevel();
-		std::vector<Plant*> getPlants();
-		void restorePlants(const std::vector<PlantSnapshot*>& snapshots);
+        // keep signature matching your implementation
+        virtual void addPlant(Plant* plant) = 0;
+        virtual void checkStockLevel();
+        virtual std::vector<Plant*> getPlants();
+        
+        // declare restorePlants so Caretaker can call it
+        virtual void restorePlants(const std::vector<PlantComponent*>& plants);
+
+    protected:
+        // storage used by the default implementation in GreenHouseInventory.cpp
+        std::vector<Item> items;
+        std::vector<Plant*> plants;
 };
 
 #endif

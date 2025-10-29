@@ -25,6 +25,14 @@ std::chrono::system_clock::time_point Receipt::getOrderDate() const {
 }
 
 void Receipt::printReceipt() const {
+    std::time_t t = std::chrono::system_clock::to_time_t(orderDate);
+    std::tm buf;
+#if defined(_WIN32) || defined(_WIN64)
+    localtime_s(&buf, &t);
+#else
+    localtime_r(&t, &buf);
+#endif
+
     std::cout << "Receipt ID: " << receiptID << std::endl;
     
     std::time_t time = std::chrono::system_clock::to_time_t(orderDate);
@@ -39,9 +47,8 @@ void Receipt::printReceipt() const {
 bool Receipt::validateReceipt() {
     auto now = std::chrono::system_clock::now();
     auto diff = now - orderDate;
-
     auto hours = std::chrono::duration_cast<std::chrono::hours>(diff).count();
-    isValid = (hours <= 168);
+    isValid = (hours <= 168); // 7 days
     return isValid;
 }
 

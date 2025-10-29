@@ -2,17 +2,16 @@
 #define PLANTCOMPONENT_H
 
 #include <string>
+#include <vector>
 
-class PlantComponent
-{
-private:
-	double price;
-	std::string name;
+class PlantComponent {
+    public:
+        PlantComponent() = default;
+        virtual ~PlantComponent() = default; 
 
-public:
-	virtual double getPrice() = 0;
-	virtual std::string getName() = 0;
-	virtual void addPlantComponent(PlantComponent *plantComponent) = 0;
+        virtual double getPrice() = 0;
+        virtual std::string getName() = 0;
+        virtual std::vector<PlantComponent*> getPlants() { return {}; }
 };
 
 #endif
