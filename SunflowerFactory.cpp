@@ -1,21 +1,23 @@
 #include "SunflowerFactory.h"
 #include "Sunflower.h"
+#include <stdexcept>
 
-SunflowerFactory::SunflowerFactory(){
-    this->state = state;
-    this->waterLevel = waterLevel;
-    this->fertilizerLevel = fertilizerLevel;
+SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon):PlantFactory(waterMon, fertMon, deadMon){
+    if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
+        throw std::invalid_argument("Monitors cannot be null");
+    }
 }
 
-SunflowerFactory::~SunflowerFactory(){
-    delete this->state;
-    this->state = nullptr;
+SunflowerFactory::~SunflowerFactory(){}
+
+Plant* SunflowerFactory::createPlant(){
+    Sunflower* newSunflower = new Sunflower();
+    newSunflower->attachWaterMonitor(this->waterMonitor);
+    newSunflower->attachFertilizerMonitor(this->fertilizerMonitor);
+    newSunflower->attachDeadMonitor(this->deadMonitor);
+    return  newSunflower;
 }
 
-Plant* SunflowerFactory::createSunflower(){
-    return new Sunflower();
-}
-
-Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
-    return new Sunflower(state, waterLevel, fertilizerLevel);
-}
+// Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
+//     return new Sunflower(state, waterLevel, fertilizerLevel);
+// }

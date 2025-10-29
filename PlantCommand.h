@@ -1,3 +1,4 @@
+
 #ifndef PLANTCOMMAND_H
 #define PLANTCOMMAND_H
 
@@ -9,10 +10,11 @@ class PlantCommand : public Command {
 
 protected:
 	Plant* plant;
-	std::string type;
+	cmdType type;
 
 public:
-	PlantCommand(const std::string& type, Plant* plant);
+	PlantCommand(cmdType type, Plant* plant);
+	virtual void execute() = 0;
 };
 
 #endif

@@ -1,7 +1,8 @@
 #include "Order.h"
-#include "NormalPrice.h"
+#include "OrderMemento.h"
+#include "Receipt.h"
 #include "DiscountPrice.h"
-#include <string>
+#include "NormalPrice.h"
 #include <iostream>
 
 Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup) {
