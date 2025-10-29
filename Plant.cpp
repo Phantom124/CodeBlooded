@@ -183,7 +183,8 @@ void Plant::internalsTimeElapse(){//ADD CARECOUNT LATER ON FOR GROWTH STATE
     increaseCareCount();
     std::cout << "Decreasing Water and Fertilizer Levels...\n";
     decreaseWaterLevel();//Decrease water level//
-    decreaseFertilizerLevel();
+    decreaseFertilizerLevel(); 
+    
 }
 
 
