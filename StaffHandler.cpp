@@ -16,6 +16,7 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
     }
     
     if (successor == nullptr){
+        std::cout<<"No successor found, enqueuing command directly."<<std::endl;
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
@@ -47,11 +48,11 @@ QueryProduct *StaffHandler::createDeleteQuery(string plantID, string plantType, 
     return nullptr;
 }
 
-void StaffHandler::resetBusy()
+void StaffHandler::resetAvailable()
 {
-    isBusy = false;
+    isAvailable = true;
     if (successor != nullptr){
-        successor->resetBusy();
+        successor->resetAvailable();
     }
 }
 

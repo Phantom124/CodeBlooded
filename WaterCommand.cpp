@@ -1,12 +1,13 @@
 #include "WaterCommand.h"
 #include <stdexcept>
-
+#include <iostream>
 WaterCommand::WaterCommand(Plant *plant)
     : PlantCommand(WATER, plant){}
 
 void WaterCommand::execute(){
-    if (plant == nullptr){
-        throw std::runtime_error("Attempted to process data with a null pointer.");
+    std::cout << "DEBUG: Executing WaterCommand for plant @" << static_cast<void*>(this->plant) << std::endl;
+    if(!plant){
+        throw std::invalid_argument("WaterCommand tried to execute with null plant");
     }
     plant->waterPlant();
 }

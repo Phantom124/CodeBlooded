@@ -21,83 +21,128 @@ class WaterMonitor;
 class FertilizerMonitor;
 class DeadMonitor;
 
+/**
+ * @class Plant
+ * @brief Represents a plant in the simulation, with water, fertilizer, growth, and health tracking.
+ *
+ * This is an abstract base class for all specific plant types (e.g., Rose, Cactus, Sunflower).
+ * It manages states like hydration, fertilization, growth stage, and health.
+ * It also interacts with monitors (observers) for water, fertilizer, and death notifications.
+ */
 class Plant : public PlantComponent
 {
-	protected:
-		std::string type; //Child
-		double price; //Child
-		int careCount; //Plant
-		int health; //Plant
+protected:
+    std::string type;            /**< Type of the plant (e.g., Rose) */
+    double price;                /**< Base price of the plant */
+    int careCount;               /**< Number of care actions performed */
+    int health;                  /**< Current health of the plant (0-100) */
 
-		Water* waterState;//Needs Retention
-		int waterLevel;//Plant
-		double waterRetention;//Child //How slowly water level decreases
-		int lowWaterLevel;//Child
+    Water* waterState;           /**< Current water state object */
+    int waterLevel;              /**< Current water level (0-100) */
+    double waterRetention;       /**< Rate at which water level decreases */
+    int lowWaterLevel;           /**< Threshold for low water notifications */
 
-		Fertilizer* fertilizerState;//Needs Retention
-		int fertilizerLevel;//Plant
-		double fertilizerRetention;//Child// How slowly fertilizer level decreases
-		int lowFertilizerLevel;//Child
+    Fertilizer* fertilizerState; /**< Current fertilizer state object */
+    int fertilizerLevel;          /**< Current fertilizer level (0-100) */
+    double fertilizerRetention;   /**< Rate at which fertilizer level decreases */
+    int lowFertilizerLevel;       /**< Threshold for low fertilizer notifications */
 
-		int plantId;                    // Instance ID for each plant
-    	static int nextPlantId;         // Static variable to track next ID
+    int plantId;                 /**< Unique ID for this plant instance */
+    static int nextPlantId;      /**< Static variable to generate unique IDs */
 
-		PlantGrowthState* growthState;
+    PlantGrowthState* growthState; /**< Current growth state of the plant */
 
-		//Monitoring
-		WaterMonitor* waterMonitor;
-		FertilizerMonitor* fertilizerMonitor;
-		DeadMonitor* deadMonitor;
+    // Monitoring
+    WaterMonitor* waterMonitor;         /**< Observer for water changes */
+    FertilizerMonitor* fertilizerMonitor; /**< Observer for fertilizer changes */
+    DeadMonitor* deadMonitor;           /**< Observer for plant death */
 
-		friend class PlantSnapshot;
+    friend class PlantSnapshot;         /**< Allows PlantSnapshot to access private members */
 
-	public:
-		Plant();
-		virtual ~Plant();
-		void hoursHasPassed();
-		// Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);
-		void waterPlant();//Water plant to full and set state
-		void fertilizePlant();// Fertilize plant to full and set state
-		void print();//Does this print plant name / plant info?
+public:
+    /**
+     * @brief Constructs a new Plant object.
+     * @param type The type of the plant.
+     * @param price Base price of the plant.
+     * @param waterRetention How fast the plant loses water.
+     * @param lowWaterLevel Threshold for low water notifications.
+     * @param fertilizerRetention How fast the plant loses fertilizer.
+     * @param lowFertilizerLevel Threshold for low fertilizer notifications.
+     */
+    Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel);
 
-		std::string getWaterStateName();
-		std::string getFertilizerStateName();
-		std::string getMaturityStateName();
-		int getHealth();
+    /**
+     * @brief Destructor for Plant.
+     * Cleans up dynamically allocated state objects.
+     */
+    virtual ~Plant();
 
-		void attachWaterMonitor(WaterMonitor* observer);
-		void attachFertilizerMonitor(FertilizerMonitor* observer);
-		void attachDeadMonitor(DeadMonitor* observer);
+    /**
+     * @brief Updates the plant state after an hour has passed.
+     */
+    void hoursHasPassed();
 
-		double getPrice();
-		virtual std::string getName() = 0;
-		PlantGrowthState* getState();
-		int getWaterLevel();
-		int getFertilizerLevel();
-		int getPlantId();
+    /**
+     * @brief Waters the plant to full and updates water state.
+     */
+    void waterPlant();
 
-	protected:
-		//Only if at 100 health should the plant grow (careCount increase)
-		int getCareCount();//Return care count
-		int getCareCountEffect();//Return care count effect based on water and fertilizer states
-		void increaseCareCount();//Increase care count by amount
-		void setGrowthState(PlantGrowthState* state);//Set growth state
-		void checkGrowthLevel();//Check and update growth state based on care count
-	
+    /**
+     * @brief Fertilizes the plant to full and updates fertilizer state.
+     */
+    void fertilizePlant();
 
-		int getHealthEffects();
-		void healthEffects();//Calculate new health // Can put plant in deadState
+    /**
+     * @brief Prints current plant information including ID, water, fertilizer, health, growth state, and care count.
+     */
+    void print();
 
-		void setWaterState(Water* waterState);
-		void setFertilizerState(Fertilizer* fertilizerState);
-		void checkWaterLevel(); // changes water state based on the current water level // Notify observers here when NotHydratedState is set
-		void checkFertilizerLevel();// changes fertilizer state based on the current fertilizer level // Notify observers here when NotFertilizerState is set
-		void decreaseWaterLevel();
-		void decreaseFertilizerLevel();
-		void internalsTimeElapse();// updates health, water level, and fertilizer level over time
+    // State getters
+    std::string getWaterStateName();
+    std::string getFertilizerStateName();
+    std::string getMaturityStateName();
+    int getHealth();
 
-		//Only if at 100 health should the plant grow (careCount increase)
+    // Observer attachment
+    void attachWaterMonitor(WaterMonitor* observer);
+    void attachFertilizerMonitor(FertilizerMonitor* observer);
+    void attachDeadMonitor(DeadMonitor* observer);
 
+    /**
+     * @brief Returns the price of the plant, factoring in growth stage effects.
+     * @return Price as double
+     */
+    double getPrice();
+
+    /**
+     * @brief Returns the name/type of the plant.
+     * @return Plant type as string
+     */
+    virtual std::string getName() = 0;
+
+    PlantGrowthState* getState();
+    int getWaterLevel();
+    int getFertilizerLevel();
+    int getPlantId();
+
+protected:
+    // Internal methods for plant management
+    int getCareCount();
+    int getCareCountEffect();
+    void increaseCareCount();
+    void setGrowthState(PlantGrowthState* state);
+    void checkGrowthLevel();
+
+    int getHealthEffects();
+    void healthEffects();
+
+    void setWaterState(Water* waterState);
+    void setFertilizerState(Fertilizer* fertilizerState);
+    void checkWaterLevel();
+    void checkFertilizerLevel();
+    void decreaseWaterLevel();
+    void decreaseFertilizerLevel();
+    void internalsTimeElapse();
 };
 
 #endif

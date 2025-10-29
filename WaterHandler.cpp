@@ -10,9 +10,9 @@ void WaterHandler::handleRequest(Command* command, StaffSystem* staffSys){
     } else if (staffSys == nullptr){
         throw std::invalid_argument("StaffSystem is a nullptr.");
     }
-    
-    if (command->getType() == WATER){
-        isBusy = false;
+
+    if (isAvailable == true && command->getType() == WATER){//First: Are you available //Second: Is this a water command
+        isAvailable = false;
         command->execute();
     } else {
         StaffHandler::handleRequest(command, staffSys);

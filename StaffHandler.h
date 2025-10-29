@@ -10,11 +10,11 @@ class QueryBuilder;
 class QueryProduct;
 class StaffSystem;
 
-class StaffHandler {
+class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 	protected:
 		StaffHandler* successor;
 		QueryBuilder* queryBuilder;
-		bool isBusy;
+		bool isAvailable;
 	public:
 		StaffHandler();
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
@@ -22,7 +22,7 @@ class StaffHandler {
 		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
 		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
 		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
-		void resetBusy();
+		void resetAvailable();
 		void setQueryBuilder(QueryBuilder* qb);
 };
 

@@ -9,14 +9,18 @@ FertilizerMonitor::FertilizerMonitor(){
 FertilizerMonitor::~FertilizerMonitor(){}
 
 void FertilizerMonitor::update(Plant *plant){
-    if(plant != nullptr){//Passed in plant is valid
-        if(plant->getFertilizerStateName() == "NonFertilized"){
-            FertilizerCommand* command = new FertilizerCommand(plant);//MAKE FERTILIZER COMMAND CORRECTLY
-
-            if(staffSystem != nullptr){//SEND TO STAFF SYSTEM IF EXISTS
-                staffSystem->attemptCommand(command);
-                std::cout<< "Fertilizer Monitor Recieved Update: Sending to Staff System.\n";
-            }
-        }
+    if(!plant){
+        throw std::invalid_argument("FertilizerMonitor got a null plant pointer");
     }
+    if(plant->getFertilizerStateName() != "NonFertilized"){
+            return; // No action needed
+    }
+    
+    if(staffSystem != nullptr){//SEND TO STAFF SYSTEM IF EXISTS
+        std::cout<< "Fertilizer Monitor Recieved Update: Sending to Staff System.\n";
+        FertilizerCommand* command = new FertilizerCommand(plant);//MAKE FERTILIZER COMMAND CORRECTLY
+        staffSystem->attemptCommand(command);
+    }
+    
+    
 }

@@ -8,8 +8,8 @@
 class FertilizerCommand : public PlantCommand {
 
 protected:
-	Plant* plant;
-	std::string type;
+	// Plant* plant;
+	// std::string type;
 
 public:
 	FertilizerCommand(Plant* plant);

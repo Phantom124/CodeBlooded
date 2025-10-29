@@ -1,14 +1,9 @@
 #include "Rose.h"
 #include <string>
 
-Rose::Rose():Plant(){
-    this->type = "Rose";
-    this->price = 20;
-    this->waterRetention = 0.85;
-    this->lowWaterLevel = 30;
-    this->fertilizerRetention = 0.60;
-    this->lowFertilizerLevel = 70;
-}
+Rose::Rose()
+  : Plant("Rose", 20, 0.85, 30, 0.60, 70) {}
+
 
 // Rose::Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel){
 //     // this->state = state;

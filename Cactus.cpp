@@ -1,22 +1,18 @@
 #include "Cactus.h"
 
-Cactus::Cactus():Plant(){
-    this->type = "Cactus";
-    this->price = 15;
-    this->waterRetention = 0.95;
-    this->lowWaterLevel = 15;
-    this->fertilizerRetention = 0.90;
-    this->lowFertilizerLevel = 10;
+Cactus::Cactus()
+    : Plant("Cactus",        // type
+            15,              // price
+            0.95,            // waterRetention
+            15,              // lowWaterLevel
+            0.90,            // fertilizerRetention
+            10)              // lowFertilizerLevel
+{
+    // If you need additional cactus-specific setup, put it here.
 }
 
-// Cactus::Cactus(PlantGrowthState *state, int waterLevel, int fertilizerLevel){
-//     // this->state = state;
-//     // this->waterLevel = waterLevel;
-//     // this->fertilizerLevel = fertilizerLevel;
-// }
+Cactus::~Cactus() {}
 
-Cactus::~Cactus(){}
-
-std::string Cactus::getName(){
-    return this->type;
+std::string Cactus::getName() {
+    return "Cactus";
 }
