@@ -4,8 +4,10 @@
 #include "PlantGrowthState.h"
 
 class DeadState : public PlantGrowthState {
-	public:
-		void handle();
+    public:
+        PlantGrowthState* getNextState(int careCount);
+        double getPriceEffect();
+        std::string getStateName();
 };
 
 #endif

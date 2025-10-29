@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-RedPot::RedPot() : PlantDecorator() {}
+RedPot::RedPot() : PlantDecorator(nullptr) {}
 
 double RedPot::getPrice()
 {

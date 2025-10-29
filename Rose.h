@@ -5,18 +5,13 @@
 #include "PlantGrowthState.h"
 #include <string>
 
-class Rose : public Plant
-{
-private:
-	std::string name;
-	double price;
+class Rose : public Plant {
+	public:
+		Rose();
+		// Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
+		~Rose();
 
-public:
-	Rose();
-	virtual double getPrice();
-	virtual std::string getName();
-	virtual void print();
-	virtual void add(Plant *extra) {};
+		std::string getName();
 };
 
 #endif

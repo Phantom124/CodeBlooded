@@ -8,10 +8,10 @@
 
 class RoseFactory : public PlantFactory {
 	public:
-		RoseFactory();
+		RoseFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon);
 		~RoseFactory();
-		Plant* createRose();
-		Plant* createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
+		Plant* createPlant();
+		// Plant* createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 
 	private:
 		PlantGrowthState* state;

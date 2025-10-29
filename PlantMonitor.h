@@ -1,16 +1,26 @@
 #ifndef PLANTMONITOR_H
 #define PLANTMONITOR_H
 
-#include "Plant.h"
-#include "StaffHandler.h"
+#include "StaffHandler.h"  // or forward declare if not needed
+#include <string>
+#include "StaffSystem.h"
+
+
+// Forward declaration
+class Plant;
+
 
 class PlantMonitor {
-	private:
-		Plant* subject;
-		StaffHandler* chain;
+protected:
+    StaffSystem* staffSystem;
+    std::string type;
 
-	public:
-		void update();
+public:
+    PlantMonitor();
+    virtual ~PlantMonitor();
+
+    void setStaffSystem(StaffSystem* staffSystem);
+    virtual void update(Plant* plant) = 0;  // Pure virtual function
 };
 
-#endif
+#endif // PLANTMONITOR_H
