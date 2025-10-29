@@ -188,19 +188,13 @@ void Plant::internalsTimeElapse(){//ADD CARECOUNT LATER ON FOR GROWTH STATE
 
 
 
-Plant::~Plant()
-{
-
-    if(this->waterState != nullptr){
-        delete this->waterState;
-    }
-
-    if(this->fertilizerState != nullptr){
-        delete this->fertilizerState;
-    }
-    if(this->growthState != nullptr){
-        delete this->growthState;
-    }
+Plant::~Plant() {
+    delete waterState;
+    delete fertilizerState;
+    delete growthState;
+    delete waterMonitor;
+    delete fertilizerMonitor;
+    delete deadMonitor;
 }
 
 void Plant::hoursHasPassed(){

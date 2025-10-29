@@ -9,6 +9,10 @@
 #include "Plant.h"
 #include "GreenHouseInventory.h"
 #include "ProxyGreenHouseInventory.h"
+#include "Rose.h"
+#include "Sunflower.h"
+#include "Cactus.h"
+#include "SeedState.h"
 
 class GreenHouseInventory;
 class ProxyGreenHouseInventory;
@@ -28,6 +32,7 @@ class QueryProduct{
     private:
         std::string query;
         ProxyGreenHouseInventory* inventory;
+        Plant* plant;
 };
 
 #endif

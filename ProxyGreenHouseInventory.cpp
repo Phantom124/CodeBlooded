@@ -22,12 +22,14 @@ void ProxyGreenHouseInventory::showAllPlants()
     this->realInventory->showAllPlants();
 }
 
-void ProxyGreenHouseInventory::addPlant(Item item){
-    std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot INSERT.\n";
+void ProxyGreenHouseInventory::addPlant(Plant* plant){
+    // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot INSERT.\n";
+    this->realInventory->addPlant(plant);
 }
 
 void ProxyGreenHouseInventory::removePlant(std::string parameters){
-    std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot DELETE.\n";
+    // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot DELETE.\n";
+    this->realInventory->removePlant(parameters);
 }
 
 void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct query){

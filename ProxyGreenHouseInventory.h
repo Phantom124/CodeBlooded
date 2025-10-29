@@ -18,7 +18,7 @@ class ProxyGreenHouseInventory : public GreenHouseInventory {
         
         void showPlant(std::string parameters);
         void showAllPlants();
-        void addPlant(Item item);
+        void addPlant(Plant* plant);
         void removePlant(std::string parameters);
 
         void handleControlRights(void* user, QueryProduct query);

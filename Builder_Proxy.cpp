@@ -14,6 +14,8 @@
 #include "ProxyGreenHouseInventory.h"
 #include "Plant.h"
 #include "SeedState.h"
+#include "Rose.h"
+#include "Sunflower.h"
 
 void Builder();
 
@@ -185,8 +187,9 @@ void RealGreenhouseInventoryTest() {
 
     RealGreenHouseInventory inv;
 
-    inv.addPlant(Item("2", "Rose", "Young"));
-    inv.addPlant(Item("3", "Tulip", "Mature"));
+    // use concrete Plant subclasses (default ctors). Do not pass Item.
+    inv.addPlant(new Rose());
+    inv.addPlant(new Sunflower());
 
     std::cout << "In CRUD Operation: SELECT Rose FROM INVENTORY;\n";
     inv.showPlant("SELECT Rose FROM INVENTORY;");
@@ -203,8 +206,9 @@ void TestInventory() {
     RealGreenHouseInventory inventory;
     inventory.showAllPlants();
 
-    inventory.addPlant(Item("2", "Rose", "Young"));
-    inventory.addPlant(Item("3", "Tulip", "Mature"));
+    // add concrete plants
+    inventory.addPlant(new Rose());
+    inventory.addPlant(new Sunflower());
 
     std::cout << "In CRUD Operation: SELECT Rose\n";
     inventory.showPlant("Rose");

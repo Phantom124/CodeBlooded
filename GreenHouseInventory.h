@@ -9,10 +9,10 @@
 
 class GreenHouseInventory {
     public:
-        virtual ~GreenHouseInventory() = default;
+        virtual ~GreenHouseInventory();
 
         // keep signature matching your implementation
-        virtual void addPlant(Item item) = 0;
+        virtual void addPlant(Plant* plant) = 0;
         virtual void checkStockLevel();
         virtual std::vector<Plant*> getPlants();
         

@@ -87,11 +87,21 @@ void QueryProduct::executeInsert(std::string query){
     }
 
     // fields[0], fields[1], fields[2] -> id, type, maturity
-    Item item(fields[0], fields[1], fields[2]);
+    // Item item(fields[0], fields[1], fields[2]);
 
-    if (inventory) {
-        this->inventory->addPlant(item);
-    }
+    class TempPlant : public Plant {
+    public:
+        TempPlant(const std::string& id, const std::string& type, const std::string& maturity) {
+            this->type = type;
+            try { this->plantId = std::stoi(id); } catch (...) { this->plantId = 0; }
+            this->growthState = new SeedState();
+        }
+        std::string getName() override { return type; }
+    };
+
+    // ---- Create plant dynamically and add it ----
+    Plant* plant = new TempPlant(fields[0], fields[1], fields[2]);
+    this->inventory->addPlant(plant);
 }
 
 void QueryProduct::executeDelete(std::string query){

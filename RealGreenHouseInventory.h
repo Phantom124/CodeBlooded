@@ -16,13 +16,13 @@ class RealGreenHouseInventory : public GreenHouseInventory{
 
         void showPlant(std::string parameters);
         void showAllPlants();
-        void addPlant(Item item);
+        void addPlant(Plant* plant);
         void removePlant(std::string parameters);
         // void handleControlRights(void* user, QueryProduct query);
 
 
     private:
-        std::vector<Item> plant;
+        // std::vector<Plant*> plant;
 };
 
 #endif
