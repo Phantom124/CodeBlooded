@@ -1,9 +1,10 @@
 #ifndef GREENHOUSEINVENTORY_H
 #define GREENHOUSEINVENTORY_H
 
+#include "PlantComponent.h"
+#include "PlantSnapshot.h"
 #include "Item.h"
 #include "Plant.h"
-// #include "PlantComponent.h"
 #include <vector>
 #include <string>
 

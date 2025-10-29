@@ -1,15 +1,11 @@
 #include "Receipt.h"
 #include <iostream>
-#include <chrono>
-#include <ctime>
 #include <iomanip>
+#include <ctime>
 
-Receipt::Receipt(const std::string& receiptID, double orderPrice, const std::string& info)
-    : receiptID(receiptID),
-      orderInfo(info),
-      orderPrice(orderPrice),
-      orderDate(std::chrono::system_clock::now()),
-      isValid(true) {
+Receipt::Receipt(const std::string& receiptID, double orderPrice, const std::string& info) 
+    : receiptID(receiptID), orderPrice(orderPrice), orderInfo(info), isValid(true) {
+    orderDate = std::chrono::system_clock::now();
 }
 
 std::string Receipt::getReceiptID() const {
@@ -38,7 +34,10 @@ void Receipt::printReceipt() const {
 #endif
 
     std::cout << "Receipt ID: " << receiptID << std::endl;
-    std::cout << "Order Date: " << std::put_time(&buf, "%d/%m/%Y %H:%M:%S") << std::endl;
+    
+    std::time_t time = std::chrono::system_clock::to_time_t(orderDate);
+    std::cout << "Order Date: " << std::put_time(std::localtime(&time), "%d/%m/%Y %H:%M:%S") << std::endl;
+    
     std::cout << "===========================" << std::endl;
     std::cout << "Order Info: " << orderInfo << std::endl;
     std::cout << "Total Price: R" << orderPrice << std::endl;
