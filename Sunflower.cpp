@@ -1,24 +1,18 @@
 #include "Sunflower.h"
-#include <iostream>
-#include <string>
 
 Sunflower::Sunflower()
+    : Plant("Sunflower",     // type
+            25,              // price
+            0.72,            // waterRetention
+            55,              // lowWaterLevel
+            0.85,            // fertilizerRetention
+            20)              // lowFertilizerLevel
 {
-    this->price = 55;
-    this->name = "Sunflower";
+    // Additional sunflower setup can go here if needed.
 }
 
-double Sunflower::getPrice()
-{
-    return this->price;
-}
+Sunflower::~Sunflower() {}
 
-std::string Sunflower::getName()
-{
-    return this->name;
-}
-
-void Sunflower::print()
-{
-    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
+std::string Sunflower::getName() {
+    return "Sunflower";
 }

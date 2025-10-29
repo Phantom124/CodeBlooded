@@ -1,5 +1,4 @@
 #include "PlantFactory.h"
-#include <stdexcept>
 
 PlantFactory::PlantFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon){
     if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
@@ -9,5 +8,3 @@ PlantFactory::PlantFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, D
     this->fertilizerMonitor = fertMon;
     this->deadMonitor = deadMon;
 }
-
-

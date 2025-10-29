@@ -1,4 +1,3 @@
-
 #include "GerminationState.h"
 #include "SaplingState.h"
 

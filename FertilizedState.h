@@ -2,8 +2,6 @@
 #define FERTILIZERSTATE_H
 
 #include "Fertilizer.h"
-#include <string>
-
 class NonFertilizerState;
 class FertilizedState : public Fertilizer {
 	public:

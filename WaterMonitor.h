@@ -3,8 +3,6 @@
 
 #include "PlantMonitor.h"
 #include "WaterCommand.h"
-#include "StaffSystem.h"
-
 class Plant; // Forward declaration
 
 // WaterMonitor inherits from PlantMonitor and adds water-specific monitoring functionality.
@@ -15,9 +13,6 @@ public:
 
     void update(Plant* plant);
 
-private:
-    StaffSystem* staffSystem;
-    std::string type;
 };
 
 #endif // WATERMONITOR_H

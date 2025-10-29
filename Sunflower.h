@@ -4,18 +4,14 @@
 #include "Plant.h"
 #include <string>
 
-class Sunflower : public Plant
-{
-private:
-	std::string name;
-	double price;
+class Sunflower : public Plant {
+	public:
+		Sunflower();
+		// Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
+		~Sunflower();
 
-public:
-	Sunflower();
-	virtual double getPrice();
-	virtual std::string getName();
-	virtual void print();
-	virtual void add(Plant *extra) {};
+		std::string getName();
+
 };
 
 #endif

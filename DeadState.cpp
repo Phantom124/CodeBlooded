@@ -1,4 +1,3 @@
-
 #include "DeadState.h"
 
 PlantGrowthState *DeadState::getNextState(int careCount) {

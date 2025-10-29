@@ -1,6 +1,5 @@
 #include "SunflowerFactory.h"
 #include "Sunflower.h"
-#include <stdexcept>
 
 SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon):PlantFactory(waterMon, fertMon, deadMon){
     if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){

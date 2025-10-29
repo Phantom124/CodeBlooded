@@ -1,7 +1,6 @@
 #ifndef STAFFHANDLER_H
 #define STAFFHANDLER_H
 
-#include "QueryBuilder.h"
 #include "Command.h"
 #include <string>
 
@@ -11,19 +10,19 @@ class QueryBuilder;
 class QueryProduct;
 class StaffSystem;
 
-class StaffHandler {
+class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 	protected:
 		StaffHandler* successor;
 		QueryBuilder* queryBuilder;
-		bool isBusy;
+		bool isAvailable;
 	public:
 		StaffHandler();
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 		void setSuccessor(StaffHandler* successor);
-		QueryProduct createSelectQuery(string plantID, string plantType, string maturityState);
-		QueryProduct createInsertQuery(string plantID, string plantType, string maturityState);
-		QueryProduct createDeleteQuery(string plantID, string plantType, string maturityState);
-		void resetBusy();
+		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
+		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
+		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
+		void resetAvailable();
 		void setQueryBuilder(QueryBuilder* qb);
 };
 

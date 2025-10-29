@@ -3,19 +3,20 @@
 
 #include "Plant.h"
 #include <string>
+#include "Cactus.h"
+#include "Rose.h"
+#include "Sunflower.h"
 
 class PlantSnapshot {
 	private:
 		std::string plantType;
-		std::string growthState;
+		int careCount;
 		int waterLevel;
 		int fertilizerLevel;
 
 	public:
 		PlantSnapshot(Plant* plant);
-		std::string getGrowthState();
-		int getWaterLevel();
-		int getFertilizerLevel();
+		Plant* convertToPlant();
 };
 
 #endif

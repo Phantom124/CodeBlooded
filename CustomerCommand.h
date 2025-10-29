@@ -12,7 +12,7 @@ protected:
 	Customer* customer;
 
 public:
-	CustomerCommand(const std::string& type, Customer* customer);
+	CustomerCommand(const cmdType type, Customer* customer);
 };
 
 #endif
