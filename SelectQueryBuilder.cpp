@@ -1,4 +1,5 @@
 #include "SelectQueryBuilder.h"
+#include "QueryProduct.h"
 #include <string>
 #include <vector>
 
@@ -36,6 +37,34 @@ void SelectQueryBuilder::selectQueryBuilder(std::string plantID, std::string pla
 
 
     this->queryProduct->setQueryProduct(finalQuery);
+}
+
+void SelectQueryBuilder::selectQueryBuilder(Plant* selectPlant){
+    std::string plantID = std::to_string(selectPlant->getPlantId());
+    std::string plantType = selectPlant->getName();
+    std::string maturityState = selectPlant->getMaturityStateName();
+
+    std::vector<std::string> queryFields;
+
+    if (!plantID.empty()) queryFields.push_back(plantID);
+    if (!plantType.empty()) queryFields.push_back(plantType);
+    if (!maturityState.empty()) queryFields.push_back(maturityState);
+
+    if (queryFields.empty()){
+        this->queryProduct->setQueryProduct("");
+        return;
+    }
+
+    std::string finalQuery = "SELECT ";
+    for (size_t i = 0; i < queryFields.size(); i++){
+        finalQuery += queryFields[i];
+        if (i + 1 < queryFields.size()) finalQuery += ", ";
+    }
+    finalQuery += " FROM INVENTORY;";
+
+
+    this->queryProduct->setQueryProduct(finalQuery);
+    
 }
 
 std::string SelectQueryBuilder::addPlantID(std::string plantID){

@@ -6,7 +6,7 @@
 class DiscountPrice : public PriceStrategies
 {
 public:
-	virtual double priceStrategy() { return 0.8; };
+	virtual double apply(double basePrice);
 };
 
 #endif

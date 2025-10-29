@@ -1,4 +1,5 @@
 #include "QueryBuilder.h"
+#include "QueryProduct.h"
 
 QueryBuilder::QueryBuilder(){
     this->queryProduct = new QueryProduct(nullptr);
@@ -28,6 +29,6 @@ std::string QueryBuilder::addMaturityState(std::string maturityState){
     return maturityState;
 }
 
-QueryProduct QueryBuilder::getQueryProduct(){
-    return *this->queryProduct;
+QueryProduct* QueryBuilder::getQueryProduct(){
+    return this->queryProduct;
 }

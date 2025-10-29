@@ -53,6 +53,7 @@ class Plant : public PlantComponent
 
 	public:
 		Plant();
+		Plant(std::string plantID, std::string plantType, std::string maturityState);
 		virtual ~Plant();
 		void hoursHasPassed();
 		// Plant(PlantGrowthState *state, int waterLevel, int fertilizerLevel);

@@ -1,23 +1,25 @@
 #include "Item.h"
 
-Item::Item(std::string plantID, std::string plantType, std::string maturityState){
-    this->plantID = this->plantReference->getPlantId();
-    this->plantType = this->plantReference->getName();
-    this->maturityState = this->plantReference->getMaturityStateName();
+Item::Item(std::string plantID, std::string plantType, std::string maturityState)
+    : plantID(std::move(plantID)),
+      plantType(std::move(plantType)),
+      maturityState(std::move(maturityState)),
+      plantReference(nullptr)
+{
 }
 
 std::string Item::getPlantID(){
-    return std::to_string(this->plantReference->getPlantId());
-}    
+    return this->plantID;
+}
 
 std::string Item::getPlantType(){
-    return this->plantReference->getName();
+    return this->plantType;
 }
 
 std::string Item::getMaturityState(){
-    return this->plantReference->getMaturityStateName();
+    return this->maturityState;
 }
 
 std::string Item::toString(){
-    return this->plantReference->getPlantId() + " " + this->plantReference->getName() + " " + this->plantReference->getMaturityStateName();
+    return this->plantID + " " + this->plantType + " " + this->maturityState;
 }

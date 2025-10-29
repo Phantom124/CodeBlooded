@@ -1,10 +1,12 @@
 #ifndef QUERYBUILDER_H
 #define QUERYBUILDER_H
 
-#include "PlantGrowthState.h"
+// #include "PlantGrowthState.h"
 #include "Plant.h"
-#include "QueryProduct.h"
+// #include "QueryProduct.h"
 #include <string>
+
+class QueryProduct;
 
 class QueryBuilder{
     public:
@@ -20,7 +22,7 @@ class QueryBuilder{
         virtual std::string addMaturityState(std::string maturityState);
 
         
-        QueryProduct getQueryProduct();
+        QueryProduct* getQueryProduct();
         
 
     protected:

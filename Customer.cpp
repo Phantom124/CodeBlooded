@@ -1,4 +1,5 @@
 #include "Customer.h"
+#include "QueryProduct.h"
 
 QueryProduct Customer::createSelectQuery(std::string plantID, std::string plantType, std::string maturityState){
     if (this->queryBuilder == nullptr) return QueryProduct(nullptr);
@@ -8,7 +9,7 @@ QueryProduct Customer::createSelectQuery(std::string plantID, std::string plantT
     std::string state = this->queryBuilder->addMaturityState(maturityState);
 
     this->queryBuilder->selectQueryBuilder(id, type, state);
-    return this->queryBuilder->getQueryProduct();
+    return *(this->queryBuilder->getQueryProduct());
 }
 
 void Customer::setQueryBuilder(QueryBuilder* queryBuilder){

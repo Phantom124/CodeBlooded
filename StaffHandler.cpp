@@ -1,10 +1,10 @@
 #include "StaffHandler.h"
 #include "QueryBuilder.h"
 #include "QueryProduct.h"
+#include "QueueIterator.h"
 
 StaffHandler::StaffHandler(){
     this->successor = nullptr;
-    this->staffSys = nullptr;
     this->queryBuilder = nullptr;
 }
 
@@ -14,9 +14,9 @@ QueryProduct StaffHandler::createSelectQuery(std::string plantID, std::string pl
     std::string id = this->queryBuilder->addPlantID(plantID);
     std::string type = this->queryBuilder->addPlantType(plantType);
     std::string state = this->queryBuilder->addMaturityState(maturityState);
-
+    
     this->queryBuilder->selectQueryBuilder(id, type, state);
-    return this->queryBuilder->getQueryProduct();
+    return *this->queryBuilder->getQueryProduct();
 }
 
 QueryProduct StaffHandler::createInsertQuery(std::string plantID, std::string plantType, std::string maturityState){
@@ -27,7 +27,7 @@ QueryProduct StaffHandler::createInsertQuery(std::string plantID, std::string pl
     std::string state = this->queryBuilder->addMaturityState(maturityState);
 
     this->queryBuilder->insertQueryBuilder(id, type, state);
-    return this->queryBuilder->getQueryProduct();
+    return *this->queryBuilder->getQueryProduct();
 }
 
 QueryProduct StaffHandler::createDeleteQuery(std::string plantID, std::string plantType, std::string maturityState){
@@ -38,9 +38,64 @@ QueryProduct StaffHandler::createDeleteQuery(std::string plantID, std::string pl
     std::string state = this->queryBuilder->addMaturityState(maturityState);
 
     this->queryBuilder->deleteQueryBuilder(id, type, state);
-    return this->queryBuilder->getQueryProduct();
+    return *this->queryBuilder->getQueryProduct();
 }
 
-void StaffHandler::setQueryBuilder(QueryBuilder* queryBuilder){
-    this->queryBuilder = queryBuilder;
+
+
+void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    if (command == nullptr){
+        throw std::invalid_argument("Command is a nullptr.");
+    } else if (staffSys == nullptr){
+        throw std::invalid_argument("StaffSystem is a nullptr.");
+    }
+    
+    if (successor == nullptr){
+        QueueIterator it = staffSys->createIterator();
+        it.enqueue(command);
+    } else {
+        successor->handleRequest(command, staffSys);            
+    }
+}
+
+void StaffHandler::setSuccessor(StaffHandler *successor){
+    if (this->successor == nullptr){
+        this->successor = successor;
+    } else {
+        // delete this->successor;
+        this->successor = successor;
+    }
+}
+
+// QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState){
+//     std::cout<<"Creating Select Query"<<std::endl;
+//     return nullptr;
+// }
+
+// QueryProduct *StaffHandler::createInsertQuery(string plantID, string plantType, string maturityState){
+//     std::cout<<"Creating Insert Query"<<std::endl;
+//     return nullptr;
+// }
+
+// QueryProduct *StaffHandler::createDeleteQuery(string plantID, string plantType, string maturityState){
+//     std::cout<<"Creating Delete Query"<<std::endl;
+//     return nullptr;
+// }
+
+void StaffHandler::resetBusy()
+{
+    isBusy = false;
+    if (successor != nullptr){
+        successor->resetBusy();
+    }
+}
+
+void StaffHandler::setQueryBuilder(QueryBuilder *qb){
+    if (queryBuilder == nullptr){
+        queryBuilder = qb;
+        return;
+    }
+
+    // delete queryBuilder;
+    // queryBuilder = qb;
 }

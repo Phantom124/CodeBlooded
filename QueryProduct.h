@@ -28,10 +28,6 @@ class QueryProduct{
     private:
         std::string query;
         ProxyGreenHouseInventory* inventory;
-
-        // void inventorySelect(std::string query);
-        // void inventoryInsert(std::string query);
-        // void inventoryDelete(std::string query);
 };
 
 #endif

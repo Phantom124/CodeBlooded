@@ -2,14 +2,14 @@
 #define RECEIPT_H
 
 #include <string>
-#include <date/time.h>
+#include <chrono>
 
 class Receipt {
     private:
         std::string receiptID;
         std::string orderInfo;
         double orderPrice;
-        date::time orderDate;
+        std::chrono::system_clock::time_point orderDate;
         bool isValid;
 
     public:
@@ -17,7 +17,7 @@ class Receipt {
         std::string getReceiptID() const;
         std::string getOrderInfo() const;
         double getOrderPrice() const;
-        date::time getOrderDate() const;
+        std::chrono::system_clock::time_point getOrderDate() const;
         void printReceipt() const;
         bool validateReceipt();
         bool getIsValid() const;

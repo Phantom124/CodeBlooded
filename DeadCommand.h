@@ -8,11 +8,13 @@
 class DeadCommand : public PlantCommand {
 
 protected:
-	Plant* plant;
-	std::string type;
+	// Plant* plant;
+	// std::string type;
 
 public:
-	DeadCommand(const std::string& type, Plant* plant);
+	DeadCommand(Plant* plant);
+	virtual void execute();
+	Plant* getPlant();  	
 };
 
 #endif
