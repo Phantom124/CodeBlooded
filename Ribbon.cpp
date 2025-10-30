@@ -5,12 +5,12 @@ Ribbon::Ribbon() : PlantDecorator() {}
 
 double Ribbon::getPrice()
 {
-    return PlantDecorator::getPrice() + 25.00;
+    return 25.00 + PlantDecorator::getPrice();
 }
 
 std::string Ribbon::getName()
 {
-    return PlantDecorator::getName() + ", Ribbon";
+    return ", Ribbon" + PlantDecorator::getName();
 }
 
 void Ribbon::print()

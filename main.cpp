@@ -36,13 +36,29 @@ void CompAndDec()
     myPlant->printPlant();
     std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
 
-    myPlant->addPlant(new Ribbon());
+    myPlant->add(new Ribbon());
 
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
 
     std::cout << "added ribbon:" << std::endl;
+    myPlant->printPlant();
+    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    myPlant->add(new RedPot());
+
+    std::cout << "added red pot:" << std::endl;
+    myPlant->printPlant();
+    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
+
+        myPlant->add(new Scent());
+
+    std::cout << "added scent:" << std::endl;
     myPlant->printPlant();
     std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
 }

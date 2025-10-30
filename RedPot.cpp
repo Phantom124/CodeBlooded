@@ -6,12 +6,12 @@ RedPot::RedPot() : PlantDecorator() {}
 
 double RedPot::getPrice()
 {
-    return PlantDecorator::getPrice() + 40.00;
+    return 40.00 + PlantDecorator::getPrice();
 }
 
 std::string RedPot::getName()
 {
-    return PlantDecorator::getName() + ", RedPot";
+    return ", RedPot" + PlantDecorator::getName();
 }
 
 void RedPot::print()

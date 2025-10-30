@@ -15,6 +15,8 @@
 #include "PlantGrowthState.h"
 #include "PlantMonitor.h"
 
+#include "PlantDecorator.h"
+
 #include <string>
 
 class WaterMonitor;
@@ -58,6 +60,7 @@ protected:
 	DeadMonitor *deadMonitor;			  /**< Observer for plant death */
 
 	friend class PlantSnapshot; /**< Allows PlantSnapshot to access private members */
+	PlantComponent *decorator; /**< For Decorator pattern */
 
 public:
 	/**
@@ -118,7 +121,7 @@ public:
 	 * @brief Returns the name/type of the plant.
 	 * @return Plant type as string
 	 */
-	virtual std::string getName() = 0;
+	std::string getName();
 
 	PlantGrowthState *getState();
 	int getWaterLevel();
@@ -127,7 +130,7 @@ public:
 
 	virtual void printPlant(); // oe add
 
-	void addPlant(PlantComponent *plant) {};
+	void add(PlantComponent *plantComponent); // zaman add
 
 protected:
 	// Internal methods for plant management

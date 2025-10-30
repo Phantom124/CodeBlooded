@@ -197,6 +197,10 @@ Plant::~Plant()
     {
         delete this->growthState;
     }
+    
+    if(this->decorator != nullptr){
+        delete this->decorator;
+    }
 }
 
 void Plant::hoursHasPassed()
@@ -344,10 +348,10 @@ void Plant::attachDeadMonitor(DeadMonitor *observer)
     }
 }
 
-std::string Plant::getName()
-{
-    return this->type;
-}
+// std::string Plant::getName()
+// {
+//     return this->type;
+// }
 
 PlantGrowthState *Plant::getState()
 {
@@ -374,9 +378,18 @@ void Plant::printPlant()
     std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }
 
-double Plant::getPrice()
+void Plant::add(PlantComponent *newDecorator)
 {
-    return this->price * this->growthState->getPriceEffect(); // multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
+    if(newDecorator == nullptr){
+        return;
+    }
+
+
+    if (decorator != nullptr){//something already exists
+        decorator->add(newDecorator);
+    }else{//nothing exists yet
+        decorator = newDecorator;
+    }
 }
 
 int Plant::getCareCount()
@@ -427,4 +440,25 @@ void Plant::checkGrowthLevel()
         delete this->growthState;
         this->growthState = nextState;
     }
+}
+
+std::string Plant::getName()
+{   
+    std::string decoratorNames = "";
+    if (this->decorator != nullptr)
+    {
+        decoratorNames += this->decorator->getName();
+    }
+
+    return this->type + decoratorNames;
+}
+
+double Plant::getPrice()
+{
+    double currentPrice = this->price * this->growthState->getPriceEffect(); // multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
+    if (this->decorator != nullptr)
+    {
+        currentPrice += this->decorator->getPrice();
+    }
+    return currentPrice;
 }

@@ -42,6 +42,8 @@ SOURCES = main.cpp \
           SunflowerFactory.cpp \
           PlantDecorator.cpp \
           Ribbon.cpp \
+          RedPot.cpp \
+          Scent.cpp
           
 
 # Object files (replace .cpp with .o)

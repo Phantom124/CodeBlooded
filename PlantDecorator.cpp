@@ -3,52 +3,49 @@
 #include <iostream>
 #include <string>
 
-PlantDecorator::PlantDecorator() : myPlant(0) {}
+PlantDecorator::PlantDecorator() : nextDecorator(nullptr) {}
 
 PlantDecorator::~PlantDecorator()
 {
-    delete this->myPlant;
-    this->myPlant = nullptr;
+    if(nextDecorator != nullptr){
+        delete nextDecorator;
+        nextDecorator = nullptr;
+    }
 }
 
-void PlantDecorator::addPlant(PlantComponent *extra)
-{
-    if (extra == nullptr)
-    {
+
+void PlantDecorator::add(PlantComponent *extra)
+{   
+    if(extra == nullptr){
         return;
     }
-    if (this->myPlant == nullptr)
-    {
-        this->myPlant = extra;
-    }
 
-    else
-    {
-        this->myPlant->addPlant(extra);
+    if (nextDecorator == nullptr){
+        nextDecorator = extra;
+    }else{
+        nextDecorator->add(extra);
     }
 }
-
-void PlantDecorator::printPlant()
-{
-    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
-}
+// void PlantDecorator::printPlant()
+// {
+    
+//     // std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
+// }
 
 double PlantDecorator::getPrice()
 {
-    if (this->myPlant == nullptr)
+    if (this->nextDecorator == nullptr)
     {
         return 0.0;
     }
-
-    return this->myPlant->getPrice();
+    return this->nextDecorator->getPrice();
 }
 
 std::string PlantDecorator::getName()
 {
-    if (this->myPlant == nullptr)
+    if (this->nextDecorator == nullptr)
     {
         return "";
     }
-
-    return this->myPlant->getName();
+    return this->nextDecorator->getName();
 }

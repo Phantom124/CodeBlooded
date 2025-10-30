@@ -8,13 +8,14 @@
 class PlantDecorator : public PlantComponent
 {
 protected:
-	PlantComponent *myPlant;
+	PlantComponent *nextDecorator;
+	// PlantComponent *plantComponent;
 
 public:
 	PlantDecorator();
 	~PlantDecorator();
-	virtual void addPlant(PlantComponent *extra);
-	virtual void printPlant();
+	virtual void add(PlantComponent *extra);
+	// virtual void printPlant();    // Removed due to no one calling the function
 	virtual double getPrice();
 	virtual std::string getName();
 };
