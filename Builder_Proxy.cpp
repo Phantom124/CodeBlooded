@@ -17,6 +17,22 @@
 #include "Rose.h"
 #include "Sunflower.h"
 
+// --- add a single reusable test concrete Plant type ---
+class TempPlant : public Plant {
+public:
+    TempPlant(const std::string& id, const std::string& t, const std::string& m)
+        : Plant(t, 0.0, 1.0, 0, 1.0, 0) // use parameterized Plant ctor
+    {
+        type = t;
+        try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
+        if (growthState) { delete growthState; growthState = nullptr; }
+        growthState = new SeedState();
+        // if you need to store maturity text, set any member here
+    }
+    std::string getName() override { return type; }
+};
+// --- end TempPlant ---
+
 void Builder();
 
 void SelectQuery() {
@@ -39,24 +55,12 @@ void SelectQuery() {
 
     //PLANT OVERLOAD
     {
-        // Minimal concrete Plant for testing
-        class TestPlant : public Plant {
-        public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
-                type = t;
-                try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
-                if (growthState) { delete growthState; growthState = nullptr; }
-                growthState = new SeedState(); // safe default
-            }
-            std::string getName() override { return type; }
-        };
-
-        TestPlant tp("1","Lily","Seedling");
+        // use shared TempPlant instead of local TestPlant
+        TempPlant tp("1","Lily","Seedling");
         SelectQueryBuilder builder;
         Customer customer;
         customer.setQueryBuilder(&builder);
 
-        // use existing public API that returns a QueryProduct
         auto product = customer.createSelectQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
         std::cout << "[Plant* SELECT] " << product.getQuery() << std::endl;
     }
@@ -70,15 +74,15 @@ void InsertQuery() {
 
     {
         auto product = staff.createInsertQuery("2", "Daffodil", "Young");
-        assert(product.getQuery() ==
+        assert(product->getQuery() ==
                "INSERT INTO INVENTORY (PlantID, PlantType, MaturityState) VALUES ('2', 'Daffodil', 'Young');");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createInsertQuery("", "Iris", "");
-        assert(product.getQuery() == "INSERT INTO INVENTORY (PlantType) VALUES ('Iris');");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery() == "INSERT INTO INVENTORY (PlantType) VALUES ('Iris');");
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     //PLANT OVERLOAD
@@ -86,7 +90,9 @@ void InsertQuery() {
         // Minimal concrete Plant for testing
         class TestPlant : public Plant {
         public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
+            TestPlant(const std::string& id, const std::string& t, const std::string& m)
+                : Plant(t, 0.0, 1.0, 0, 1.0, 0) // <-- initialize base (no default ctor in Plant)
+            {
                 type = t;
                 try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
                 if (growthState) { delete growthState; growthState = nullptr; }
@@ -98,7 +104,7 @@ void InsertQuery() {
         TestPlant tp("5", "Cactus", "Adult");
         // use StaffHandler API that returns a QueryProduct
         auto product = staff.createInsertQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
-        std::cout << "[Plant* INSERT] " << product.getQuery() << std::endl;
+        std::cout << "[Plant* INSERT] " << product->getQuery() << std::endl;
     }
 }
 
@@ -110,21 +116,21 @@ void DeleteQuery() {
 
     {
         auto product = staff.createDeleteQuery("2", "", "");
-        assert(product.getQuery() == "DELETE FROM INVENTORY WHERE PlantID = '2';");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery() == "DELETE FROM INVENTORY WHERE PlantID = '2';");
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createDeleteQuery("3", "Rose", "Mature");
-        assert(product.getQuery() ==
+        assert(product->getQuery() ==
                "DELETE FROM INVENTORY WHERE PlantID = '3' AND PlantType = 'Rose' AND MaturityState = 'Mature';");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createDeleteQuery("", "", "");
-        assert(product.getQuery().empty());
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery().empty());
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     //PLANT OVERLOAD
@@ -132,7 +138,9 @@ void DeleteQuery() {
         // Minimal concrete Plant for testing
         class TestPlant : public Plant {
         public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
+            TestPlant(const std::string& id, const std::string& t, const std::string& m)
+                : Plant(t, 0.0, 1.0, 0, 1.0, 0) // <-- same change here
+            {
                 type = t;
                 try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
                 if (growthState) { delete growthState; growthState = nullptr; }
@@ -144,7 +152,7 @@ void DeleteQuery() {
         TestPlant tp("5", "Cactus", "Adult");
         // use StaffHandler API that returns a QueryProduct
         auto product = staff.createDeleteQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
-        std::cout << "[Plant* DELETE] " << product.getQuery() << std::endl;
+        std::cout << "[Plant* DELETE] " << product->getQuery() << std::endl;
     }
 }
 

@@ -5,17 +5,19 @@
 #include "Plant.h"
 
 class InsertQueryBuilder: public QueryBuilder{
-    public:
-        void insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
-        void insertQueryBuilder(Plant* insertPlant);
+public:
+    InsertQueryBuilder();
+    ~InsertQueryBuilder();
 
-        std::string addPlantID(std::string plantID);
-        std::string addPlantType(std::string plantType);
-        std::string addMaturityState(std::string maturityState);
+    void insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
+    void insertQueryBuilder(Plant* insertPlant);
 
-    private:
-    Plant* insertPlant;
+    std::string addPlantID(std::string plantID);
+    std::string addPlantType(std::string plantType);
+    std::string addMaturityState(std::string maturityState);
 
+private:
+    Plant* insertPlant = nullptr; // non-owning by default; use unique_ptr if ownership needed
 };
 
 #endif

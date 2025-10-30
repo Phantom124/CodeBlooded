@@ -2,6 +2,9 @@
 #define STAFFHANDLER_H
 
 #include "Command.h"
+// #include "QueryProduct.h"
+// #include "QueryBuilder.h"
+// #include "StaffSystem.h"
 #include <string>
 
 using namespace std;
@@ -27,3 +30,4 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 };
 
 #endif
+

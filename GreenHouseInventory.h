@@ -4,9 +4,10 @@
 #include "PlantComponent.h"
 #include "PlantSnapshot.h"
 #include "Item.h"
-#include "Plant.h"
 #include <vector>
 #include <string>
+
+class Plant;
 
 class GreenHouseInventory {
     public:
@@ -22,7 +23,7 @@ class GreenHouseInventory {
 
     protected:
         // storage used by the default implementation in GreenHouseInventory.cpp
-        std::vector<Item> items;
+        // std::vector<Item> items;
         std::vector<Plant*> plants;
 };
 

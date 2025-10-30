@@ -32,7 +32,7 @@ class QueryProduct{
     private:
         std::string query;
         ProxyGreenHouseInventory* inventory;
-        Plant* plant;
+        // Plant* plant;
 };
 
 #endif

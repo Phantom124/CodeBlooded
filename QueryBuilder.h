@@ -7,6 +7,9 @@
 #include <string>
 
 class QueryProduct;
+class Plant;
+
+class QueryProduct;
 
 class QueryBuilder{
     public:

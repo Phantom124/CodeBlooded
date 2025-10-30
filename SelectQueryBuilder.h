@@ -2,7 +2,8 @@
 #define SELECTQUERYBUILDER_H
 
 #include "QueryBuilder.h"
-#include "Plant.h"
+// #include "Plant.h"
+class Plant;
 
 class SelectQueryBuilder: public QueryBuilder{
     public:

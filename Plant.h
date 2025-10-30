@@ -2,22 +2,16 @@
 #define PLANT_H
 
 #include "PlantComponent.h"
-#include "PlantGrowthState.h"
-
-#include "Water.h"
-#include "HydratedState.h"
-#include "NotHydratedState.h"
-
-#include "Fertilizer.h"
-#include "FertilizedState.h"
-#include "NonFertilizerState.h"
-
-#include "PlantGrowthState.h"
-#include "PlantMonitor.h"
-
-#include "PlantDecorator.h"
-
 #include <string>
+
+// forward declarations instead of including concrete state/monitor headers
+class PlantGrowthState;
+class Water;
+class HydratedState;
+class NotHydratedState;
+class Fertilizer;
+class FertilizedState;
+class NonFertilizerState;
 
 class WaterMonitor;
 class FertilizerMonitor;

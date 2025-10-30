@@ -1,4 +1,5 @@
 #include "PlantSnapshot.h"
+#include <stdexcept> 
 
 PlantSnapshot::PlantSnapshot(Plant *plant) {
     if(plant == nullptr) {

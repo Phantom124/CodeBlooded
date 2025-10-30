@@ -2,11 +2,17 @@
 #define PROXYGREENHOUSEINVENTORY_H
 
 #include "GreenHouseInventory.h"
-#include "RealGreenHouseInventory.h"
-#include "QueryProduct.h"
-#include "Customer.h"
-#include "StaffHandler.h"
+// #include "RealGreenHouseInventory.h"
+// #include "QueryProduct.h"
+// #include "Customer.h"
+// #include "StaffHandler.h"
 #include "Item.h"
+
+class RealGreenHouseInventory;
+class QueryProduct;
+class Plant;
+class Customer;
+class StaffHandler;
 
 #include <string>
 // #include <typeinfo>
