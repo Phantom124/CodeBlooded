@@ -11,7 +11,8 @@ public:
 	// Sunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 	~Sunflower();
 
-	std::string getName();
+	// std::string getName();
 };
 
 #endif
+
