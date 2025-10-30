@@ -15,6 +15,6 @@ Rose::~Rose(){}
 
 
 
-std::string Rose::getName(){
-    return "Rose";
-}
+// std::string Rose::getName(){
+//     return "Rose";
+// }

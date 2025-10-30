@@ -11,7 +11,7 @@ class Rose : public Plant {
 		// Rose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 		~Rose();
 
-		std::string getName();
+		// std::string getName();
 };
 
 #endif

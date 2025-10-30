@@ -1,6 +1,14 @@
 #include "PlantGroup.h"
+#include <iostream>
 
-std::vector<PlantComponent*> PlantGroup::getPlantComponents() {
+void PlantGroup::printOrder()
+{
+    std::cout << "Order Description: " << getName() << std::endl;
+    std::cout << "Order Price: " << getPrice() << std::endl;
+}
+
+std::vector<PlantComponent *> PlantGroup::getPlantComponents()
+{
     return plants;
 }
 
@@ -28,7 +36,7 @@ double PlantGroup::getPrice()
 
 std::string PlantGroup::getName()
 {
-    std::string plantGroup = this->name + " (";
+    std::string plantGroup = "(";
     auto size = static_cast<int>(plants.size());
     // std::cout << "size is " << size << std::endl;
     for (int i = 0; i < size; i++)
@@ -49,7 +57,7 @@ std::vector<PlantComponent *> PlantGroup::getPlants()
     return this->plants;
 }
 
-void PlantGroup::addPlantComponent(PlantComponent *plantComponent)
+void PlantGroup::add(PlantComponent *plantComponent)
 {
     this->plants.push_back(plantComponent);
 }

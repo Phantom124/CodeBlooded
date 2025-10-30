@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -std=c++11 -g -O0
 TARGET = plant_sim
 
 # Source files
-SOURCES = StateTesting.cpp \
+SOURCES = main.cpp \
           Plant.cpp \
           Cactus.cpp \
           Rose.cpp \
@@ -30,6 +30,7 @@ SOURCES = StateTesting.cpp \
           DeadCommand.cpp \
           WaterCommand.cpp \
           FertilizerCommand.cpp \
+          PlantGroup.cpp \
           StaffSystem.cpp \
           StaffHandler.cpp \
           WaterHandler.cpp \
@@ -39,7 +40,12 @@ SOURCES = StateTesting.cpp \
           PlantFactory.cpp \
           RoseFactory.cpp \
           CactusFactory.cpp \
-          SunflowerFactory.cpp
+          SunflowerFactory.cpp \
+          PlantDecorator.cpp \
+          Ribbon.cpp \
+          RedPot.cpp \
+          Scent.cpp \
+          
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
