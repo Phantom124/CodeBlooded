@@ -1,4 +1,11 @@
 #include "PlantGroup.h"
+#include <iostream>
+
+void PlantGroup::printOrder()
+{
+    std::cout << "Order Description: " << getName() << std::endl;
+    std::cout << "Order Price: " << getPrice() << std::endl;
+}
 
 std::vector<PlantComponent *> PlantGroup::getPlantComponents()
 {
@@ -50,7 +57,7 @@ std::vector<PlantComponent *> PlantGroup::getPlants()
     return this->plants;
 }
 
-void PlantGroup::addPlantComponent(PlantComponent *plantComponent)
+void PlantGroup::add(PlantComponent *plantComponent)
 {
     this->plants.push_back(plantComponent);
 }

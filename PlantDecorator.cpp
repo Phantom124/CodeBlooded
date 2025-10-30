@@ -7,30 +7,34 @@ PlantDecorator::PlantDecorator() : nextDecorator(nullptr) {}
 
 PlantDecorator::~PlantDecorator()
 {
-    if(nextDecorator != nullptr){
+    if (nextDecorator != nullptr)
+    {
         delete nextDecorator;
         nextDecorator = nullptr;
     }
 }
 
-
 void PlantDecorator::add(PlantComponent *extra)
-{   
-    if(extra == nullptr){
+{
+    if (extra == nullptr)
+    {
         return;
     }
 
-    if (nextDecorator == nullptr){
+    if (nextDecorator == nullptr)
+    {
         nextDecorator = extra;
-    }else{
+    }
+    else
+    {
         nextDecorator->add(extra);
     }
 }
-// void PlantDecorator::printPlant()
-// {
-    
-//     // std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
-// }
+void PlantDecorator::printPlant()
+{
+
+    // std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
+}
 
 double PlantDecorator::getPrice()
 {

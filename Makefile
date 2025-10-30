@@ -30,6 +30,7 @@ SOURCES = main.cpp \
           DeadCommand.cpp \
           WaterCommand.cpp \
           FertilizerCommand.cpp \
+          PlantGroup.cpp \
           StaffSystem.cpp \
           StaffHandler.cpp \
           WaterHandler.cpp \
@@ -43,7 +44,7 @@ SOURCES = main.cpp \
           PlantDecorator.cpp \
           Ribbon.cpp \
           RedPot.cpp \
-          Scent.cpp
+          Scent.cpp \
           
 
 # Object files (replace .cpp with .o)

@@ -15,7 +15,7 @@ public:
 	PlantDecorator();
 	~PlantDecorator();
 	virtual void add(PlantComponent *extra);
-	// virtual void printPlant();    // Removed due to no one calling the function
+	virtual void printPlant(); // Removed due to no one calling the function
 	virtual double getPrice();
 	virtual std::string getName();
 };

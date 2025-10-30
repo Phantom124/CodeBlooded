@@ -16,7 +16,9 @@ public:
 	virtual double getPrice();
 	virtual std::string getName();
 	std::vector<PlantComponent *> getPlants();
-	void addPlantComponent(PlantComponent *plantComponent);
+	virtual void add(PlantComponent *plantComponent);
+	virtual void printPlant() {};
+	void printOrder();
 	std::vector<PlantComponent *> getPlantComponents();
 	void removePlantComponent(PlantComponent *plantComponent);
 };
