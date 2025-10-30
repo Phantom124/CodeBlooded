@@ -11,7 +11,7 @@ class Cactus : public Plant {
 		// Cactus(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 		~Cactus();
 
-		std::string getName();
+		// std::string getName();
 
 };
 
