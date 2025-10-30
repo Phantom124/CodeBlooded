@@ -13,6 +13,6 @@ Cactus::Cactus()
 
 Cactus::~Cactus() {}
 
-std::string Cactus::getName() {
-    return "Cactus";
-}
+// std::string Cactus::getName() {
+//     return "Cactus";
+// }

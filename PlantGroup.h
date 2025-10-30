@@ -8,19 +8,19 @@
 class PlantGroup : public PlantComponent
 {
 private:
-	double price;
-	std::string name;
 	std::vector<PlantComponent *> plants;
 
-	public:
-		PlantGroup();
-		virtual ~PlantGroup();
-	  virtual double getPrice();
-	  virtual std::string getName();
-    std::vector<PlantComponent *> getPlants();
-		void addPlantComponent(PlantComponent* plantComponent);
-		std::vector<PlantComponent*> getPlantComponents();
-    void removePlantComponent(PlantComponent *plantComponent);
+public:
+	PlantGroup();
+	virtual ~PlantGroup();
+	virtual double getPrice();
+	virtual std::string getName();
+	std::vector<PlantComponent *> getPlants();
+	virtual void add(PlantComponent *plantComponent);
+	virtual void printPlant() {};
+	void printOrder();
+	std::vector<PlantComponent *> getPlantComponents();
+	void removePlantComponent(PlantComponent *plantComponent);
 };
 
 #endif

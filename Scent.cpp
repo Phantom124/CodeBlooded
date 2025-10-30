@@ -2,16 +2,16 @@
 #include <iostream>
 #include <string>
 
-Scent::Scent() : PlantDecorator(nullptr) {}
+Scent::Scent() : PlantDecorator() {}
 
 double Scent::getPrice()
 {
-    return PlantDecorator::getPrice() + 50.00;
+    return 50.00 + PlantDecorator::getPrice();
 }
 
 std::string Scent::getName()
 {
-    return PlantDecorator::getName() + ", Scent";
+    return ", Scent" + PlantDecorator::getName();
 }
 
 void Scent::print()
