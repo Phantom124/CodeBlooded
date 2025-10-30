@@ -1,14 +1,14 @@
 #include "Sunflower.h"
 
 Sunflower::Sunflower()
-    : Plant() // use default Plant ctor like Cactus/Rose
+    : Plant("Sunflower",     // type
+            25,              // price
+            0.72,            // waterRetention
+            55,              // lowWaterLevel
+            0.85,            // fertilizerRetention
+            20)              // lowFertilizerLevel
 {
-    this->type = "Sunflower";
-    this->price = 25;
-    this->waterRetention = 0.72;
-    this->lowWaterLevel = 55;
-    this->fertilizerRetention = 0.85;
-    this->lowFertilizerLevel = 20;
+    // Additional sunflower setup can go here if needed.
 }
 
 Sunflower::~Sunflower() {}
