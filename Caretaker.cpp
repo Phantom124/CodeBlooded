@@ -31,8 +31,18 @@ void Caretaker::restoreOrder(Receipt& receipt, GreenHouseInventory& inventory) {
     if (!memento) return;
 
     if (receipt.getIsValid()) {
-        auto plants = memento->getPlants();
-        inventory.restorePlants(plants);
+        auto snapshots = memento->getPlants();
+        std::vector<PlantComponent*> components;
+        components.reserve(snapshots.size());
+        for (PlantSnapshot* ps : snapshots) {
+            PlantComponent* pc = dynamic_cast<PlantComponent*>(ps);
+            if (pc) {
+                components.push_back(pc);
+            } else {
+                // conversion failed: skip or log as appropriate
+            }
+        }
+        inventory.restorePlants(components);
     }
 
     removeMemento(receipt.getReceiptID());

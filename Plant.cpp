@@ -13,23 +13,67 @@
 
 int Plant::nextPlantId = 1;
 
-// Plant.cpp
-Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel): type(type), price(price),waterRetention(waterRetention),lowWaterLevel(lowWaterLevel),fertilizerRetention(fertilizerRetention),lowFertilizerLevel(lowFertilizerLevel){
-    // Initialize the rest too (health, states, etc.)
-    this->careCount = 0;
-    this->health = 100;
-    this->plantId = nextPlantId++;
-    this->waterLevel = 100;
-    this->fertilizerLevel = 100;
-
+Plant::Plant()
+    : type(""),
+      price(0.0),
+      careCount(0),
+      health(75),
+      waterState(nullptr),
+      waterLevel(100),
+      waterRetention(1.0),
+      lowWaterLevel(20),
+      fertilizerState(nullptr),
+      fertilizerLevel(100),
+      fertilizerRetention(1.0),
+      lowFertilizerLevel(20),
+      plantId(nextPlantId++),
+      growthState(nullptr),
+      waterMonitor(nullptr),
+      fertilizerMonitor(nullptr),
+      deadMonitor(nullptr)
+{
+    // now it's safe to allocate default states
     this->waterState = new HydratedState();
     this->fertilizerState = new FertilizedState();
     this->growthState = new SeedState();
 
+    // safe to call checks because all relevant fields are initialized
     checkWaterLevel();
     checkFertilizerLevel();
 }
 
+// If you keep the string ctor, initialize members there as well:
+Plant::Plant(std::string plantID, std::string plantType, std::string maturityState)
+    : type(std::move(plantType)),
+      price(0.0),
+      careCount(0),
+      health(75),
+      waterState(nullptr),
+      waterLevel(100),
+      waterRetention(1.0),
+      lowWaterLevel(20),
+      fertilizerState(nullptr),
+      fertilizerLevel(100),
+      fertilizerRetention(1.0),
+      lowFertilizerLevel(20),
+      plantId(nextPlantId++),
+      growthState(nullptr),
+      waterMonitor(nullptr),
+      fertilizerMonitor(nullptr),
+      deadMonitor(nullptr)
+{
+    // map maturityState -> growthState safely (fallback to SeedState)
+    if (maturityState == "Germination") growthState = new GerminationState();
+    else if (maturityState == "Sapling" || maturityState == "Young") growthState = new SaplingState();
+    else if (maturityState == "Mature") growthState = new MatureState();
+    else growthState = new SeedState();
+
+    this->waterState = new HydratedState();
+    this->fertilizerState = new FertilizedState();
+
+    checkWaterLevel();
+    checkFertilizerLevel();
+}
 
 int Plant::getHealthEffects(){
     int totalEffect = -1000;//will kill plant if not effected
@@ -38,9 +82,6 @@ int Plant::getHealthEffects(){
         //can add extra abilities 
         //if +10 can increase to +15
         //if -10 can decrease to -12
-        if(totalEffect == 0){//If One state needs attention
-            totalEffect = -2;//Small decrease
-        }
     }
     return totalEffect;
     
@@ -56,9 +97,6 @@ void Plant::healthEffects(){
     if(this->health < 0 ){//DEAD
         this->health = 0;
         setGrowthState(new DeadState());//MAKE DEAD MAKE DEAD
-        if(deadMonitor != nullptr){
-            deadMonitor->update(this);
-        }
         //NOTIFY OBSERVERS
         //TRANSITION TO DEAD STATE
     }else if(this->health > 100){//MAX HEALTH
@@ -87,11 +125,11 @@ void Plant::checkWaterLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setWaterState(nextState);
             if(nextState->getStateName() == "NotHydrated"){
-
                 if(waterMonitor != nullptr){
-                    waterMonitor->update(this);//NOTIFY Monitor
+                    waterMonitor->update(this);
                 }
                 
+                //NOTIFY OBSERVERS
             }
         }
         // If nextState is nullptr, STAY in current state
@@ -104,11 +142,8 @@ void Plant::checkFertilizerLevel(){
         if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
             this->setFertilizerState(nextState);
             if(nextState->getStateName() == "NonFertilized"){
-                std::cout << "Fertilizer level low, notifying monitor." << std::endl;
-                if (fertilizerMonitor != nullptr) {
-                    fertilizerMonitor->update(this);//NOTIFY Monitor
-                }
-                // else ignore or log warning
+                //NOTIFY OBSERVERS
+                fertilizerMonitor->update(this);
             }
         }
         // If nextState is nullptr, STAY in current state
@@ -148,24 +183,19 @@ void Plant::internalsTimeElapse(){//ADD CARECOUNT LATER ON FOR GROWTH STATE
     increaseCareCount();
     std::cout << "Decreasing Water and Fertilizer Levels...\n";
     decreaseWaterLevel();//Decrease water level//
-    decreaseFertilizerLevel();
+    decreaseFertilizerLevel(); 
+    
 }
 
 
 
-Plant::~Plant()
-{
-
-    if(this->waterState != nullptr){
-        delete this->waterState;
-    }
-
-    if(this->fertilizerState != nullptr){
-        delete this->fertilizerState;
-    }
-    if(this->growthState != nullptr){
-        delete this->growthState;
-    }
+Plant::~Plant() {
+    delete waterState;
+    delete fertilizerState;
+    delete growthState;
+    delete waterMonitor;
+    delete fertilizerMonitor;
+    delete deadMonitor;
 }
 
 void Plant::hoursHasPassed(){
@@ -183,7 +213,6 @@ void Plant::waterPlant(){
 }
 
 void Plant::fertilizePlant(){
-    std::cout << "Fertilizing Plant...\n";
     if(this->health <= 0){//IF DEAD DO NOT FERTILIZE
         this->fertilizerLevel = 0;
         checkFertilizerLevel();

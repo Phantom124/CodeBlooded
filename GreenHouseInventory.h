@@ -22,7 +22,7 @@ class GreenHouseInventory {
 
     protected:
         // storage used by the default implementation in GreenHouseInventory.cpp
-        std::vector<Item> items;
+        // std::vector<Item> items;
         std::vector<Plant*> plants;
 };
 
