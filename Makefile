@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -std=c++11 -g -O0
 TARGET = plant_sim
 
 # Source files
-SOURCES = main.cpp \
+SOURCES = Builder_Proxy.cpp \
           Plant.cpp \
           Cactus.cpp \
           Rose.cpp \
@@ -50,6 +50,11 @@ SOURCES = main.cpp \
           ProxyGreenHouseInventory.cpp\
           RealGreenHouseInventory.cpp \
           GreenHouseInventory.cpp\
+          SelectQueryBuilder.cpp\
+          InsertQueryBuilder.cpp\
+          DeleteQueryBuilder.cpp\
+          Customer.cpp\
+
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
