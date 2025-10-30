@@ -2,18 +2,21 @@
 #define PLANTDECORATOR_H
 
 #include "Plant.h"
+#include "PlantComponent.h"
 #include <string>
 
+class PlantDecorator : public PlantComponent
+{
+protected:
+	PlantComponent *myPlant;
 
-class PlantDecorator : public Plant {
-	public:
-		Plant* myPlant;
-		PlantDecorator(Plant* plant);
-		~PlantDecorator();
-		void add(Plant* extra);
-		void print();
-		double getPrice();
-		std::string getName();
+public:
+	PlantDecorator();
+	~PlantDecorator();
+	virtual void addPlant(PlantComponent *extra);
+	virtual void printPlant();
+	virtual double getPrice();
+	virtual std::string getName();
 };
 
 #endif

@@ -14,7 +14,8 @@
 int Plant::nextPlantId = 1;
 
 // Plant.cpp
-Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel): type(type), price(price),waterRetention(waterRetention),lowWaterLevel(lowWaterLevel),fertilizerRetention(fertilizerRetention),lowFertilizerLevel(lowFertilizerLevel){
+Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel) : type(type), price(price), waterRetention(waterRetention), lowWaterLevel(lowWaterLevel), fertilizerRetention(fertilizerRetention), lowFertilizerLevel(lowFertilizerLevel)
+{
     // Initialize the rest too (health, states, etc.)
     this->careCount = 0;
     this->health = 100;
@@ -30,83 +31,101 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     checkFertilizerLevel();
 }
 
-
-int Plant::getHealthEffects(){
-    int totalEffect = -1000;//will kill plant if not effected
-    if(waterState != nullptr && fertilizerState != nullptr){
+int Plant::getHealthEffects()
+{
+    int totalEffect = -1000; // will kill plant if not effected
+    if (waterState != nullptr && fertilizerState != nullptr)
+    {
         totalEffect = this->waterState->effect() + this->fertilizerState->effect();
-        //can add extra abilities 
-        //if +10 can increase to +15
-        //if -10 can decrease to -12
-        if(totalEffect == 0){//If One state needs attention
-            totalEffect = -2;//Small decrease
+        // can add extra abilities
+        // if +10 can increase to +15
+        // if -10 can decrease to -12
+        if (totalEffect == 0)
+        {                     // If One state needs attention
+            totalEffect = -2; // Small decrease
         }
     }
     return totalEffect;
-    
 }
 
-void Plant::healthEffects(){
+void Plant::healthEffects()
+{
 
     // if(this->health <= 0){//CHECK IF DEAD
     //     return;
     // }
-    //Normal health effects
+    // Normal health effects
     this->health += getHealthEffects();
-    if(this->health < 0 ){//DEAD
+    if (this->health < 0)
+    { // DEAD
         this->health = 0;
-        setGrowthState(new DeadState());//MAKE DEAD MAKE DEAD
-        if(deadMonitor != nullptr){
+        setGrowthState(new DeadState()); // MAKE DEAD MAKE DEAD
+        if (deadMonitor != nullptr)
+        {
             deadMonitor->update(this);
         }
-        //NOTIFY OBSERVERS
-        //TRANSITION TO DEAD STATE
-    }else if(this->health > 100){//MAX HEALTH
+        // NOTIFY OBSERVERS
+        // TRANSITION TO DEAD STATE
+    }
+    else if (this->health > 100)
+    { // MAX HEALTH
         this->health = 100;
     }
 }
 
 void Plant::setWaterState(Water *waterState)
 { // Changes Water State
-    if(this->waterState != nullptr){
+    if (this->waterState != nullptr)
+    {
         delete this->waterState;
     }
     this->waterState = waterState;
 }
 
-void Plant::setFertilizerState(Fertilizer *fertilizerState){//Changes Fertilizer State
-    if(this->fertilizerState != nullptr){
+void Plant::setFertilizerState(Fertilizer *fertilizerState)
+{ // Changes Fertilizer State
+    if (this->fertilizerState != nullptr)
+    {
         delete this->fertilizerState;
     }
     this->fertilizerState = fertilizerState;
 }
 
-void Plant::checkWaterLevel(){
-    if(waterState != nullptr){
-        Water* nextState = waterState->getNextState(this->waterLevel, this->lowWaterLevel);
-        if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
+void Plant::checkWaterLevel()
+{
+    if (waterState != nullptr)
+    {
+        Water *nextState = waterState->getNextState(this->waterLevel, this->lowWaterLevel);
+        if (nextState != nullptr)
+        { // CHANGE state (nextState is a new state object)
             this->setWaterState(nextState);
-            if(nextState->getStateName() == "NotHydrated"){
+            if (nextState->getStateName() == "NotHydrated")
+            {
 
-                if(waterMonitor != nullptr){
-                    waterMonitor->update(this);//NOTIFY Monitor
+                if (waterMonitor != nullptr)
+                {
+                    waterMonitor->update(this); // NOTIFY Monitor
                 }
-                
             }
         }
         // If nextState is nullptr, STAY in current state
     }
 }
 
-void Plant::checkFertilizerLevel(){
-    if(fertilizerState != nullptr){
-        Fertilizer* nextState = fertilizerState->getNextState(this->fertilizerLevel, this->lowFertilizerLevel);
-        if(nextState != nullptr){  // CHANGE state (nextState is a new state object)
+void Plant::checkFertilizerLevel()
+{
+    if (fertilizerState != nullptr)
+    {
+        Fertilizer *nextState = fertilizerState->getNextState(this->fertilizerLevel, this->lowFertilizerLevel);
+        if (nextState != nullptr)
+        { // CHANGE state (nextState is a new state object)
             this->setFertilizerState(nextState);
-            if(nextState->getStateName() == "NonFertilized"){
+            if (nextState->getStateName() == "NonFertilized")
+            {
                 std::cout << "Fertilizer level low, notifying monitor." << std::endl;
-                if (fertilizerMonitor != nullptr) {
-                    fertilizerMonitor->update(this);//NOTIFY Monitor
+                if (fertilizerMonitor != nullptr)
+                {
+                    fertilizerMonitor->update(this); // NOTIFY Monitor
                 }
                 // else ignore or log warning
             }
@@ -115,65 +134,80 @@ void Plant::checkFertilizerLevel(){
     }
 }
 
-void Plant::decreaseWaterLevel(){
-    if(health <= 0){//IF DEAD DO NOT DECREASE LEVELS
+void Plant::decreaseWaterLevel()
+{
+    if (health <= 0)
+    { // IF DEAD DO NOT DECREASE LEVELS
         this->waterLevel = 0;
-    }else{//Only decrease if not dead
-        this->waterLevel = this->waterLevel - (10 * this->waterRetention);//Decrease water level based on retention
-        if(waterLevel < 0){
+    }
+    else
+    {                                                                      // Only decrease if not dead
+        this->waterLevel = this->waterLevel - (10 * this->waterRetention); // Decrease water level based on retention
+        if (waterLevel < 0)
+        {
             this->waterLevel = 0;
         }
     }
     checkWaterLevel();
 }
 
-void Plant::decreaseFertilizerLevel(){
-    if(health <= 0){//IF DEAD DO NOT DECREASE LEVELS
+void Plant::decreaseFertilizerLevel()
+{
+    if (health <= 0)
+    { // IF DEAD DO NOT DECREASE LEVELS
         this->fertilizerLevel = 0;
-    }else{//Only decrease if not dead
-        this->fertilizerLevel = this->fertilizerLevel - (8 * this->fertilizerRetention);//Decrease fertilizer level based on retention
-        if(fertilizerLevel < 0){
+    }
+    else
+    {                                                                                    // Only decrease if not dead
+        this->fertilizerLevel = this->fertilizerLevel - (8 * this->fertilizerRetention); // Decrease fertilizer level based on retention
+        if (fertilizerLevel < 0)
+        {
             this->fertilizerLevel = 0;
         }
     }
     checkFertilizerLevel();
 }
 
-void Plant::internalsTimeElapse(){//ADD CARECOUNT LATER ON FOR GROWTH STATE
-    //Growth state update would go here based on careCount
-    //CHECK IF PLANT IS DEAD!!!
+void Plant::internalsTimeElapse()
+{ // ADD CARECOUNT LATER ON FOR GROWTH STATE
+    // Growth state update would go here based on careCount
+    // CHECK IF PLANT IS DEAD!!!
     std::cout << "Effecting Plant Health...\n";
-    healthEffects();//Calculate new health // Can put plant in deadState
-    std::cout<< "Increasing Care Count...\n";
+    healthEffects(); // Calculate new health // Can put plant in deadState
+    std::cout << "Increasing Care Count...\n";
     increaseCareCount();
     std::cout << "Decreasing Water and Fertilizer Levels...\n";
-    decreaseWaterLevel();//Decrease water level//
+    decreaseWaterLevel(); // Decrease water level//
     decreaseFertilizerLevel();
 }
-
-
 
 Plant::~Plant()
 {
 
-    if(this->waterState != nullptr){
+    if (this->waterState != nullptr)
+    {
         delete this->waterState;
     }
 
-    if(this->fertilizerState != nullptr){
+    if (this->fertilizerState != nullptr)
+    {
         delete this->fertilizerState;
     }
-    if(this->growthState != nullptr){
+    if (this->growthState != nullptr)
+    {
         delete this->growthState;
     }
 }
 
-void Plant::hoursHasPassed(){
+void Plant::hoursHasPassed()
+{
     this->internalsTimeElapse();
 }
 
-void Plant::waterPlant(){
-    if(this->health <= 0){//IF DEAD DO NOT WATER
+void Plant::waterPlant()
+{
+    if (this->health <= 0)
+    { // IF DEAD DO NOT WATER
         this->waterLevel = 0;
         checkWaterLevel();
         return;
@@ -182,9 +216,11 @@ void Plant::waterPlant(){
     checkWaterLevel();
 }
 
-void Plant::fertilizePlant(){
+void Plant::fertilizePlant()
+{
     std::cout << "Fertilizing Plant...\n";
-    if(this->health <= 0){//IF DEAD DO NOT FERTILIZE
+    if (this->health <= 0)
+    { // IF DEAD DO NOT FERTILIZE
         this->fertilizerLevel = 0;
         checkFertilizerLevel();
         return;
@@ -193,9 +229,10 @@ void Plant::fertilizePlant(){
     checkFertilizerLevel();
 }
 
-void Plant::print() {
+void Plant::print()
+{
     std::string result = "";
-    //UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS
+    // UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS UNCOMMENT TO SHOW FULL DETAILS
     std::stringstream ss;
     ss << this->plantId;
     std::string strPlantId = ss.str();
@@ -218,7 +255,6 @@ void Plant::print() {
     ss << this->fertilizerLevel;
     std::string strFertLvl = ss.str();
     result += " | Fertilizer: " + this->fertilizerState->getStateName() + " " + strFertLvl + "%";
-
 
     ss.str("");
     ss.clear();
@@ -244,92 +280,121 @@ void Plant::print() {
     std::cout << result << std::endl;
 }
 
-std::string Plant::getWaterStateName(){
-    if(this->waterState == nullptr){
+std::string Plant::getWaterStateName()
+{
+    if (this->waterState == nullptr)
+    {
         return "No Water State";
     }
     return this->waterState->getStateName();
 }
 
-std::string Plant::getFertilizerStateName(){
-    if(this->fertilizerState == nullptr){
+std::string Plant::getFertilizerStateName()
+{
+    if (this->fertilizerState == nullptr)
+    {
         return "No Fertilizer State";
     }
     return this->fertilizerState->getStateName();
 }
 
-std::string Plant::getMaturityStateName(){
+std::string Plant::getMaturityStateName()
+{
     return this->growthState->getStateName();
 }
 
-int Plant::getHealth(){
+int Plant::getHealth()
+{
     return this->health;
 }
 
-void Plant::attachWaterMonitor(WaterMonitor *observer){
-    if(observer != nullptr){
+void Plant::attachWaterMonitor(WaterMonitor *observer)
+{
+    if (observer != nullptr)
+    {
         this->waterMonitor = observer;
-    }else{
+    }
+    else
+    {
         throw std::invalid_argument("Observer cannot be null");
     }
-
 }
 
-void Plant::attachFertilizerMonitor(FertilizerMonitor *observer){
-    if(observer != nullptr){
+void Plant::attachFertilizerMonitor(FertilizerMonitor *observer)
+{
+    if (observer != nullptr)
+    {
         this->fertilizerMonitor = observer;
-    }else{
+    }
+    else
+    {
         throw std::invalid_argument("Observer cannot be null");
     }
 }
 
-void Plant::attachDeadMonitor(DeadMonitor *observer){
-    if(observer != nullptr){
+void Plant::attachDeadMonitor(DeadMonitor *observer)
+{
+    if (observer != nullptr)
+    {
         this->deadMonitor = observer;
-    }else{
+    }
+    else
+    {
         throw std::invalid_argument("Observer cannot be null");
     }
 }
 
-std::string Plant::getName(){
+std::string Plant::getName()
+{
     return this->type;
 }
 
-PlantGrowthState *Plant::getState(){
+PlantGrowthState *Plant::getState()
+{
     return this->growthState;
 }
 
-int Plant::getWaterLevel(){
+int Plant::getWaterLevel()
+{
     return this->waterLevel;
 }
 
-int Plant::getFertilizerLevel(){
+int Plant::getFertilizerLevel()
+{
     return this->fertilizerLevel;
 }
 
-int Plant::getPlantId(){
+int Plant::getPlantId()
+{
     return plantId;
 }
 
-double Plant::getPrice(){
-    return this->price * this->growthState->getPriceEffect();//multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
+void Plant::printPlant()
+{
+    std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }
 
-
+double Plant::getPrice()
+{
+    return this->price * this->growthState->getPriceEffect(); // multiply price by how big the plant is 1.1 1.2 1.3 1.5 2.0
+}
 
 int Plant::getCareCount()
 {
     return this->careCount;
 }
 
-int Plant::getCareCountEffect(){
+int Plant::getCareCountEffect()
+{
     int waterEffect = (this->waterState->getStateName() == "Hydrated") ? 2 : 0;
     int fertilizerEffect = (this->fertilizerState->getStateName() == "Fertilized") ? 2 : 0;
     return waterEffect + fertilizerEffect;
 }
 
-void Plant::increaseCareCount(){
-    if(this->health <= 0){//IF DEAD DO NOT INCREASE CARE COUNT
+void Plant::increaseCareCount()
+{
+    if (this->health <= 0)
+    { // IF DEAD DO NOT INCREASE CARE COUNT
         return;
     }
     this->careCount += getCareCountEffect();
@@ -341,19 +406,24 @@ void Plant::increaseCareCount(){
     // }
 }
 
-void Plant::setGrowthState(PlantGrowthState *state){
-    if(this->growthState != nullptr){
+void Plant::setGrowthState(PlantGrowthState *state)
+{
+    if (this->growthState != nullptr)
+    {
         delete this->growthState;
     }
     this->growthState = state;
 }
 
-void Plant::checkGrowthLevel(){
-    if(growthState == nullptr){
+void Plant::checkGrowthLevel()
+{
+    if (growthState == nullptr)
+    {
         return;
     }
-    PlantGrowthState* nextState = this->growthState->getNextState(this->careCount);
-    if(nextState != nullptr){
+    PlantGrowthState *nextState = this->growthState->getNextState(this->careCount);
+    if (nextState != nullptr)
+    {
         delete this->growthState;
         this->growthState = nextState;
     }

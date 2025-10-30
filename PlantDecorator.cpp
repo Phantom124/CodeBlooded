@@ -3,10 +3,7 @@
 #include <iostream>
 #include <string>
 
-PlantDecorator::PlantDecorator()
-{
-    this->myPlant = nullptr;
-}
+PlantDecorator::PlantDecorator() : myPlant(0) {}
 
 PlantDecorator::~PlantDecorator()
 {
@@ -14,7 +11,7 @@ PlantDecorator::~PlantDecorator()
     this->myPlant = nullptr;
 }
 
-void PlantDecorator::add(Plant *extra)
+void PlantDecorator::addPlant(PlantComponent *extra)
 {
     if (extra == nullptr)
     {
@@ -27,11 +24,11 @@ void PlantDecorator::add(Plant *extra)
 
     else
     {
-        this->myPlant->add(extra);
+        this->myPlant->addPlant(extra);
     }
 }
 
-void PlantDecorator::print()
+void PlantDecorator::printPlant()
 {
     std::cout << "Plant: " << this->getName() << " | Price: R" << this->getPrice() << std::endl;
 }

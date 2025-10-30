@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-Scent::Scent() : PlantDecorator(nullptr) {}
+Scent::Scent() : PlantDecorator() {}
 
 double Scent::getPrice()
 {

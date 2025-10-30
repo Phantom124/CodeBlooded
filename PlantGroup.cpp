@@ -1,6 +1,7 @@
 #include "PlantGroup.h"
 
-std::vector<PlantComponent*> PlantGroup::getPlantComponents() {
+std::vector<PlantComponent *> PlantGroup::getPlantComponents()
+{
     return plants;
 }
 
@@ -28,7 +29,7 @@ double PlantGroup::getPrice()
 
 std::string PlantGroup::getName()
 {
-    std::string plantGroup = this->name + " (";
+    std::string plantGroup = "(";
     auto size = static_cast<int>(plants.size());
     // std::cout << "size is " << size << std::endl;
     for (int i = 0; i < size; i++)
