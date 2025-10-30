@@ -63,7 +63,17 @@ void InsertQueryBuilder::insertQueryBuilder(std::string plantID, std::string pla
     this->queryProduct->setQueryProduct(finalQuery);
 }
 
-void InsertQueryBuilder::insertQueryBuilder(Plant* insertPlant){
+InsertQueryBuilder::InsertQueryBuilder(){
+    this->insertPlant = nullptr;
+}
+
+InsertQueryBuilder::~InsertQueryBuilder(){
+    delete this->insertPlant;
+    this->insertPlant = nullptr;
+}
+
+void InsertQueryBuilder::insertQueryBuilder(Plant *insertPlant)
+{
     std::string plantID = std::to_string(insertPlant->getPlantId());
     std::string plantType = insertPlant->getName();
     std::string maturityState = insertPlant->getMaturityStateName();

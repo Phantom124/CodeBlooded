@@ -4,9 +4,10 @@
 #include "PlantComponent.h"
 #include "PlantSnapshot.h"
 #include "Item.h"
-#include "Plant.h"
 #include <vector>
 #include <string>
+
+class Plant;
 
 class GreenHouseInventory {
     public:

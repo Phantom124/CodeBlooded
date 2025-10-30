@@ -2,13 +2,16 @@
 #define STAFFHANDLER_H
 
 #include "Command.h"
+#include "QueryProduct.h"
+#include "QueryBuilder.h"
+#include "StaffSystem.h"
 #include <string>
 
 using namespace std;
 
-class QueryBuilder;
-class QueryProduct;
-class StaffSystem;
+// class QueryBuilder;
+// class QueryProduct;
+// class StaffSystem;
 
 class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 	protected:

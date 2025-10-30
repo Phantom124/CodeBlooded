@@ -11,6 +11,19 @@
 #include "FertilizerMonitor.h"
 #include "DeadMonitor.h"
 
+#include "PlantComponent.h"
+#include "PlantGrowthState.h"
+
+#include "Water.h"
+#include "HydratedState.h"
+#include "NotHydratedState.h"
+
+#include "Fertilizer.h"
+#include "FertilizedState.h"
+#include "NonFertilizerState.h"
+
+#include "PlantMonitor.h"
+
 int Plant::nextPlantId = 1;
 
 // Plant.cpp

@@ -2,9 +2,8 @@
 #include <sstream>
 #include <vector>
 
-QueryProduct::QueryProduct(ProxyGreenHouseInventory* inventory){
-    this->inventory = inventory;
-}
+QueryProduct::QueryProduct(ProxyGreenHouseInventory* inventory)
+    :inventory(inventory){}
 
 QueryProduct::~QueryProduct(){
     this->inventory = nullptr;
@@ -20,6 +19,8 @@ std::string QueryProduct::getQuery() {
 }
 
 void QueryProduct::execute(){
+    if (!this->inventory) return;
+
     std::string q = this->getQuery();
 
     if (q.find("SELECT") != std::string::npos){
@@ -58,7 +59,8 @@ void QueryProduct::executeSelect(std::string query){
     }
 }
 
-void QueryProduct::executeInsert(std::string query){
+
+void QueryProduct::executeInsert(std::string query) {
     size_t values = query.find("VALUES(");
     if (values == std::string::npos) return;
 
@@ -66,43 +68,37 @@ void QueryProduct::executeInsert(std::string query){
     size_t endOfInsert = query.find(")", values);
     if (endOfInsert == std::string::npos) return;
 
-    std::string parameters = query.substr(values, endOfInsert-values);
+    std::string parameters = query.substr(values, endOfInsert - values);
     std::stringstream ss(parameters);
-    std::string storage;
-
+    std::string token;
     std::vector<std::string> fields;
-    while (std::getline(ss, storage, ',')){
-        while (!storage.empty() && storage.front() == ' '){
-            storage.erase(0,1);
-        }
-        if (!storage.empty() && storage.front() == '\''){
-            if (storage.size() >= 2) storage = storage.substr(1, storage.size() - 2);
-            else storage.clear();
-        }
-        fields.push_back(storage);
+
+    while (std::getline(ss, token, ',')) {
+        while (!token.empty() && token.front() == ' ')
+            token.erase(0, 1);
+        if (!token.empty() && token.front() == '\'')
+            token = token.substr(1, token.size() - 2);
+        fields.push_back(token);
     }
 
-    while (fields.size() < 3){
+    while (fields.size() < 3)
         fields.push_back("");
-    }
 
-    // fields[0], fields[1], fields[2] -> id, type, maturity
-    // Item item(fields[0], fields[1], fields[2]);
+    // Assume: fields[0] = id, fields[1] = type, fields[2] = maturity
+    std::string type = fields[1];
 
-    class TempPlant : public Plant {
-    public:
-        TempPlant(const std::string& id, const std::string& type, const std::string& maturity) {
-            this->type = type;
-            try { this->plantId = std::stoi(id); } catch (...) { this->plantId = 0; }
-            this->growthState = new SeedState();
-        }
-        std::string getName() override { return type; }
-    };
+    Plant* plant = nullptr;
+    if (type == "Rose")
+        plant = new Rose();
+    else if (type == "Cactus")
+        plant = new Cactus();
+    else if (type == "Sunflower")
+        plant = new Sunflower();
 
-    // ---- Create plant dynamically and add it ----
-    Plant* plant = new TempPlant(fields[0], fields[1], fields[2]);
-    this->inventory->addPlant(plant);
+    if (plant && inventory)
+        inventory->addPlant(plant);
 }
+
 
 void QueryProduct::executeDelete(std::string query){
     size_t where = query.find("WHERE");

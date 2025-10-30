@@ -8,7 +8,7 @@
 class PlantDecorator : public Plant {
 	public:
 		Plant* myPlant;
-		PlantDecorator(Plant* plant);
+		PlantDecorator();
 		~PlantDecorator();
 		void add(Plant* extra);
 		void print();
