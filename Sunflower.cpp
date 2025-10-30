@@ -13,7 +13,7 @@ Sunflower::Sunflower()
 
 Sunflower::~Sunflower() {}
 
-std::string Sunflower::getName()
-{
-    return "Sunflower";
-}
+// std::string Sunflower::getName()
+// {
+//     return "Sunflower";
+// }
