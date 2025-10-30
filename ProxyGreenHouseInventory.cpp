@@ -1,4 +1,8 @@
 #include "ProxyGreenHouseInventory.h"
+#include "RealGreenHouseInventory.h"
+#include "QueryProduct.h"
+#include "Customer.h"
+#include "StaffHandler.h"
 
 ProxyGreenHouseInventory::ProxyGreenHouseInventory(){
     this->realInventory = new RealGreenHouseInventory();

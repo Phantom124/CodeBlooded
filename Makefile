@@ -45,7 +45,11 @@ SOURCES = main.cpp \
           Ribbon.cpp \
           RedPot.cpp \
           Scent.cpp \
-          
+          QueryBuilder.cpp\
+          QueryProduct.cpp\
+          ProxyGreenHouseInventory.cpp\
+          RealGreenHouseInventory.cpp \
+          GreenHouseInventory.cpp\
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)

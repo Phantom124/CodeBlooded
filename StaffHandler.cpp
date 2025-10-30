@@ -1,5 +1,6 @@
 #include "StaffHandler.h"
 #include "StaffSystem.h"
+#include "QueryBuilder.h"
 #include <iostream>
 #include <stdexcept>
 
