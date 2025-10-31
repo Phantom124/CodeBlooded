@@ -14,7 +14,41 @@ void QueryBuilder::selectQueryBuilder(std::string plantID, std::string plantType
 void QueryBuilder::insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState){}
 void QueryBuilder::deleteQueryBuilder(std::string plantID, std::string plantType, std::string maturityState){}
 
-std::string QueryBuilder::addPlantID(std::string plantID){
+void QueryBuilder::selectQueryBuilder(Plant* plant) {
+    if (plant == nullptr) return;
+
+    std::stringstream ss;
+    ss << "SELECT " << plant->getPlantId()
+       << " FROM PLANTS WHERE Type='" << plant->getName()
+       << "' AND MaturityState='" << plant->getMaturityStateName() << "';";
+
+    this->queryProduct->setQueryProduct(ss.str());
+}
+
+void QueryBuilder::insertQueryBuilder(Plant *plant){
+    if (plant == nullptr) return;
+
+    std::stringstream ss;
+    ss << "INSERT INTO PLANTS VALUES('"
+       << plant->getPlantId() << "', '"
+       << plant->getName() << "', '"
+       << plant->getMaturityStateName() << "');";
+
+    this->queryProduct->setQueryProduct(ss.str());
+}
+
+void QueryBuilder::deleteQueryBuilder(Plant* plant) {
+    if (plant == nullptr) return;
+
+    std::stringstream ss;
+    ss << "DELETE FROM PLANTS WHERE PlantID='"
+       << plant->getPlantId() << "';";
+
+    this->queryProduct->setQueryProduct(ss.str());
+}
+
+std::string QueryBuilder::addPlantID(std::string plantID)
+{
     if (plantID.length() == 0) return "";
     return plantID;
 }

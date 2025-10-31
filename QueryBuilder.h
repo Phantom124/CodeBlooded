@@ -17,6 +17,10 @@ class QueryBuilder{
         virtual void insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
         virtual void deleteQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
 
+        virtual void selectQueryBuilder(Plant* plant);
+        virtual void insertQueryBuilder(Plant* plant);
+        virtual void deleteQueryBuilder(Plant* plant);
+
         virtual std::string addPlantID(std::string plantID);
         virtual std::string addPlantType(std::string plantType);
         virtual std::string addMaturityState(std::string maturityState);

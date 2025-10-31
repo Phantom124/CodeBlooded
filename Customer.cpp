@@ -12,6 +12,15 @@ QueryProduct Customer::createSelectQuery(std::string plantID, std::string plantT
     return *(this->queryBuilder->getQueryProduct());
 }
 
+QueryProduct *Customer::createSelectQuery(Plant* plant){
+    std::string plantID = std::to_string(plant->getPlantId());
+    std::string plantType = plant->getName();
+    std::string maturityState = plant->getMaturityStateName();
+
+    this->queryBuilder->selectQueryBuilder(plantID, plantType, maturityState);
+    return this->queryBuilder->getQueryProduct();
+}
+
 void Customer::setQueryBuilder(QueryBuilder* queryBuilder){
     this->queryBuilder = queryBuilder;
 }

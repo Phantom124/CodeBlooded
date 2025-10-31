@@ -1,17 +1,14 @@
 #include "RealGreenHouseInventory.h"
-#include <vector>
-#include "Rose.h"
-#include "Sunflower.h"
-// #include "Cactus.h"
+#include "Plant.h"
 
-RealGreenHouseInventory::RealGreenHouseInventory(){
-    // this->plants.push_back(new Rose());
-    // this->plants.push_back(new Sunflower());
-    // this->plant.push_back(Plant("3", "Rose", "Adult"));
-}
+RealGreenHouseInventory::RealGreenHouseInventory(){}
 
-RealGreenHouseInventory::~RealGreenHouseInventory(){
-    this->plants.clear();
+RealGreenHouseInventory::~RealGreenHouseInventory()
+{
+    for (Plant* p : plants) {
+        delete p;
+    }
+    plants.clear();
 }
 
 void RealGreenHouseInventory::showPlant(std::string parameters)

@@ -59,49 +59,63 @@ void QueryProduct::executeSelect(std::string query){
 }
 
 void QueryProduct::executeInsert(std::string query){
-    size_t values = query.find("VALUES(");
-    if (values == std::string::npos) return;
 
-    values += 7;
-    size_t endOfInsert = query.find(")", values);
-    if (endOfInsert == std::string::npos) return;
-
-    std::string parameters = query.substr(values, endOfInsert-values);
-    std::stringstream ss(parameters);
-    std::string storage;
-
-    std::vector<std::string> fields;
-    while (std::getline(ss, storage, ',')){
-        while (!storage.empty() && storage.front() == ' '){
-            storage.erase(0,1);
-        }
-        if (!storage.empty() && storage.front() == '\''){
-            if (storage.size() >= 2) storage = storage.substr(1, storage.size() - 2);
-            else storage.clear();
-        }
-        fields.push_back(storage);
+    size_t valuesPos = query.find("VALUES");
+    if (valuesPos == std::string::npos) {
+        // std::cout << "[ERROR] Invalid INSERT syntax.\n";
+        return;
     }
 
-    while (fields.size() < 3){
-        fields.push_back("");
+
+    size_t openParen = query.find('(', valuesPos);
+    size_t closeParen = query.find(')', openParen);
+    if (openParen == std::string::npos || closeParen == std::string::npos) {
+        // std::cout << "[ERROR] Missing parentheses in INSERT.\n";
+        return;
     }
 
-    // fields[0], fields[1], fields[2] -> id, type, maturity
-    // Item item(fields[0], fields[1], fields[2]);
+    std::string inside = query.substr(openParen + 1, closeParen - openParen - 1);
 
-    class TempPlant : public Plant {
-    public:
-        TempPlant(const std::string& id, const std::string& type, const std::string& maturity) {
-            this->type = type;
-            try { this->plantId = std::stoi(id); } catch (...) { this->plantId = 0; }
-            this->growthState = new SeedState();
-        }
-        std::string getName() override { return type; }
-    };
+    std::stringstream ss(inside);
+    std::string token;
+    std::string values[3];
+    int i = 0;
 
-    // ---- Create plant dynamically and add it ----
-    Plant* plant = new TempPlant(fields[0], fields[1], fields[2]);
-    this->inventory->addPlant(plant);
+    while (std::getline(ss, token, ',') && i < 3) {
+        while (!token.empty() && (token.front() == ' ' || token.front() == '\'')) token.erase(0, 1);
+        while (!token.empty() && (token.back() == ' ' || token.back() == '\'')) token.pop_back();
+        values[i++] = token;
+    }
+
+    if (i < 3) {
+        // std::cout << "[ERROR] Missing values for INSERT.\n";
+        return;
+    }
+
+    
+    Plant* newPlant = nullptr;
+
+    if (values[1] == "Rose"){
+        newPlant = new Rose();
+    }
+    else if (values[1] == "Sunflower"){
+        newPlant = new Sunflower();
+    }
+    else if (values[1] == "Cactus"){
+        newPlant = new Cactus();
+    }
+    else{
+        std::cout << "Unknown Plant Type: " << values[1] << std::endl;
+        return;
+    }
+
+    if (this->inventory && newPlant){
+        this->inventory->addPlant(newPlant);
+    }
+    else{
+        std::cout << "Inventory Unavailable or Invalid Plant.\n";
+        delete newPlant;
+    }
 }
 
 void QueryProduct::executeDelete(std::string query){

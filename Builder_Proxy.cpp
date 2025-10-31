@@ -32,33 +32,29 @@ void SelectQuery() {
     }
 
     {
-        auto product = customer.createSelectQuery("", "Tulip", "");
-        assert(product.getQuery() == "SELECT Tulip FROM INVENTORY;");
+        auto product = customer.createSelectQuery("", "Sunflower", "");
+        assert(product.getQuery() == "SELECT Sunflower FROM INVENTORY;");
         std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
     }
 
     //PLANT OVERLOAD
     {
-        // Minimal concrete Plant for testing
-        class TestPlant : public Plant {
-        public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
-                type = t;
-                try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
-                if (growthState) { delete growthState; growthState = nullptr; }
-                growthState = new SeedState(); // safe default
-            }
-            std::string getName() override { return type; }
-        };
-
-        TestPlant tp("1","Lily","Seedling");
+        ProxyGreenHouseInventory proxyInventory;
         SelectQueryBuilder builder;
+
+        Rose rose;                    // stack object
+        Plant* rosePtr = &rose;
+
         Customer customer;
         customer.setQueryBuilder(&builder);
 
-        // use existing public API that returns a QueryProduct
-        auto product = customer.createSelectQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
+        QueryProduct product(&proxyInventory);
+        builder.selectQueryBuilder(rosePtr);
+        product.setQueryProduct("SELECT " + std::to_string(rosePtr->getPlantId()) + ", " + rosePtr->getName() + ", " + rosePtr->getMaturityStateName() + " FROM INVENTORY;");
+
         std::cout << "[Plant* SELECT] " << product.getQuery() << std::endl;
+
+        proxyInventory.handleControlRights(&customer, product);
     }
 }
 
@@ -70,35 +66,38 @@ void InsertQuery() {
 
     {
         auto product = staff.createInsertQuery("2", "Daffodil", "Young");
-        assert(product.getQuery() ==
+        assert(product->getQuery() ==
                "INSERT INTO INVENTORY (PlantID, PlantType, MaturityState) VALUES ('2', 'Daffodil', 'Young');");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createInsertQuery("", "Iris", "");
-        assert(product.getQuery() == "INSERT INTO INVENTORY (PlantType) VALUES ('Iris');");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery() == "INSERT INTO INVENTORY (PlantType) VALUES ('Iris');");
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     //PLANT OVERLOAD
     {
-        // Minimal concrete Plant for testing
-        class TestPlant : public Plant {
-        public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
-                type = t;
-                try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
-                if (growthState) { delete growthState; growthState = nullptr; }
-                growthState = new SeedState(); // safe default
-            }
-            std::string getName() override { return type; }
-        };
+        ProxyGreenHouseInventory proxyInventory;
+        InsertQueryBuilder builder;
+        staff.setQueryBuilder(&builder); // only staff can insert
 
-        TestPlant tp("5", "Cactus", "Adult");
-        // use StaffHandler API that returns a QueryProduct
-        auto product = staff.createInsertQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
+        QueryProduct product(&proxyInventory);
+        Rose rose;                     // stack object
+        Plant* rosePtr = &rose;
+        builder.insertQueryBuilder(rosePtr);
+
+        product.setQueryProduct(
+            "INSERT INTO INVENTORY VALUES('" +
+            std::to_string(rose.getPlantId()) + "', '" +
+            rose.getName() + "', '" +
+            rose.getMaturityStateName() + "');"
+        );
+
+        std::cout << "\n[TEST] INSERT QUERY\n";
         std::cout << "[Plant* INSERT] " << product.getQuery() << std::endl;
+        proxyInventory.handleControlRights(&staff, product); // allowed
     }
 }
 
@@ -110,41 +109,42 @@ void DeleteQuery() {
 
     {
         auto product = staff.createDeleteQuery("2", "", "");
-        assert(product.getQuery() == "DELETE FROM INVENTORY WHERE PlantID = '2';");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery() == "DELETE FROM INVENTORY WHERE PlantID = '2';");
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createDeleteQuery("3", "Rose", "Mature");
-        assert(product.getQuery() ==
+        assert(product->getQuery() ==
                "DELETE FROM INVENTORY WHERE PlantID = '3' AND PlantType = 'Rose' AND MaturityState = 'Mature';");
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     {
         auto product = staff.createDeleteQuery("", "", "");
-        assert(product.getQuery().empty());
-        std::cout << "In CRUD Operation: " << product.getQuery() << std::endl;
+        assert(product->getQuery().empty());
+        std::cout << "In CRUD Operation: " << product->getQuery() << std::endl;
     }
 
     //PLANT OVERLOAD
     {
-        // Minimal concrete Plant for testing
-        class TestPlant : public Plant {
-        public:
-            TestPlant(const std::string& id, const std::string& t, const std::string& m) {
-                type = t;
-                try { plantId = std::stoi(id); } catch(...) { plantId = 0; }
-                if (growthState) { delete growthState; growthState = nullptr; }
-                growthState = new SeedState(); // safe default
-            }
-            std::string getName() override { return type; }
-        };
+        ProxyGreenHouseInventory proxyInventory;
+        DeleteQueryBuilder builder;
+        staff.setQueryBuilder(&builder); // only staff can delete
 
-        TestPlant tp("5", "Cactus", "Adult");
-        // use StaffHandler API that returns a QueryProduct
-        auto product = staff.createDeleteQuery(std::to_string(tp.getPlantId()), tp.getName(), tp.getMaturityStateName());
+        QueryProduct product(&proxyInventory);
+        Rose rose;                     // stack object
+        Plant* rosePtr = &rose;
+        builder.deleteQueryBuilder(rosePtr);
+
+        product.setQueryProduct(
+            "DELETE FROM INVENTORY WHERE PlantID='" +
+            std::to_string(rose.getPlantId()) + "';"
+        );
+
+        std::cout << "\n[TEST] DELETE QUERY\n";
         std::cout << "[Plant* DELETE] " << product.getQuery() << std::endl;
+        proxyInventory.handleControlRights(&staff, product);
     }
 }
 
@@ -162,7 +162,7 @@ void QueryProductTest() {
     }
 
     {
-        queryProduct.setQueryProduct("INSERT INTO INVENTORY VALUES (2, Tulip, Mature);");
+        queryProduct.setQueryProduct("INSERT INTO INVENTORY VALUES (2, Rose, Mature);");
         std::cout << "In CRUD Operation: " << queryProduct.getQuery() << std::endl;
         queryProduct.execute();
         assert(queryProduct.getQuery().find("INSERT") != std::string::npos);
@@ -256,7 +256,7 @@ void Proxy(){
     // ----------------------------
     {
         QueryProduct query(&proxyInventory);
-        query.setQueryProduct("INSERT INTO INVENTORY VALUES (4, Tulip, Mature);");
+        query.setQueryProduct("INSERT INTO INVENTORY VALUES (4, Cactus, Mature);");
         std::cout << "\n[Customer INSERT Test]\n";
         proxyInventory.handleControlRights(&customer, query);
     }

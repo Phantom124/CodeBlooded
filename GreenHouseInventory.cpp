@@ -25,11 +25,12 @@ std::vector<Plant*> GreenHouseInventory::getPlants() {
     return plants;
 }
 
-void GreenHouseInventory::restorePlants(const std::vector<PlantSnapshot*>& snapshots) {
-    for (auto& snapshot : snapshots) {
-        Plant* plant = snapshot->convertToPlant();
-        if (plant) {
-            addPlant(plant);
-        }
+void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plants) {
+    for (PlantComponent* pc : plants) {
+        Plant* plant = dynamic_cast<Plant*>(pc);
+        if (!plant) continue;
+        // Construct Item from Plant fields (Item has constructor Item(string id, string type, string maturity))
+        // Item item(std::to_string(plant->getPlantId()), plant->getName(), plant->getMaturityStateName());
+        addPlant(plant);
     }
 }
