@@ -1,6 +1,8 @@
 #include "QueryProduct.h"
 #include <sstream>
 #include <vector>
+#include <string>
+#include <iostream>
 
 QueryProduct::QueryProduct(ProxyGreenHouseInventory* inventory){
     this->inventory = inventory;

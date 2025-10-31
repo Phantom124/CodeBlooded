@@ -8,6 +8,12 @@
 #include "StaffHandler.h"
 #include "Item.h"
 
+class RealGreenHouseInventory;
+class QueryProduct;
+class Plant;
+class Customer;
+class StaffHandler;
+
 #include <string>
 // #include <typeinfo>
 
@@ -22,6 +28,8 @@ class ProxyGreenHouseInventory : public GreenHouseInventory {
         void removePlant(std::string parameters);
 
         void handleControlRights(void* user, QueryProduct query);
+
+        void hourHasPassed();
     
     private:
         RealGreenHouseInventory* realInventory;

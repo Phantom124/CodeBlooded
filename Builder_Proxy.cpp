@@ -296,6 +296,14 @@ void Proxy(){
     // ----------------------------
     std::cout << "\n[Final Inventory]\n";
     proxyInventory.showAllPlants();    
+
+    {
+        ProxyGreenHouseInventory proxyInventory;
+        proxyInventory.addPlant(new Rose());
+        proxyInventory.addPlant(new Sunflower());
+
+        proxyInventory.hourHasPassed();
+    }
 }
 
 int main() {

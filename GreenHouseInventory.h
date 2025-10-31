@@ -20,9 +20,10 @@ class GreenHouseInventory {
         // declare restorePlants so Caretaker can call it
         virtual void restorePlants(const std::vector<PlantComponent*>& plants);
 
+        virtual void hourHasPassed() = 0;
+
     protected:
         // storage used by the default implementation in GreenHouseInventory.cpp
-        std::vector<Item> items;
         std::vector<Plant*> plants;
 };
 

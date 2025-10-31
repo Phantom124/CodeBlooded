@@ -54,3 +54,12 @@ void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct quer
         std::cout << "[CONTROL ACCESS] Unknown User Type\n";
     }
 }
+
+void ProxyGreenHouseInventory::hourHasPassed(){
+    if (this->realInventory != nullptr) return;
+    
+    for (Plant* plant: this->realInventory->getAllPlants()){
+        if (plant != nullptr) plant->hoursHasPassed();
+        std::cout << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
+    }
+}
