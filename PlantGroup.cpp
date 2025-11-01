@@ -14,13 +14,7 @@ std::vector<PlantComponent *> PlantGroup::getPlantComponents()
 
 PlantGroup::PlantGroup() : PlantComponent() {}
 
-PlantGroup::~PlantGroup()
-{
-    for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
-    {
-        delete *it;
-    }
-}
+PlantGroup::~PlantGroup() = default;
 
 double PlantGroup::getPrice()
 {
@@ -68,7 +62,6 @@ void PlantGroup::removePlantComponent(PlantComponent *plantComponent)
     {
         if ((*it) == plantComponent)
         {
-            delete *it;
             this->plants.erase(it);
             break;
         }

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CustomerMainWindow</class>
+ <widget class="QMainWindow" name="CustomerMainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>768</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Plant Nursery - Customer Portal</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="titleLabel">
+      <property name="text">
+       <string>CUSTOMER PORTAL</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="mainLayout">
+      <item>
+       <widget class="QGroupBox" name="inventoryGroup">
+        <property name="title">
+         <string>Plant Inventory</string>
+        </property>
+        <layout class="QVBoxLayout" name="inventoryLayout">
+         <item>
+          <layout class="QHBoxLayout" name="searchLayout">
+           <item>
+            <widget class="QLabel" name="typeLabel">
+             <property name="text">
+              <string>Type:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="plantTypeCombo">
+             <item>
+              <property name="text">
+               <string>All</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Rose</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Sunflower</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Cactus</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="maturityLabel">
+             <property name="text">
+              <string>Maturity:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="maturityCombo">
+             <item>
+              <property name="text">
+               <string>All</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Seed</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Germination</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Sapling</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Mature</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="refreshButton">
+             <property name="text">
+              <string>REFRESH</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QListWidget" name="inventoryList">
+           <property name="minimumSize">
+            <size>
+             <width>400</width>
+             <height>300</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="plantCountLabel">
+           <property name="text">
+            <string>Available Plants: 0</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="rightLayout">
+        <item>
+         <widget class="QGroupBox" name="detailsGroup">
+          <property name="title">
+           <string>Plant Details</string>
+          </property>
+          <layout class="QVBoxLayout" name="detailsLayout">
+           <item>
+            <widget class="QPlainTextEdit" name="plantDetailsText">
+             <property name="plainText">
+              <string>Select a plant to view details</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="decorationsGroup">
+          <property name="title">
+           <string>Add Decorations</string>
+          </property>
+          <layout class="QGridLayout" name="decorationsLayout">
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="redPotCheck">
+             <property name="text">
+              <string>Red Pot (+R40)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QCheckBox" name="ribbonCheck">
+             <property name="text">
+              <string>Ribbon (+R25)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="scentCheck">
+             <property name="text">
+              <string>Scent (+R50)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="giftWrapCheck">
+             <property name="text">
+              <string>Gift Wrap (+R20)</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="addButtonLayout">
+          <item>
+           <spacer name="addSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="addToCartButton">
+            <property name="text">
+             <string>ADD TO CART</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="discountGroup">
+          <property name="title">
+           <string>Discount Code</string>
+          </property>
+          <layout class="QVBoxLayout" name="discountLayout">
+           <item>
+            <layout class="QHBoxLayout" name="discountInputLayout">
+             <item>
+              <widget class="QLineEdit" name="discountCodeEdit">
+               <property name="placeholderText">
+                <string>Enter code (SAVE10, BULK)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="applyDiscountButton">
+               <property name="text">
+                <string>APPLY</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="discountStatusLabel">
+             <property name="text">
+              <string>No discount</string>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color: gray;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="cartGroup">
+          <property name="title">
+           <string>Shopping Cart</string>
+          </property>
+          <layout class="QVBoxLayout" name="cartLayout">
+           <item>
+            <widget class="QListWidget" name="cartList">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>150</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="totalPriceLabel">
+             <property name="text">
+              <string>Total: R0.00</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="cartButtonLayout">
+             <item>
+              <widget class="QPushButton" name="removeFromCartButton">
+               <property name="text">
+                <string>REMOVE</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="clearCartButton">
+               <property name="text">
+                <string>CLEAR</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="checkoutButton">
+               <property name="text">
+                <string>CHECKOUT</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="bottomButtonLayout">
+      <item>
+       <widget class="QPushButton" name="returnOrderButton">
+        <property name="text">
+         <string>RETURN ORDER</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="bottomSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="logoutButton">
+        <property name="text">
+         <string>LOGOUT</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

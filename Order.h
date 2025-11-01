@@ -13,7 +13,7 @@ class OrderMemento; // forward declaration
 class Order {
     private:
         PlantGroup* plantGroup;
-        PriceStrategies* priceStrategy;
+        PriceStrategies* priceStrategy = nullptr;
         std::string receiptID;
 
     public:

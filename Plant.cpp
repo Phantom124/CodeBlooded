@@ -27,7 +27,14 @@
 int Plant::nextPlantId = 1;
 
 // Plant.cpp
-Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel) : type(type), price(price), waterRetention(waterRetention), lowWaterLevel(lowWaterLevel), fertilizerRetention(fertilizerRetention), lowFertilizerLevel(lowFertilizerLevel)
+Plant::Plant(std::string type, double price, double waterRetention, int lowWaterLevel, double fertilizerRetention, int lowFertilizerLevel)
+    : type(type)
+    , price(price)
+    , waterRetention(waterRetention)
+    , lowWaterLevel(lowWaterLevel)
+    , fertilizerRetention(fertilizerRetention)
+    , lowFertilizerLevel(lowFertilizerLevel)
+    , decorator(nullptr)
 {
     // Initialize the rest too (health, states, etc.)
     this->careCount = 0;

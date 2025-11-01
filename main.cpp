@@ -1,82 +1,79 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
+#include <QApplication>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QFontDatabase>
+#include "Common/LoginDialog.h"
+#include "ProxyGreenHouseInventory.h"
+#include "RealGreenHouseInventory.h"
+#include "Caretaker.h"
+#include "StaffSystem.h"
+#include "CustomerFacade.h"
+#include "GreenHouseFacade.h"
 
-#include "PlantComponent.h"
-#include "PlantGroup.h"
-#include "PlantDecorator.h"
+// Global shared instances - accessible across all windows
+ProxyGreenHouseInventory* g_sharedInventory = nullptr;
+Caretaker* g_sharedCaretaker = nullptr;
+StaffSystem* g_sharedStaffSystem = nullptr;
+CustomerFacade* g_customerFacade = nullptr;
+GreenHouseFacade* g_greenHouseFacade = nullptr;
 
-#include "Plant.h"
-#include "RedPot.h"
-#include "Ribbon.h"
-#include "Scent.h"
-
-#include "Sunflower.h"
-#include "Rose.h"
-
-#include "PlantMonitor.h"
-#include "WaterMonitor.h"
-#include "FertilizerMonitor.h"
-
-#include "RoseFactory.h"
-#include "SunflowerFactory.h"
-#include "DeadMonitor.h"
-
-void CompAndDec()
+int main(int argc, char *argv[])
 {
-    PlantGroup *pg = new PlantGroup();
+    QApplication app(argc, argv);
+    app.setQuitOnLastWindowClosed(false);
 
-    FertilizerMonitor *fertMon = new FertilizerMonitor();
-    WaterMonitor *watMon = new WaterMonitor();
-    DeadMonitor *deadMon = new DeadMonitor();
+    // Load custom font
+    int fontId = QFontDatabase::addApplicationFont(":/fonts/resources/font/PressStart2P.ttf");
+    if (fontId != -1)
+    {
+        QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
+        if (!fontFamilies.isEmpty())
+        {
+            app.setFont(QFont(fontFamilies.at(0), 10));
+        }
+    }
+    else
+    {
+        QMessageBox::warning(nullptr, "Font Error", 
+            "Could not load Press Start 2P font. Application will use default font.");
+    }
 
-    RoseFactory *rFact = new RoseFactory(watMon, fertMon, deadMon);
-    SunflowerFactory *sFact = new SunflowerFactory(watMon, fertMon, deadMon);
+    // Initialize shared backend systems
+    g_sharedInventory = new ProxyGreenHouseInventory();
+    g_sharedCaretaker = new Caretaker();
+    g_sharedStaffSystem = new StaffSystem();
+    
+    // Initialize facades with shared instances
+    g_customerFacade = new CustomerFacade(g_sharedInventory, g_sharedCaretaker);
+    g_greenHouseFacade = new GreenHouseFacade(g_sharedInventory, g_sharedStaffSystem);
 
-    Plant *myPlant = rFact->createPlant();
-    std::cout << "OE print plant" << std::endl;
-    myPlant->printPlant();
-    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
+    QFile styleFile(":/styles/styles.qss"); // Load stylesheet
+    if (styleFile.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream stream(&styleFile);
+        QString styleSheet = stream.readAll();
+        app.setStyleSheet(styleSheet);
+        styleFile.close();
+    }
+    else
+    {
+        QMessageBox::warning(nullptr, "Style Error", 
+            "Could not load stylesheet. Application will use default styling.");
+    }
 
-    Plant *sunflower = sFact->createPlant();
-    myPlant->add(new Ribbon());
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "added ribbon:" << std::endl;
-    myPlant->printPlant();
-    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-
-    myPlant->add(new RedPot());
-
-    std::cout << "added red pot:" << std::endl;
-    myPlant->printPlant();
-    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
-
-    myPlant->add(new Scent());
-
-    std::cout << "added scent:" << std::endl;
-    myPlant->printPlant();
-    std::cout << "OE price is: " << myPlant->getPrice() << std::endl;
-
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "quote on quote order (not really involving order here) is : " << std::endl;
-    pg->add(myPlant);
-    pg->add(sunflower);
-    pg->printOrder();
-}
-
-int main()
-{
-    CompAndDec();
-    return 0;
+    // Show login dialog
+    LoginDialog loginDialog;
+    loginDialog.show();
+    
+    int result = app.exec();
+    
+    // Cleanup shared instances
+    delete g_greenHouseFacade;
+    delete g_customerFacade;
+    delete g_sharedStaffSystem;
+    delete g_sharedCaretaker;
+    delete g_sharedInventory;
+    
+    return result;
 }

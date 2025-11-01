@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>StaffManagementWidget</class>
+ <widget class="QWidget" name="StaffManagementWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QGroupBox" name="queueGroup">
+     <property name="title">
+      <string>Command Queue</string>
+     </property>
+     <layout class="QVBoxLayout" name="queueLayout">
+      <item>
+       <widget class="QListWidget" name="queueList">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>250</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="queueCountLabel">
+        <property name="text">
+         <string>Queue Size: 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="queueButtonLayout">
+        <item>
+         <widget class="QPushButton" name="refreshQueueButton">
+          <property name="text">
+           <string>REFRESH</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="processQueueButton">
+          <property name="text">
+           <string>PROCESS QUEUE</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearQueueButton">
+          <property name="text">
+           <string>CLEAR QUEUE</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="queueSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+    <item>
+     <widget class="QGroupBox" name="handlerGroup">
+      <property name="title">
+        <string>Handler Management</string>
+      </property>
+      <layout class="QVBoxLayout" name="handlerLayout">
+        <item>
+         <widget class="QTableWidget" name="handlerTable">
+          <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>200</height>
+            </size>
+          </property>
+          <column>
+            <property name="text">
+             <string>Handler Type</string>
+            </property>
+          </column>
+          <column>
+            <property name="text">
+             <string>Status</string>
+            </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="handlerSummaryLabel">
+          <property name="text">
+            <string>No handlers registered.</string>
+          </property>
+          <property name="alignment">
+            <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+            <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="addHandlerLayout">
+          <item>
+            <widget class="QPushButton" name="addWaterHandlerButton">
+             <property name="text">
+              <string>Add Water Handler</string>
+             </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="addFertilizerHandlerButton">
+             <property name="text">
+              <string>Add Fertilizer Handler</string>
+             </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="addDeadHandlerButton">
+             <property name="text">
+              <string>Add Dead Handler</string>
+             </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="addSalesHandlerButton">
+             <property name="text">
+              <string>Add Sales Handler</string>
+             </property>
+            </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="handlerControlsLayout">
+          <item>
+            <widget class="QPushButton" name="removeHandlerButton">
+             <property name="text">
+              <string>Remove Selected Handler</string>
+             </property>
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+            </widget>
+          </item>
+          <item>
+            <widget class="QPushButton" name="refreshHandlersButton">
+             <property name="text">
+              <string>Refresh Handler Status</string>
+             </property>
+            </widget>
+          </item>
+          <item>
+            <spacer name="handlerSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </spacer>
+          </item>
+         </layout>
+        </item>
+      </layout>
+     </widget>
+    </item>
+   <item>
+    <spacer name="bottomSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

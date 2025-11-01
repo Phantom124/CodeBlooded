@@ -10,6 +10,11 @@ Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup) {
     receiptID = "RCPT-" + std::to_string(++counter);
 }
 
+Order::~Order() {
+    delete priceStrategy;
+    priceStrategy = nullptr;
+}
+
 OrderMemento* Order::createMemento(){
     return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
 }
@@ -58,7 +63,7 @@ void Order::printOrder()
 
 void Order::addToOrder(Plant *plant)
 {
-    plantGroup->addPlantComponent(plant);
+    plantGroup->add(plant);
 }
 
 void Order::setPriceStrategy(PriceStrategies *priceStrategy)
