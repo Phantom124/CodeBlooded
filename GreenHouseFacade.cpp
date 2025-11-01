@@ -135,10 +135,10 @@ void GreenHouseFacade::processCommandQueue()
         return;
     }
 
+    markHandlersBusyForCommands(queued);
+
     QueueIterator iterator = staffSystem->createIterator();
     iterator.emptyQueue(handlerChain);
-
-    markHandlersBusyForCommands(queued);
 
     staffSystem->timeElapsed();
 }
