@@ -10,15 +10,14 @@ DeadHandler::~DeadHandler(){
 }
 
 void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
-    cout << "DeadHandler: Received command to handle." << std::endl;
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr");
     } else if (staffSys == nullptr){
         throw std::invalid_argument("StaffSystem is a nullptr");
     }
 
-    if (isAvailable == true && command->getType() == DEAD){//First: Are you available //Second: Is this a dead command
-        cout << "DeadHandler: Handling dead plant command..." << std::endl;
+    if (isAvailable == true && command->getType() == DEAD){//First: Are you 1available //Second: Is this a dead command
+        // cout << "DeadHandler: Handling dead plant command..." << std::endl;
         isAvailable = false;
         //Remove the dead plant from the queue
         DeadCommand* deadCmd = dynamic_cast<DeadCommand*>(command);

@@ -47,13 +47,15 @@ void systemTesting() {
 
     cout << "[setup] Creating StaffSystem..." << endl;
     StaffSystem* staffSystem = new StaffSystem();
-    StaffHandler* gardener1 = new WaterHandler();
-    StaffHandler* gardener2 = new FertilizerHandler();
-    StaffHandler* gardener3 = new DeadHandler();
-    staffSystem->addHandler(gardener1);
-    staffSystem->addHandler(gardener2);
-    staffSystem->addHandler(gardener3);
-
+    for (int i = 0; i < 3; i++) {
+        StaffHandler* gardener1 = new WaterHandler();
+        StaffHandler* gardener2 = new FertilizerHandler();
+        StaffHandler* gardener3 = new DeadHandler();
+        staffSystem->addHandler(gardener1);
+        staffSystem->addHandler(gardener2);
+        staffSystem->addHandler(gardener3);
+    }
+    
     cout << "[setup] Creating Plant monitors..." << endl;
     WaterMonitor* waterMonitor = new WaterMonitor();
     waterMonitor->setStaffSystem(staffSystem);
@@ -98,7 +100,8 @@ void systemTesting() {
     cout << "Advance one hour? (1 = yes, 0 = no): ";
     if (!(cin >> choice)) choice = 0;
     int hour = 0;
-    while(choice == 1 && plants.size() > 0){
+    int i = 10000;
+    while(i > 0 && plants.size() > 0){
         hour++;
         cout << "\n--- Hour " << hour << " ---" << endl;
         // header
@@ -113,7 +116,8 @@ void systemTesting() {
         }
 
         cout << "\nAdvance another hour? (1 = yes, 0 = no): ";
-        if (!(cin >> choice)) break;
+        // if (!(cin >> choice)) break;
+        i--;
     }
     
     delete insertQ;
