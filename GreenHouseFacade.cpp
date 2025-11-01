@@ -4,6 +4,9 @@
 
 #include <algorithm>
 #include <cctype>
+#include <iostream>
+
+using namespace std;
 
 namespace
 {

@@ -4,7 +4,9 @@
 #include <stdexcept>
 #include <iostream>
 
-DeadHandler::DeadHandler(){}
+DeadHandler::DeadHandler(){
+    cout << "Creating Dead Handler" << endl;
+}
 
 DeadHandler::~DeadHandler(){
 }
@@ -23,7 +25,8 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
         DeadCommand* deadCmd = dynamic_cast<DeadCommand*>(command);
         Plant* plant = deadCmd->getPlant();
         string id = std::to_string(plant->getPlantId());
-        createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
+        QueryProduct* qp = createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
+        
         // TODO: Figure out how the DeleteQuery works
         delete command;
     } else {
