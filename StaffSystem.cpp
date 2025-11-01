@@ -8,6 +8,20 @@ StaffSystem::StaffSystem(){
     staffHandler = nullptr;
 }
 
+StaffSystem::~StaffSystem(){
+    if (!staffHandler)
+        return;
+
+    while (staffHandler) {
+        StaffHandler* temp = staffHandler;
+        staffHandler = staffHandler->getSuccessor();
+        delete temp;
+    }
+
+    QueueIterator it = createIterator();
+    it.deleteQueue();
+}
+
 // void StaffSystem::setHandler(StaffHandler *staff){
 //     if (this->staffHandler != nullptr){
 //         delete this->staffHandler;
@@ -21,6 +35,8 @@ void StaffSystem::timeElapsed(){
         this->staffHandler->resetAvailable();
     }
 
+    QueueIterator it = createIterator();
+    it.emptyQueue(this->staffHandler);
     
 }
 
@@ -29,6 +45,13 @@ void StaffSystem::addHandler(StaffHandler *staff)
     if (staff == nullptr){
         throw std::invalid_argument("Cannot add staff handler is a nullptr.");
     }
+    cout << "Adding StaffHandler to StaffSystem..." << std::endl;
+    if (this->staffHandler == nullptr){
+        cout << "This is the first staff handler being added." << std::endl;
+        this->staffHandler = staff;
+        return;
+    }
+    cout << "Setting new staff handler as successor to existing handler." << std::endl;
     staff->setSuccessor(this->staffHandler);
     this->staffHandler = staff;
 
@@ -48,9 +71,9 @@ void StaffSystem::attemptCommand(Command *cmd){
 
     PlantCommand* pc = dynamic_cast<PlantCommand*>(cmd);
     if(pc){
-        std::cout << "DEBUG: StaffSystem received command for plant @" << static_cast<void*>(pc->getPlant()) << std::endl;
+        // std::cout << "DEBUG: StaffSystem received command for plant @" << static_cast<void*>(pc->getPlant()) << std::endl;
     } else {
-        std::cout << "DEBUG: StaffSystem received non-Plant command @" << cmd << std::endl;
+        // std::cout << "DEBUG: StaffSystem received non-Plant command @" << cmd << std::endl;
     }
 
     if (!staffHandler){//No staff handler, attempt to put in queue
@@ -60,6 +83,5 @@ void StaffSystem::attemptCommand(Command *cmd){
         it.enqueue(cmd);
         return;
     }
-
     this->staffHandler->handleRequest(cmd, this);
 }

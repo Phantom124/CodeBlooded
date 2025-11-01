@@ -4,6 +4,9 @@ Command::Command(const cmdType type): type(type), marked(false){
 
 }
 
+Command::~Command(){
+}
+
 Command::~Command() = default;
 
 cmdType Command::getType(){

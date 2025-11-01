@@ -7,6 +7,7 @@
 StaffHandler::StaffHandler(){
     successor = nullptr;
     queryBuilder = nullptr;
+    isAvailable = true;
 }
 
 StaffHandler::~StaffHandler() = default;
@@ -19,11 +20,10 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
     }
     
     if (successor == nullptr){
-        std::cout<<"No successor found, enqueuing command directly."<<std::endl;
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
-        successor->handleRequest(command, staffSys);            
+        successor->handleRequest(command, staffSys);
     }
 }
 
@@ -34,6 +34,10 @@ void StaffHandler::setSuccessor(StaffHandler *successor){
         // delete this->successor;
         this->successor = successor;
     }
+}
+
+StaffHandler *StaffHandler::getSuccessor(){
+    return successor;
 }
 
 QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState){
@@ -85,4 +89,4 @@ void StaffHandler::setQueryBuilder(QueryBuilder *qb){
 
     // delete queryBuilder;
     // queryBuilder = qb;
-}
+}   

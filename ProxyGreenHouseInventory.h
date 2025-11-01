@@ -26,6 +26,7 @@ class ProxyGreenHouseInventory : public GreenHouseInventory {
         void showAllPlants();
         void addPlant(Plant* plant);
         void removePlant(std::string parameters);
+        std::vector<Plant*> getPlants();
 
     std::vector<Plant*> getPlants() override;
 

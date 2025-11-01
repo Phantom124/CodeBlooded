@@ -10,7 +10,12 @@ RealGreenHouseInventory::RealGreenHouseInventory(){
     // this->plant.push_back(Plant("3", "Rose", "Adult"));
 }
 
-RealGreenHouseInventory::~RealGreenHouseInventory() = default;
+RealGreenHouseInventory::~RealGreenHouseInventory(){
+    for (Plant *plant : this->plants) {
+        delete plant;
+    }
+    this->plants.clear();
+}
 
 void RealGreenHouseInventory::showPlant(std::string parameters)
 {

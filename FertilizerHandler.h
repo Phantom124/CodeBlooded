@@ -7,6 +7,7 @@
 class FertilizerHandler : public StaffHandler {
 	public:
 		FertilizerHandler();
+		virtual ~FertilizerHandler();
 		void handleRequest(Command* command, StaffSystem* staffSys);
 };
 

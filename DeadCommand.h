@@ -13,6 +13,7 @@ protected:
 
 public:
 	DeadCommand(Plant* plant);
+	virtual ~DeadCommand();
 	virtual void execute();
 	Plant* getPlant();  	
 };
