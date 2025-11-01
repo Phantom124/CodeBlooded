@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -std=c++11 -g -O0
 TARGET = plant_sim
 
 # Source files
-SOURCES = Builder_Proxy.cpp \
+SOURCES = main.cpp \
           Plant.cpp \
           Cactus.cpp \
           Rose.cpp \
@@ -29,6 +29,8 @@ SOURCES = Builder_Proxy.cpp \
           PlantCommand.cpp \
           DeadCommand.cpp \
           WaterCommand.cpp \
+          Receipt.cpp \
+          Order.cpp \
           FertilizerCommand.cpp \
           PlantGroup.cpp \
           StaffSystem.cpp \
@@ -45,16 +47,9 @@ SOURCES = Builder_Proxy.cpp \
           Ribbon.cpp \
           RedPot.cpp \
           Scent.cpp \
-          QueryBuilder.cpp\
-          QueryProduct.cpp\
-          ProxyGreenHouseInventory.cpp\
-          RealGreenHouseInventory.cpp \
-          GreenHouseInventory.cpp\
-          SelectQueryBuilder.cpp\
-          InsertQueryBuilder.cpp\
-          DeleteQueryBuilder.cpp\
-          Customer.cpp\
-
+          NormalPrice.cpp \
+          DiscountPrice.cpp \
+          
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -74,6 +69,9 @@ $(TARGET): $(OBJECTS)
 run: $(TARGET)
 	./$(TARGET)
 
+valgrind: $(TARGET)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
+
 # Memory leak check (macOS)
 checkleaks: $(TARGET)
 	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
@@ -83,4 +81,4 @@ clean:
 	rm -f $(OBJECTS) $(TARGET)
 
 # Phony targets (not actual files)
-.PHONY: all run clean checkleaks
+.PHONY: all run valgrind clean checkleaks

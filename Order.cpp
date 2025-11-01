@@ -1,39 +1,56 @@
 #include "Order.h"
-#include "OrderMemento.h"
 #include "Receipt.h"
 #include "DiscountPrice.h"
 #include "NormalPrice.h"
 #include <iostream>
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup) {
+Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
+{
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
 }
 
-OrderMemento* Order::createMemento(){
-    return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
+Order::~Order()
+{
+    if (priceStrategy)
+    {
+        delete priceStrategy;
+        priceStrategy = nullptr;
+    }
 }
 
-Receipt* Order::generateReceipt(){
+// OrderMemento *Order::createMemento()
+// {
+//     return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
+// }
+
+Receipt *Order::generateReceipt()
+{
     return new Receipt(receiptID, this->getPrice(), this->generateInfo());
 }
 
-std::string Order::getReceiptID() const{
+std::string Order::getReceiptID() const
+{
     return receiptID;
 }
 
-std::string Order::generateInfo(){
+std::string Order::generateInfo()
+{
     std::string info = "";
 
-    if (!plantGroup) return info;
+    if (!plantGroup)
+        return info;
 
-    for (size_t i = 0; i < plantGroup->getPlantComponents().size(); ++i) {
+    for (size_t i = 0; i < plantGroup->getPlantComponents().size(); ++i)
+    {
         auto p = plantGroup->getPlantComponents()[i];
-        if (!p) continue;
+        if (!p)
+            continue;
         info += p->getName();
         info += " : R";
         info += std::to_string(p->getPrice());
-        if (i + 1 < plantGroup->getPlantComponents().size()) info += "\n";
+        if (i + 1 < plantGroup->getPlantComponents().size())
+            info += "\n";
     }
     return info;
 }
@@ -58,7 +75,7 @@ void Order::printOrder()
 
 void Order::addToOrder(Plant *plant)
 {
-    plantGroup->addPlantComponent(plant);
+    plantGroup->add(plant);
 }
 
 void Order::setPriceStrategy(PriceStrategies *priceStrategy)

@@ -13,21 +13,22 @@ class QueryBuilder;
 class QueryProduct;
 class StaffSystem;
 
-class StaffHandler {//WHY IS THIS NOT ABSTRACT???
-	protected:
-		StaffHandler* successor;
-		QueryBuilder* queryBuilder;
-		bool isAvailable;
-	public:
-		StaffHandler();
-		virtual void handleRequest(Command* command, StaffSystem* staffSys);
-		void setSuccessor(StaffHandler* successor);
-		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
-		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
-		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
-		void resetAvailable();
-		void setQueryBuilder(QueryBuilder* qb);
+class StaffHandler
+{ // WHY IS THIS NOT ABSTRACT???
+protected:
+	StaffHandler *successor;
+	QueryBuilder *queryBuilder;
+	bool isAvailable;
+
+public:
+	StaffHandler();
+	virtual void handleRequest(Command *command, StaffSystem *staffSys);
+	void setSuccessor(StaffHandler *successor);
+	// QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
+	// QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
+	// QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
+	void resetAvailable();
+	void setQueryBuilder(QueryBuilder *qb);
 };
 
 #endif
-
