@@ -2,6 +2,7 @@
 #include "DeadCommand.h" 
 
 #include <stdexcept>
+#include <iostream>
 
 DeadHandler::DeadHandler(){}
 
@@ -9,6 +10,7 @@ DeadHandler::~DeadHandler(){
 }
 
 void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    cout << "DeadHandler: Received command to handle." << std::endl;
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr");
     } else if (staffSys == nullptr){
@@ -16,6 +18,7 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
     }
 
     if (isAvailable == true && command->getType() == DEAD){//First: Are you available //Second: Is this a dead command
+        cout << "DeadHandler: Handling dead plant command..." << std::endl;
         isAvailable = false;
         //Remove the dead plant from the queue
         DeadCommand* deadCmd = dynamic_cast<DeadCommand*>(command);
@@ -23,7 +26,7 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
         string id = std::to_string(plant->getPlantId());
         createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
         // TODO: Figure out how the DeleteQuery works
-
+        delete command;
     } else {
         StaffHandler::handleRequest(command, staffSys);
     }

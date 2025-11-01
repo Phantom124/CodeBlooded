@@ -9,6 +9,7 @@ protected:
 
 public:
     PlantCommand(cmdType type, Plant* plant);
+    virtual ~PlantCommand();
     virtual void execute() = 0;
 	Plant* getPlant();
 

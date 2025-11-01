@@ -14,6 +14,9 @@ GetPlantCommand::GetPlantCommand(Plant *plant, Customer *customer)
     }
 }
 
+GetPlantCommand::~GetPlantCommand(){
+}
+
 void GetPlantCommand::execute()
 {
     if (!plant){

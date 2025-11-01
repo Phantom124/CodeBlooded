@@ -7,13 +7,13 @@
 StaffHandler::StaffHandler(){
     successor = nullptr;
     queryBuilder = nullptr;
+    isAvailable = true;
 }
 
 // StaffHandler::~StaffHandler(){
 // }
 
 void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
-    cout << "StaffHandler handling request..." << std::endl;
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
@@ -21,12 +21,10 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
     }
     
     if (successor == nullptr){
-        std::cout<<"No successor found, enqueuing command directly."<<std::endl;
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
-        cout << "Sending to next handler" << std::endl;
-        successor->handleRequest(command, staffSys);            
+        successor->handleRequest(command, staffSys);
     }
 }
 
@@ -92,11 +90,4 @@ void StaffHandler::setQueryBuilder(QueryBuilder *qb){
 
     // delete queryBuilder;
     // queryBuilder = qb;
-}
-
-void StaffHandler::printHandlers(){
-    cout << "StaffHandler at " << this << std::endl;
-    if (successor != nullptr){
-        successor->printHandlers();
-    }
-}
+}   

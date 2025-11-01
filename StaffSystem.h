@@ -20,7 +20,6 @@ class StaffSystem {
 		void attemptCommand(Command* cmd);	
 		QueueIterator createIterator();
 		friend class QueueIterator;
-		void printStaffHandlers();
 };
 
 #endif

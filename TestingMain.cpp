@@ -47,6 +47,12 @@ void systemTesting() {
 
     cout << "[setup] Creating StaffSystem..." << endl;
     StaffSystem* staffSystem = new StaffSystem();
+    StaffHandler* gardener1 = new WaterHandler();
+    StaffHandler* gardener2 = new FertilizerHandler();
+    StaffHandler* gardener3 = new DeadHandler();
+    staffSystem->addHandler(gardener1);
+    staffSystem->addHandler(gardener2);
+    staffSystem->addHandler(gardener3);
 
     cout << "[setup] Creating Plant monitors..." << endl;
     WaterMonitor* waterMonitor = new WaterMonitor();
@@ -65,15 +71,6 @@ void systemTesting() {
     cout << "[setup] Creating InsertQueryBuilder..." << endl;
     InsertQueryBuilder* insertQ = new InsertQueryBuilder();
     cout << "[setup] Creating Staff Handlers and adding to StaffSystem..." << endl;
-    StaffSystem* ss = new StaffSystem();
-    StaffHandler* gardener1 = new WaterHandler();
-    StaffHandler* gardener2 = new FertilizerHandler();
-    StaffHandler* gardener3 = new DeadHandler();
-    ss->addHandler(gardener1);
-    ss->addHandler(gardener2);
-    ss->addHandler(gardener3);
-
-    ss->printStaffHandlers();
 
     cout << "[setup] Adding plants to inventory via Proxy..." << endl;
 
@@ -82,13 +79,11 @@ void systemTesting() {
     cout << setfill('-') << setw(66) << "" << setfill(' ') << endl;
 
     for (int i = 0; i < 3; i++) {
-        Plant* plant1 = plantFactories[i]->createPlant();
-        proxy->addPlant(plant1);
-            cout << left << setw(6) << plant1->getPlantId() << setw(16) << plant1->getName() << setw(18) << plant1->getMaturityStateName() << setw(8) << plant1->getWaterLevel() << setw(12) << plant1->getFertilizerLevel() << endl;
-
-        Plant* plant2 = plantFactories[i]->createPlant();
-        proxy->addPlant(plant2);
-            cout << left << setw(6) << plant2->getPlantId() << setw(16) << plant2->getName() << setw(18) << plant2->getMaturityStateName() << setw(8) << plant2->getWaterLevel() << setw(12) << plant2->getFertilizerLevel() << endl;
+        for (int j = 0; j < 9; j++) {
+            Plant* plant = plantFactories[i]->createPlant();
+            proxy->addPlant(plant);
+            cout << left << setw(6) << plant->getPlantId() << setw(16) << plant->getName() << setw(18) << plant->getMaturityStateName() << setw(8) << plant->getWaterLevel() << setw(12) << plant->getFertilizerLevel() << endl;
+        }
     }
 
     proxy->showAllPlants();
@@ -106,11 +101,11 @@ void systemTesting() {
     while(choice == 1 && plants.size() > 0){
         hour++;
         cout << "\n--- Hour " << hour << " ---" << endl;
-        ss->printStaffHandlers();
         // header
         cout << left << setw(6) << "ID" << setw(16) << "Type" << setw(18) << "Maturity" << setw(8) << "Water" << setw(12) << "Fertilizer" << setw(8) << "Health" << endl;
         cout << setfill('-') << setw(76) << "" << setfill(' ') << endl;
-
+        staffSystem->timeElapsed(); // Process queued commands first
+        
         for (Plant* plant : plants) {
             plant->hoursHasPassed();
             // print compact table row using available getters
@@ -121,7 +116,6 @@ void systemTesting() {
         if (!(cin >> choice)) break;
     }
     
-    delete ss;
     delete insertQ;
     for (int i = 0; i < 3; i++) {
         delete plantFactories[i];

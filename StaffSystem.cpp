@@ -17,6 +17,9 @@ StaffSystem::~StaffSystem(){
         staffHandler = staffHandler->getSuccessor();
         delete temp;
     }
+
+    QueueIterator it = createIterator();
+    it.deleteQueue();
 }
 
 // void StaffSystem::setHandler(StaffHandler *staff){
@@ -32,6 +35,8 @@ void StaffSystem::timeElapsed(){
         this->staffHandler->resetAvailable();
     }
 
+    QueueIterator it = createIterator();
+    it.emptyQueue(this->staffHandler);
     
 }
 
@@ -59,15 +64,6 @@ QueueIterator StaffSystem::createIterator(){
     return out;
 }
 
-void StaffSystem::printStaffHandlers(){
-    if (this->staffHandler == nullptr){
-        std::cout << "No staff handlers in the system." << std::endl;
-        return;
-    }
-    std::cout << "Printing Staff Handlers in the Staff System:" << std::endl;
-    this->staffHandler->printHandlers();
-}
-
 void StaffSystem::attemptCommand(Command *cmd){
     if (!cmd){
         throw std::invalid_argument("Command is a nullptr.");
@@ -75,17 +71,14 @@ void StaffSystem::attemptCommand(Command *cmd){
 
     PlantCommand* pc = dynamic_cast<PlantCommand*>(cmd);
     if(pc){
-        std::cout << "DEBUG: StaffSystem received command for plant @" << static_cast<void*>(pc->getPlant()) << std::endl;
+        // std::cout << "DEBUG: StaffSystem received command for plant @" << static_cast<void*>(pc->getPlant()) << std::endl;
     } else {
-        std::cout << "DEBUG: StaffSystem received non-Plant command @" << cmd << std::endl;
+        // std::cout << "DEBUG: StaffSystem received non-Plant command @" << cmd << std::endl;
     }
-
-    printStaffHandlers();
 
     if (!staffHandler){//No staff handler, attempt to put in queue
         // throw std::invalid_argument("staffHandler is nullptr.");
         //PUT COMMAND IN QUEUE DIRECTLY
-        cout << "No StaffHandler available, enqueuing command directly." << std::endl;
         QueueIterator it = this->createIterator();
         it.enqueue(cmd);
         return;

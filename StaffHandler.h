@@ -29,7 +29,6 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
 		void resetAvailable();
 		void setQueryBuilder(QueryBuilder* qb);
-		void printHandlers();
 };
 
 #endif
