@@ -9,7 +9,11 @@ StaffHandler::StaffHandler(){
     queryBuilder = nullptr;
 }
 
+// StaffHandler::~StaffHandler(){
+// }
+
 void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    cout << "StaffHandler handling request..." << std::endl;
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
@@ -21,6 +25,7 @@ void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
     } else {
+        cout << "Sending to next handler" << std::endl;
         successor->handleRequest(command, staffSys);            
     }
 }
@@ -32,6 +37,10 @@ void StaffHandler::setSuccessor(StaffHandler *successor){
         // delete this->successor;
         this->successor = successor;
     }
+}
+
+StaffHandler *StaffHandler::getSuccessor(){
+    return successor;
 }
 
 QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState){
@@ -83,4 +92,11 @@ void StaffHandler::setQueryBuilder(QueryBuilder *qb){
 
     // delete queryBuilder;
     // queryBuilder = qb;
+}
+
+void StaffHandler::printHandlers(){
+    cout << "StaffHandler at " << this << std::endl;
+    if (successor != nullptr){
+        successor->printHandlers();
+    }
 }

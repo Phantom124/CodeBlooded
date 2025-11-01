@@ -5,6 +5,9 @@
 
 DeadHandler::DeadHandler(){}
 
+DeadHandler::~DeadHandler(){
+}
+
 void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr");

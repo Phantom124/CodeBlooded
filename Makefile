@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -std=c++11 -g -O0
 TARGET = plant_sim
 
 # Source files
-SOURCES = Builder_Proxy.cpp \
+SOURCES = TestingMain.cpp \
           Plant.cpp \
           Cactus.cpp \
           Rose.cpp \
@@ -77,6 +77,10 @@ run: $(TARGET)
 # Memory leak check (macOS)
 checkleaks: $(TARGET)
 	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
+
+#valgrind
+valgrind: $(TARGET)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
 
 # Clean up build artifacts
 clean:

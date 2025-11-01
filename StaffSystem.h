@@ -13,12 +13,14 @@ class StaffSystem {
 		StaffHandler* staffHandler;
 	public:
 		StaffSystem();
+		~StaffSystem();
 		// void setHandler(StaffHandler* staff);
 		void timeElapsed();
 		void addHandler(StaffHandler* staff);
-		void attemptCommand(Command* cmd);
+		void attemptCommand(Command* cmd);	
 		QueueIterator createIterator();
 		friend class QueueIterator;
+		void printStaffHandlers();
 };
 
 #endif

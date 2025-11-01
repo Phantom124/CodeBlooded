@@ -40,6 +40,8 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     this->fertilizerState = new FertilizedState();
     this->growthState = new SeedState();
 
+    this->decorator = nullptr;
+
     checkWaterLevel();
     checkFertilizerLevel();
 }
@@ -114,7 +116,6 @@ void Plant::checkWaterLevel()
             this->setWaterState(nextState);
             if (nextState->getStateName() == "NotHydrated")
             {
-
                 if (waterMonitor != nullptr)
                 {
                     waterMonitor->update(this); // NOTIFY Monitor

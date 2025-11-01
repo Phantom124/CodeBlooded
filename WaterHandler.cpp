@@ -1,10 +1,17 @@
 #include "WaterHandler.h"
 
 #include <stdexcept>
+#include <iostream>
+using namespace std;
 
 WaterHandler::WaterHandler() {}
 
+WaterHandler::~WaterHandler(){
+}
+
 void WaterHandler::handleRequest(Command* command, StaffSystem* staffSys){
+    cout << "WaterHandler handling request..." << std::endl;
+
     if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr.");
     } else if (staffSys == nullptr){
