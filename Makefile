@@ -48,8 +48,8 @@ SOURCES = main.cpp \
           RedPot.cpp \
           Scent.cpp \
           NormalPrice.cpp \
-          DiscountPrice.cpp \
-          
+          Save10Discount.cpp \
+          BulkDiscount.cpp \
 
 # Object files (replace .cpp with .o)
 OBJECTS = $(SOURCES:.cpp=.o)

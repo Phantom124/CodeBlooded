@@ -25,7 +25,7 @@ public:
     void printOrder();
     void addToOrder(Plant *plant);
     void setPriceStrategy(PriceStrategies *priceStrategy);
-    double applyPriceStrategy();
+    double applyPriceStrategy(std::string code);
     int quantity();
     // OrderMemento* createMemento();
     // Receipt *generateReceipt();

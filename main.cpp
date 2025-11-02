@@ -28,7 +28,8 @@
 #include "Order.h"
 #include "PriceStrategies.h"
 #include "NormalPrice.h"
-#include "DiscountPrice.h"
+#include "Save10Discount.h"
+#include "BulkDiscount.h"
 
 void CompAndDec()
 {
@@ -154,43 +155,12 @@ void CompAndDec()
 
     std::cout << "Order ID: " << order1->getReceiptID() << std::endl;
     order1->printOrder();
-    std::cout << "Total after pricing strategy applied. pricing: R" << order1->applyPriceStrategy() << std::endl;
+    std::cout << "Price before copoun attempt: R" << order1->getPrice() << std::endl;
+    std::string code;
+    std::cout << "Please enter your coupon code for discount: ";
+    std::cin >> code;
+    std::cout << "Price after copoun attempt: R" << order1->applyPriceStrategy(code) << std::endl;
     std::cout << std::endl;
-
-    // Test 11: Order with Discount Pricing Strategy (bulk order)
-    std::cout << "--- TEST 11: Bulk Order with price strateg ---" << std::endl;
-    PlantGroup *bulkOrder = new PlantGroup();
-
-    // Add multiple plants to trigger discount
-    for (int i = 0; i < 15; i++)
-    {
-        Plant *bulkPlant = rFact->createPlant();
-        bulkPlant->add(new RedPot());
-        bulkOrder->add(bulkPlant);
-    }
-
-    Order *order2 = new Order(bulkOrder);
-
-    std::cout << "Order ID: " << order2->getReceiptID() << std::endl;
-    order2->printOrder();
-    std::cout << "Total after pricing strategy applied: R" << order2->applyPriceStrategy() << std::endl;
-    std::cout << std::endl;
-
-    // Test 12: Switching strategies
-    std::cout << "--- TEST 12: ---" << std::endl;
-    PlantGroup *flexOrder = new PlantGroup();
-    Plant *rose4 = rFact->createPlant();
-    rose4->add(new Scent());
-    Plant *sunflower3 = sFact->createPlant();
-    sunflower3->add(new Ribbon());
-    flexOrder->add(rose4);
-    flexOrder->add(sunflower3);
-
-    Order *order3 = new Order(flexOrder);
-
-    std::cout << "Applying pricing strategy:" << std::endl;
-
-    std::cout << "Price: R" << order3->applyPriceStrategy() << std::endl;
 
     std::cout << "========================================" << std::endl;
     std::cout << "ALL TESTS COMPLETED" << std::endl;
@@ -200,8 +170,6 @@ void CompAndDec()
     delete mainGroup;
     delete fancyRose;
     delete order1;
-    delete order2;
-    delete order3;
     delete fertMon;
     delete watMon;
     delete deadMon;

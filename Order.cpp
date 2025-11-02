@@ -1,8 +1,10 @@
 #include "Order.h"
 #include "Receipt.h"
-#include "DiscountPrice.h"
 #include "NormalPrice.h"
+#include "BulkDiscount.h"
+#include "Save10Discount.h"
 #include <iostream>
+#include <map>
 
 Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
 {
@@ -95,18 +97,25 @@ void Order::setPriceStrategy(PriceStrategies *priceStrategy)
     this->priceStrategy = priceStrategy;
 }
 
-double Order::applyPriceStrategy()
+double Order::applyPriceStrategy(std::string code)
 {
     if (!priceStrategy)
     {
         return plantGroup->getPrice();
     }
 
-    if (quantity() >= 5)
+    if (code == "BULK")
     {
-        setPriceStrategy(new DiscountPrice());
+        setPriceStrategy(new BulkDiscount());
     }
-
+    else if (code == "SAVE10")
+    {
+        setPriceStrategy(new Save10Discount());
+    }
+    else
+    {
+        setPriceStrategy(new NormalPrice());
+    }
     return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
 }
 

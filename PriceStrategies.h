@@ -2,6 +2,7 @@
 #define PRICESTRATEGIES_H
 #include "PlantComponent.h"
 #include <vector>
+#include <iostream>
 class PriceStrategies
 {
 public:
