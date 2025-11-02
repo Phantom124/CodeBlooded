@@ -18,7 +18,7 @@ void WaterMonitor::update(Plant* plant){
         return; // No action needed
     }
     if(staffSystem != nullptr){//SEND TO STAFF SYSTEM IF EXISTS
-        std::cout<< "Water Monitor Recieved Update: Sending to Staff System.\n";
+        // std::cout<< "Water Monitor Recieved Update: Sending to Staff System.\n";
         WaterCommand* cmd = new WaterCommand(plant);
         // std::cout << "DEBUG: Created WaterCommand for plant @" << static_cast<void*>(cmd->getPlant()) << std::endl;
         staffSystem->attemptCommand(cmd);
