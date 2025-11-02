@@ -18,6 +18,7 @@ protected:
 
 public:
 	Command(const cmdType type);
+	virtual ~Command();
 	virtual void execute() = 0;
 	cmdType getType();
 	bool getMarked();

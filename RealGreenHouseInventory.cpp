@@ -11,6 +11,9 @@ RealGreenHouseInventory::RealGreenHouseInventory(){
 }
 
 RealGreenHouseInventory::~RealGreenHouseInventory(){
+    for (Plant *plant : this->plants) {
+        delete plant;
+    }
     this->plants.clear();
 }
 

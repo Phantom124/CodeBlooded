@@ -7,6 +7,7 @@
 class DeadHandler : public StaffHandler {
 	public:
 		DeadHandler();
+		virtual ~DeadHandler();
 		void handleRequest(Command* command, StaffSystem* staffSys);
 };
 

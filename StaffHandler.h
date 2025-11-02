@@ -20,8 +20,10 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		bool isAvailable;
 	public:
 		StaffHandler();
+		virtual ~StaffHandler() = default;
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 		void setSuccessor(StaffHandler* successor);
+		StaffHandler* getSuccessor();
 		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
 		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
 		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);

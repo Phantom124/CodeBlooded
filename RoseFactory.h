@@ -14,7 +14,7 @@ class RoseFactory : public PlantFactory {
 		// Plant* createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);
 
 	private:
-		PlantGrowthState* state;
+		// PlantGrowthState* state;
 		int waterLevel;
 		int fertilizerLevel;
 

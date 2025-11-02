@@ -13,6 +13,7 @@ protected:
 
 public:
 	WaterCommand(Plant* plant);
+	~WaterCommand();
 	virtual void execute();
 };
 
