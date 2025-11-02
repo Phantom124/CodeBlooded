@@ -1,13 +1,10 @@
 #include "RealGreenHouseInventory.h"
-#include <vector>
-#include "Rose.h"
-#include "Sunflower.h"
-// #include "Cactus.h"
+#include "Plant.h"
 
 RealGreenHouseInventory::RealGreenHouseInventory(){
-    // this->plants.push_back(new Rose());
-    // this->plants.push_back(new Sunflower());
-    // this->plant.push_back(Plant("3", "Rose", "Adult"));
+    this->plants.push_back(new Rose());
+    this->plants.push_back(new Sunflower());
+    this->plants.push_back(new Cactus());
 }
 
 RealGreenHouseInventory::~RealGreenHouseInventory(){
@@ -57,4 +54,16 @@ void RealGreenHouseInventory::removePlant(std::string parameters){
         }
     }
     std::cout << "NO MATCH FOR => DELETE FROM INVENTORY WHERE PlantID=" << parameters << ";" << std::endl;
+}
+
+void RealGreenHouseInventory::hourHasPassed(){
+    for (size_t i = 0; i < this->plants.size(); i++){
+        if (this->plants[i] != nullptr){
+            this->plants[i]->hoursHasPassed();
+        }
+    }
+}
+
+std::vector<Plant *> RealGreenHouseInventory::getAllPlants(){
+    return this->plants;
 }

@@ -1,6 +1,8 @@
 #include "QueryProduct.h"
 #include <sstream>
 #include <vector>
+#include <string>
+#include <iostream>
 
 QueryProduct::QueryProduct(ProxyGreenHouseInventory* inventory)
     :inventory(inventory){}
@@ -59,44 +61,64 @@ void QueryProduct::executeSelect(std::string query){
     }
 }
 
+void QueryProduct::executeInsert(std::string query){
 
-void QueryProduct::executeInsert(std::string query) {
-    size_t values = query.find("VALUES(");
-    if (values == std::string::npos) return;
-
-    values += 7;
-    size_t endOfInsert = query.find(")", values);
-    if (endOfInsert == std::string::npos) return;
-
-    std::string parameters = query.substr(values, endOfInsert - values);
-    std::stringstream ss(parameters);
-    std::string token;
-    std::vector<std::string> fields;
-
-    while (std::getline(ss, token, ',')) {
-        while (!token.empty() && token.front() == ' ')
-            token.erase(0, 1);
-        if (!token.empty() && token.front() == '\'')
-            token = token.substr(1, token.size() - 2);
-        fields.push_back(token);
+    size_t valuesPos = query.find("VALUES");
+    if (valuesPos == std::string::npos) {
+        // std::cout << "[ERROR] Invalid INSERT syntax.\n";
+        return;
     }
 
-    while (fields.size() < 3)
-        fields.push_back("");
 
-    // Assume: fields[0] = id, fields[1] = type, fields[2] = maturity
-    std::string type = fields[1];
+    size_t openParen = query.find('(', valuesPos);
+    size_t closeParen = query.find(')', openParen);
+    if (openParen == std::string::npos || closeParen == std::string::npos) {
+        // std::cout << "[ERROR] Missing parentheses in INSERT.\n";
+        return;
+    }
 
-    Plant* plant = nullptr;
-    if (type == "Rose")
-        plant = new Rose();
-    else if (type == "Cactus")
-        plant = new Cactus();
-    else if (type == "Sunflower")
-        plant = new Sunflower();
+    std::string inside = query.substr(openParen + 1, closeParen - openParen - 1);
 
-    if (plant && inventory)
-        inventory->addPlant(plant);
+    std::stringstream ss(inside);
+    std::string token;
+    std::string values[3];
+    int i = 0;
+
+    while (std::getline(ss, token, ',') && i < 3) {
+        while (!token.empty() && (token.front() == ' ' || token.front() == '\'')) token.erase(0, 1);
+        while (!token.empty() && (token.back() == ' ' || token.back() == '\'')) token.pop_back();
+        values[i++] = token;
+    }
+
+    if (i < 3) {
+        // std::cout << "[ERROR] Missing values for INSERT.\n";
+        return;
+    }
+
+    
+    Plant* newPlant = nullptr;
+
+    if (values[1] == "Rose"){
+        newPlant = new Rose();
+    }
+    else if (values[1] == "Sunflower"){
+        newPlant = new Sunflower();
+    }
+    else if (values[1] == "Cactus"){
+        newPlant = new Cactus();
+    }
+    else{
+        std::cout << "Unknown Plant Type: " << values[1] << std::endl;
+        return;
+    }
+
+    if (this->inventory && newPlant){
+        this->inventory->addPlant(newPlant);
+    }
+    else{
+        std::cout << "Inventory Unavailable or Invalid Plant.\n";
+        delete newPlant;
+    }
 }
 
 

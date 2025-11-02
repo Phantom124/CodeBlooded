@@ -29,6 +29,8 @@ class ProxyGreenHouseInventory : public GreenHouseInventory {
         std::vector<Plant*> getPlants();
 
         void handleControlRights(void* user, QueryProduct query);
+
+        void hourHasPassed();
     
     private:
         RealGreenHouseInventory* realInventory;

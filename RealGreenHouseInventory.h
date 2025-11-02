@@ -20,6 +20,9 @@ class RealGreenHouseInventory : public GreenHouseInventory{
         void removePlant(std::string parameters);
         // void handleControlRights(void* user, QueryProduct query);
 
+        void hourHasPassed();
+        std::vector<Plant*> getAllPlants();
+
 
     private:
         // std::vector<Plant*> plant;

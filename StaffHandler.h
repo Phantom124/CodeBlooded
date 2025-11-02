@@ -12,6 +12,7 @@ using namespace std;
 class QueryBuilder;
 class QueryProduct;
 class StaffSystem;
+class Plant;
 
 class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 	protected:
@@ -25,8 +26,14 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		void setSuccessor(StaffHandler* successor);
 		StaffHandler* getSuccessor();
 		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
+		QueryProduct* createSelectQuery(Plant* selectPlant);
+
 		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
+		QueryProduct* createInsertQuery(Plant* insertPlant);
+
 		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
+		QueryProduct* createDeleteQuery(Plant* deletePlant);
+
 		void resetAvailable();
 		void setQueryBuilder(QueryBuilder* qb);
 };
