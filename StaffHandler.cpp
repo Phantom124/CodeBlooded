@@ -12,8 +12,7 @@ StaffHandler::StaffHandler()
     isAvailable = true;
 }
 
-// StaffHandler::~StaffHandler(){
-// }
+StaffHandler::~StaffHandler() = default;
 
 void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){

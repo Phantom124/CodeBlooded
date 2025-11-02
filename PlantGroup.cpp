@@ -63,7 +63,6 @@ void PlantGroup::removePlantComponent(PlantComponent *plantComponent)
     {
         if ((*it) == plantComponent)
         {
-            delete *it;
             this->plants.erase(it);
             break;
         }

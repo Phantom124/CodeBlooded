@@ -11,7 +11,7 @@ void SalesHandler::handleRequest(Command *cmd, StaffSystem* staffSys){
     }
 
     if (cmd->getType() == GET_PLANT){
-        isBusy = false;
+        isAvailable = false;
         cmd->execute();
         //TODO: check whether there was anything else?
     } else {

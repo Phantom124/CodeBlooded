@@ -1,8 +1,11 @@
 #include "FertilizerHandler.h"
 
 #include <stdexcept>
+#include <iostream>
 
-FertilizerHandler::FertilizerHandler() {}
+FertilizerHandler::FertilizerHandler() {
+    cout << "Creating Fertilizer Handler" << endl;
+}
 
 FertilizerHandler::~FertilizerHandler(){
 }

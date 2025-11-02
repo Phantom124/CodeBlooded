@@ -4,7 +4,9 @@
 #include <iostream>
 using namespace std;
 
-WaterHandler::WaterHandler() {}
+WaterHandler::WaterHandler() {
+    cout << "Creating Water Handler" << endl;
+}
 
 WaterHandler::~WaterHandler(){
 }

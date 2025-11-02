@@ -12,11 +12,12 @@ StaffSystem::~StaffSystem(){
     if (!staffHandler)
         return;
 
-    while (staffHandler) {
-        StaffHandler* temp = staffHandler;
-        staffHandler = staffHandler->getSuccessor();
-        delete temp;
-    }
+    // while (staffHandler) {
+    //     StaffHandler* temp = staffHandler;
+    //     staffHandler = staffHandler->getSuccessor();
+    //     delete temp;
+    // }
+    staffHandler = nullptr;
 
     QueueIterator it = createIterator();
     it.deleteQueue();

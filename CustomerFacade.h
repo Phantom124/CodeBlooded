@@ -1,37 +1,100 @@
 #ifndef CUSTOMERFACADE_H
 #define CUSTOMERFACADE_H
 
-#include "RealGreenHouseInventory.h"
+#include "ProxyGreenHouseInventory.h"
 #include "Caretaker.h"
-#include "StaffHandler.h"
 #include "Order.h"
 #include "Customer.h"
 #include "PlantComponent.h"
+#include "PlantDecorator.h"
 #include "Receipt.h"
+#include "Plant.h"
+#include "PlantGroup.h"
+#include "NormalPrice.h"
+#include "DiscountPrice.h"
+#include "PriceStrategies.h"
 #include <string>
+#include <vector>
+#include <unordered_set>
 
 class CustomerFacade {
     private:
-        RealGreenHouseInventory* inventory;
+        ProxyGreenHouseInventory* inventory;
         Caretaker* caretaker;
-        StaffHandler* staff;
-        Order* order;
+        Order* currentOrder;
+        PlantGroup* currentPlantGroup;
         Customer* customer;
-        
+        bool discountApplied;
+        std::string discountCode;
+
     public:
-        CustomerFacade();
+        enum class DecorationType {
+            RedPot,
+            Ribbon,
+            Scent,
+            GiftWrap
+        };
+
+        struct CartEntry {
+            Plant* plant;
+            std::vector<DecorationType> decorations;
+        };
+
+        CustomerFacade(ProxyGreenHouseInventory* sharedInventory, Caretaker* sharedCaretaker);
         ~CustomerFacade();
-        Order* createOrder();
-        void addPlantToOrder(std::string plantType);
-        PlantComponent* addDecoration(Plant* plant, std::string decorationType);
+        
+        // Order management
+        void createNewOrder();
+        void addPlantToOrder(Plant* plant, const std::vector<DecorationType>& decorations = {});
+        void removeFromOrder(PlantComponent* component);
+        void clearOrder();
+        double getOrderTotal();
+        double getSubtotal() const;
+        std::vector<PlantComponent*> getOrderItems();
+        int getOrderItemCount();
+        std::vector<CartEntry> getCartEntries() const;
+        double getEntryTotal(const CartEntry& entry) const;
+        double getEntryDecorationsTotal(const CartEntry& entry) const;
+        
+        // Decoration management
+        PlantComponent* applyRedPot(PlantComponent* component);
+        PlantComponent* applyRibbon(PlantComponent* component);
+        PlantComponent* applyScent(PlantComponent* component);
+        PlantComponent* applyGiftWrap(PlantComponent* component);
+        static std::string decorationName(DecorationType type);
+        static double decorationPrice(DecorationType type);
+        
+        // Discount management
+        void applyDiscount(bool apply, const std::string& code = "");
+        bool isDiscountApplied() const;
+        bool hasManualDiscount() const;
+        bool hasAutomaticDiscount() const;
+        double getDiscountRate() const;
+        std::string getDiscountCode() const;
+        
+        // Checkout
         Receipt* checkout();
-        void cancelOrder();
-        void returnOrder(Receipt* receipt);
-        void viewPlants();
-        void sendCustomerRequest(std::string request);
+        
+        // Returns
+        OrderMemento* searchOrder(const std::string& receiptID);
+        void returnOrder(const std::string& receiptID);
+        
+        // Inventory browsing
+        std::vector<Plant*> browsePlants();
+        std::vector<Plant*> searchPlants(const std::string& type, const std::string& maturity);
+        
+        // Customer management
         void setCustomer(Customer* customer);
         Customer* getCustomer() const;
-        void removeCustomer();
+
+    private:
+        // GUI helpers
+        std::vector<CartEntry> cartEntries;
+        std::unordered_set<int> reservedPlantIds;
+        std::vector<Plant*> purchasedPlants;
+
+        double calculateEntryDecorationsTotal(const CartEntry& entry) const;
+        std::vector<Plant*> filterVisiblePlants(const std::vector<Plant*>& plants) const;
 };
 
 #endif

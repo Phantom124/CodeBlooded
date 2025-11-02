@@ -1,3 +1,5 @@
+#ifndef PLANTCOMMAND_H
+#define PLANTCOMMAND_H
 #include "Command.h"
 #include <stdexcept>
 #include "Plant.h"
@@ -17,3 +19,5 @@ public:
     PlantCommand(const PlantCommand&) = delete;
     PlantCommand& operator=(const PlantCommand&) = delete;
 };
+
+#endif // PLANTCOMMAND_H

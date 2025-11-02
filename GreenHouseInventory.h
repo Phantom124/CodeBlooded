@@ -13,10 +13,10 @@ class GreenHouseInventory {
     public:
         virtual ~GreenHouseInventory();
 
-        // keep signature matching your implementation
         virtual void addPlant(Plant* plant) = 0;
         virtual void checkStockLevel();
         virtual std::vector<Plant*> getPlants();
+        virtual void removePlant(std::string parameters) = 0;
         
         // declare restorePlants so Caretaker can call it
         virtual void restorePlants(const std::vector<PlantComponent*>& plants);

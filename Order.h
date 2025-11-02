@@ -10,12 +10,11 @@
 
 class OrderMemento; // forward declaration
 
-class Order
-{
-private:
-    PlantGroup *plantGroup;
-    PriceStrategies *priceStrategy;
-    std::string receiptID;
+class Order {
+    private:
+        PlantGroup* plantGroup;
+        PriceStrategies* priceStrategy = nullptr;
+        std::string receiptID;
 
 public:
     Order(PlantGroup *plantGroup);

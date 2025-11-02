@@ -1,183 +1,85 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <sstream>
+#include <QApplication>
+#include <QFile>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QFontDatabase>
+#include "Common/LoginDialog.h"
+#include "ProxyGreenHouseInventory.h"
+#include "RealGreenHouseInventory.h"
+#include "Caretaker.h"
+#include "StaffSystem.h"
+#include "CustomerFacade.h"
+#include "GreenHouseFacade.h"
 
-#include "PlantComponent.h"
-#include "PlantGroup.h"
-#include "PlantDecorator.h"
+// Global shared instances - accessible across all windows
+ProxyGreenHouseInventory* g_sharedInventory = nullptr;
+Caretaker* g_sharedCaretaker = nullptr;
+StaffSystem* g_sharedStaffSystem = nullptr;
+CustomerFacade* g_customerFacade = nullptr;
+GreenHouseFacade* g_greenHouseFacade = nullptr;
 
-#include "Plant.h"
-#include "RedPot.h"
-#include "Ribbon.h"
-#include "Scent.h"
-
-#include "Sunflower.h"
-#include "Rose.h"
-#include "Cactus.h"
-
-#include "PlantMonitor.h"
-#include "WaterMonitor.h"
-#include "FertilizerMonitor.h"
-
-#include "RoseFactory.h"
-#include "SunflowerFactory.h"
-#include "CactusFactory.h"
-#include "DeadMonitor.h"
-
-#include "Order.h"
-#include "PriceStrategies.h"
-#include "NormalPrice.h"
-#include "Save10Discount.h"
-#include "BulkDiscount.h"
-
-void CompAndDec()
+int main(int argc, char *argv[])
 {
-    std::cout << "========================================" << std::endl;
-    std::cout << "TESTING COMPOSITE AND DECORATOR PATTERNS" << std::endl;
-    std::cout << "========================================" << std::endl
-              << std::endl;
+    QApplication app(argc, argv);
+    app.setQuitOnLastWindowClosed(false);
 
-    PlantGroup *pg = new PlantGroup();
+    // Load custom font
+    int fontId = QFontDatabase::addApplicationFont(":/fonts/resources/font/PressStart2P.ttf");
+    if (fontId != -1)
+    {
+        QStringList fontFamilies = QFontDatabase::applicationFontFamilies(fontId);
+        if (!fontFamilies.isEmpty())
+        {
+            app.setFont(QFont(fontFamilies.at(0), 10));
+        }
+    }
+    else
+    {
+        QMessageBox::warning(nullptr, "Font Error", 
+            "Could not load Press Start 2P font. Application will use default font.");
+    }
 
-    FertilizerMonitor *fertMon = new FertilizerMonitor();
-    WaterMonitor *watMon = new WaterMonitor();
-    DeadMonitor *deadMon = new DeadMonitor();
+    // Initialize shared backend systems
+    g_sharedInventory = new ProxyGreenHouseInventory();
+    g_sharedCaretaker = new Caretaker();
+    g_sharedStaffSystem = new StaffSystem();
+    
+    // Initialize facades with shared instances
+    g_customerFacade = new CustomerFacade(g_sharedInventory, g_sharedCaretaker);
+    g_greenHouseFacade = new GreenHouseFacade(g_sharedInventory, g_sharedStaffSystem);
 
-    RoseFactory *rFact = new RoseFactory(watMon, fertMon, deadMon);
-    SunflowerFactory *sFact = new SunflowerFactory(watMon, fertMon, deadMon);
-    CactusFactory *cFact = new CactusFactory(watMon, fertMon, deadMon);
+    QFile styleFile(":/styles/styles.qss"); // Load stylesheet
+    if (styleFile.open(QFile::ReadOnly | QFile::Text))
+    {
+        QTextStream stream(&styleFile);
+        QString styleSheet = stream.readAll();
+        app.setStyleSheet(styleSheet);
+        styleFile.close();
+    }
+    else
+    {
+        QMessageBox::warning(nullptr, "Style Error", 
+            "Could not load stylesheet. Application will use default styling.");
+    }
 
-    // Test 1: Base Rose plant
-    std::cout << "--- TEST 1: Base Rose Plant ---" << std::endl;
-    Plant *myPlant = rFact->createPlant();
-    myPlant->printPlant();
-    std::cout << "Base price: R" << myPlant->getPrice() << std::endl;
-    std::cout << std::endl;
+    // Show login dialog
+    LoginDialog loginDialog;
+    QObject::connect(&loginDialog, &QDialog::rejected, &app, &QApplication::quit);
+    loginDialog.show();
+    
+    int result = app.exec();
 
-    // Test 2: Add Ribbon decorator
-    std::cout << "--- TEST 2: Rose + Ribbon ---" << std::endl;
-    myPlant->add(new Ribbon());
-    myPlant->printPlant();
-    std::cout << "Price after ribbon: R" << myPlant->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 3: Add RedPot decorator
-    std::cout << "--- TEST 3: Rose + Ribbon + RedPot ---" << std::endl;
-    myPlant->add(new RedPot());
-    myPlant->printPlant();
-    std::cout << "Price after red pot: R" << myPlant->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 4: Add Scent decorator
-    std::cout << "--- TEST 4: Rose + Ribbon + RedPot + Scent ---" << std::endl;
-    myPlant->add(new Scent());
-    myPlant->printPlant();
-    std::cout << "Final price: R" << myPlant->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 5: Create Sunflower with decorations
-    std::cout << "--- TEST 5: Sunflower with Multiple Decorations ---" << std::endl;
-    Plant *sunflower = sFact->createPlant();
-    sunflower->printPlant();
-    std::cout << "Base sunflower price: R" << sunflower->getPrice() << std::endl;
-
-    sunflower->add(new RedPot());
-    sunflower->add(new Scent());
-    sunflower->printPlant();
-    std::cout << "Decorated sunflower price: R" << sunflower->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 6: Create Cactus with decorations
-    std::cout << "--- TEST 6: Cactus with Decorations ---" << std::endl;
-    Plant *cactus = cFact->createPlant();
-    cactus->add(new Ribbon());
-    cactus->add(new RedPot());
-    cactus->printPlant();
-    std::cout << "Decorated cactus price: R" << cactus->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 7: Composite - Group of plants
-    std::cout << "--- TEST 7: Plant Group (Composite) ---" << std::endl;
-    pg->add(myPlant);
-    pg->add(sunflower);
-    pg->add(cactus);
-    std::cout << "Complete order contents:" << std::endl;
-    std::cout << "Total group price: R" << pg->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 8: Nested groups
-    std::cout << "--- TEST 8: Nested Plant Groups ---" << std::endl;
-    PlantGroup *subGroup = new PlantGroup();
-    Plant *rose2 = rFact->createPlant();
-    rose2->add(new Ribbon());
-    Plant *sunflower2 = sFact->createPlant();
-    sunflower2->add(new Scent());
-
-    subGroup->add(rose2);
-    subGroup->add(sunflower2);
-
-    PlantGroup *mainGroup = new PlantGroup();
-    mainGroup->add(pg);
-    mainGroup->add(subGroup);
-
-    std::cout << "Nested group structure:" << std::endl;
-    std::cout << "Total nested group price: R" << mainGroup->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    // Test 9: Single heavily decorated plant
-    std::cout << "--- TEST 9: Heavily Decorated Plant ---" << std::endl;
-    Plant *fancyRose = rFact->createPlant();
-    fancyRose->add(new Ribbon());
-    fancyRose->add(new RedPot());
-    fancyRose->add(new Scent());
-    fancyRose->add(new Ribbon()); // Double ribbon
-    fancyRose->printPlant();
-    std::cout << "Fancy rose total price: R" << fancyRose->getPrice() << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "========================================" << std::endl;
-    std::cout << "TESTING STRATEGY PATTERN WITH ORDERS" << std::endl;
-    std::cout << "========================================" << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-
-    // Test 10: Order with Normal Pricing Strategy
-    std::cout << "--- TEST 10: Small Order with price strategy ---" << std::endl;
-    PlantGroup *smallOrder = new PlantGroup();
-    Plant *rose3 = rFact->createPlant();
-    rose3->add(new Ribbon());
-    smallOrder->add(rose3);
-
-    Order *order1 = new Order(smallOrder);
-
-    std::cout << "Order ID: " << order1->getReceiptID() << std::endl;
-    order1->printOrder();
-    std::cout << "Price before copoun attempt: R" << order1->getPrice() << std::endl;
-    std::string code;
-    std::cout << "Please enter your coupon code for discount: ";
-    std::cin >> code;
-    std::cout << "Price after copoun attempt: R" << order1->applyPriceStrategy(code) << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "========================================" << std::endl;
-    std::cout << "ALL TESTS COMPLETED" << std::endl;
-    std::cout << "========================================" << std::endl;
-
-    // Cleanup
-    delete mainGroup;
-    delete fancyRose;
-    delete order1;
-    delete fertMon;
-    delete watMon;
-    delete deadMon;
-    delete rFact;
-    delete sFact;
-    delete cFact;
-}
-
-int main()
-{
-    CompAndDec();
-    return 0;
+    if (fontId != -1)
+    {
+        QFontDatabase::removeApplicationFont(fontId);
+    }
+    
+    // Cleanup shared instances
+    delete g_greenHouseFacade;
+    delete g_customerFacade;
+    delete g_sharedStaffSystem;
+    delete g_sharedCaretaker;
+    delete g_sharedInventory;
+    
+    return result;
 }

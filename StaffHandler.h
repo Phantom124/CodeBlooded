@@ -21,7 +21,7 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		bool isAvailable;
 	public:
 		StaffHandler();
-		virtual ~StaffHandler() = default;
+		virtual ~StaffHandler();
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 		void setSuccessor(StaffHandler* successor);
 		StaffHandler* getSuccessor();
