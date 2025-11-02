@@ -6,7 +6,7 @@
 class NormalPrice : public PriceStrategies
 {
 public:
-	virtual double apply(double basePrice);
+	virtual double applyPriceStrategy(double amount);
 };
 
 #endif

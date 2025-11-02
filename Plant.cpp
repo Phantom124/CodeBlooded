@@ -200,19 +200,24 @@ Plant::~Plant()
     if (this->waterState != nullptr)
     {
         delete this->waterState;
+        this->waterState = nullptr;
     }
 
     if (this->fertilizerState != nullptr)
     {
         delete this->fertilizerState;
+        this->fertilizerState = nullptr;
     }
     if (this->growthState != nullptr)
     {
         delete this->growthState;
+        this->growthState = nullptr;
     }
-    
-    if(this->decorator != nullptr){
+
+    if (this->decorator != nullptr)
+    {
         delete this->decorator;
+        this->decorator = nullptr;
     }
 }
 
@@ -393,14 +398,17 @@ void Plant::printPlant()
 
 void Plant::add(PlantComponent *newDecorator)
 {
-    if(newDecorator == nullptr){
+    if (newDecorator == nullptr)
+    {
         return;
     }
 
-
-    if (decorator != nullptr){//something already exists
+    if (decorator != nullptr)
+    { // something already exists
         decorator->add(newDecorator);
-    }else{//nothing exists yet
+    }
+    else
+    { // nothing exists yet
         decorator = newDecorator;
     }
 }
@@ -456,7 +464,7 @@ void Plant::checkGrowthLevel()
 }
 
 std::string Plant::getName()
-{   
+{
     std::string decoratorNames = "";
     if (this->decorator != nullptr)
     {

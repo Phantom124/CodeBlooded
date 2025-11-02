@@ -1,7 +1,7 @@
 #include "NormalPrice.h"
 
-
-double NormalPrice::apply(double basePrice) {
+double NormalPrice::applyPriceStrategy(double amount)
+{
     // no discount
-    return basePrice;
+    return amount;
 }

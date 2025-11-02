@@ -4,7 +4,7 @@
 #include "NormalPrice.h"
 #include <iostream>
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
+Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup), priceStrategy(nullptr)
 {
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
@@ -17,6 +17,10 @@ Order::~Order()
         delete priceStrategy;
         priceStrategy = nullptr;
     }
+    if (plantGroup)
+    {
+        delete plantGroup;
+    }
 }
 
 // OrderMemento *Order::createMemento()
@@ -24,10 +28,10 @@ Order::~Order()
 //     return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
 // }
 
-Receipt *Order::generateReceipt()
-{
-    return new Receipt(receiptID, this->getPrice(), this->generateInfo());
-}
+// Receipt *Order::generateReceipt()
+// {
+//     return new Receipt(receiptID, this->getPrice(), this->generateInfo());
+// }
 
 std::string Order::getReceiptID() const
 {
@@ -57,6 +61,10 @@ std::string Order::generateInfo()
 
 double Order::getPrice()
 {
+    if (priceStrategy)
+    {
+        return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
+    }
     return plantGroup->getPrice();
 }
 
@@ -80,31 +88,19 @@ void Order::addToOrder(Plant *plant)
 
 void Order::setPriceStrategy(PriceStrategies *priceStrategy)
 {
-    if (this->priceStrategy != priceStrategy)
+    if (this->priceStrategy)
     {
         delete this->priceStrategy;
-        this->priceStrategy = priceStrategy;
     }
+    this->priceStrategy = priceStrategy;
 }
 
-void Order::applyPriceStrategy()
+double Order::applyPriceStrategy()
 {
-    std::vector<PlantComponent *> plants = plantGroup->getPlants();
-    int plantCount = 0;
-    for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
+    if (!priceStrategy)
     {
-        plantCount++;
+        return plantGroup->getPrice();
     }
 
-    if (plantCount >= 10)
-    {
-        delete priceStrategy;
-        priceStrategy = new DiscountPrice();
-    }
-
-    else
-    {
-        delete priceStrategy;
-        priceStrategy = new NormalPrice();
-    }
+    return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
 }

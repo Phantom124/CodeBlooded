@@ -149,6 +149,61 @@ void CompAndDec()
     rose3->add(new Ribbon());
     smallOrder->add(rose3);
 
+    Order *order1 = new Order(smallOrder);
+    // PriceStrategies *normalPrice = new NormalPrice();
+    // order1->setPriceStrategy(normalPrice);
+    // order1->applyPriceStrategy();
+
+    std::cout << "Order ID: " << order1->getReceiptID() << std::endl;
+    order1->printOrder();
+    std::cout << "Total with normal pricing: R" << order1->getPrice() << std::endl
+              << std::endl;
+
+    // Test 11: Order with Discount Pricing Strategy (bulk order)
+    std::cout << "--- TEST 11: Bulk Order (Discount Pricing) ---" << std::endl;
+    PlantGroup *bulkOrder = new PlantGroup();
+
+    // Add multiple plants to trigger discount
+    for (int i = 0; i < 5; i++)
+    {
+        Plant *bulkPlant = rFact->createPlant();
+        bulkPlant->add(new RedPot());
+        bulkOrder->add(bulkPlant);
+    }
+
+    Order *order2 = new Order(bulkOrder);
+    // PriceStrategies *discountPrice = new DiscountPrice();
+    // order2->setPriceStrategy(discountPrice);
+    // order2->applyPriceStrategy();
+
+    std::cout << "Order ID: " << order2->getReceiptID() << std::endl;
+    order2->printOrder();
+    std::cout << "Total with discount pricing: R" << order2->getPrice() << std::endl
+              << std::endl;
+
+    // Test 12: Switching strategies
+    std::cout << "--- TEST 12: Switching Price Strategies ---" << std::endl;
+    PlantGroup *flexOrder = new PlantGroup();
+    Plant *rose4 = rFact->createPlant();
+    rose4->add(new Scent());
+    Plant *sunflower3 = sFact->createPlant();
+    sunflower3->add(new Ribbon());
+    flexOrder->add(rose4);
+    flexOrder->add(sunflower3);
+
+    Order *order3 = new Order(flexOrder);
+
+    std::cout << "Applying normal pricing:" << std::endl;
+    // order3->setPriceStrategy(normalPrice);
+    // order3->applyPriceStrategy();
+    std::cout << "Price: R" << order3->getPrice() << std::endl;
+
+    std::cout << "Switching to discount pricing:" << std::endl;
+    // order3->setPriceStrategy(discountPrice);
+    // order3->applyPriceStrategy();
+    std::cout << "Price: R" << order3->getPrice() << std::endl
+              << std::endl;
+
     std::cout << "========================================" << std::endl;
     std::cout << "ALL TESTS COMPLETED" << std::endl;
     std::cout << "========================================" << std::endl;
@@ -156,6 +211,9 @@ void CompAndDec()
     // Cleanup
     delete mainGroup;
     delete fancyRose;
+    delete order1;
+    delete order2;
+    delete order3;
     delete fertMon;
     delete watMon;
     delete deadMon;

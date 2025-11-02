@@ -19,6 +19,7 @@ PlantGroup::~PlantGroup()
     for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
     {
         delete *it;
+        *it = nullptr;
     }
 }
 

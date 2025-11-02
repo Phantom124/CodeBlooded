@@ -16,6 +16,7 @@ private:
     PlantGroup *plantGroup;
     PriceStrategies *priceStrategy;
     std::string receiptID;
+    double final_amount = 0;
 
 public:
     Order(PlantGroup *plantGroup);
@@ -25,9 +26,9 @@ public:
     void printOrder();
     void addToOrder(Plant *plant);
     void setPriceStrategy(PriceStrategies *priceStrategy);
-    void applyPriceStrategy();
+    double applyPriceStrategy();
     // OrderMemento* createMemento();
-    Receipt *generateReceipt();
+    // Receipt *generateReceipt();
     std::string getReceiptID() const;
     std::string generateInfo();
 };

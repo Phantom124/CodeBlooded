@@ -1,7 +1,7 @@
 #include "DiscountPrice.h"
 
-
-double DiscountPrice::apply(double basePrice) {
+double DiscountPrice::applyPriceStrategy(double amount)
+{
     // example: 10% discount
-    return basePrice * 0.90;
+    return amount * 0.9;
 }
