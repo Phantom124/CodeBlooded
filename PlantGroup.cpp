@@ -1,12 +1,6 @@
 #include "PlantGroup.h"
 #include <iostream>
 
-void PlantGroup::printOrder()
-{
-    std::cout << "Order Description: " << getName() << std::endl;
-    std::cout << "Order Price: " << getPrice() << std::endl;
-}
-
 std::vector<PlantComponent *> PlantGroup::getPlantComponents()
 {
     return plants;

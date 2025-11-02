@@ -18,7 +18,6 @@ public:
 	std::vector<PlantComponent *> getPlants();
 	virtual void add(PlantComponent *plantComponent);
 	virtual void printPlant() {};
-	void printOrder();
 	std::vector<PlantComponent *> getPlantComponents();
 	void removePlantComponent(PlantComponent *plantComponent);
 };

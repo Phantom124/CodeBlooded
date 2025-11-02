@@ -103,7 +103,6 @@ void CompAndDec()
     pg->add(sunflower);
     pg->add(cactus);
     std::cout << "Complete order contents:" << std::endl;
-    pg->printOrder();
     std::cout << "Total group price: R" << pg->getPrice() << std::endl;
     std::cout << std::endl;
 
@@ -123,7 +122,6 @@ void CompAndDec()
     mainGroup->add(subGroup);
 
     std::cout << "Nested group structure:" << std::endl;
-    mainGroup->printOrder();
     std::cout << "Total nested group price: R" << mainGroup->getPrice() << std::endl;
     std::cout << std::endl;
 

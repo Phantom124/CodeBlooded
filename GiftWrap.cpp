@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-GiftWrap::GiftWrap() : PlantDecorator(nullptr) {}
+GiftWrap::GiftWrap() : PlantDecorator() {}
 
 double GiftWrap::getPrice()
 {
