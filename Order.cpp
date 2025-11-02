@@ -4,19 +4,19 @@
 #include "NormalPrice.h"
 #include <iostream>
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup), priceStrategy(nullptr)
+Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
 {
+    priceStrategy = new NormalPrice();
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
 }
 
 Order::~Order()
 {
-    if (priceStrategy)
-    {
-        delete priceStrategy;
-        priceStrategy = nullptr;
-    }
+
+    delete priceStrategy;
+    priceStrategy = nullptr;
+
     if (plantGroup)
     {
         delete plantGroup;
@@ -102,5 +102,22 @@ double Order::applyPriceStrategy()
         return plantGroup->getPrice();
     }
 
+    if (quantity() >= 5)
+    {
+        setPriceStrategy(new DiscountPrice());
+    }
+
     return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
+}
+
+int Order::quantity()
+{
+    std::vector<PlantComponent *> plants = plantGroup->getPlants();
+    int plantCount = 0;
+    for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
+    {
+        plantCount++;
+    }
+
+    return plantCount;
 }

@@ -51,29 +51,29 @@ void CompAndDec()
     std::cout << "--- TEST 1: Base Rose Plant ---" << std::endl;
     Plant *myPlant = rFact->createPlant();
     myPlant->printPlant();
-    std::cout << "Base price: R" << myPlant->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Base price: R" << myPlant->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 2: Add Ribbon decorator
     std::cout << "--- TEST 2: Rose + Ribbon ---" << std::endl;
     myPlant->add(new Ribbon());
     myPlant->printPlant();
-    std::cout << "Price after ribbon: R" << myPlant->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Price after ribbon: R" << myPlant->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 3: Add RedPot decorator
     std::cout << "--- TEST 3: Rose + Ribbon + RedPot ---" << std::endl;
     myPlant->add(new RedPot());
     myPlant->printPlant();
-    std::cout << "Price after red pot: R" << myPlant->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Price after red pot: R" << myPlant->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 4: Add Scent decorator
     std::cout << "--- TEST 4: Rose + Ribbon + RedPot + Scent ---" << std::endl;
     myPlant->add(new Scent());
     myPlant->printPlant();
-    std::cout << "Final price: R" << myPlant->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Final price: R" << myPlant->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 5: Create Sunflower with decorations
     std::cout << "--- TEST 5: Sunflower with Multiple Decorations ---" << std::endl;
@@ -84,8 +84,8 @@ void CompAndDec()
     sunflower->add(new RedPot());
     sunflower->add(new Scent());
     sunflower->printPlant();
-    std::cout << "Decorated sunflower price: R" << sunflower->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Decorated sunflower price: R" << sunflower->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 6: Create Cactus with decorations
     std::cout << "--- TEST 6: Cactus with Decorations ---" << std::endl;
@@ -93,8 +93,8 @@ void CompAndDec()
     cactus->add(new Ribbon());
     cactus->add(new RedPot());
     cactus->printPlant();
-    std::cout << "Decorated cactus price: R" << cactus->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Decorated cactus price: R" << cactus->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 7: Composite - Group of plants
     std::cout << "--- TEST 7: Plant Group (Composite) ---" << std::endl;
@@ -103,8 +103,8 @@ void CompAndDec()
     pg->add(cactus);
     std::cout << "Complete order contents:" << std::endl;
     pg->printOrder();
-    std::cout << "Total group price: R" << pg->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Total group price: R" << pg->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 8: Nested groups
     std::cout << "--- TEST 8: Nested Plant Groups ---" << std::endl;
@@ -123,8 +123,8 @@ void CompAndDec()
 
     std::cout << "Nested group structure:" << std::endl;
     mainGroup->printOrder();
-    std::cout << "Total nested group price: R" << mainGroup->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Total nested group price: R" << mainGroup->getPrice() << std::endl;
+    std::cout << std::endl;
 
     // Test 9: Single heavily decorated plant
     std::cout << "--- TEST 9: Heavily Decorated Plant ---" << std::endl;
@@ -134,37 +134,35 @@ void CompAndDec()
     fancyRose->add(new Scent());
     fancyRose->add(new Ribbon()); // Double ribbon
     fancyRose->printPlant();
-    std::cout << "Fancy rose total price: R" << fancyRose->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Fancy rose total price: R" << fancyRose->getPrice() << std::endl;
+    std::cout << std::endl;
 
     std::cout << "========================================" << std::endl;
     std::cout << "TESTING STRATEGY PATTERN WITH ORDERS" << std::endl;
-    std::cout << "========================================" << std::endl
-              << std::endl;
+    std::cout << "========================================" << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
 
     // Test 10: Order with Normal Pricing Strategy
-    std::cout << "--- TEST 10: Small Order (Normal Pricing) ---" << std::endl;
+    std::cout << "--- TEST 10: Small Order with price strategy ---" << std::endl;
     PlantGroup *smallOrder = new PlantGroup();
     Plant *rose3 = rFact->createPlant();
     rose3->add(new Ribbon());
     smallOrder->add(rose3);
 
     Order *order1 = new Order(smallOrder);
-    // PriceStrategies *normalPrice = new NormalPrice();
-    // order1->setPriceStrategy(normalPrice);
-    // order1->applyPriceStrategy();
 
     std::cout << "Order ID: " << order1->getReceiptID() << std::endl;
     order1->printOrder();
-    std::cout << "Total with normal pricing: R" << order1->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Total after pricing strategy applied. pricing: R" << order1->applyPriceStrategy() << std::endl;
+    std::cout << std::endl;
 
     // Test 11: Order with Discount Pricing Strategy (bulk order)
-    std::cout << "--- TEST 11: Bulk Order (Discount Pricing) ---" << std::endl;
+    std::cout << "--- TEST 11: Bulk Order with price strateg ---" << std::endl;
     PlantGroup *bulkOrder = new PlantGroup();
 
     // Add multiple plants to trigger discount
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 15; i++)
     {
         Plant *bulkPlant = rFact->createPlant();
         bulkPlant->add(new RedPot());
@@ -172,17 +170,14 @@ void CompAndDec()
     }
 
     Order *order2 = new Order(bulkOrder);
-    // PriceStrategies *discountPrice = new DiscountPrice();
-    // order2->setPriceStrategy(discountPrice);
-    // order2->applyPriceStrategy();
 
     std::cout << "Order ID: " << order2->getReceiptID() << std::endl;
     order2->printOrder();
-    std::cout << "Total with discount pricing: R" << order2->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Total after pricing strategy applied: R" << order2->applyPriceStrategy() << std::endl;
+    std::cout << std::endl;
 
     // Test 12: Switching strategies
-    std::cout << "--- TEST 12: Switching Price Strategies ---" << std::endl;
+    std::cout << "--- TEST 12: ---" << std::endl;
     PlantGroup *flexOrder = new PlantGroup();
     Plant *rose4 = rFact->createPlant();
     rose4->add(new Scent());
@@ -193,16 +188,9 @@ void CompAndDec()
 
     Order *order3 = new Order(flexOrder);
 
-    std::cout << "Applying normal pricing:" << std::endl;
-    // order3->setPriceStrategy(normalPrice);
-    // order3->applyPriceStrategy();
-    std::cout << "Price: R" << order3->getPrice() << std::endl;
+    std::cout << "Applying pricing strategy:" << std::endl;
 
-    std::cout << "Switching to discount pricing:" << std::endl;
-    // order3->setPriceStrategy(discountPrice);
-    // order3->applyPriceStrategy();
-    std::cout << "Price: R" << order3->getPrice() << std::endl
-              << std::endl;
+    std::cout << "Price: R" << order3->applyPriceStrategy() << std::endl;
 
     std::cout << "========================================" << std::endl;
     std::cout << "ALL TESTS COMPLETED" << std::endl;

@@ -6,6 +6,7 @@
 class DiscountPrice : public PriceStrategies
 {
 public:
+	virtual ~DiscountPrice() = default;
 	virtual double applyPriceStrategy(double amount);
 };
 

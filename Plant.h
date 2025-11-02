@@ -54,7 +54,7 @@ protected:
 	DeadMonitor *deadMonitor;			  /**< Observer for plant death */
 
 	friend class PlantSnapshot; /**< Allows PlantSnapshot to access private members */
-	PlantComponent *decorator; /**< For Decorator pattern */
+	PlantComponent *decorator;	/**< For Decorator pattern */
 
 public:
 	/**

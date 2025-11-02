@@ -23,7 +23,7 @@ void DeadHandler::handleRequest(Command *command, StaffSystem *staffSys)
         DeadCommand *deadCmd = dynamic_cast<DeadCommand *>(command);
         Plant *plant = deadCmd->getPlant();
         string id = std::to_string(plant->getPlantId());
-        // createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
+        createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
         // TODO: Figure out how the DeleteQuery works
     }
     else

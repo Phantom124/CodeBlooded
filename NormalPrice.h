@@ -6,6 +6,7 @@
 class NormalPrice : public PriceStrategies
 {
 public:
+	virtual ~NormalPrice() = default;
 	virtual double applyPriceStrategy(double amount);
 };
 
