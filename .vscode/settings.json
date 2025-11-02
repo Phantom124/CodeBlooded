@@ -72,6 +72,10 @@
         "bitset": "cpp",
         "ios": "cpp",
         "locale": "cpp",
+        "condition_variable": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "mutex": "cpp",
         "semaphore": "cpp",
         "stop_token": "cpp",
         "thread": "cpp"

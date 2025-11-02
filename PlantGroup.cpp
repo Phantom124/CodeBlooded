@@ -1,12 +1,6 @@
 #include "PlantGroup.h"
 #include <iostream>
 
-void PlantGroup::printOrder()
-{
-    std::cout << "Order Description: " << getName() << std::endl;
-    std::cout << "Order Price: " << getPrice() << std::endl;
-}
-
 std::vector<PlantComponent *> PlantGroup::getPlantComponents()
 {
     return plants;
@@ -19,6 +13,7 @@ PlantGroup::~PlantGroup()
     for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
     {
         delete *it;
+        *it = nullptr;
     }
 }
 

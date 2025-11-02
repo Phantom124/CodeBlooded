@@ -32,4 +32,3 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 };
 
 #endif
-

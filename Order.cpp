@@ -1,45 +1,72 @@
 #include "Order.h"
-#include "OrderMemento.h"
 #include "Receipt.h"
-#include "DiscountPrice.h"
 #include "NormalPrice.h"
+#include "BulkDiscount.h"
+#include "Save10Discount.h"
 #include <iostream>
+#include <map>
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup) {
+Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
+{
+    priceStrategy = new NormalPrice();
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
 }
 
-OrderMemento* Order::createMemento(){
+Order::~Order()
+{
+
+    delete priceStrategy;
+    priceStrategy = nullptr;
+
+    if (plantGroup)
+    {
+        delete plantGroup;
+    }
+}
+
+OrderMemento *Order::createMemento()
+{
     return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
 }
 
-Receipt* Order::generateReceipt(){
+Receipt *Order::generateReceipt()
+{
     return new Receipt(receiptID, this->getPrice(), this->generateInfo());
 }
 
-std::string Order::getReceiptID() const{
+std::string Order::getReceiptID() const
+{
     return receiptID;
 }
 
-std::string Order::generateInfo(){
+std::string Order::generateInfo()
+{
     std::string info = "";
 
-    if (!plantGroup) return info;
+    if (!plantGroup)
+        return info;
 
-    for (size_t i = 0; i < plantGroup->getPlantComponents().size(); ++i) {
+    for (size_t i = 0; i < plantGroup->getPlantComponents().size(); ++i)
+    {
         auto p = plantGroup->getPlantComponents()[i];
-        if (!p) continue;
+        if (!p)
+            continue;
         info += p->getName();
         info += " : R";
         info += std::to_string(p->getPrice());
-        if (i + 1 < plantGroup->getPlantComponents().size()) info += "\n";
+        if (i + 1 < plantGroup->getPlantComponents().size())
+            info += "\n";
     }
     return info;
 }
 
 double Order::getPrice()
 {
+    if (priceStrategy)
+    {
+        return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
+    }
     return plantGroup->getPrice();
 }
 
@@ -58,19 +85,41 @@ void Order::printOrder()
 
 void Order::addToOrder(Plant *plant)
 {
-    plantGroup->addPlantComponent(plant);
+    plantGroup->add(plant);
 }
 
 void Order::setPriceStrategy(PriceStrategies *priceStrategy)
 {
-    if (this->priceStrategy != priceStrategy)
+    if (this->priceStrategy)
     {
         delete this->priceStrategy;
-        this->priceStrategy = priceStrategy;
     }
+    this->priceStrategy = priceStrategy;
 }
 
-void Order::applyPriceStrategy()
+double Order::applyPriceStrategy(std::string code)
+{
+    if (!priceStrategy)
+    {
+        return plantGroup->getPrice();
+    }
+
+    if (code == "BULK")
+    {
+        setPriceStrategy(new BulkDiscount());
+    }
+    else if (code == "SAVE10")
+    {
+        setPriceStrategy(new Save10Discount());
+    }
+    else
+    {
+        setPriceStrategy(new NormalPrice());
+    }
+    return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
+}
+
+int Order::quantity()
 {
     std::vector<PlantComponent *> plants = plantGroup->getPlants();
     int plantCount = 0;
@@ -79,15 +128,5 @@ void Order::applyPriceStrategy()
         plantCount++;
     }
 
-    if (plantCount >= 10)
-    {
-        delete priceStrategy;
-        priceStrategy = new DiscountPrice();
-    }
-
-    else
-    {
-        delete priceStrategy;
-        priceStrategy = new NormalPrice();
-    }
+    return plantCount;
 }
