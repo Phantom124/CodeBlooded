@@ -76,6 +76,10 @@ valgrind: $(TARGET)
 checkleaks: $(TARGET)
 	MallocStackLogging=1 leaks --atExit -- ./$(TARGET)
 
+#valgrind
+valgrind: $(TARGET)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
+
 # Clean up build artifacts
 clean:
 	rm -f $(OBJECTS) $(TARGET)

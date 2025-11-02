@@ -3,7 +3,7 @@
 Cactus::Cactus()
     : Plant("Cactus",        // type
             15,              // price
-            0.95,            // waterRetention
+            0.1,            // waterRetention
             15,              // lowWaterLevel
             0.90,            // fertilizerRetention
             10)              // lowFertilizerLevel

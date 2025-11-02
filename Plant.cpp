@@ -40,6 +40,8 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     this->fertilizerState = new FertilizedState();
     this->growthState = new SeedState();
 
+    this->decorator = nullptr;
+
     checkWaterLevel();
     checkFertilizerLevel();
 }
@@ -114,7 +116,6 @@ void Plant::checkWaterLevel()
             this->setWaterState(nextState);
             if (nextState->getStateName() == "NotHydrated")
             {
-
                 if (waterMonitor != nullptr)
                 {
                     waterMonitor->update(this); // NOTIFY Monitor
@@ -135,7 +136,7 @@ void Plant::checkFertilizerLevel()
             this->setFertilizerState(nextState);
             if (nextState->getStateName() == "NonFertilized")
             {
-                std::cout << "Fertilizer level low, notifying monitor." << std::endl;
+                // std::cout << "Fertilizer level low, notifying monitor." << std::endl;
                 if (fertilizerMonitor != nullptr)
                 {
                     fertilizerMonitor->update(this); // NOTIFY Monitor
@@ -185,11 +186,11 @@ void Plant::internalsTimeElapse()
 { // ADD CARECOUNT LATER ON FOR GROWTH STATE
     // Growth state update would go here based on careCount
     // CHECK IF PLANT IS DEAD!!!
-    std::cout << "Effecting Plant Health...\n";
+    // std::cout << "Effecting Plant Health...\t";
     healthEffects(); // Calculate new health // Can put plant in deadState
-    std::cout << "Increasing Care Count...\n";
+    // std::cout << "Increasing Care Count...\t";
     increaseCareCount();
-    std::cout << "Decreasing Water and Fertilizer Levels...\n";
+    // std::cout << "Decreasing Water and Fertilizer Levels...\n";
     decreaseWaterLevel(); // Decrease water level//
     decreaseFertilizerLevel();
 }

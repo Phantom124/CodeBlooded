@@ -3,6 +3,10 @@
 
 DeadCommand::DeadCommand(Plant *plant): PlantCommand(DEAD, plant){}
 
+DeadCommand::~DeadCommand()
+{
+}
+
 void DeadCommand::execute(){
     if (plant == nullptr){
         throw std::runtime_error("Attempted to process data with a null pointer.");

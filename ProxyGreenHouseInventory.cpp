@@ -36,6 +36,10 @@ void ProxyGreenHouseInventory::removePlant(std::string parameters){
     this->realInventory->removePlant(parameters);
 }
 
+std::vector<Plant *> ProxyGreenHouseInventory::getPlants(){
+    return this->realInventory->getPlants();
+}
+
 void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct query){
     //customers can only SELECT (showPlant, showAllPlants)
 

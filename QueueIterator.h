@@ -17,6 +17,7 @@ class QueueIterator {
 		Command* front();
 		bool isEmpty();
 		void enqueue(Command* command);
+		void deleteQueue();
 };
 
 #endif

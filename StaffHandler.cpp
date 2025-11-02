@@ -8,27 +8,25 @@ StaffHandler::StaffHandler()
 {
     successor = nullptr;
     queryBuilder = nullptr;
+    isAvailable = true;
 }
 
-void StaffHandler::handleRequest(Command *command, StaffSystem *staffSys)
-{
-    if (command == nullptr)
-    {
+// StaffHandler::~StaffHandler(){
+// }
+
+void StaffHandler::handleRequest(Command *command, StaffSystem* staffSys){
+    if (command == nullptr){
         throw std::invalid_argument("Command is a nullptr.");
     }
     else if (staffSys == nullptr)
     {
         throw std::invalid_argument("StaffSystem is a nullptr.");
     }
-
-    if (successor == nullptr)
-    {
-        std::cout << "No successor found, enqueuing command directly." << std::endl;
+    
+    if (successor == nullptr){
         QueueIterator it = staffSys->createIterator();
         it.enqueue(command);
-    }
-    else
-    {
+    } else {
         successor->handleRequest(command, staffSys);
     }
 }
@@ -46,10 +44,12 @@ void StaffHandler::setSuccessor(StaffHandler *successor)
     }
 }
 
-QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState)
-{
-    if (this->queryBuilder == nullptr)
-        return nullptr;
+StaffHandler *StaffHandler::getSuccessor(){
+    return successor;
+}
+
+QueryProduct *StaffHandler::createSelectQuery(string plantID, string plantType, string maturityState){
+    if (this->queryBuilder == nullptr) return nullptr;
 
     std::string id = this->queryBuilder->addPlantID(plantID);
     std::string type = this->queryBuilder->addPlantType(plantType);
@@ -104,4 +104,4 @@ void StaffHandler::setQueryBuilder(QueryBuilder *qb)
 
     // delete queryBuilder;
     // queryBuilder = qb;
-}
+}   
