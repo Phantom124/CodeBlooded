@@ -25,15 +25,15 @@ Order::~Order()
     }
 }
 
-// OrderMemento *Order::createMemento()
-// {
-//     return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
-// }
+OrderMemento *Order::createMemento()
+{
+    return new OrderMemento(plantGroup->getPlantComponents(), this->getPrice(), receiptID);
+}
 
-// Receipt *Order::generateReceipt()
-// {
-//     return new Receipt(receiptID, this->getPrice(), this->generateInfo());
-// }
+Receipt *Order::generateReceipt()
+{
+    return new Receipt(receiptID, this->getPrice(), this->generateInfo());
+}
 
 std::string Order::getReceiptID() const
 {

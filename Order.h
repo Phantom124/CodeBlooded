@@ -27,8 +27,8 @@ public:
     void setPriceStrategy(PriceStrategies *priceStrategy);
     double applyPriceStrategy(std::string code);
     int quantity();
-    // OrderMemento* createMemento();
-    // Receipt *generateReceipt();
+    OrderMemento *createMemento();
+    Receipt *generateReceipt();
     std::string getReceiptID() const;
     std::string generateInfo();
 };
