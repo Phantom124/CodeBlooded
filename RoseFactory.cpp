@@ -10,10 +10,7 @@ RoseFactory::RoseFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, Dea
     }
 }
 
-RoseFactory::~RoseFactory()
-{
-    delete this->state;
-    this->state = nullptr;
+RoseFactory::~RoseFactory(){
 }
 
 Plant *RoseFactory::createPlant()

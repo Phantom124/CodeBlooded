@@ -1,8 +1,14 @@
 #include "FertilizerHandler.h"
 
 #include <stdexcept>
+#include <iostream>
 
-FertilizerHandler::FertilizerHandler() {}
+FertilizerHandler::FertilizerHandler() {
+    cout << "Creating Fertilizer Handler" << endl;
+}
+
+FertilizerHandler::~FertilizerHandler(){
+}
 
 void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (command == nullptr){
@@ -14,6 +20,7 @@ void FertilizerHandler::handleRequest(Command *command, StaffSystem* staffSys){
     if (isAvailable == true && command->getType() == FERTILIZER){//First: Are you available //Second: Is this a fertilizer command
         isAvailable = false;
         command->execute();
+        delete command;
     } else {
         StaffHandler::handleRequest(command, staffSys);
     }

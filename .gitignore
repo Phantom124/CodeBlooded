@@ -28,3 +28,6 @@ release/
 *~
 *.swp
 *.swo
+
+# Local analysis files
+gui.supp

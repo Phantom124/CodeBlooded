@@ -64,9 +64,15 @@ int main(int argc, char *argv[])
 
     // Show login dialog
     LoginDialog loginDialog;
+    QObject::connect(&loginDialog, &QDialog::rejected, &app, &QApplication::quit);
     loginDialog.show();
     
     int result = app.exec();
+
+    if (fontId != -1)
+    {
+        QFontDatabase::removeApplicationFont(fontId);
+    }
     
     // Cleanup shared instances
     delete g_greenHouseFacade;

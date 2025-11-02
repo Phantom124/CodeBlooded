@@ -8,6 +8,10 @@ PlantCommand::PlantCommand(cmdType type, Plant *plant): Command(type) {
     this->plant = plant;
 }
 
+PlantCommand::~PlantCommand()
+{
+}
+
 Plant *PlantCommand::getPlant()
 {
     return this->plant;

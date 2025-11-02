@@ -13,6 +13,7 @@ protected:
 
 public:
 	CustomerCommand(const cmdType type, Customer* customer);
+	virtual ~CustomerCommand();
 };
 
 #endif
