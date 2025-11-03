@@ -12,6 +12,7 @@ void DeadCommand::execute(){
         throw std::runtime_error("Attempted to process data with a null pointer.");
     }
     //Still gotta add this functionality
+    
 }
 
 Plant *DeadCommand::getPlant(){
