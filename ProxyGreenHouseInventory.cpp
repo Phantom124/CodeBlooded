@@ -3,6 +3,7 @@
 #include "QueryProduct.h"
 #include "Customer.h"
 #include "StaffHandler.h"
+#include "PlantFactory.h"
 
 ProxyGreenHouseInventory::ProxyGreenHouseInventory(){
     this->realInventory = new RealGreenHouseInventory();
@@ -59,7 +60,7 @@ void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct quer
             std::cout << "[CONTROL ACCESS] Customer cannot perform " << queryText << " operations.\n";
         }
     }
-    else if (dynamic_cast<StaffHandler*>((StaffHandler*)user)){
+    else if (dynamic_cast<StaffHandler*>((StaffHandler*)user) || dynamic_cast<PlantFactory*>((PlantFactory*)user)){
         query.execute();
         
     }
