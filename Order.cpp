@@ -6,11 +6,12 @@
 #include <iostream>
 #include <map>
 
-Order::Order(PlantGroup *plantGroup) : plantGroup(plantGroup)
+Order::Order()
 {
     priceStrategy = new NormalPrice();
     static unsigned long long counter = 0;
     receiptID = "RCPT-" + std::to_string(++counter);
+    plantGroup = new PlantGroup();
 }
 
 Order::~Order()
@@ -83,6 +84,17 @@ void Order::printOrder()
     std::cout << getName() << std::endl;
 }
 
+std::vector<PlantComponent *> Order::getOrderPlants()
+{
+
+    if (plantGroup)
+    {
+        return plantGroup->getPlants();
+    }
+
+    return std::vector<PlantComponent *>();
+}
+
 void Order::addToOrder(Plant *plant)
 {
     plantGroup->add(plant);
@@ -117,6 +129,11 @@ double Order::applyPriceStrategy(std::string code)
         setPriceStrategy(new NormalPrice());
     }
     return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
+}
+
+void Order::removeFromOrder(PlantComponent *plantComponent)
+{
+    plantGroup->removePlantComponent(plantComponent);
 }
 
 int Order::quantity()

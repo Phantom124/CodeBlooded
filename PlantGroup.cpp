@@ -10,11 +10,12 @@ PlantGroup::PlantGroup() : PlantComponent() {}
 
 PlantGroup::~PlantGroup()
 {
-    for (std::vector<PlantComponent *>::iterator it = plants.begin(); it != plants.end(); ++it)
+
+    for (PlantComponent *plant : plants)
     {
-        delete *it;
-        *it = nullptr;
+        delete plant;
     }
+    plants.clear();
 }
 
 double PlantGroup::getPrice()
