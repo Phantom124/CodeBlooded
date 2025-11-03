@@ -38,6 +38,6 @@ Zaman Bassa - U24744931
 
 Obed Edom Mbaya - U24595889 
 
-Ange Yeshouessi - U24614484
+Ange Yehouessi - U24614484
 
 Joshua Mahabeer - U24597092
