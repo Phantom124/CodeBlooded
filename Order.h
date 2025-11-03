@@ -10,21 +10,24 @@
 
 class OrderMemento; // forward declaration
 
-class Order {
-    private:
-        PlantGroup* plantGroup;
-        PriceStrategies* priceStrategy = nullptr;
-        std::string receiptID;
+class Order
+{
+private:
+    PlantGroup *plantGroup;
+    PriceStrategies *priceStrategy;
+    std::string receiptID;
 
 public:
-    Order(PlantGroup *plantGroup);
+    Order();
     ~Order();
     double getPrice();
     std::string getName();
     void printOrder();
+    std::vector<PlantComponent *> getOrderPlants();
     void addToOrder(Plant *plant);
     void setPriceStrategy(PriceStrategies *priceStrategy);
     double applyPriceStrategy(std::string code);
+    void removeFromOrder(PlantComponent *plantComponent);
     int quantity();
     OrderMemento *createMemento();
     Receipt *generateReceipt();

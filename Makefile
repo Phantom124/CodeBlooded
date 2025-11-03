@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = PlantNurseryGUI1.0.0
-DISTDIR = /root/COS\ 214/CodeBlooded/build/obj/PlantNurseryGUI1.0.0
+DISTDIR = /home/obedm/second-year/COS214_project/CodeBlooded/build/obj/PlantNurseryGUI1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so -lGL -lpthread   
@@ -64,7 +64,8 @@ SOURCES       = Cactus.cpp \
 		DeadMonitor.cpp \
 		DeadState.cpp \
 		DeleteQueryBuilder.cpp \
-		DiscountPrice.cpp \
+		Save10Discount.cpp \
+		BulkDiscount.cpp \
 		FertilizedState.cpp \
 		FertilizerCommand.cpp \
 		FertilizerHandler.cpp \
@@ -140,7 +141,8 @@ OBJECTS       = build/obj/Cactus.o \
 		build/obj/DeadMonitor.o \
 		build/obj/DeadState.o \
 		build/obj/DeleteQueryBuilder.o \
-		build/obj/DiscountPrice.o \
+		build/obj/Save10Discount.o \
+		build/obj/BulkDiscount.o \
 		build/obj/FertilizedState.o \
 		build/obj/FertilizerCommand.o \
 		build/obj/FertilizerHandler.o \
@@ -294,7 +296,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		DeadMonitor.h \
 		DeadState.h \
 		DeleteQueryBuilder.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		FertilizedState.h \
 		Fertilizer.h \
 		FertilizerCommand.h \
@@ -365,7 +368,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		DeadMonitor.cpp \
 		DeadState.cpp \
 		DeleteQueryBuilder.cpp \
-		DiscountPrice.cpp \
+		Save10Discount.cpp \
+		BulkDiscount.cpp \
 		FertilizedState.cpp \
 		FertilizerCommand.cpp \
 		FertilizerHandler.cpp \
@@ -609,8 +613,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Cactus.h CactusFactory.h Caretaker.h Command.h Customer.h CustomerCommand.h CustomerFacade.h DeadCommand.h DeadHandler.h DeadMonitor.h DeadState.h DeleteQueryBuilder.h DiscountPrice.h FertilizedState.h Fertilizer.h FertilizerCommand.h FertilizerHandler.h FertilizerMonitor.h GerminationState.h GetPlantCommand.h GiftWrap.h GreenHouseFacade.h GreenHouseInventory.h HydratedState.h InsertQueryBuilder.h Item.h MatureState.h NonFertilizerState.h NormalPrice.h NotHydratedState.h Order.h OrderMemento.h Plant.h PlantCommand.h PlantComponent.h PlantDecorator.h PlantFactory.h PlantGroup.h PlantGrowthState.h PlantMonitor.h PlantSnapshot.h PriceStrategies.h ProxyGreenHouseInventory.h QueryBuilder.h QueryProduct.h QueueIterator.h RealGreenHouseInventory.h Receipt.h RedPot.h Ribbon.h Rose.h RoseFactory.h SalesHandler.h SaplingState.h Scent.h SeedState.h SelectQueryBuilder.h StaffHandler.h StaffSystem.h Sunflower.h SunflowerFactory.h Water.h WaterCommand.h WaterHandler.h WaterMonitor.h Common/LoginDialog.h CustomerWindows/CustomerMainWindow.h CustomerWindows/ReturnOrderDialog.h CustomerWindows/ReceiptDialog.h StaffWindows/StaffMainWindow.h StaffWindows/PlantManagementWidget.h StaffWindows/StaffManagementWidget.h $(DISTDIR)/
-	$(COPY_FILE) --parents Cactus.cpp CactusFactory.cpp Caretaker.cpp Command.cpp Customer.cpp CustomerCommand.cpp CustomerFacade.cpp DeadCommand.cpp DeadHandler.cpp DeadMonitor.cpp DeadState.cpp DeleteQueryBuilder.cpp DiscountPrice.cpp FertilizedState.cpp FertilizerCommand.cpp FertilizerHandler.cpp FertilizerMonitor.cpp GerminationState.cpp GetPlantCommand.cpp GiftWrap.cpp GreenHouseFacade.cpp GreenHouseInventory.cpp HydratedState.cpp InsertQueryBuilder.cpp Item.cpp MatureState.cpp NonFertilizerState.cpp NormalPrice.cpp NotHydratedState.cpp Order.cpp OrderMemento.cpp Plant.cpp PlantCommand.cpp PlantDecorator.cpp PlantFactory.cpp PlantGroup.cpp PlantMonitor.cpp PlantSnapshot.cpp ProxyGreenHouseInventory.cpp QueryBuilder.cpp QueryProduct.cpp QueueIterator.cpp RealGreenHouseInventory.cpp Receipt.cpp RedPot.cpp Ribbon.cpp Rose.cpp RoseFactory.cpp SalesHandler.cpp SaplingState.cpp Scent.cpp SeedState.cpp SelectQueryBuilder.cpp StaffHandler.cpp StaffSystem.cpp Sunflower.cpp SunflowerFactory.cpp Water.cpp WaterCommand.cpp WaterHandler.cpp WaterMonitor.cpp main.cpp Common/LoginDialog.cpp CustomerWindows/CustomerMainWindow.cpp CustomerWindows/ReturnOrderDialog.cpp CustomerWindows/ReceiptDialog.cpp StaffWindows/StaffMainWindow.cpp StaffWindows/PlantManagementWidget.cpp StaffWindows/StaffManagementWidget.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Cactus.h CactusFactory.h Caretaker.h Command.h Customer.h CustomerCommand.h CustomerFacade.h DeadCommand.h DeadHandler.h DeadMonitor.h DeadState.h DeleteQueryBuilder.h Save10Discount.h BulkDiscount.h FertilizedState.h Fertilizer.h FertilizerCommand.h FertilizerHandler.h FertilizerMonitor.h GerminationState.h GetPlantCommand.h GiftWrap.h GreenHouseFacade.h GreenHouseInventory.h HydratedState.h InsertQueryBuilder.h Item.h MatureState.h NonFertilizerState.h NormalPrice.h NotHydratedState.h Order.h OrderMemento.h Plant.h PlantCommand.h PlantComponent.h PlantDecorator.h PlantFactory.h PlantGroup.h PlantGrowthState.h PlantMonitor.h PlantSnapshot.h PriceStrategies.h ProxyGreenHouseInventory.h QueryBuilder.h QueryProduct.h QueueIterator.h RealGreenHouseInventory.h Receipt.h RedPot.h Ribbon.h Rose.h RoseFactory.h SalesHandler.h SaplingState.h Scent.h SeedState.h SelectQueryBuilder.h StaffHandler.h StaffSystem.h Sunflower.h SunflowerFactory.h Water.h WaterCommand.h WaterHandler.h WaterMonitor.h Common/LoginDialog.h CustomerWindows/CustomerMainWindow.h CustomerWindows/ReturnOrderDialog.h CustomerWindows/ReceiptDialog.h StaffWindows/StaffMainWindow.h StaffWindows/PlantManagementWidget.h StaffWindows/StaffManagementWidget.h $(DISTDIR)/
+	$(COPY_FILE) --parents Cactus.cpp CactusFactory.cpp Caretaker.cpp Command.cpp Customer.cpp CustomerCommand.cpp CustomerFacade.cpp DeadCommand.cpp DeadHandler.cpp DeadMonitor.cpp DeadState.cpp DeleteQueryBuilder.cpp Save10Discount.cpp BulkDiscount.cpp FertilizedState.cpp FertilizerCommand.cpp FertilizerHandler.cpp FertilizerMonitor.cpp GerminationState.cpp GetPlantCommand.cpp GiftWrap.cpp GreenHouseFacade.cpp GreenHouseInventory.cpp HydratedState.cpp InsertQueryBuilder.cpp Item.cpp MatureState.cpp NonFertilizerState.cpp NormalPrice.cpp NotHydratedState.cpp Order.cpp OrderMemento.cpp Plant.cpp PlantCommand.cpp PlantDecorator.cpp PlantFactory.cpp PlantGroup.cpp PlantMonitor.cpp PlantSnapshot.cpp ProxyGreenHouseInventory.cpp QueryBuilder.cpp QueryProduct.cpp QueueIterator.cpp RealGreenHouseInventory.cpp Receipt.cpp RedPot.cpp Ribbon.cpp Rose.cpp RoseFactory.cpp SalesHandler.cpp SaplingState.cpp Scent.cpp SeedState.cpp SelectQueryBuilder.cpp StaffHandler.cpp StaffSystem.cpp Sunflower.cpp SunflowerFactory.cpp Water.cpp WaterCommand.cpp WaterHandler.cpp WaterMonitor.cpp main.cpp Common/LoginDialog.cpp CustomerWindows/CustomerMainWindow.cpp CustomerWindows/ReturnOrderDialog.cpp CustomerWindows/ReceiptDialog.cpp StaffWindows/StaffMainWindow.cpp StaffWindows/PlantManagementWidget.cpp StaffWindows/StaffManagementWidget.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Common/LoginDialog.ui CustomerWindows/CustomerMainWindow.ui CustomerWindows/ReturnOrderDialog.ui CustomerWindows/ReceiptDialog.ui StaffWindows/StaffMainWindow.ui StaffWindows/PlantManagementWidget.ui StaffWindows/StaffManagementWidget.ui $(DISTDIR)/
 
 
@@ -656,7 +660,7 @@ compiler_moc_header_clean:
 build/moc/moc_LoginDialog.cpp: Common/LoginDialog.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include Common/LoginDialog.h -o build/moc/moc_LoginDialog.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include Common/LoginDialog.h -o build/moc/moc_LoginDialog.cpp
 
 build/moc/moc_CustomerMainWindow.cpp: CustomerWindows/CustomerMainWindow.h \
 		CustomerFacade.h \
@@ -681,15 +685,16 @@ build/moc/moc_CustomerMainWindow.cpp: CustomerWindows/CustomerMainWindow.h \
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/CustomerMainWindow.h -o build/moc/moc_CustomerMainWindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/CustomerMainWindow.h -o build/moc/moc_CustomerMainWindow.cpp
 
 build/moc/moc_ReturnOrderDialog.cpp: CustomerWindows/ReturnOrderDialog.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/ReturnOrderDialog.h -o build/moc/moc_ReturnOrderDialog.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/ReturnOrderDialog.h -o build/moc/moc_ReturnOrderDialog.cpp
 
 build/moc/moc_ReceiptDialog.cpp: CustomerWindows/ReceiptDialog.h \
 		Order.h \
@@ -706,12 +711,12 @@ build/moc/moc_ReceiptDialog.cpp: CustomerWindows/ReceiptDialog.h \
 		Receipt.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/ReceiptDialog.h -o build/moc/moc_ReceiptDialog.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CustomerWindows/ReceiptDialog.h -o build/moc/moc_ReceiptDialog.cpp
 
 build/moc/moc_StaffMainWindow.cpp: StaffWindows/StaffMainWindow.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/StaffMainWindow.h -o build/moc/moc_StaffMainWindow.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/StaffMainWindow.h -o build/moc/moc_StaffMainWindow.cpp
 
 build/moc/moc_PlantManagementWidget.cpp: StaffWindows/PlantManagementWidget.h \
 		GreenHouseFacade.h \
@@ -745,7 +750,7 @@ build/moc/moc_PlantManagementWidget.cpp: StaffWindows/PlantManagementWidget.h \
 		SalesHandler.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/PlantManagementWidget.h -o build/moc/moc_PlantManagementWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/PlantManagementWidget.h -o build/moc/moc_PlantManagementWidget.cpp
 
 build/moc/moc_StaffManagementWidget.cpp: StaffWindows/StaffManagementWidget.h \
 		GreenHouseFacade.h \
@@ -779,7 +784,7 @@ build/moc/moc_StaffManagementWidget.cpp: StaffWindows/StaffManagementWidget.h \
 		SalesHandler.h \
 		build/moc/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include '/root/COS 214/CodeBlooded/build/moc/moc_predefs.h' -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I'/root/COS 214/CodeBlooded' -I'/root/COS 214/CodeBlooded/StaffWindows' -I'/root/COS 214/CodeBlooded/CustomerWindows' -I'/root/COS 214/CodeBlooded/Common' -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/StaffManagementWidget.h -o build/moc/moc_StaffManagementWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/obedm/second-year/COS214_project/CodeBlooded/build/moc/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/obedm/second-year/COS214_project/CodeBlooded -I/home/obedm/second-year/COS214_project/CodeBlooded/StaffWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/CustomerWindows -I/home/obedm/second-year/COS214_project/CodeBlooded/Common -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include StaffWindows/StaffManagementWidget.h -o build/moc/moc_StaffManagementWidget.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -978,7 +983,8 @@ build/obj/CustomerFacade.o: CustomerFacade.cpp CustomerFacade.h \
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		RedPot.h \
 		Ribbon.h \
 		Scent.h \
@@ -1035,9 +1041,15 @@ build/obj/DeleteQueryBuilder.o: DeleteQueryBuilder.cpp DeleteQueryBuilder.h \
 		SeedState.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/DeleteQueryBuilder.o DeleteQueryBuilder.cpp
 
-build/obj/DiscountPrice.o: DiscountPrice.cpp DiscountPrice.h \
-		PriceStrategies.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/DiscountPrice.o DiscountPrice.cpp
+build/obj/Save10Discount.o: Save10Discount.cpp Save10Discount.h \
+		PriceStrategies.h \
+		PlantComponent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/Save10Discount.o Save10Discount.cpp
+
+build/obj/BulkDiscount.o: BulkDiscount.cpp BulkDiscount.h \
+		PriceStrategies.h \
+		PlantComponent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/BulkDiscount.o BulkDiscount.cpp
 
 build/obj/FertilizedState.o: FertilizedState.cpp FertilizedState.h \
 		Fertilizer.h \
@@ -1179,7 +1191,8 @@ build/obj/NonFertilizerState.o: NonFertilizerState.cpp NonFertilizerState.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/NonFertilizerState.o NonFertilizerState.cpp
 
 build/obj/NormalPrice.o: NormalPrice.cpp NormalPrice.h \
-		PriceStrategies.h
+		PriceStrategies.h \
+		PlantComponent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/NormalPrice.o NormalPrice.cpp
 
 build/obj/NotHydratedState.o: NotHydratedState.cpp NotHydratedState.h \
@@ -1200,8 +1213,9 @@ build/obj/Order.o: Order.cpp Order.h \
 		Rose.h \
 		Sunflower.h \
 		Receipt.h \
-		DiscountPrice.h \
-		NormalPrice.h
+		NormalPrice.h \
+		BulkDiscount.h \
+		Save10Discount.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/Order.o Order.cpp
 
 build/obj/OrderMemento.o: OrderMemento.cpp OrderMemento.h \
@@ -1532,7 +1546,8 @@ build/obj/main.o: main.cpp Common/LoginDialog.h \
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		GreenHouseFacade.h \
 		PlantFactory.h \
 		WaterMonitor.h \
@@ -1576,7 +1591,8 @@ build/obj/LoginDialog.o: Common/LoginDialog.cpp Common/LoginDialog.h \
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		StaffWindows/StaffMainWindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/LoginDialog.o Common/LoginDialog.cpp
 
@@ -1603,7 +1619,8 @@ build/obj/CustomerMainWindow.o: CustomerWindows/CustomerMainWindow.cpp CustomerW
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h \
+		Save10Discount.h \
+		BulkDiscount.h \
 		build/ui/ui_CustomerMainWindow.h \
 		CustomerWindows/ReturnOrderDialog.h \
 		CustomerWindows/ReceiptDialog.h \
@@ -1635,7 +1652,8 @@ build/obj/ReturnOrderDialog.o: CustomerWindows/ReturnOrderDialog.cpp CustomerWin
 		SelectQueryBuilder.h \
 		PlantDecorator.h \
 		NormalPrice.h \
-		DiscountPrice.h
+		Save10Discount.h \
+		BulkDiscount.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o build/obj/ReturnOrderDialog.o CustomerWindows/ReturnOrderDialog.cpp
 
 build/obj/ReceiptDialog.o: CustomerWindows/ReceiptDialog.cpp CustomerWindows/ReceiptDialog.h \

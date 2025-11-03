@@ -33,7 +33,8 @@ SOURCES += \
     DeadMonitor.cpp \
     DeadState.cpp \
     DeleteQueryBuilder.cpp \
-    DiscountPrice.cpp \
+    Save10Discount.cpp \
+    BulkDiscount.cpp \
     FertilizedState.cpp \
     FertilizerCommand.cpp \
     FertilizerHandler.cpp \
@@ -108,7 +109,8 @@ HEADERS += \
     DeadMonitor.h \
     DeadState.h \
     DeleteQueryBuilder.h \
-    DiscountPrice.h \
+    Save10Discount.h \
+    BulkDiscount.h \
     FertilizedState.h \
     Fertilizer.h \
     FertilizerCommand.h \
