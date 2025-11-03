@@ -20,7 +20,7 @@ Plant *RoseFactory::createPlant()
     newRose->attachFertilizerMonitor(this->fertilizerMonitor);
     newRose->attachDeadMonitor(this->deadMonitor);
 
-    this->queryBuilder->insertQueryBuilder(newRose);
+    // this->queryBuilder->insertQueryBuilder(newRose);
 
     return newRose;
 }

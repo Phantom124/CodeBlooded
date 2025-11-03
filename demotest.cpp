@@ -2,6 +2,7 @@
 #include <string>
 #include "GreenHouseInventory.h"
 #include "ProxyGreenHouseInventory.h"
+#include "RealGreenHouseInventory.h"
 #include "Plant.h"
 #include <vector>
 
@@ -15,90 +16,44 @@
 #include "FertilizerMonitor.h"
 #include "DeadMonitor.h"
 
+#include "QueryBuilder.h"
+#include "QueryProduct.h"
 
+#include "DeleteQueryBuilder.h"
+#include "InsertQueryBuilder.h"
+#include "SelectQueryBuilder.h"
 
-class CustomerInterface{
-    private:
-    GreenHouseInventory* inventory;
-    public:
-    void DisplayPlants(){
-        // std::cout << "Displaying available plants...\n";
-        // Add logic to display plants
-        //PrintPlantFuncion
-        std::vector<Plant*> plants = inventory->getPlants();
-        for (const auto& plant : plants) {
-            plant->print();
-        }
+#include "StaffInterface.h"
 
-
-
-    }
-    void customerMenu() {
-    std::cout << "Customer Menu\n";
-    while(true) {
-        std::cout << "1. View Plants\n2. Purchase Plant\n3. Return Order\nb. Back to Main Menu\nEnter choice: ";
-        std::string choice;
-        std::cin >> choice;
-        if (choice == "b" || choice == "B") {
-            std::cout<<"Returning to Main Menu...\n";
-            break;
-        }
-        if(choice == "1") {
-            std::cout << "Displaying available plants...\n";
-            // Add logic to display plants
-        } else if(choice == "2") {
-            std::cout << "Processing plant purchase...\n";
-            // Add logic to purchase plant
-        } else if(choice == "3") {
-            std::cout << "Processing order return...\n";
-            // Add logic to return order
-        } else {
-            std::cout << "Invalid option. Please try again.\n";
-        }
-        // Add more customer functionalities here
-        // std::cout << "Functionality not implemented yet.\n";
-    }
-}
-};
-
-void customerMenu() {
-    std::cout << "Customer Menu\n";
-    while(true) {
-        std::cout << "1. View Plants\n2. Purchase Plant\n3. Return Order\nb. Back to Main Menu\nEnter choice: ";
-        std::string choice;
-        std::cin >> choice;
-        if (choice == "b" || choice == "B") {
-            std::cout<<"Returning to Main Menu...\n";
-            break;
-        }
-        if(choice == "1") {
-            std::cout << "Displaying available plants...\n";
-            // Add logic to display plants
-        } else if(choice == "2") {
-            std::cout << "Processing plant purchase...\n";
-            // Add logic to purchase plant
-        } else if(choice == "3") {
-            std::cout << "Processing order return...\n";
-            // Add logic to return order
-        } else {
-            std::cout << "Invalid option. Please try again.\n";
-        }
-        // Add more customer functionalities here
-        // std::cout << "Functionality not implemented yet.\n";
-    }
-}
 
 int main() {
-    //Create Handlers
-    StaffHandler *waterHandler = new WaterHandler();
-    StaffHandler *fertilizerHandler = new FertilizerHandler();
-    StaffHandler *deadHandler = new DeadHandler();
+    //Create Inventory
+    ProxyGreenHouseInventory* proxyGreenHouseInventory = new ProxyGreenHouseInventory();
+    StaffSystem* staffSystem = new StaffSystem();
+    StaffInterface* staffInterface = new StaffInterface(proxyGreenHouseInventory, staffSystem);//sets up monitors and factories
+
+
+    // //Create Handlers
+    // StaffHandler *waterHandler = new WaterHandler();
+    // StaffHandler *fertilizerHandler = new FertilizerHandler();
+    // StaffHandler *deadHandler = new DeadHandler();
+
+    // //Creating Query Builders
+    // QueryBuilder* selectQueryBuilder = new SelectQueryBuilder();
+    // QueryBuilder* insertQueryBuilder = new InsertQueryBuilder();
+    // QueryBuilder* deleteQueryBuilder = new DeleteQueryBuilder();
+
+    // //Assign DeadHandler to use DeleteQueryBuilder
+    // deadHandler->setQueryBuilder(deleteQueryBuilder);
+    // QueryProduct* product = new QueryProduct(proxyGreenHouseInventory);
+
+    
 
     //Create Staff System and add handlers
-    StaffSystem* staffSystem = new StaffSystem();
-    staffSystem->addHandler(waterHandler);
-    staffSystem->addHandler(fertilizerHandler);
-    staffSystem->addHandler(deadHandler);
+    
+    // staffSystem->addHandler(waterHandler);
+    // staffSystem->addHandler(fertilizerHandler);
+    // staffSystem->addHandler(deadHandler);
 
     //Create Monitors and link to Staff System
     WaterMonitor* waterMonitor = new WaterMonitor();
