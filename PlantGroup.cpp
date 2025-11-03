@@ -3,7 +3,7 @@
 
 std::vector<PlantComponent *> PlantGroup::getPlantComponents()
 {
-    return plants;
+    return plants;  
 }
 
 PlantGroup::PlantGroup() : PlantComponent() {}
