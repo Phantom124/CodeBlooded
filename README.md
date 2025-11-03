@@ -5,7 +5,7 @@ PLANT NURSERY SIMULATOR
 Welcome to DeBUG Nursery, a C++ project inspired the vibrant energy of spring in South Africa.
 This simulator models the day-to-day operations of a thriving nursery, where plants grow, customers shop, and staff keep everything running smoothly.
 
-## Feautures:
+## Features:
 ### Greenhouse
 - Manage and monitor various plant types.
 - Track plant growth stages.
@@ -17,7 +17,7 @@ This simulator models the day-to-day operations of a thriving nursery, where pla
 - Greenhouse conditions are managed automatically.
 - Staff interactions are protected.
 
-### Customer Intereactions
+### Customer Interactions
 - Customer can browse and view plants.
 - Access is secured via control rights.
 
