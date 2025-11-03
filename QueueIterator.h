@@ -6,18 +6,21 @@
 class StaffSystem;
 class StaffHandler;
 
-class QueueIterator {
-	private:
-		StaffSystem* sys;
-	public:
-		QueueIterator(StaffSystem* sys);
-		// QueueIterator(const QueueIterator& it);
-		void emptyQueue(StaffHandler* head);
-		Command* dequeue();
-		Command* front();
-		bool isEmpty();
-		void enqueue(Command* command);
-		void deleteQueue();
+class QueueIterator
+{
+private:
+	StaffSystem *sys;
+
+public:
+	QueueIterator(StaffSystem *sys);
+	// QueueIterator(const QueueIterator& it);
+	void emptyQueue(StaffHandler *head);
+	Command *dequeue();
+	Command *front();
+	bool isEmpty();
+	void enqueue(Command *command);
+	void deleteQueue();
+	void deleteAllWithId(int plantID);
 };
 
 #endif

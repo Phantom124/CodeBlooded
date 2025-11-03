@@ -17,8 +17,10 @@ void WaterHandler::handleRequest(Command* command, StaffSystem* staffSys){
     } else if (staffSys == nullptr){
         throw std::invalid_argument("StaffSystem is a nullptr.");
     }
+    cout << "handle req" << endl;
 
     if (isAvailable == true && command->getType() == WATER){//First: Are you available //Second: Is this a water command
+        cout << "WaterHandler: Handling water command..." << endl;
         isAvailable = false;
         command->execute();
         delete command;

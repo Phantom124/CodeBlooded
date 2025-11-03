@@ -1,7 +1,12 @@
 #include "QueryBuilder.h"
 #include "QueryProduct.h"
+#include "SharedInstances.h"
 
 QueryBuilder::QueryBuilder(){
+    if (g_sharedInventory != nullptr){
+        this->queryProduct = new QueryProduct(g_sharedInventory);
+        return;
+    }
     this->queryProduct = new QueryProduct(nullptr);
 }
 

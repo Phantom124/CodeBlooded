@@ -3,9 +3,9 @@
 
 RealGreenHouseInventory::RealGreenHouseInventory()
 {
-    this->plants.push_back(new Rose());
-    this->plants.push_back(new Sunflower());
-    this->plants.push_back(new Cactus());
+    // this->plants.push_back(new Rose());
+    // this->plants.push_back(new Sunflower());
+    // this->plants.push_back(new Cactus());
 }
 
 RealGreenHouseInventory::~RealGreenHouseInventory()

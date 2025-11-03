@@ -1,6 +1,7 @@
 #include "DeadHandler.h"
 #include "DeadCommand.h"
-
+#include "QueryProduct.h"
+#include "QueueIterator.h"
 #include <stdexcept>
 #include <iostream>
 
@@ -25,9 +26,16 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
         DeadCommand *deadCmd = dynamic_cast<DeadCommand *>(command);
         Plant *plant = deadCmd->getPlant();
         string id = std::to_string(plant->getPlantId());
-        // createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
-        // TODO: Figure out how the DeleteQuery works
+        int intId = plant->getPlantId();
+
+        QueryProduct* qp = createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
+        if (qp){
+            qp->execute();
+        }
         delete command;
+
+        QueueIterator it(staffSys);
+        it.deleteAllWithId(intId);
     } else {
         StaffHandler::handleRequest(command, staffSys);
     }

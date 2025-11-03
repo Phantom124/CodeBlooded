@@ -114,6 +114,24 @@ void GreenHouseFacade::simulateHourPassed()
         }
     }
 
+    //Remove dead plants from vector
+    vector<Plant*>::iterator it = managedPlants.begin();
+    while (it != managedPlants.end()) {
+        Plant* plant = *it;
+        if (plant && plant->getMaturityStateName() == "Dead"){
+            // Remove from inventory BEFORE deleting
+            if (inventory)            {
+                inventory->removePlant(std::to_string(plant->getPlantId()));
+            }
+            it = managedPlants.erase(it);
+            cout << "Removing dead plants" << endl;
+
+            // delete plant;
+        } else{
+            ++it;
+        }
+    }
+
     resetHandlerStatuses();
 
     if (staffSystem)
