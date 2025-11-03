@@ -4,6 +4,7 @@
 #include "PlantComponent.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 GreenHouseInventory::~GreenHouseInventory(){
     for (Plant* p: this->plants){
@@ -32,5 +33,19 @@ void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plan
         // Construct Item from Plant fields (Item has constructor Item(string id, string type, string maturity))
         // Item item(std::to_string(plant->getPlantId()), plant->getName(), plant->getMaturityStateName());
         addPlant(plant);
+    }
+}
+
+void GreenHouseInventory::printPlant(){
+    if (this->plants.empty()){
+        std::cout << "No plants in the Inventory." << std::endl;
+        return;
+    }
+
+    for (auto p: this->plants){
+        if (!p){
+            continue;
+        }
+        p->printPlant();
     }
 }

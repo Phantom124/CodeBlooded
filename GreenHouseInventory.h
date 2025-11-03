@@ -22,6 +22,8 @@ class GreenHouseInventory {
         virtual void restorePlants(const std::vector<PlantComponent*>& plants);
 
         virtual void hourHasPassed() = 0;
+        
+        virtual void printPlant();
 
     protected:
         // storage used by the default implementation in GreenHouseInventory.cpp

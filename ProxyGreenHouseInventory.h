@@ -31,6 +31,8 @@ class ProxyGreenHouseInventory : public GreenHouseInventory {
         void handleControlRights(void* user, QueryProduct query);
 
         void hourHasPassed();
+
+        void printPlant();
     
     private:
         RealGreenHouseInventory* realInventory;

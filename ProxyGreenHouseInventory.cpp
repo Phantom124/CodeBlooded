@@ -77,3 +77,12 @@ void ProxyGreenHouseInventory::hourHasPassed(){
         std::cout << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
     }
 }
+
+void ProxyGreenHouseInventory::printPlant(){
+    if (this->realInventory){
+        this->realInventory->printPlant();
+    }
+    else{
+        GreenHouseInventory::printPlant();
+    }
+}

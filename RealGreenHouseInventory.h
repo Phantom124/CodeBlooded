@@ -23,6 +23,8 @@ class RealGreenHouseInventory : public GreenHouseInventory{
         void hourHasPassed();
         std::vector<Plant*> getAllPlants();
 
+        void printPlant();
+
 
     private:
         // std::vector<Plant*> plant;

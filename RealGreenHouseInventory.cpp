@@ -83,3 +83,8 @@ std::vector<Plant *> RealGreenHouseInventory::getAllPlants()
 {
     return this->plants;
 }
+
+void RealGreenHouseInventory::printPlant(){
+    std::cout << "REAL GREENHOUSE INVENTORY" << std::endl;
+    GreenHouseInventory::printPlant();
+}
