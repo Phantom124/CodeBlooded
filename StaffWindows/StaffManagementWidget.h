@@ -1,3 +1,10 @@
+/**
+ * @file StaffWindows/StaffManagementWidget.h
+ * @brief StaffManagementWidget.h — Header and declarations for the StaffManagementWidget.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #ifndef STAFFMANAGEMENTWIDGET_H
 #define STAFFMANAGEMENTWIDGET_H
 
@@ -13,6 +20,11 @@ class StaffManagementWidget : public QWidget
     Q_OBJECT
 
 public:
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ */
+
     explicit StaffManagementWidget(QWidget *parent = nullptr);
     ~StaffManagementWidget();
 

@@ -1,3 +1,10 @@
+/**
+ * @file Cactus.cpp
+ * @brief Cactus.cpp — Header and declarations for the Cactus.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Cactus.h"
 
 Cactus::Cactus()

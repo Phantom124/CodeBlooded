@@ -1,3 +1,10 @@
+/**
+ * @file PlantSnapshot.cpp
+ * @brief PlantSnapshot.cpp — Header and declarations for the PlantSnapshot.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "PlantSnapshot.h"
 #include <stdexcept> 
 #include "SeedState.h"
@@ -6,8 +13,19 @@
 #include "MatureState.h"
 #include "DeadState.h"
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param *plant 
+ */
+
 PlantSnapshot::PlantSnapshot(Plant *plant) {
     if(plant == nullptr) {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param null" 
+ */
+
         throw std::invalid_argument("Plant pointer cannot be null");
     }
     this->plantType = plant->type;
@@ -28,11 +46,24 @@ Plant *PlantSnapshot::convertToPlant(){
     Plant *plant;
     if(plantType == "Cactus"){
         plant = new Cactus();
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ */
+
     }else if(plantType == "Rose"){
         plant = new Rose();
+
+
     }else if(plantType == "Sunflower"){
         plant = new Sunflower();
     }else{
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param plantType The plantType parameter used by the function.
+ */
+
         throw std::invalid_argument("Unknown plant type: " + plantType);
     }
 

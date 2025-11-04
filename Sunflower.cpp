@@ -1,3 +1,10 @@
+/**
+ * @file Sunflower.cpp
+ * @brief Sunflower.cpp — Header and declarations for the Sunflower.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Sunflower.h"
 
 Sunflower::Sunflower()

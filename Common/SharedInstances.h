@@ -1,3 +1,10 @@
+/**
+ * @file Common/SharedInstances.h
+ * @brief SharedInstances.h — Header and declarations for the SharedInstances.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #ifndef SHAREDINSTANCES_H
 #define SHAREDINSTANCES_H
 

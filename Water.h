@@ -1,3 +1,10 @@
+/**
+ * @file Water.h
+ * @brief Water.h — Header and declarations for the Water.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #ifndef WATER_H
 #define WATER_H
 #include <string>

@@ -1,3 +1,10 @@
+/**
+ * @file TestingMain.cpp
+ * @brief TestingMain.cpp — Header and declarations for the TestingMain.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -51,23 +58,59 @@ void systemTesting() {
         StaffHandler* gardener1 = new WaterHandler();
         StaffHandler* gardener2 = new FertilizerHandler();
         StaffHandler* gardener3 = new DeadHandler();
+/**
+ * @brief Execute the function's primary operation.
+ * @param gardener1 The gardener1 parameter used by the function.
+ */
+
         staffSystem->addHandler(gardener1);
+/**
+ * @brief Execute the function's primary operation.
+ * @param gardener2 The gardener2 parameter used by the function.
+ */
+
         staffSystem->addHandler(gardener2);
+/**
+ * @brief Execute the function's primary operation.
+ * @param gardener3 The gardener3 parameter used by the function.
+ */
+
         staffSystem->addHandler(gardener3);
     }
     
     cout << "[setup] Creating Plant monitors..." << endl;
     WaterMonitor* waterMonitor = new WaterMonitor();
+/**
+ * @brief Execute the function's primary operation.
+ * @param staffSystem The staffSystem parameter used by the function.
+ */
+
     waterMonitor->setStaffSystem(staffSystem);
     FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
+
+
     fertilizerMonitor->setStaffSystem(staffSystem);
     DeadMonitor* deadMonitor = new DeadMonitor();
+
+
     deadMonitor->setStaffSystem(staffSystem);
 
     cout << "[setup] Instantiating Factories..." << endl;  // 0 - Rose, 1 - Sunflower, 2 - Cactus
     PlantFactory** plantFactories = new PlantFactory*[3];
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param waterMonitor The waterMonitor parameter used by the function.
+ * @param fertilizerMonitor The fertilizerMonitor parameter used by the function.
+ * @param deadMonitor The deadMonitor parameter used by the function.
+ */
+
     plantFactories[0] = new RoseFactory(waterMonitor, fertilizerMonitor, deadMonitor);
+
+
     plantFactories[1] = new SunflowerFactory(waterMonitor, fertilizerMonitor, deadMonitor);
+
+
     plantFactories[2] = new CactusFactory(waterMonitor, fertilizerMonitor, deadMonitor);
 
     cout << "[setup] Creating InsertQueryBuilder..." << endl;
@@ -83,6 +126,11 @@ void systemTesting() {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 9; j++) {
             Plant* plant = plantFactories[i]->createPlant();
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
             proxy->addPlant(plant);
             cout << left << setw(6) << plant->getPlantId() << setw(16) << plant->getName() << setw(18) << plant->getMaturityStateName() << setw(8) << plant->getWaterLevel() << setw(12) << plant->getFertilizerLevel() << endl;
         }

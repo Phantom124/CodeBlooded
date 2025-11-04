@@ -1,10 +1,35 @@
+/**
+ * @file RealGreenHouseInventory.cpp
+ * @brief RealGreenHouseInventory.cpp — Header and declarations for the RealGreenHouseInventory.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "RealGreenHouseInventory.h"
 #include "Plant.h"
 
 RealGreenHouseInventory::RealGreenHouseInventory()
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param Rose() TODO - describe parameter
+ */
+
     // this->plants.push_back(new Rose());
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param Sunflower() TODO - describe parameter
+ */
+
     // this->plants.push_back(new Sunflower());
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param Cactus() TODO - describe parameter
+ */
+
     // this->plants.push_back(new Cactus());
 }
 
@@ -46,6 +71,11 @@ void RealGreenHouseInventory::showAllPlants()
 
 void RealGreenHouseInventory::addPlant(Plant *plant)
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
     this->plants.push_back(plant);
 
     std::cout << "PLANT ADDED => " << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
@@ -60,6 +90,11 @@ void RealGreenHouseInventory::removePlant(std::string parameters)
         if (std::to_string(plants[i]->getPlantId()) == parameters)
         {
             std::cout << "PLANT REMOVED => " << plants[i]->getPlantId() << " " << plants[i]->getName() << " " << plants[i]->getMaturityStateName() << std::endl;
+/**
+ * @brief Execute the function's primary operation.
+ * @param i The i parameter used by the function.
+ */
+
             plants.erase(plants.begin() + i);
             showAllPlants();
             return;

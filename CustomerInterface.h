@@ -1,3 +1,10 @@
+/**
+ * @file CustomerInterface.h
+ * @brief CustomerInterface.h — Header and declarations for the CustomerInterface.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #ifndef CUSTOMERINTERFACE_H
 #define CUSTOMERINTERFACE_H
 #include "GreenHouseInventory.h"

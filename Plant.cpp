@@ -1,3 +1,10 @@
+/**
+ * @file Plant.cpp
+ * @brief Plant.cpp — Header and declarations for the Plant.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Plant.h"
 #include <string>
 #include <sstream>
@@ -76,6 +83,11 @@ int Plant::getHealthEffects()
 void Plant::healthEffects()
 {
 
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ */
+
     // if(this->health <= 0){//CHECK IF DEAD
     //     return;
     // }
@@ -84,9 +96,19 @@ void Plant::healthEffects()
     if (this->health < 0)
     { // DEAD
         this->health = 0;
+/**
+ * @brief Execute the function's primary operation.
+ * @param DeadState
+ */
+
         setGrowthState(new DeadState()); // MAKE DEAD MAKE DEAD
         if (deadMonitor != nullptr)
         {
+/**
+ * @brief Execute the function's primary operation.
+ * @param this The this parameter used by the function.
+ */
+
             deadMonitor->update(this);
         }
         // NOTIFY OBSERVERS
@@ -120,14 +142,28 @@ void Plant::checkWaterLevel()
 {
     if (waterState != nullptr)
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param this->waterLevel 
+ * @param this->lowWaterLevel
+ */
+
         Water *nextState = waterState->getNextState(this->waterLevel, this->lowWaterLevel);
         if (nextState != nullptr)
         { // CHANGE state (nextState is a new state object)
+/**
+ * @brief Execute the function's primary operation.
+ * @param nextState The nextState parameter used by the function.
+ */
+
             this->setWaterState(nextState);
             if (nextState->getStateName() == "NotHydrated")
             {
                 if (waterMonitor != nullptr)
                 {
+
+
                     waterMonitor->update(this); // NOTIFY Monitor
                 }
             }
@@ -140,15 +176,26 @@ void Plant::checkFertilizerLevel()
 {
     if (fertilizerState != nullptr)
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param this->fertilizerLevel 
+ * @param this->lowFertilizerLevel
+ */
+
         Fertilizer *nextState = fertilizerState->getNextState(this->fertilizerLevel, this->lowFertilizerLevel);
         if (nextState != nullptr)
         { // CHANGE state (nextState is a new state object)
+
+
             this->setFertilizerState(nextState);
             if (nextState->getStateName() == "NonFertilized")
             {
                 // std::cout << "Fertilizer level low, notifying monitor." << std::endl;
                 if (fertilizerMonitor != nullptr)
                 {
+
+
                     fertilizerMonitor->update(this); // NOTIFY Monitor
                 }
                 // else ignore or log warning
@@ -166,6 +213,12 @@ void Plant::decreaseWaterLevel()
     }
     else
     {                                                                      // Only decrease if not dead
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param this->waterRetention 
+ */
+
         this->waterLevel = this->waterLevel - (10 * this->waterRetention); // Decrease water level based on retention
         if (waterLevel < 0)
         {
@@ -183,6 +236,12 @@ void Plant::decreaseFertilizerLevel()
     }
     else
     {                                                                                    // Only decrease if not dead
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param this->fertilizerRetention 
+ */
+
         this->fertilizerLevel = this->fertilizerLevel - (8 * this->fertilizerRetention); // Decrease fertilizer level based on retention
         if (fertilizerLevel < 0)
         {
@@ -277,11 +336,17 @@ void Plant::print()
 
     result += ": " + strPlantId;
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param "" 
+ */
+
     ss.str("");
     ss.clear();
     ss << this->waterLevel;
     std::string strWaterLvl = ss.str();
     result += " | Water: " + this->waterState->getStateName() + " " + strWaterLvl + "%";
+
 
     ss.str("");
     ss.clear();
@@ -289,19 +354,32 @@ void Plant::print()
     std::string strFertLvl = ss.str();
     result += " | Fertilizer: " + this->fertilizerState->getStateName() + " " + strFertLvl + "%";
 
+
     ss.str("");
     ss.clear();
     ss << this->health;
     std::string strHealth = ss.str();
     result += " | Health: " + strHealth;
 
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ */
+
     // if(getHealthEffects() && health != 100 && health != 0){//is change in health
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param "" 
+ */
+
     //     ss.str("");
     //     ss.clear();
     //     ss << this->getHealthEffects();
     //     std::string strHealthEffect = ss.str();
     //     result += " changed by: " + strHealthEffect;
     // }
+
 
     ss.str("");
     ss.clear();
@@ -349,6 +427,12 @@ void Plant::attachWaterMonitor(WaterMonitor *observer)
     }
     else
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param null
+ */
+
         throw std::invalid_argument("Observer cannot be null");
     }
 }
@@ -361,6 +445,8 @@ void Plant::attachFertilizerMonitor(FertilizerMonitor *observer)
     }
     else
     {
+
+
         throw std::invalid_argument("Observer cannot be null");
     }
 }
@@ -373,6 +459,8 @@ void Plant::attachDeadMonitor(DeadMonitor *observer)
     }
     else
     {
+
+
         throw std::invalid_argument("Observer cannot be null");
     }
 }
@@ -416,6 +504,11 @@ void Plant::add(PlantComponent *newDecorator)
 
     if (decorator != nullptr)
     { // something already exists
+/**
+ * @brief Execute the function's primary operation.
+ * @param newDecorator The newDecorator parameter used by the function.
+ */
+
         decorator->add(newDecorator);
     }
     else
@@ -444,7 +537,15 @@ void Plant::increaseCareCount()
     }
     this->careCount += getCareCountEffect();
     checkGrowthLevel();
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param this->careCount 
+ */
+
     // PlantGrowthState* nextState = this->growthState->getNextState(this->careCount);
+
+
     // if(nextState != nullptr){
     //     delete this->growthState;
     //     this->growthState = nextState;
@@ -469,12 +570,16 @@ void Plant::checkGrowthLevel()
     PlantGrowthState *nextState = nullptr;
     do
     {
+
+
         nextState = this->growthState->getNextState(this->careCount);
         if (nextState != nullptr)
         {
             delete this->growthState;
             this->growthState = nextState;
         }
+
+
     } while (nextState != nullptr);
 }
 

@@ -1,3 +1,10 @@
+/**
+ * @file Ribbon.cpp
+ * @brief Ribbon.cpp — Header and declarations for the Ribbon.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Ribbon.h"
 #include <iostream>
 #include <string>

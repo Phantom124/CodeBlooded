@@ -1,3 +1,10 @@
+/**
+ * @file GiftWrap.cpp
+ * @brief GiftWrap.cpp — Header and declarations for the GiftWrap.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "GiftWrap.h"
 #include <iostream>
 #include <string>

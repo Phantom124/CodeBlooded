@@ -1,3 +1,10 @@
+/**
+ * @file PlantGroup.cpp
+ * @brief PlantGroup.cpp — Header and declarations for the PlantGroup.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "PlantGroup.h"
 #include <iostream>
 
@@ -20,6 +27,12 @@ PlantGroup::~PlantGroup()
 
 double PlantGroup::getPrice()
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param plants.size() 
+ */
+
     auto size = static_cast<int>(plants.size());
     double price = 0.0;
     for (long int i = 0; i < size; i++)
@@ -33,6 +46,8 @@ double PlantGroup::getPrice()
 std::string PlantGroup::getName()
 {
     std::string plantGroup = "(";
+
+
     auto size = static_cast<int>(plants.size());
     // std::cout << "size is " << size << std::endl;
     for (int i = 0; i < size; i++)
@@ -55,6 +70,11 @@ std::vector<PlantComponent *> PlantGroup::getPlants()
 
 void PlantGroup::add(PlantComponent *plantComponent)
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @param plantComponent The plantComponent parameter used by the function.
+ */
+
     this->plants.push_back(plantComponent);
 }
 
@@ -64,6 +84,11 @@ void PlantGroup::removePlantComponent(PlantComponent *plantComponent)
     {
         if ((*it) == plantComponent)
         {
+/**
+ * @brief Execute the function's primary operation.
+ * @param it The it parameter used by the function.
+ */
+
             this->plants.erase(it);
             break;
         }

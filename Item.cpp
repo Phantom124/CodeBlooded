@@ -1,3 +1,10 @@
+/**
+ * @file Item.cpp
+ * @brief Item.cpp — Header and declarations for the Item.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Item.h"
 
 Item::Item(std::string plantID, std::string plantType, std::string maturityState)

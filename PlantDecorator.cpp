@@ -1,7 +1,19 @@
+/**
+ * @file PlantDecorator.cpp
+ * @brief PlantDecorator.cpp — Header and declarations for the PlantDecorator.cpp component.
+ * @author Obed Edom Mbaya
+ * @date 2025-11-04
+ */
+
 #include "PlantDecorator.h"
 
 #include <iostream>
 #include <string>
+
+/**
+ * @brief Execute the function's primary operation.
+ * @param nextDecorator
+ */
 
 PlantDecorator::PlantDecorator() : nextDecorator(nullptr) {}
 
@@ -27,6 +39,11 @@ void PlantDecorator::add(PlantComponent *extra)
     }
     else
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @param extra The extra parameter used by the function.
+ */
+
         nextDecorator->add(extra);
     }
 }

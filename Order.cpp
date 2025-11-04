@@ -1,3 +1,10 @@
+/**
+ * @file Order.cpp
+ * @brief Order.cpp — Header and declarations for the Order.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "Order.h"
 #include "Receipt.h"
 #include "NormalPrice.h"
@@ -10,6 +17,12 @@ Order::Order()
 {
     priceStrategy = new NormalPrice();
     static unsigned long long counter = 0;
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param ++counter 
+ */
+
     receiptID = "RCPT-" + std::to_string(++counter);
     plantGroup = new PlantGroup();
 }
@@ -55,6 +68,12 @@ std::string Order::generateInfo()
             continue;
         info += p->getName();
         info += " : R";
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param p->getPrice() 
+ */
+
         info += std::to_string(p->getPrice());
         if (i + 1 < plantGroup->getPlantComponents().size())
             info += "\n";
@@ -97,6 +116,11 @@ std::vector<PlantComponent *> Order::getOrderPlants()
 
 void Order::addToOrder(Plant *plant)
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
     plantGroup->add(plant);
 }
 
@@ -118,14 +142,29 @@ double Order::applyPriceStrategy(std::string code)
 
     if (code == "BULK")
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @param BulkDiscount() 
+ */
+
         setPriceStrategy(new BulkDiscount());
     }
     else if (code == "SAVE10")
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @param Save10Discount() 
+ */
+
         setPriceStrategy(new Save10Discount());
     }
     else
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @param NormalPrice() 
+ */
+
         setPriceStrategy(new NormalPrice());
     }
     return priceStrategy->applyPriceStrategy(plantGroup->getPrice());
@@ -133,6 +172,11 @@ double Order::applyPriceStrategy(std::string code)
 
 void Order::removeFromOrder(PlantComponent *plantComponent)
 {
+/**
+ * @brief Execute the function's primary operation.
+ * @param plantComponent The plantComponent parameter used by the function.
+ */
+
     plantGroup->removePlantComponent(plantComponent);
 }
 

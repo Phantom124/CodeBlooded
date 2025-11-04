@@ -1,3 +1,10 @@
+/**
+ * @file CustomerFacade.cpp
+ * @brief CustomerFacade.cpp — Header and declarations for the CustomerFacade.cpp component.
+ * @author Ange Yehouessi
+ * @date 2025-11-04
+ */
+
 #include "CustomerFacade.h"
 #include "RedPot.h"
 #include "Ribbon.h"
@@ -72,23 +79,51 @@ void CustomerFacade::addPlantToOrder(Plant *plant, const std::vector<DecorationT
         switch (decoration)
         {
         case DecorationType::RedPot:
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param decoratedPlant The decoratedPlant parameter used by the function.
+ */
+
             decoratedPlant = applyRedPot(decoratedPlant);
             break;
         case DecorationType::Ribbon:
+
+
             decoratedPlant = applyRibbon(decoratedPlant);
             break;
         case DecorationType::Scent:
+
+
             decoratedPlant = applyScent(decoratedPlant);
             break;
         case DecorationType::GiftWrap:
+
+
             decoratedPlant = applyGiftWrap(decoratedPlant);
             break;
         }
     }
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
     currentOrder->addToOrder(plant);
     currentOrder->printOrder();
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant 
+ * @param decorations
+ */
+
     cartEntries.push_back({plant, decorations});
+/**
+ * @brief Execute the function's primary operation.
+ * @param plantId The plantId parameter used by the function.
+ */
+
     reservedPlantIds.insert(plantId);
 }
 
@@ -99,13 +134,29 @@ void CustomerFacade::removeFromOrder(PlantComponent *component)
         return;
     }
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param component The component parameter used by the function.
+ */
+
     currentOrder->removeFromOrder(component);
+
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param component The component parameter used by the function.
+ */
 
     Plant *plant = dynamic_cast<Plant *>(component);
     if (!plant)
     {
         return;
     }
+
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant->getPlantId() 
+ */
 
     reservedPlantIds.erase(plant->getPlantId());
     cartEntries.erase(
@@ -138,6 +189,12 @@ double CustomerFacade::getSubtotal() const
         {
             subtotal += entry.plant->getPrice();
         }
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param entry The entry parameter used by the function.
+ */
+
         subtotal += calculateEntryDecorationsTotal(entry);
     }
     return subtotal;
@@ -169,6 +226,8 @@ double CustomerFacade::getEntryTotal(const CartEntry &entry) const
     {
         total += entry.plant->getPrice();
     }
+
+
     total += calculateEntryDecorationsTotal(entry);
     return total;
 }
@@ -183,6 +242,11 @@ PlantComponent *CustomerFacade::applyRedPot(PlantComponent *component)
     if (!component)
         return nullptr;
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param RedPot
+ */
+
     component->add(new RedPot());
     return component;
 }
@@ -191,6 +255,11 @@ PlantComponent *CustomerFacade::applyRibbon(PlantComponent *component)
 {
     if (!component)
         return nullptr;
+
+/**
+ * @brief Execute the function's primary operation.
+ * @param Ribbon
+ */
 
     component->add(new Ribbon());
     return component;
@@ -201,6 +270,11 @@ PlantComponent *CustomerFacade::applyScent(PlantComponent *component)
     if (!component)
         return nullptr;
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param Scent
+ */
+
     component->add(new Scent());
     return component;
 }
@@ -209,6 +283,11 @@ PlantComponent *CustomerFacade::applyGiftWrap(PlantComponent *component)
 {
     if (!component)
         return nullptr;
+
+/**
+ * @brief Execute the function's primary operation.
+ * @param GiftWrap
+ */
 
     component->add(new GiftWrap());
     return component;
@@ -322,6 +401,12 @@ Receipt *CustomerFacade::checkout()
     const double discountAmount = subtotal - total;
 
     std::ostringstream info;
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param 2 The 2 parameter used by the function.
+ */
+
     info << std::fixed << std::setprecision(2);
     info << "Items:\n";
 
@@ -348,11 +433,33 @@ Receipt *CustomerFacade::checkout()
     info << "Total: R" << total << '\n';
 
     const std::string receiptID = currentOrder->getReceiptID();
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param receiptID The receiptID parameter used by the function.
+ * @param total The total parameter used by the function.
+ * @param info.str() 
+ */
+
     Receipt *receipt = new Receipt(receiptID, total, info.str());
 
     if (caretaker)
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param currentOrder->getOrderPlants()
+ * @param total The total parameter used by the function.
+ * @param receiptID The receiptID parameter used by the function.
+ */
+
         OrderMemento memento(currentOrder->getOrderPlants(), total, receiptID);
+/**
+ * @brief Execute the function's primary operation.
+ * @param receiptID The receiptID parameter used by the function.
+ * @param memento The memento parameter used by the function.
+ */
+
         caretaker->addMemento(receiptID, memento);
     }
 
@@ -364,9 +471,25 @@ Receipt *CustomerFacade::checkout()
             {
                 continue;
             }
+/**
+ * @brief Execute the function's primary operation.
+ * @param entry.plant->getPlantId() 
+ */
+
             reservedPlantIds.erase(entry.plant->getPlantId());
             std::cout << "removeee" << std::to_string(entry.plant->getPlantId()) << std::endl;
+/**
+ * @brief Execute the function's primary operation.
+ * @param std::to_string(entry.plant->getPlantId()) 
+ */
+
             inventory->removePlant(std::to_string(entry.plant->getPlantId()));
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param entry.plant
+ */
+
             // purchasedPlants.push_back(entry.plant);
         }
     }
@@ -376,6 +499,11 @@ Receipt *CustomerFacade::checkout()
         {
             if (entry.plant)
             {
+/**
+ * @brief Execute the function's primary operation.
+ * @param entry.plant 
+ */
+
                 purchasedPlants.push_back(entry.plant);
             }
         }
@@ -409,15 +537,35 @@ void CustomerFacade::returnOrder(const std::string &receiptID)
     if (!caretaker || !inventory)
         return;
 
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param receiptID The receiptID parameter used by the function.
+ */
+
     OrderMemento *memento = caretaker->getMemento(receiptID);
     if (!memento)
         return;
 
     // Create a receipt object to pass to restoreOrder
     // Note: OrderMemento doesn't have getOrderInfo(), so we'll create an empty receipt
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param receiptID The receiptID parameter used by the function.
+ * @param memento->getOrderPrice() 
+ * @param ""
+ */
+
     Receipt receipt(receiptID, memento->getOrderPrice(), "");
 
     // Restore order (adds plants back to inventory)
+/**
+ * @brief Execute the function's primary operation.
+ * @param receipt The receipt parameter used by the function.
+ * @param *inventory 
+ */
+
     caretaker->restoreOrder(receipt, *inventory);
 }
 
@@ -437,7 +585,17 @@ std::vector<Plant *> CustomerFacade::searchPlants(const std::string &type, const
 
     // Use query builder to search
     SelectQueryBuilder builder;
+/**
+ * @brief Execute the function's primary operation.
+ * @param type The type parameter used by the function.
+ */
+
     builder.addPlantType(type);
+/**
+ * @brief Execute the function's primary operation.
+ * @param maturity The maturity parameter used by the function.
+ */
+
     builder.addMaturityState(maturity);
     QueryProduct *product = builder.getQueryProduct();
 
@@ -465,6 +623,12 @@ double CustomerFacade::calculateEntryDecorationsTotal(const CartEntry &entry) co
     double total = 0.0;
     for (DecorationType decoration : entry.decorations)
     {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param decoration The decoration parameter used by the function.
+ */
+
         total += decorationPrice(decoration);
     }
     return total;
@@ -473,6 +637,11 @@ double CustomerFacade::calculateEntryDecorationsTotal(const CartEntry &entry) co
 std::vector<Plant *> CustomerFacade::filterVisiblePlants(const std::vector<Plant *> &plants) const
 {
     std::vector<Plant *> visible;
+/**
+ * @brief Execute the function's primary operation.
+ * @param plants.size() 
+ */
+
     visible.reserve(plants.size());
 
     for (Plant *plant : plants)
@@ -491,6 +660,7 @@ std::vector<Plant *> CustomerFacade::filterVisiblePlants(const std::vector<Plant
         {
             continue;
         }
+
 
         visible.push_back(plant);
     }

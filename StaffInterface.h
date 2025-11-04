@@ -1,3 +1,10 @@
+/**
+ * @file StaffInterface.h
+ * @brief StaffInterface.h — Header and declarations for the StaffInterface.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #ifndef STAFFINTERFACE_H
 #define STAFFINTERFACE_H
 
@@ -21,6 +28,12 @@
 
 class StaffInterface {
     public:
+/**
+ * @brief Execute the function's primary operation.
+ * @param inventory The inventory parameter used by the function.
+ * @param staffSystem The staffSystem parameter used by the function.
+ */
+
         StaffInterface(ProxyGreenHouseInventory* inventory, StaffSystem* staffSystem);
         void startInterface();
         virtual ~StaffInterface();

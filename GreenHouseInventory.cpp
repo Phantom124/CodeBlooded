@@ -1,3 +1,10 @@
+/**
+ * @file GreenHouseInventory.cpp
+ * @brief GreenHouseInventory.cpp — Header and declarations for the GreenHouseInventory.cpp component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "GreenHouseInventory.h"
 #include "Item.h"
 #include "Plant.h"
@@ -26,12 +33,36 @@ std::vector<Plant*> GreenHouseInventory::getPlants() {
     return plants;
 }
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param plants The plants parameter used by the function.
+ */
+
 void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plants) {
     for (PlantComponent* pc : plants) {
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param pc The pc parameter used by the function.
+ */
+
         Plant* plant = dynamic_cast<Plant*>(pc);
         if (!plant) continue;
         // Construct Item from Plant fields (Item has constructor Item(string id, string type, string maturity))
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param std::to_string(plant->getPlantId()) 
+ * @param plant->getName()
+ * @param plant->getMaturityStateName() 
+ */
+
         // Item item(std::to_string(plant->getPlantId()), plant->getName(), plant->getMaturityStateName());
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
         addPlant(plant);
     }
 }

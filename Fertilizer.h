@@ -1,3 +1,10 @@
+/**
+ * @file Fertilizer.h
+ * @brief Fertilizer.h — Header and declarations for the Fertilizer.h component.
+ * @author Team: Jared Williams, Zaman Bassa, Obed Edom Mbaya, Ange Yehouessi, Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 
 #ifndef FERTILIZER_H
 #define FERTILIZER_H

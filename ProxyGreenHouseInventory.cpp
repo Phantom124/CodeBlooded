@@ -1,3 +1,10 @@
+/**
+ * @file ProxyGreenHouseInventory.cpp
+ * @brief ProxyGreenHouseInventory.cpp — Header and declarations for the ProxyGreenHouseInventory.cpp component.
+ * @author Joshua Mahabeer
+ * @date 2025-11-04
+ */
+
 #include "ProxyGreenHouseInventory.h"
 #include "RealGreenHouseInventory.h"
 #include "QueryProduct.h"
@@ -18,7 +25,14 @@ ProxyGreenHouseInventory::~ProxyGreenHouseInventory(){
 
 }
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param parameters The parameters parameter used by the function.
+ */
+
 void ProxyGreenHouseInventory::showPlant(std::string parameters){
+
+
     this->realInventory->showPlant(parameters);
 }
 
@@ -27,13 +41,23 @@ void ProxyGreenHouseInventory::showAllPlants()
     this->realInventory->showAllPlants();
 }
 
+/**
+ * @brief Execute the function's primary operation.
+ * @param plant The plant parameter used by the function.
+ */
+
 void ProxyGreenHouseInventory::addPlant(Plant* plant){
     // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot INSERT.\n";
+
+
     this->realInventory->addPlant(plant);
 }
 
+
 void ProxyGreenHouseInventory::removePlant(std::string parameters){
     // std::cout << "[CONTROL ACCESS] Access Denied: Customer cannot DELETE.\n";
+
+
     this->realInventory->removePlant(parameters);
 }
 
@@ -45,6 +69,12 @@ std::vector<Plant*> ProxyGreenHouseInventory::getPlants()
     }
     return this->realInventory->getPlants();
 }
+
+/**
+ * @brief Execute the function's primary operation.
+ * @param user The user parameter used by the function.
+ * @param query The query parameter used by the function.
+ */
 
 void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct query){
     //customers can only SELECT (showPlant, showAllPlants)
@@ -60,6 +90,12 @@ void ProxyGreenHouseInventory::handleControlRights(void* user, QueryProduct quer
             std::cout << "[CONTROL ACCESS] Customer cannot perform " << queryText << " operations.\n";
         }
     }
+/**
+ * @brief Execute the function's primary operation.
+ * @return The return value of the function; see implementation for details.
+ * @param dynamic_cast<PlantFactory*>((PlantFactory*)user) TODO - describe parameter
+ */
+
     else if (dynamic_cast<StaffHandler*>((StaffHandler*)user) || dynamic_cast<PlantFactory*>((PlantFactory*)user)){
         query.execute();
         
