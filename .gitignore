@@ -1,0 +1,33 @@
+# Qt build artifacts
+Makefile
+.qmake.stash
+*.pro.user
+*.pro.user.*
+
+# Compiled Object files
+*.o
+*.obj
+
+# Qt Meta Object Compiler output
+moc_*.cpp
+moc_*.h
+
+# Qt UI Compiler output
+ui_*.h
+
+# Build directories
+build/
+bin/
+debug/
+release/
+
+# Qt Creator files
+*.autosave
+
+# Temporary files
+*~
+*.swp
+*.swo
+
+# Local analysis files
+gui.supp

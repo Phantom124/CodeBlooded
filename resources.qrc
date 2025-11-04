@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/styles">
+        <file>styles.qss</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>resources/font/PressStart2P.ttf</file>
+    </qresource>
+</RCC>
