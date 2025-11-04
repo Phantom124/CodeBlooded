@@ -34,6 +34,9 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     , lowWaterLevel(lowWaterLevel)
     , fertilizerRetention(fertilizerRetention)
     , lowFertilizerLevel(lowFertilizerLevel)
+    , waterMonitor(nullptr)  
+    , fertilizerMonitor(nullptr)
+    , deadMonitor(nullptr)
     , decorator(nullptr)
 {
     // Initialize the rest too (health, states, etc.)
@@ -463,12 +466,16 @@ void Plant::checkGrowthLevel()
     {
         return;
     }
-    PlantGrowthState *nextState = this->growthState->getNextState(this->careCount);
-    if (nextState != nullptr)
+    PlantGrowthState *nextState = nullptr;
+    do
     {
-        delete this->growthState;
-        this->growthState = nextState;
-    }
+        nextState = this->growthState->getNextState(this->careCount);
+        if (nextState != nullptr)
+        {
+            delete this->growthState;
+            this->growthState = nextState;
+        }
+    } while (nextState != nullptr);
 }
 
 std::string Plant::getName()
@@ -480,6 +487,11 @@ std::string Plant::getName()
     }
 
     return this->type + decoratorNames;
+}
+
+std::string Plant::getBaseName() const
+{
+    return this->type;
 }
 
 double Plant::getPrice()

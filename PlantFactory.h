@@ -10,12 +10,13 @@ class PlantFactory {
     public:
         PlantFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon, QueryBuilder* queryBuilder);
         virtual Plant* createPlant() = 0;
-        virtual ~PlantFactory() {}
+        virtual ~PlantFactory();
     protected:
         WaterMonitor* waterMonitor;
         FertilizerMonitor* fertilizerMonitor;
         DeadMonitor* deadMonitor;
         QueryBuilder* queryBuilder;
+        bool ownsQueryBuilder;
 };
 
 #endif

@@ -2,7 +2,8 @@
 #include "Rose.h"
 #include <stdexcept>
 
-RoseFactory::RoseFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon) : PlantFactory(waterMon, fertMon, deadMon, queryBuilder)
+RoseFactory::RoseFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon)
+    : PlantFactory(waterMon, fertMon, deadMon, nullptr)
 {
     if (waterMon == nullptr || fertMon == nullptr || deadMon == nullptr)
     {
@@ -20,7 +21,9 @@ Plant *RoseFactory::createPlant()
     newRose->attachFertilizerMonitor(this->fertilizerMonitor);
     newRose->attachDeadMonitor(this->deadMonitor);
 
-    // this->queryBuilder->insertQueryBuilder(newRose);
+    if (this->queryBuilder != nullptr){
+        this->queryBuilder->insertQueryBuilder(newRose);  
+    }
 
     return newRose;
 }

@@ -2,6 +2,8 @@
 #include "ui_PlantManagementWidget.h"
 #include "../Common/SharedInstances.h"
 #include <QMessageBox>
+#include <QComboBox>
+#include <QHeaderView>
 
 PlantManagementWidget::PlantManagementWidget(QWidget *parent)
     : QWidget(parent)
@@ -10,6 +12,10 @@ PlantManagementWidget::PlantManagementWidget(QWidget *parent)
     , selectedPlant(nullptr)
 {
     ui->setupUi(this);
+    ui->plantTypeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents); // ensure dropdown fits longest entry
+    ui->plantTypeCombo->setMinimumContentsLength(12);
+    ui->plantTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // spread columns across available width
+    ui->plantTable->horizontalHeader()->setMinimumSectionSize(110);
     setupConnections();
     loadPlants();
     loadCommandQueue();
@@ -50,7 +56,7 @@ void PlantManagementWidget::loadPlants()
         Plant *plant = plants[i];
         
         ui->plantTable->setItem(i, 0, new QTableWidgetItem(QString::number(plant->getPlantId())));
-        ui->plantTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(plant->getName())));
+        ui->plantTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(plant->getBaseName())));  // show concise plant name regardless of decorations
         ui->plantTable->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(plant->getMaturityStateName())));
         ui->plantTable->setItem(i, 3, new QTableWidgetItem(QString::number(plant->getHealth())));
         ui->plantTable->setItem(i, 4, new QTableWidgetItem(QString::number(plant->getWaterLevel())));

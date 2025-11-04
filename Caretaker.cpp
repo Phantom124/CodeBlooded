@@ -7,6 +7,12 @@ Caretaker::~Caretaker() {
 }
 
 void Caretaker::addMemento(const std::string& receiptID, const OrderMemento& memento) {
+    auto it = mementos.find(receiptID);
+    if (it != mementos.end()){
+        delete it->second;  
+        it->second = nullptr;
+    }
+
     mementos[receiptID] = new OrderMemento(memento);
 }
 

@@ -13,6 +13,7 @@ class PlantSnapshot {
 		int careCount;
 		int waterLevel;
 		int fertilizerLevel;
+		std::string growthStateName;
 
 	public:
 		PlantSnapshot(Plant* plant);

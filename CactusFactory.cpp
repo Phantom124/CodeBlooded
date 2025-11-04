@@ -1,6 +1,8 @@
 #include "CactusFactory.h"
+#include <stdexcept>
 
-CactusFactory::CactusFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon):PlantFactory(waterMon, fertMon, deadMon, queryBuilder){
+CactusFactory::CactusFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon)
+    : PlantFactory(waterMon, fertMon, deadMon, nullptr){
     if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
         throw std::invalid_argument("Monitors cannot be null");
     }
@@ -14,7 +16,9 @@ Plant* CactusFactory::createPlant(){
     newCactus->attachFertilizerMonitor(this->fertilizerMonitor);
     newCactus->attachDeadMonitor(this->deadMonitor);
 
-    this->queryBuilder->insertQueryBuilder(newCactus);
+    if (this->queryBuilder != nullptr){
+        this->queryBuilder->insertQueryBuilder(newCactus);
+    }
 
     return newCactus;
 }
