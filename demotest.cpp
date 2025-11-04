@@ -73,25 +73,23 @@ int main()
         std::cin >> choice1;
         if (choice1 == "1")
         {
-            std::cout << "\nYou selected Customer.\n";
+            std::cout << "\nCustomer selected.\n";
             customerInterface->customerMenu();
         }
         else if (choice1 == "2")
         {
-            std::cout << "\nYou selected Staff.\n";
+            std::cout << "\nStaff Selected.\n";
             staffInterface->startInterface();
         }
         else if (choice1 == "q" || choice1 == "Q")
         {
-            std::cout << "\nExiting program...\n";
+            std::cout << "\nLeaving program...\n";
             break;
         }
         else
         {
             std::cout << "\nInvalid option. Please try again.\n";
         }
-        // Remove this line that was causing the menu to repeat
-        // customerInterface->customerMenu();  // <- REMOVE THIS
     }
     bool doIt = true;
     while (doIt)
