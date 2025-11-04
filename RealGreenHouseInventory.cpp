@@ -102,8 +102,9 @@ void RealGreenHouseInventory::insertPlant(Plant *plant) {
     if(plant != nullptr) {
         this->plants.push_back(plant);
         std::cout << "PLANT ADDED => " << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
-    }
+    }else{
     throw std::invalid_argument("RealGreenHouseInventory::insertPlant received a null Plant pointer");
+    }
 }
 
 void RealGreenHouseInventory::deletePlant(Plant *plant){
@@ -123,6 +124,7 @@ void RealGreenHouseInventory::deletePlant(Plant *plant){
 }
 
 void RealGreenHouseInventory::displayPlants(){
+    std::cout<<"GreenHouseInventory:\n";
     for(size_t i = 0; i < this->plants.size(); i++){
         if (plants[i] != nullptr) {
             std::cout << plants[i]->getPlantId() << " " << plants[i]->getName() << " " << plants[i]->getMaturityStateName() << std::endl;

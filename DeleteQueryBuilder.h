@@ -8,7 +8,7 @@ class DeleteQueryBuilder : public QueryBuilder {
 public:
     DeleteQueryBuilder();
 
-    void buildOriginator(const std::string& org);
+    void buildOriginator(std::string org);
     void buildOperation();
     void buildValues(Plant* p);
     // void buildAndSendQuery();

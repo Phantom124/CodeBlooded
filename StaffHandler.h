@@ -25,6 +25,7 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 		void setSuccessor(StaffHandler* successor);
 		StaffHandler* getSuccessor();
+		void sendDeleteQuery(Plant* plant);
 		// QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
 		// QueryProduct* createSelectQuery(Plant* selectPlant);
 

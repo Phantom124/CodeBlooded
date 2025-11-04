@@ -41,7 +41,10 @@ int main() {
     DeadMonitor* deadMon = new DeadMonitor();
 
     RoseFactory* roseFact = new RoseFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
-
+    RoseFactory* sunflowerFact = new SunflowerFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
+    roseFact->createPlant();
+    sunflowerFact->createPlant();
+    
     GH->displayPlants();
 
     // //Create Handlers

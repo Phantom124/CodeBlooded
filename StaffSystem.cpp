@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "PlantCommand.h"
+#include "GreenHouseInventory.h"
 
 StaffSystem::StaffSystem(GreenHouseInventory* inventory, QueryBuilder* queryBuilder) : inventory(inventory), queryBuilder(queryBuilder) {
     staffHandler = nullptr;
@@ -21,6 +22,14 @@ StaffSystem::~StaffSystem(){
 
     QueueIterator it = createIterator();
     it.deleteQueue();
+}
+
+void StaffSystem::sendDeadQuery(Plant * plant){
+    this->queryBuilder->createNewQuery();
+    this->queryBuilder->buildOriginator("PlantFactory");
+    this->queryBuilder->buildOperation();
+    this->queryBuilder->buildValues(plant);
+    this->inventory->handle(this->queryBuilder->getQuery());
 }
 
 // void StaffSystem::setHandler(StaffHandler *staff){

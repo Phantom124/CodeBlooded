@@ -4,7 +4,7 @@
 
 DeleteQueryBuilder::DeleteQueryBuilder(): QueryBuilder() {}
 
-void DeleteQueryBuilder::buildOriginator(const std::string& org){
+void DeleteQueryBuilder::buildOriginator(std::string org){
     if(this->query != nullptr){
         this->query->setOriginator(org);
     }else{

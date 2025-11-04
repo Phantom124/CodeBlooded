@@ -26,7 +26,7 @@ public:
     virtual void buildOriginator(std::string originator) = 0;
     virtual void buildOperation() = 0;
     virtual void buildValues(Plant* p) = 0;
-    virtual void buildAndSendQuery() = 0;
+    // virtual void buildAndSendQuery() = 0;
 };
 
 #endif

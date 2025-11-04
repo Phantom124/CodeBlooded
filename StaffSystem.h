@@ -18,6 +18,7 @@ class StaffSystem {
 	public:
 		StaffSystem(GreenHouseInventory* inventory, QueryBuilder* queryBuilder);
 		~StaffSystem();
+		void sendDeadQuery(Plant* plant);
 		// void setHandler(StaffHandler* staff);
 		void timeElapsed();
 		void addHandler(StaffHandler* staff);
