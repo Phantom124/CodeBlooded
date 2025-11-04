@@ -125,10 +125,10 @@ public:
 	virtual void printPlant(); // oe add
 
 	void add(PlantComponent *plantComponent); // zaman add
-
+	int getCareCount();
 protected:
 	// Internal methods for plant management
-	int getCareCount();
+	
 	int getCareCountEffect();
 	void increaseCareCount();
 	void setGrowthState(PlantGrowthState *state);

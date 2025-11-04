@@ -103,13 +103,15 @@ void RealGreenHouseInventory::insertPlant(Plant *plant) {
         this->plants.push_back(plant);
         std::cout << "PLANT ADDED => " << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
     }else{
-    throw std::invalid_argument("RealGreenHouseInventory::insertPlant received a null Plant pointer");
+        return;
+        // throw std::invalid_argument("RealGreenHouseInventory::insertPlant received a null Plant pointer");
     }
 }
 
 void RealGreenHouseInventory::deletePlant(Plant *plant){
     if(plant == nullptr){
-        throw std::invalid_argument("RealGreenHouseInventory::deletePlant received a null Plant pointer");
+        return;
+        // throw std::invalid_argument("RealGreenHouseInventory::deletePlant received a null Plant pointer");
     }
 
     for (size_t i = 0; i < plants.size(); ++i){
@@ -127,7 +129,7 @@ void RealGreenHouseInventory::displayPlants(){
     std::cout<<"GreenHouseInventory:\n";
     for(size_t i = 0; i < this->plants.size(); i++){
         if (plants[i] != nullptr) {
-            std::cout << plants[i]->getPlantId() << " " << plants[i]->getName() << " " << plants[i]->getMaturityStateName() << std::endl;
+            std::cout << plants[i]->getPlantId() << " " << plants[i]->getName() << " " << plants[i]->getMaturityStateName() << " Water Level: " << plants[i]->getWaterLevel()<<"% Fertilizer Level: "<< plants[i]->getFertilizerLevel()<<"% Care Count: "<< plants[i]->getCareCount() << " Health: "<< plants[i]->getHealth() << std::endl;
         }
     }
 }

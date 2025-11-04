@@ -33,24 +33,53 @@ int main() {
     //Create Builders
     QueryBuilder* InsertBuilder = new InsertQueryBuilder();
     SelectQueryBuilder* SelectBuilder = new SelectQueryBuilder();
-    // DeleteQueryBuilder* DeleteBuilder = new DeleteQueryBuilder();
+    DeleteQueryBuilder* DeleteBuilder = new DeleteQueryBuilder();
+
+    StaffSystem* staffSystem = new StaffSystem(GH, DeleteBuilder);
 
     // StaffSystem* staffSystem = new StaffSystem();
     WaterMonitor* waterMon = new WaterMonitor();
+    waterMon->setStaffSystem(staffSystem);
     FertilizerMonitor* fertMon = new FertilizerMonitor();
+    fertMon->setStaffSystem(staffSystem);
     DeadMonitor* deadMon = new DeadMonitor();
+    deadMon->setStaffSystem(staffSystem);
+
+    //Create Handlers
+    StaffHandler *waterHandler = new WaterHandler();
+    StaffHandler *fertilizerHandler = new FertilizerHandler();
+    StaffHandler *deadHandler = new DeadHandler();
+    staffSystem->addHandler(waterHandler);
+    staffSystem->addHandler(fertilizerHandler);
+    staffSystem->addHandler(deadHandler);
 
     RoseFactory* roseFact = new RoseFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
-    RoseFactory* sunflowerFact = new SunflowerFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
-    roseFact->createPlant();
+    SunflowerFactory* sunflowerFact = new SunflowerFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
+    CactusFactory* cactusFact = new CactusFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
+    Plant* toRemove = roseFact->createPlant();
     sunflowerFact->createPlant();
-    
+    cactusFact->createPlant();
     GH->displayPlants();
 
-    // //Create Handlers
-    // StaffHandler *waterHandler = new WaterHandler();
-    // StaffHandler *fertilizerHandler = new FertilizerHandler();
-    // StaffHandler *deadHandler = new DeadHandler();
+    bool doIt = true;
+    while (doIt) {
+        GH->hourHasPassed();
+        GH->displayPlants();
+        std::string userInput;
+        std::cout << "Continue to next hour? (y/n): ";
+        std::cin >> userInput;
+        if (userInput != "y" && userInput != "Y") {
+            doIt = false;
+        }
+    }
+
+    // StaffSystem* staffSystem = new StaffSystem(GH, DeleteBuilder);
+    staffSystem->sendDeadQuery(toRemove);
+    GH->displayPlants();
+
+
+
+
 
     // //Creating Query Builders
     // QueryBuilder* selectQueryBuilder = new SelectQueryBuilder();
