@@ -115,3 +115,11 @@ CodeBlooded/
 │       └── PressStart2P.ttf
 └── [Backend implementation files...]
 
+
+👥 Meet the Team
+Name	Student Number
+Jared Williams	U24581039
+Zaman Bassa	U24744931
+Obed Edom Mbaya	U24595889
+Ange Yehouessi	U24614484
+Joshua Mahabeer	U24597092
