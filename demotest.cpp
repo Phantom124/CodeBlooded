@@ -35,9 +35,9 @@ int main()
     GreenHouseInventory *GH = new ProxyGreenHouseInventory();
     g_inventory = new ProxyGreenHouseInventory();
 
-    StaffSystem* staffSystem = new StaffSystem(g_inventory, new DeleteQueryBuilder());
+    StaffSystem *staffSystem = new StaffSystem(g_inventory, new DeleteQueryBuilder());
 
-    StaffInterface* staffInterface = new StaffInterface(static_cast<ProxyGreenHouseInventory*>(g_inventory), staffSystem);
+    StaffInterface *staffInterface = new StaffInterface(static_cast<ProxyGreenHouseInventory *>(g_inventory), staffSystem);
 
     // Create Builders
     QueryBuilder *InsertBuilder = new InsertQueryBuilder();
@@ -62,7 +62,8 @@ int main()
     Customer *customer = new Customer(g_inventory, SelectBuilder);
     CustomerInterface *customerInterface = new CustomerInterface(g_inventory, caretaker, customer);
     // customerInterface->DisplayPlants();
-    while(true) {
+    while (true)
+    {
         std::cout << "\n===== Welcome to the Greenhouse Management System =====\n"
                   << "1. Customer\n"
                   << "2. Staff\n"
@@ -70,22 +71,27 @@ int main()
                   << "Enter your choice (1, 2, or q): ";
         std::string choice1;
         std::cin >> choice1;
-        if (choice1 == "1") {
+        if (choice1 == "1")
+        {
             std::cout << "\nYou selected Customer.\n";
             customerInterface->customerMenu();
         }
-        else if (choice1 == "2") {
+        else if (choice1 == "2")
+        {
             std::cout << "\nYou selected Staff.\n";
             staffInterface->startInterface();
         }
-        else if (choice1 == "q" || choice1 == "Q") {
+        else if (choice1 == "q" || choice1 == "Q")
+        {
             std::cout << "\nExiting program...\n";
             break;
         }
-        else {
+        else
+        {
             std::cout << "\nInvalid option. Please try again.\n";
         }
-        customerInterface->customerMenu();
+        // Remove this line that was causing the menu to repeat
+        // customerInterface->customerMenu();  // <- REMOVE THIS
     }
     bool doIt = true;
     while (doIt)

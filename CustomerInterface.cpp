@@ -84,7 +84,7 @@ void CustomerInterface::customerMenu()
         if (choice == "b" || choice == "B")
         {
             std::cout << "Returning to Main Menu...\n";
-            break;
+            return;
         }
         if (choice == "1")
         {
