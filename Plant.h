@@ -99,6 +99,7 @@ public:
 	std::string getFertilizerStateName();
 	std::string getMaturityStateName();
 	int getHealth();
+	std::string getBaseName() const; // returns the base plant type without decorator suffixes
 
 	// Observer attachment
 	void attachWaterMonitor(WaterMonitor *observer);

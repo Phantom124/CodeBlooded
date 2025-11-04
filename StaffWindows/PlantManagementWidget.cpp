@@ -50,7 +50,7 @@ void PlantManagementWidget::loadPlants()
         Plant *plant = plants[i];
         
         ui->plantTable->setItem(i, 0, new QTableWidgetItem(QString::number(plant->getPlantId())));
-        ui->plantTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(plant->getName())));
+        ui->plantTable->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(plant->getBaseName())));  // show concise plant name regardless of decorations
         ui->plantTable->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(plant->getMaturityStateName())));
         ui->plantTable->setItem(i, 3, new QTableWidgetItem(QString::number(plant->getHealth())));
         ui->plantTable->setItem(i, 4, new QTableWidgetItem(QString::number(plant->getWaterLevel())));

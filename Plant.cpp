@@ -466,12 +466,16 @@ void Plant::checkGrowthLevel()
     {
         return;
     }
-    PlantGrowthState *nextState = this->growthState->getNextState(this->careCount);
-    if (nextState != nullptr)
+    PlantGrowthState *nextState = nullptr;
+    do
     {
-        delete this->growthState;
-        this->growthState = nextState;
-    }
+        nextState = this->growthState->getNextState(this->careCount);
+        if (nextState != nullptr)
+        {
+            delete this->growthState;
+            this->growthState = nextState;
+        }
+    } while (nextState != nullptr);
 }
 
 std::string Plant::getName()
@@ -483,6 +487,11 @@ std::string Plant::getName()
     }
 
     return this->type + decoratorNames;
+}
+
+std::string Plant::getBaseName() const
+{
+    return this->type;
 }
 
 double Plant::getPrice()
