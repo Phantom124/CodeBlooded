@@ -1,4 +1,6 @@
 #include "PlantFactory.h"
+#include "InsertQueryBuilder.h"  
+#include <stdexcept>
 
 PlantFactory::PlantFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon, QueryBuilder* queryBuilder){
     if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
@@ -7,5 +9,18 @@ PlantFactory::PlantFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, D
     this->waterMonitor = waterMon;
     this->fertilizerMonitor = fertMon;
     this->deadMonitor = deadMon;
-    this->queryBuilder = queryBuilder;
+    if (queryBuilder != nullptr){
+        this->queryBuilder = queryBuilder;
+        this->ownsQueryBuilder = false;
+    } else {
+        this->queryBuilder = new InsertQueryBuilder(); 
+        this->ownsQueryBuilder = true;
+    }
+}
+
+PlantFactory::~PlantFactory(){
+    if (ownsQueryBuilder && queryBuilder != nullptr){
+        delete queryBuilder;  
+    }
+    queryBuilder = nullptr;
 }

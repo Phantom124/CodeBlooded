@@ -6,7 +6,6 @@
 #include "../OrderMemento.h"
 #include "../PlantSnapshot.h"
 #include "../Plant.h"
-#include <memory>
 #include <QStringList>
 
 ReturnOrderDialog::ReturnOrderDialog(QWidget *parent)
@@ -130,7 +129,7 @@ QString ReturnOrderDialog::buildReceiptSummary(const OrderMemento* memento) cons
                 continue;
             }
 
-            std::unique_ptr<Plant> plant(snapshot->convertToPlant());
+            Plant* plant = snapshot->convertToPlant();
             if (!plant)
             {
                 continue;
@@ -140,6 +139,9 @@ QString ReturnOrderDialog::buildReceiptSummary(const OrderMemento* memento) cons
                         .arg(index++)
                         .arg(QString::fromStdString(plant->getName()))
                         .arg(QString::fromStdString(plant->getMaturityStateName()));
+
+            delete plant;  // avoid leaking the temporary plant clone
+            plant = nullptr;
         }
     }
 

@@ -34,6 +34,9 @@ Plant::Plant(std::string type, double price, double waterRetention, int lowWater
     , lowWaterLevel(lowWaterLevel)
     , fertilizerRetention(fertilizerRetention)
     , lowFertilizerLevel(lowFertilizerLevel)
+    , waterMonitor(nullptr)  
+    , fertilizerMonitor(nullptr)
+    , deadMonitor(nullptr)
     , decorator(nullptr)
 {
     // Initialize the rest too (health, states, etc.)

@@ -17,6 +17,9 @@ class OrderMemento {
 
     public:
         OrderMemento(const std::vector<PlantComponent*>& plants, double price, const std::string& receiptID);
+        OrderMemento(const OrderMemento& other);
+        OrderMemento& operator=(const OrderMemento& other);
+        ~OrderMemento();
         std::vector<PlantSnapshot*> getPlants() const;
         double getOrderPrice() const;
         std::chrono::system_clock::time_point getOrderDate() const;
