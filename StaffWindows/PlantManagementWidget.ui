@@ -24,8 +24,14 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QComboBox" name="plantTypeCombo">
+            <item>
+             <widget class="QComboBox" name="plantTypeCombo">
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToContents</enum>
+                </property>
+                <property name="minimumContentsLength">
+                 <number>12</number>
+                </property>
         <item>
          <property name="text">
           <string>Rose</string>

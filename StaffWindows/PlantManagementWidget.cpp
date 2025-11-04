@@ -2,6 +2,8 @@
 #include "ui_PlantManagementWidget.h"
 #include "../Common/SharedInstances.h"
 #include <QMessageBox>
+#include <QComboBox>
+#include <QHeaderView>
 
 PlantManagementWidget::PlantManagementWidget(QWidget *parent)
     : QWidget(parent)
@@ -10,6 +12,10 @@ PlantManagementWidget::PlantManagementWidget(QWidget *parent)
     , selectedPlant(nullptr)
 {
     ui->setupUi(this);
+    ui->plantTypeCombo->setSizeAdjustPolicy(QComboBox::AdjustToContents); // ensure dropdown fits longest entry
+    ui->plantTypeCombo->setMinimumContentsLength(12);
+    ui->plantTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // spread columns across available width
+    ui->plantTable->horizontalHeader()->setMinimumSectionSize(110);
     setupConnections();
     loadPlants();
     loadCommandQueue();
