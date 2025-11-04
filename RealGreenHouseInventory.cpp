@@ -80,7 +80,22 @@ void RealGreenHouseInventory::hourHasPassed()
     }
 }
 
-void RealGreenHouseInventory::restorePlants(std::vector<PlantComponent *> plants){
+PlantComponent *RealGreenHouseInventory::orderPlant(std::string id)
+{
+    for (auto it = plants.begin(); it != plants.end(); ++it)
+    {
+        Plant* plant = *it;
+        if (std::to_string(plant->getPlantId()) == id)
+        {
+            plants.erase(it); //  remove from vector
+            return plant;     // return the found plant
+        }
+    }
+    return nullptr; // not found
+}
+
+void RealGreenHouseInventory::restorePlants(std::vector<PlantComponent *> plants)
+{
     //MUST IMPLEMENT
 }
 
@@ -101,7 +116,7 @@ void RealGreenHouseInventory::handle(Query *query){
 void RealGreenHouseInventory::insertPlant(Plant *plant) {
     if(plant != nullptr) {
         this->plants.push_back(plant);
-        std::cout << "PLANT ADDED => " << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
+        // std::cout << "PLANT ADDED => " << plant->getPlantId() << " " << plant->getName() << " " << plant->getMaturityStateName() << std::endl;
     }else{
     throw std::invalid_argument("RealGreenHouseInventory::insertPlant received a null Plant pointer");
     }

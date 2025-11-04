@@ -19,7 +19,7 @@ Plant *RoseFactory::createPlant()
     newRose->attachWaterMonitor(this->waterMonitor);
     newRose->attachFertilizerMonitor(this->fertilizerMonitor);
     newRose->attachDeadMonitor(this->deadMonitor);
-    std::cout << "NEW ROSE CREATED => " << newRose->getPlantId() << " " << newRose->getName() << " " << newRose->getMaturityStateName() << std::endl;
+    // std::cout << "NEW ROSE CREATED => " << newRose->getPlantId() << " " << newRose->getName() << " " << newRose->getMaturityStateName() << std::endl;
     this->sendInsertQuery(newRose);
     // this->queryBuilder->insertQueryBuilder(newRose);
 

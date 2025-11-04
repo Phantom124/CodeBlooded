@@ -33,6 +33,7 @@ class RealGreenHouseInventory : public GreenHouseInventory{
         virtual void deletePlant(Plant* plant);
         virtual void displayPlants();
         // virtual void hourHasPassed();
+        virtual PlantComponent* orderPlant(std::string id);
         virtual void restorePlants(std::vector<PlantComponent*> plants);
         
 

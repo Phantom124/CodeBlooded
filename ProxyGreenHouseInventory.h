@@ -21,6 +21,7 @@ public:
     void displayPlants() ;
     void hourHasPassed() ;
     void restorePlants(std::vector<PlantComponent*> plants);
+    virtual PlantComponent* orderPlant(std::string id);
 
 private:
     void insertPlant(Plant* plant);

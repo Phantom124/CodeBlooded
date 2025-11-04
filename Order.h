@@ -24,7 +24,7 @@ public:
     std::string getName();
     void printOrder();
     std::vector<PlantComponent *> getOrderPlants();
-    void addToOrder(Plant *plant);
+    void addToOrder(PlantComponent *plant);
     void setPriceStrategy(PriceStrategies *priceStrategy);
     double applyPriceStrategy(std::string code);
     void removeFromOrder(PlantComponent *plantComponent);

@@ -80,6 +80,15 @@ void ProxyGreenHouseInventory::restorePlants(std::vector<PlantComponent *> plant
     //TO BE IMPLEMENTED
 }
 
+PlantComponent *ProxyGreenHouseInventory::orderPlant(std::string id)
+{
+    if (this->realInventory)
+    {
+        return this->realInventory->orderPlant(id);
+    }
+    return nullptr;
+}
+
 // void ProxyGreenHouseInventory::printPlant(){
 //     if (this->realInventory){
 //         this->realInventory->printPlant();

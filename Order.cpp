@@ -95,7 +95,7 @@ std::vector<PlantComponent *> Order::getOrderPlants()
     return std::vector<PlantComponent *>();
 }
 
-void Order::addToOrder(Plant *plant)
+void Order::addToOrder(PlantComponent *plant)
 {
     plantGroup->add(plant);
 }

@@ -1,6 +1,6 @@
 #ifndef CUSTOMERINTERFACE_H
 #define CUSTOMERINTERFACE_H
-#include "GreenHouseInventory.h"
+
 #include "ProxyGreenHouseInventory.h"
 #include "Caretaker.h"
 #include "Order.h"
@@ -16,18 +16,73 @@
 #include "PriceStrategies.h"
 #include <string>
 #include <vector>
-class CustomerInterface {
-    private:
-        GreenHouseInventory* inventory;
-        Customer* customer;
-        Caretaker* caretaker;
-    public:
-        CustomerInterface();//TO BE IMPLEMENTED
-        virtual ~CustomerInterface();
+#include <unordered_set>
+#include <iostream>
+#include <string>
+#include "GreenHouseInventory.h"
+#include "ProxyGreenHouseInventory.h"
+#include "Plant.h"
+#include <vector>
 
-        void startInterface();
-        void browsePlants();
-        void purchasePlant();
-        void makeReturn();
+#include "StaffHandler.h"
+#include "DeadHandler.h"
+#include "FertilizerHandler.h"
+#include "WaterHandler.h"
+
+#include "StaffSystem.h"
+#include "WaterMonitor.h"
+#include "FertilizerMonitor.h"
+#include "DeadMonitor.h"
+
+#include "Ribbon.h"
+#include "RedPot.h"
+#include "Scent.h"
+#include "GiftWrap.h"
+#include "SharedInventory.h"
+class CustomerInterface
+{
+private:
+    ProxyGreenHouseInventory *inventory;
+    Caretaker *caretaker;
+    Order *currentOrder;
+    Customer *customer;
+    bool discountApplied;
+    std::string discountCode;
+
+public:
+
+    CustomerInterface(GreenHouseInventory*sharedInventory, Caretaker *sharedCaretaker, Customer* customer = nullptr);
+    ~CustomerInterface();
+
+    // Order management
+    void createNewOrder();
+    void addPlantToOrder(PlantComponent *plant);
+    double getOrderTotal();
+    std::vector<PlantComponent *> getOrderItems();
+    int getOrderItemCount();
+    void chooseDecorators(PlantComponent* plant);
+    void processDiscountCode();
+
+
+
+
+    Receipt *checkout();
+
+    // Returns
+    OrderMemento *searchOrder(const std::string &receiptID);
+    void returnOrder(const std::string &receiptID);
+
+    // Inventory browsing
+
+    // Customer management
+    void setCustomer(Customer *customer);
+    Customer *getCustomer() const;
+
+    // GUI functions
+    void DisplayPlants();
+    void customerMenu();
+
+
 };
-#endif // CUSTOMERINTERFACE_H
+
+#endif

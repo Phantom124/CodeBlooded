@@ -32,6 +32,7 @@ class GreenHouseInventory {
         virtual void insertPlant(Plant* plant) = 0;
         virtual void deletePlant(Plant* plant) = 0;
         virtual void displayPlants() = 0;
+        virtual PlantComponent* orderPlant(std::string id) = 0;
 
     protected:
         // storage used by the default implementation in GreenHouseInventory.cpp
