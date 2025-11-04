@@ -90,7 +90,7 @@ Username: admin
 Password: admin
 
 🛒 Customer Portal
-
+  
 No credentials required — simply click “Customer” and login.
 
 🗂️ Project Structure
