@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "PlantCommand.h"
 
-StaffSystem::StaffSystem(){
+StaffSystem::StaffSystem(GreenHouseInventory* inventory, QueryBuilder* queryBuilder) : inventory(inventory), queryBuilder(queryBuilder) {
     staffHandler = nullptr;
 }
 

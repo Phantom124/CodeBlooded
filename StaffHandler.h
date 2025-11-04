@@ -25,17 +25,17 @@ class StaffHandler {//WHY IS THIS NOT ABSTRACT???
 		virtual void handleRequest(Command* command, StaffSystem* staffSys);
 		void setSuccessor(StaffHandler* successor);
 		StaffHandler* getSuccessor();
-		QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
-		QueryProduct* createSelectQuery(Plant* selectPlant);
+		// QueryProduct* createSelectQuery(string plantID, string plantType, string maturityState);
+		// QueryProduct* createSelectQuery(Plant* selectPlant);
 
-		QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
-		QueryProduct* createInsertQuery(Plant* insertPlant);
+		// QueryProduct* createInsertQuery(string plantID, string plantType, string maturityState);
+		// QueryProduct* createInsertQuery(Plant* insertPlant);
 
-		QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
-		QueryProduct* createDeleteQuery(Plant* deletePlant);
+		// QueryProduct* createDeleteQuery(string plantID, string plantType, string maturityState);
+		// QueryProduct* createDeleteQuery(Plant* deletePlant);
 
 		void resetAvailable();
-		void setQueryBuilder(QueryBuilder* qb);
+		// void setQueryBuilder(QueryBuilder* qb);
 };
 
 #endif

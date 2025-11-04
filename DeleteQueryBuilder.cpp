@@ -2,72 +2,48 @@
 #include "QueryProduct.h"
 #include <vector>
 
-void DeleteQueryBuilder::deleteQueryBuilder(std::string plantID, std::string plantType, std::string maturityState){
-    // if (!plantID.empty() && !maturityState.empty()){
-    //     this->queryProduct->setQueryProduct("DELETE " + plantID + " FROM INVENTORY WHERE Maturity=" + maturityState);
-    // }
+DeleteQueryBuilder::DeleteQueryBuilder(): QueryBuilder() {}
 
-    std::vector<std::string> queryFields;
+void DeleteQueryBuilder::buildOriginator(const std::string& org){
+    if(this->query != nullptr){
+        this->query->setOriginator(org);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOriginator(org);
+    }
+}
+void DeleteQueryBuilder::buildOperation(){
+    if(this->query != nullptr){
+        this->query->setOperation("DELETE");
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOperation("DELETE");
+    }
+}
 
-    if (!plantID.empty()) queryFields.push_back("PlantID = '" + plantID + "'");
-    if (!plantType.empty()) queryFields.push_back("PlantType = '" + plantType + "'");
-    if (!maturityState.empty()) queryFields.push_back("MaturityState = '" + maturityState + "'");
-
-    if (queryFields.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
+void DeleteQueryBuilder::buildValues(Plant *p){
+    if(p == nullptr){
+        throw std::invalid_argument("DeleteQueryBuilder::buildValues received a null Plant pointer");
     }
 
-    std::string finalQuery = "DELETE FROM INVENTORY WHERE ";
-    for (size_t i = 0; i < queryFields.size(); ++i){
-        finalQuery += queryFields[i];
-        if (i + 1 < queryFields.size()) finalQuery += " AND ";
+    if(this->query != nullptr){
+        this->query->setPlant(p);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setPlant(p);
     }
-    finalQuery += ";";
-
-    this->queryProduct->setQueryProduct(finalQuery);
 }
 
-void DeleteQueryBuilder::deleteQueryBuilder(Plant* deletePlant){
-    std::string plantID = std::to_string(deletePlant->getPlantId());
-    std::string plantType = deletePlant->getName();   
-    std::string maturityState = deletePlant->getMaturityStateName();
-    
-    std::vector<std::string> queryFields;
+// void DeleteQueryBuilder::buildAndSendQuery(){
+//     if (!this->inventory) {
+//         throw std::runtime_error("DeleteQueryBuilder: Inventory is null.");
+//     }
+//     if (!this->query) {
+//         throw std::runtime_error("DeleteQueryBuilder: Query has not been built.");
+//     }
 
-    if (!plantID.empty()) queryFields.push_back("PlantID = '" + plantID + "'");
-    if (!plantType.empty()) queryFields.push_back("PlantType = '" + plantType + "'");
-    if (!maturityState.empty()) queryFields.push_back("MaturityState = '" + maturityState + "'");
+//     // std::cout << "DEBUG: Sending DELETE query from "
+//     //           << this->query->getOriginator() << std::endl;
 
-    if (queryFields.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
-    }
-
-    std::string finalQuery = "DELETE FROM INVENTORY WHERE ";
-    for (size_t i = 0; i < queryFields.size(); ++i){
-        finalQuery += queryFields[i];
-        if (i + 1 < queryFields.size()) finalQuery += " AND ";
-    }
-    finalQuery += ";";
-
-    this->queryProduct->setQueryProduct(finalQuery);
-}
-
-std::string DeleteQueryBuilder::addPlantID(std::string plantID){
-    if (plantID.length() == 0) return "";
-    return plantID;
-
-}
-
-std::string DeleteQueryBuilder::addPlantType(std::string plantType){
-    if (plantType.length() == 0) return "";
-    return plantType;
-
-}
-
-std::string DeleteQueryBuilder::addMaturityState(std::string maturityState){
-    if (maturityState.length() == 0) return "";
-    return maturityState;
-    
-}
+//     this->inventory->handle(this->query);
+// }

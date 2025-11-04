@@ -5,17 +5,14 @@
 // #include "Plant.h"
 class Plant;
 
-class SelectQueryBuilder: public QueryBuilder{
-    public:
-        void selectQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
-        void selectQueryBuilder(Plant* selectPlant);
-        
-        std::string addPlantID(std::string plantID);
-        std::string addPlantType(std::string plantType);
-        std::string addMaturityState(std::string maturityState);
+class SelectQueryBuilder : public QueryBuilder {
+public:
+    SelectQueryBuilder();
 
-    private:
-        Plant* selectPlant;
+    void buildOriginator(std::string org);
+    void buildOperation();
+    void buildValues(Plant* p);
+    // virtual void buildAndSendQuery();
 };
 
 #endif

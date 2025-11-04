@@ -6,34 +6,27 @@
 // #include "QueryProduct.h"
 #include <string>
 
-class QueryProduct;
+// class QueryProduct;
 class Plant;
+class GreenHouseInventory;
 
-class QueryProduct;
+class Query;
 
-class QueryBuilder{
-    public:
-        QueryBuilder();
-        virtual ~QueryBuilder();
+class QueryBuilder {
+protected:
+    Query* query;
+    GreenHouseInventory* inventory;  // reference to where it will be executed
+public:
+    QueryBuilder();
+    virtual ~QueryBuilder();
 
-        virtual void selectQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
-        virtual void insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
-        virtual void deleteQueryBuilder(std::string plantID, std::string plantType, std::string maturityState);
+    virtual void createNewQuery();
+    Query* getQuery();
 
-        virtual void selectQueryBuilder(Plant* plant);
-        virtual void insertQueryBuilder(Plant* plant);
-        virtual void deleteQueryBuilder(Plant* plant);
-
-        virtual std::string addPlantID(std::string plantID);
-        virtual std::string addPlantType(std::string plantType);
-        virtual std::string addMaturityState(std::string maturityState);
-
-        
-        QueryProduct* getQueryProduct();
-        
-
-    protected:
-        QueryProduct* queryProduct;
+    virtual void buildOriginator(std::string originator) = 0;
+    virtual void buildOperation() = 0;
+    virtual void buildValues(Plant* p) = 0;
+    virtual void buildAndSendQuery() = 0;
 };
 
 #endif

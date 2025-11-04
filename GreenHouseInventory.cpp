@@ -7,45 +7,45 @@
 #include <iostream>
 
 GreenHouseInventory::~GreenHouseInventory(){
-    for (Plant* p: this->plants){
-        delete p;
-    }
-    this->plants.clear();
+    // for (Plant* p: this->plants){
+    //     delete p;
+    // }
+    // this->plants.clear();
 }
 
-void GreenHouseInventory::addPlant(Plant *plant)
-{
+// void GreenHouseInventory::addPlant(Plant *plant)
+// {
     // default behaviour: store the item in the inventory container if one exists.
     // If derived classes maintain their own storage, they can override this.
-    if (plant != nullptr) this->plants.push_back(plant);
-}
+    // if (plant != nullptr) this->plants.push_back(plant);
+// }
 
-void GreenHouseInventory::checkStockLevel() {};
+// void GreenHouseInventory::checkStockLevel() {};
 
-std::vector<Plant*> GreenHouseInventory::getPlants() {
-    return plants;
-}
+// std::vector<Plant*> GreenHouseInventory::getPlants() {
+//     // return plants;
+// }
 
-void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plants) {
-    for (PlantComponent* pc : plants) {
-        Plant* plant = dynamic_cast<Plant*>(pc);
-        if (!plant) continue;
-        // Construct Item from Plant fields (Item has constructor Item(string id, string type, string maturity))
-        // Item item(std::to_string(plant->getPlantId()), plant->getName(), plant->getMaturityStateName());
-        addPlant(plant);
-    }
-}
+// void GreenHouseInventory::restorePlants(const std::vector<PlantComponent*>& plants) {
+//     for (PlantComponent* pc : plants) {
+//         Plant* plant = dynamic_cast<Plant*>(pc);
+//         if (!plant) continue;
+//         // Construct Item from Plant fields (Item has constructor Item(string id, string type, string maturity))
+//         // Item item(std::to_string(plant->getPlantId()), plant->getName(), plant->getMaturityStateName());
+//         addPlant(plant);
+//     }
+// }
 
-void GreenHouseInventory::printPlant(){
-    if (this->plants.empty()){
-        std::cout << "No plants in the Inventory." << std::endl;
-        return;
-    }
+// void GreenHouseInventory::printPlant(){
+//     if (this->plants.empty()){
+//         std::cout << "No plants in the Inventory." << std::endl;
+//         return;
+//     }
 
-    for (auto p: this->plants){
-        if (!p){
-            continue;
-        }
-        p->printPlant();
-    }
-}
+//     for (auto p: this->plants){
+//         if (!p){
+//             continue;
+//         }
+//         p->printPlant();
+//     }
+// }

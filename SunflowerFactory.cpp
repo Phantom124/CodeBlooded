@@ -1,9 +1,9 @@
 #include "SunflowerFactory.h"
 #include "Sunflower.h"
 
-SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon):PlantFactory(waterMon, fertMon, deadMon, queryBuilder){
-    if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr){
-        throw std::invalid_argument("Monitors cannot be null");
+SunflowerFactory::SunflowerFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon, QueryBuilder* queryBuilder, GreenHouseInventory* greenHouse):PlantFactory(waterMon, fertMon, deadMon, queryBuilder, greenHouse){
+    if( waterMon == nullptr || fertMon == nullptr || deadMon == nullptr || queryBuilder == nullptr || greenHouse == nullptr){
+        throw std::invalid_argument("Monitors and Inventory cannot be null");
     }
 }
 
@@ -15,9 +15,9 @@ Plant* SunflowerFactory::createPlant(){
     newSunflower->attachFertilizerMonitor(this->fertilizerMonitor);
     newSunflower->attachDeadMonitor(this->deadMonitor);
 
-    this->queryBuilder->insertQueryBuilder(newSunflower);
+    this->sendInsertQuery(newSunflower);
     
-    return  newSunflower;
+    return newSunflower;
 }
 
 // Plant* SunflowerFactory::createSunflower(PlantGrowthState* state, int waterLevel, int fertilizerLevel){

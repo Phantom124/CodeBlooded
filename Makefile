@@ -1,21 +1,33 @@
-CXX := g++
-CXXFLAGS := -std=c++17 -Wall -Wextra -O2 -g
-TARGET := demotest
-SRC := demotest.cpp
-OBJ := $(SRC:.cpp=.o)
+# Compiler
+CXX = g++
+CXXFLAGS = -Wall -std=c++11 -g
 
-.PHONY: all clean run
+# Target executable
+TARGET = demotest
 
+# Automatically find all .cpp files in the current directory
+SRCS := $(wildcard *.cpp)
+
+# Convert source files to object files
+OBJS := $(SRCS:.cpp=.o)
+
+# Default target
 all: $(TARGET)
 
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+# Build executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
+# Compile .cpp to .o
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+# Run the program
 run: $(TARGET)
 	./$(TARGET)
 
+# Clean object files and executable
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
+
+.PHONY: all run clean

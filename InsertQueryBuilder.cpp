@@ -2,140 +2,54 @@
 #include "QueryProduct.h"
 #include <vector>
 
-void InsertQueryBuilder::insertQueryBuilder(std::string plantID, std::string plantType, std::string maturityState)
-{
-    // if (!plantID.empty() && !maturityState.empty()){
-    //     this->queryProduct->setQueryProduct("INSERT INTO INVENTORY VALUES(" + plantID + ", " + maturityState + ");");
-    // }
-    // else if (!plantID.empty() && maturityState.empty()){
-    //     this->queryProduct->setQueryProduct("INSERT INTO INVENTORY VALUES(" + plantID + ");");
-
-    // }
-
-    std::vector<std::string> queryCol;
-    std::vector<std::string> queryValue;
-
-    if (!plantID.empty()){ 
-        queryCol.push_back("PlantID");
-        queryValue.push_back("'" + plantID + "'");
-    }
-
-    if (!plantType.empty()){
-        queryCol.push_back("PlantType");
-        queryValue.push_back("'" + plantType + "'");
-    }
-
-    if (!maturityState.empty()){
-        queryCol.push_back("MaturityState");
-        queryValue.push_back("'" + maturityState + "'");
-    }
-
-
-
-    if (queryCol.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
-    }
-
-    // std::string finalQuery = "INSERT INTO INVENTORY VALUES (";
-    // for (size_t i = 0; i < queryFields.size(); i++){
-    //     finalQuery += queryFields[i];
-    //     if (i + 1 < queryFields.size()) finalQuery += ", ";
-    // }
-    // finalQuery += ");";
-
-    std::string finalQuery = "INSERT INTO INVENTORY (";
-    for (size_t i = 0; i < queryCol.size(); i++){
-        finalQuery += queryCol[i];
-        if (i + 1 < queryCol.size()) finalQuery += ", ";
-    }
-
-    finalQuery += ") VALUES (";
-
-    for (size_t i = 0; i < queryValue.size(); i++){
-        finalQuery += queryValue[i];
-        if (i + 1 < queryValue.size()) finalQuery += ", ";
-    }
-
-    finalQuery += ");";
-
-
-    this->queryProduct->setQueryProduct(finalQuery);
-}
-
-InsertQueryBuilder::InsertQueryBuilder(){
-    this->insertPlant = nullptr;
-}
-
-InsertQueryBuilder::~InsertQueryBuilder(){
-    delete this->insertPlant;
-    this->insertPlant = nullptr;
-}
-
-void InsertQueryBuilder::insertQueryBuilder(Plant *insertPlant)
-{
-    std::string plantID = std::to_string(insertPlant->getPlantId());
-    std::string plantType = insertPlant->getName();
-    std::string maturityState = insertPlant->getMaturityStateName();
-
-    std::vector<std::string> queryCol;
-    std::vector<std::string> queryValue;
-
-    if (!plantID.empty()){ 
-        queryCol.push_back("PlantID");
-        queryValue.push_back("'" + plantID + "'");
-    }
-
-    if (!plantType.empty()){
-        queryCol.push_back("PlantType");
-        queryValue.push_back("'" + plantType + "'");
-    }
-
-    if (!maturityState.empty()){
-        queryCol.push_back("MaturityState");
-        queryValue.push_back("'" + maturityState + "'");
-    }
-
-
-
-    if (queryCol.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
-    }
-
-    std::string finalQuery = "INSERT INTO INVENTORY (";
-    for (size_t i = 0; i < queryCol.size(); i++){
-        finalQuery += queryCol[i];
-        if (i + 1 < queryCol.size()) finalQuery += ", ";
-    }
-
-    finalQuery += ") VALUES (";
-
-    for (size_t i = 0; i < queryValue.size(); i++){
-        finalQuery += queryValue[i];
-        if (i + 1 < queryValue.size()) finalQuery += ", ";
-    }
-
-    finalQuery += ");";
-
-
-    this->queryProduct->setQueryProduct(finalQuery);
-}
-
-std::string InsertQueryBuilder::addPlantID(std::string plantID){
-    if (plantID.length() == 0) return "";
-    return plantID;
+InsertQueryBuilder::InsertQueryBuilder() : QueryBuilder() {
 
 }
 
-std::string InsertQueryBuilder::addPlantType(std::string plantType){
-    if (plantType.length() == 0) return "";
-    return plantType;
+InsertQueryBuilder::~InsertQueryBuilder(){}
 
+void InsertQueryBuilder::buildOriginator(std::string org){
+    if(this->query != nullptr){
+        this->query->setOriginator(org);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOriginator(org);
+    }
 }
 
-std::string InsertQueryBuilder::addMaturityState(std::string maturityState){
-    if (maturityState.length() == 0) return "";
-    return maturityState;
-    
+void InsertQueryBuilder::buildOperation(){
+    if(this->query != nullptr){
+        this->query->setOperation("INSERT");
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOperation("INSERT");
+    }
 }
+
+void InsertQueryBuilder::buildValues(Plant *p){
+    if(p == nullptr){
+        throw std::invalid_argument("InsertQueryBuilder::buildValues received a null Plant pointer");
+    }
+
+    if(this->query != nullptr){
+        this->query->setPlant(p);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setPlant(p);
+    }
+}
+
+// void InsertQueryBuilder::buildAndSendQuery() {
+//     if (!this->inventory) {
+//         throw std::runtime_error("InsertQueryBuilder: Inventory is null.");
+//     }
+//     if (!this->query) {
+//         throw std::runtime_error("InsertQueryBuilder: Query has not been built.");
+//     }
+
+//     // std::cout << "DEBUG: Sending INSERT query from " 
+//     //           << this->query->getOriginator() << std::endl;
+
+//     this->inventory->handle(this->query);
+// }
+

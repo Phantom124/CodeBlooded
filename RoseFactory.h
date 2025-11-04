@@ -8,7 +8,7 @@
 
 class RoseFactory : public PlantFactory {
 	public:
-		RoseFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon);
+		RoseFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon, QueryBuilder* queryBuilder, GreenHouseInventory* greenHouse);
 		~RoseFactory();
 		Plant* createPlant();
 		// Plant* createRose(PlantGrowthState* state, int waterLevel, int fertilizerLevel);

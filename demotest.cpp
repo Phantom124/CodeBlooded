@@ -28,10 +28,21 @@
 
 int main() {
     //Create Inventory
-    ProxyGreenHouseInventory* proxyGreenHouseInventory = new ProxyGreenHouseInventory();
-    StaffSystem* staffSystem = new StaffSystem();
-    StaffInterface* staffInterface = new StaffInterface(proxyGreenHouseInventory, staffSystem);//sets up monitors and factories
+    GreenHouseInventory* GH = new ProxyGreenHouseInventory();
 
+    //Create Builders
+    QueryBuilder* InsertBuilder = new InsertQueryBuilder();
+    SelectQueryBuilder* SelectBuilder = new SelectQueryBuilder();
+    // DeleteQueryBuilder* DeleteBuilder = new DeleteQueryBuilder();
+
+    // StaffSystem* staffSystem = new StaffSystem();
+    WaterMonitor* waterMon = new WaterMonitor();
+    FertilizerMonitor* fertMon = new FertilizerMonitor();
+    DeadMonitor* deadMon = new DeadMonitor();
+
+    RoseFactory* roseFact = new RoseFactory(waterMon, fertMon, deadMon, InsertBuilder, GH);
+
+    GH->displayPlants();
 
     // //Create Handlers
     // StaffHandler *waterHandler = new WaterHandler();
@@ -56,44 +67,44 @@ int main() {
     // staffSystem->addHandler(deadHandler);
 
     //Create Monitors and link to Staff System
-    WaterMonitor* waterMonitor = new WaterMonitor();
-    FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
-    DeadMonitor* deadMonitor = new DeadMonitor();
-    waterMonitor->setStaffSystem(staffSystem);
-    fertilizerMonitor->setStaffSystem(staffSystem);
-    deadMonitor->setStaffSystem(staffSystem);
+    // WaterMonitor* waterMonitor = new WaterMonitor();
+    // FertilizerMonitor* fertilizerMonitor = new FertilizerMonitor();
+    // DeadMonitor* deadMonitor = new DeadMonitor();
+    // waterMonitor->setStaffSystem(staffSystem);
+    // fertilizerMonitor->setStaffSystem(staffSystem);
+    // deadMonitor->setStaffSystem(staffSystem);
 
     //Create Inventory and add some plants
 
 
 
-    while (true) {
-        std::cout << "\n===== Welcome to the Greenhouse Management System =====\n"
-                  << "1. Customer\n"
-                  << "2. Staff\n"
-                  << "q. Quit\n"
-                  << "Enter your choice (1, 2, or q): ";
+    // while (true) {
+    //     std::cout << "\n===== Welcome to the Greenhouse Management System =====\n"
+    //               << "1. Customer\n"
+    //               << "2. Staff\n"
+    //               << "q. Quit\n"
+    //               << "Enter your choice (1, 2, or q): ";
 
-        std::string choice;
-        std::getline(std::cin, choice);
+    //     std::string choice;
+    //     std::getline(std::cin, choice);
 
-        if (choice == "1") {
-            std::cout << "\nYou selected Customer.\n";
-            // TODO: Call customerMenu() or whatever logic goes here.
+    //     if (choice == "1") {
+    //         std::cout << "\nYou selected Customer.\n";
+    //         // TODO: Call customerMenu() or whatever logic goes here.
 
-        } 
-        else if (choice == "2") {
-            std::cout << "\nYou selected Staff.\n";
-            // TODO: Call staffMenu() or related function.
-        } 
-        else if (choice == "q" || choice == "Q") {
-            std::cout << "\nExiting program...\n";
-            break;
-        } 
-        else {
-            std::cout << "\nInvalid option. Please try again.\n";
-        }
-    }
+    //     } 
+    //     else if (choice == "2") {
+    //         std::cout << "\nYou selected Staff.\n";
+    //         // TODO: Call staffMenu() or related function.
+    //     } 
+    //     else if (choice == "q" || choice == "Q") {
+    //         std::cout << "\nExiting program...\n";
+    //         break;
+    //     } 
+    //     else {
+    //         std::cout << "\nInvalid option. Please try again.\n";
+    //     }
+    // }
 
     return 0;
 }

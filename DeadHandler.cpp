@@ -28,14 +28,14 @@ void DeadHandler::handleRequest(Command *command, StaffSystem* staffSys){
         string id = std::to_string(plant->getPlantId());
         int intId = plant->getPlantId();
 
-        QueryProduct* qp = createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
-        if (qp){
-            qp->execute();
-        }
-        delete command;
+        // QueryProduct* qp = createDeleteQuery(id, plant->getName(), plant->getMaturityStateName());
+        // if (qp){
+        //     qp->execute();
+        // }
+        // delete command;
 
-        QueueIterator it(staffSys);
-        it.deleteAllWithId(intId);
+        // QueueIterator it(staffSys);
+        // it.deleteAllWithId(intId);
     } else {
         StaffHandler::handleRequest(command, staffSys);
     }

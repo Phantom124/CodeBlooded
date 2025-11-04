@@ -7,8 +7,8 @@
 
 #include "PlantGrowthState.h"
 #include "Plant.h"
-#include "GreenHouseInventory.h"
-#include "ProxyGreenHouseInventory.h"
+// #include "GreenHouseInventory.h"
+// #include "ProxyGreenHouseInventory.h"
 #include "Rose.h"
 #include "Sunflower.h"
 #include "Cactus.h"
@@ -17,22 +17,22 @@
 class GreenHouseInventory;
 class ProxyGreenHouseInventory;
 
-class QueryProduct{
+class Query{
     public:
-        QueryProduct(ProxyGreenHouseInventory* inventory);
-        ~QueryProduct();
-        void setQueryProduct(std::string query);
-        std::string getQuery();
-        void execute();
+        Query();
+        ~Query();
 
-        void executeSelect(std::string query);
-        void executeInsert(std::string query);
-        void executeDelete(std::string query);
+        void setOriginator(std::string originator);
+        std::string getOriginator();
+        void setOperation(std::string operation);
+        std::string getOperation();
+        void setPlant(Plant* plant);
+        Plant* getPlant();
 
     private:
-        std::string query;
-        ProxyGreenHouseInventory* inventory;
-        // Plant* plant;
+        std::string originator;
+        std::string operation;
+        Plant* plant;
 };
 
 #endif

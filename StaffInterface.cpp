@@ -34,7 +34,7 @@ void StaffInterface::startInterface(){
             break;
         } else {
             std::cout << "Invalid choice. Please try again.\n";
-        }
+        }a
     }
 
 }

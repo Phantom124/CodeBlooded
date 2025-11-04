@@ -6,7 +6,7 @@
 
 class CactusFactory : public PlantFactory {
 public:
-    CactusFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon);
+    CactusFactory(WaterMonitor* waterMon, FertilizerMonitor* fertMon, DeadMonitor* deadMon, QueryBuilder* queryBuilder, GreenHouseInventory* greenHouse);
     ~CactusFactory();
     Plant* createPlant();
     //Parameterized constructor version

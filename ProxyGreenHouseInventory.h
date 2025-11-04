@@ -1,44 +1,33 @@
 #ifndef PROXYGREENHOUSEINVENTORY_H
 #define PROXYGREENHOUSEINVENTORY_H
 
-#include "GreenHouseInventory.h"
-// #include "RealGreenHouseInventory.h"
-// #include "QueryProduct.h"
-// #include "Customer.h"
-// #include "StaffHandler.h"
-#include "Item.h"
+#include "GreenHouseInventory.h"  // Must include full base class
 
-class RealGreenHouseInventory;
-class QueryProduct;
+#include "QueryProduct.h"
+#include <string>
+
 class Plant;
 class Customer;
 class StaffHandler;
 
-#include <string>
-// #include <typeinfo>
+#include "RealGreenHouseInventory.h"
 
 class ProxyGreenHouseInventory : public GreenHouseInventory {
-    public:
-        ProxyGreenHouseInventory();
-        ~ProxyGreenHouseInventory();
-        
-        void showPlant(std::string parameters);
-        void showAllPlants();
-        void addPlant(Plant* plant);
-        void removePlant(std::string parameters);
-        std::vector<Plant*> getPlants();
+public:
+    ProxyGreenHouseInventory();
+    ~ProxyGreenHouseInventory();
 
-        void handleControlRights(void* user, QueryProduct query);
+    void handle(Query* query) ;
+    void displayPlants() ;
+    void hourHasPassed() ;
+    void restorePlants(std::vector<PlantComponent*> plants);
 
-        void hourHasPassed();
+private:
+    void insertPlant(Plant* plant);
+    void deletePlant(Plant* plant);
 
-        void printPlant();
-    
-    private:
-        RealGreenHouseInventory* realInventory;
+private:
+    GreenHouseInventory* realInventory;
 };
 
 #endif
-
-//typeid to validate
-//void* => generic pointer, can point to any data type

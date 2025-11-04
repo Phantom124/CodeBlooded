@@ -3,81 +3,50 @@
 #include <string>
 #include <vector>
 
-void SelectQueryBuilder::selectQueryBuilder(std::string plantID, std::string plantType, std::string maturityState){
-    // if (!plantID.empty() && !maturityState.empty() && ! plantType.empty()){
-    //     this->queryProduct->setQueryProduct("SELECT " + plantID + ", " + plantType + ", " + maturityState + " FROM INVENTORY);");
-    // }
-    // else if (!plantID.empty() && !plantType.empty() && maturityState.empty()){
-    //     this->queryProduct->setQueryProduct("SELECT " + plantID +  + ", " + plantType + " FROM INVENTORY);");
-    // }
-    // else if (!plantID.empty() && plantType.empty() && !maturityState.empty()){
-    //     this->queryProduct->setQueryProduct("SELECT " + plantID +  + ", " + maturityState + " FROM INVENTORY);");
-    // }
-    // else if (plantID.empty() && maturityState.empty()){
-    //     this->queryProduct->setQueryProduct(nullptr);
-    // }
 
-    std::vector<std::string> queryFields;
+SelectQueryBuilder::SelectQueryBuilder(): QueryBuilder() {}
 
-    if (!plantID.empty()) queryFields.push_back(plantID);
-    if (!plantType.empty()) queryFields.push_back(plantType);
-    if (!maturityState.empty()) queryFields.push_back(maturityState);
-
-    if (queryFields.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
+void SelectQueryBuilder::buildOriginator(std::string org){
+    if(this->query != nullptr){
+        this->query->setOriginator(org);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOriginator(org);
     }
-
-    std::string finalQuery = "SELECT ";
-    for (size_t i = 0; i < queryFields.size(); i++){
-        finalQuery += queryFields[i];
-        if (i + 1 < queryFields.size()) finalQuery += ", ";
+}
+void SelectQueryBuilder::buildOperation(){
+    if(this->query != nullptr){
+        this->query->setOperation("SELECT");
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setOperation("SELECT");
     }
-    finalQuery += " FROM INVENTORY;";
-
-
-    this->queryProduct->setQueryProduct(finalQuery);
 }
+void SelectQueryBuilder::buildValues(Plant *p){
+    //No check needed... we do not care xD
+    // if(p == nullptr){
+    //     throw std::invalid_argument("SelectQueryBuilder::buildValues received a null Plant pointer");
+    // }
 
-void SelectQueryBuilder::selectQueryBuilder(Plant* selectPlant){
-    std::string plantID = std::to_string(selectPlant->getPlantId());
-    std::string plantType = selectPlant->getName();
-    std::string maturityState = selectPlant->getMaturityStateName();
-
-    std::vector<std::string> queryFields;
-
-    if (!plantID.empty()) queryFields.push_back(plantID);
-    if (!plantType.empty()) queryFields.push_back(plantType);
-    if (!maturityState.empty()) queryFields.push_back(maturityState);
-
-    if (queryFields.empty()){
-        this->queryProduct->setQueryProduct("");
-        return;
+    if(this->query != nullptr){
+        this->query->setPlant(p);
+    }else{
+        QueryBuilder::createNewQuery();
+        this->query->setPlant(p);
     }
-
-    std::string finalQuery = "SELECT ";
-    for (size_t i = 0; i < queryFields.size(); i++){
-        finalQuery += queryFields[i];
-        if (i + 1 < queryFields.size()) finalQuery += ", ";
-    }
-    finalQuery += " FROM INVENTORY;";
-
-
-    this->queryProduct->setQueryProduct(finalQuery);
-    
 }
 
-std::string SelectQueryBuilder::addPlantID(std::string plantID){
-    if (plantID.length() == 0) return "";
-    return plantID;
-}
+// void SelectQueryBuilder::buildAndSendQuery() {
+//     if (!this->inventory) {
+//         throw std::runtime_error("SelectQueryBuilder: Inventory is null.");
+//     }
+//     if (!this->query) {
+//         throw std::runtime_error("SelectQueryBuilder: Query has not been built.");
+//     }
 
-std::string SelectQueryBuilder::addPlantType(std::string plantType){
-    if (plantType.length() == 0) return "";
-    return plantType;
-}
+//     // std::cout << "DEBUG: Sending SELECT query from "
+//     //           << this->query->getOriginator() << std::endl;
 
-std::string SelectQueryBuilder::addMaturityState(std::string maturityState){
-    if (maturityState.length() == 0) return "";
-    return maturityState;
-}
+//     this->inventory->handle(this->query);
+// }
+

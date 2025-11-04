@@ -2,11 +2,11 @@
 #include "Rose.h"
 #include <stdexcept>
 
-RoseFactory::RoseFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon) : PlantFactory(waterMon, fertMon, deadMon, queryBuilder)
+RoseFactory::RoseFactory(WaterMonitor *waterMon, FertilizerMonitor *fertMon, DeadMonitor *deadMon, QueryBuilder* queryBuilder, GreenHouseInventory* greenHouse) : PlantFactory(waterMon, fertMon, deadMon, queryBuilder, greenHouse)
 {
-    if (waterMon == nullptr || fertMon == nullptr || deadMon == nullptr)
+    if (waterMon == nullptr || fertMon == nullptr || deadMon == nullptr || queryBuilder == nullptr || greenHouse == nullptr)
     {
-        throw std::invalid_argument("Monitors cannot be null");
+        throw std::invalid_argument("Monitors and Inventory cannot be null");
     }
 }
 
@@ -20,6 +20,7 @@ Plant *RoseFactory::createPlant()
     newRose->attachFertilizerMonitor(this->fertilizerMonitor);
     newRose->attachDeadMonitor(this->deadMonitor);
 
+    this->sendInsertQuery(newRose);
     // this->queryBuilder->insertQueryBuilder(newRose);
 
     return newRose;
