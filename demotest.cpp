@@ -60,10 +60,25 @@ int main()
     // customerInterface->DisplayPlants();
     customerInterface->customerMenu();
 
-    // //Create Handlers
-    // StaffHandler *waterHandler = new WaterHandler();
-    // StaffHandler *fertilizerHandler = new FertilizerHandler();
-    // StaffHandler *deadHandler = new DeadHandler();
+    bool doIt = true;
+    while (doIt) {
+        GH->hourHasPassed();
+        GH->displayPlants();
+        std::string userInput;
+        std::cout << "Continue to next hour? (y/n): ";
+        std::cin >> userInput;
+        if (userInput != "y" && userInput != "Y") {
+            doIt = false;
+        }
+    }
+
+    // StaffSystem* staffSystem = new StaffSystem(GH, DeleteBuilder);
+    staffSystem->sendDeadQuery(toRemove);
+    GH->displayPlants();
+
+
+
+
 
     // //Creating Query Builders
     // QueryBuilder* selectQueryBuilder = new SelectQueryBuilder();
