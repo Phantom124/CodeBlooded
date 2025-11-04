@@ -35,6 +35,10 @@ int main()
     GreenHouseInventory *GH = new ProxyGreenHouseInventory();
     g_inventory = new ProxyGreenHouseInventory();
 
+    StaffSystem* staffSystem = new StaffSystem(g_inventory, new DeleteQueryBuilder());
+
+    StaffInterface* staffInterface = new StaffInterface(static_cast<ProxyGreenHouseInventory*>(g_inventory), staffSystem);
+
     // Create Builders
     QueryBuilder *InsertBuilder = new InsertQueryBuilder();
     SelectQueryBuilder *SelectBuilder = new SelectQueryBuilder();
@@ -58,27 +62,48 @@ int main()
     Customer *customer = new Customer(g_inventory, SelectBuilder);
     CustomerInterface *customerInterface = new CustomerInterface(g_inventory, caretaker, customer);
     // customerInterface->DisplayPlants();
-    customerInterface->customerMenu();
-
+    while(true) {
+        std::cout << "\n===== Welcome to the Greenhouse Management System =====\n"
+                  << "1. Customer\n"
+                  << "2. Staff\n"
+                  << "q. Quit\n"
+                  << "Enter your choice (1, 2, or q): ";
+        std::string choice1;
+        std::cin >> choice1;
+        if (choice1 == "1") {
+            std::cout << "\nYou selected Customer.\n";
+            customerInterface->customerMenu();
+        }
+        else if (choice1 == "2") {
+            std::cout << "\nYou selected Staff.\n";
+            staffInterface->startInterface();
+        }
+        else if (choice1 == "q" || choice1 == "Q") {
+            std::cout << "\nExiting program...\n";
+            break;
+        }
+        else {
+            std::cout << "\nInvalid option. Please try again.\n";
+        }
+        customerInterface->customerMenu();
+    }
     bool doIt = true;
-    while (doIt) {
+    while (doIt)
+    {
         GH->hourHasPassed();
         GH->displayPlants();
         std::string userInput;
         std::cout << "Continue to next hour? (y/n): ";
         std::cin >> userInput;
-        if (userInput != "y" && userInput != "Y") {
+        if (userInput != "y" && userInput != "Y")
+        {
             doIt = false;
         }
     }
 
     // StaffSystem* staffSystem = new StaffSystem(GH, DeleteBuilder);
-    staffSystem->sendDeadQuery(toRemove);
-    GH->displayPlants();
-
-
-
-
+    // staffSystem->sendDeadQuery(toRemove);
+    // GH->displayPlants();
 
     // //Creating Query Builders
     // QueryBuilder* selectQueryBuilder = new SelectQueryBuilder();
